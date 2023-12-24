@@ -34,4 +34,11 @@ fontFamily: 'Inter',
 fontWeight: FontWeight.w600,
 height: 0,
 );
+ static const TextStyle style15B =  TextStyle(
+color: Colors.black,
+fontSize: 15,
+fontFamily: 'Inter',
+fontWeight: FontWeight.w600,
+height: 0,
+);
 }
