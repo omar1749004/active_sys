@@ -1,11 +1,11 @@
 import 'package:active_system/core/constant/color.dart';
 import 'package:active_system/core/constant/image_asset.dart';
 import 'package:active_system/core/constant/styles.dart';
-import 'package:active_system/home/data/service/static/profile.dart';
 import 'package:active_system/home/view/widget/client_info.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
+ScrollController controller = ScrollController();
+ScrollController controller1 = ScrollController();
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
@@ -68,7 +68,58 @@ class HomePage extends StatelessWidget {
                   Expanded(
                       flex: 2,
                       child: Container(
-                        child: Text("data"),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            Text(
+                              "سجل الحضور اليومي",
+                            ),
+                            SizedBox(
+                                height: 750,
+                                
+                                child: Scrollbar(
+                                   thickness: 10,
+                                   controller: controller,
+                                    thumbVisibility: true,
+                                    trackVisibility: true,
+                                  child: SingleChildScrollView(
+                                    scrollDirection: Axis.vertical,
+                                    controller: controller,
+                                    child: Scrollbar(
+                                      thickness: 10,
+                                      controller: controller1,
+                                      thumbVisibility: true,
+                                      trackVisibility: true,
+                                      child: SingleChildScrollView(
+                                        controller: controller1,
+                                         scrollDirection: Axis.horizontal,
+                                        
+                                        child: DataTable(
+                                          
+                                          columns: List.generate(
+                                            10,
+                                            (index) => DataColumn(
+                                              label: Text('Header $index'),
+                                            ),
+                                          ),
+                                          rows: List.generate(
+                                            20,
+                                            (index) => DataRow(
+                                              cells: List.generate(
+                                                10,
+                                                (cellIndex) => DataCell(
+                                                  Text('Item $index-$cellIndex'),
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ))
+                          ],
+                        ),
                       )),
                   ClinetInfo(),
                 ],
