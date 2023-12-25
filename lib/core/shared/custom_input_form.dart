@@ -28,7 +28,6 @@ class CustomInputForm extends StatelessWidget {
               style: const TextStyle(color: ColorApp.kPrimaryColor),
               decoration: InputDecoration(
                 labelText: labelText,
-                focusColor: const Color.fromARGB(255, 233, 56, 3),
               ),
               validator: (value) {
                 if (value.runtimeType != dataType) {

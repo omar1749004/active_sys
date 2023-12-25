@@ -1,4 +1,5 @@
 import 'package:active_system/core/shared/custom_app_bar.dart';
+import 'package:active_system/subscriptions/view/widgets/custom_button.dart';
 import 'package:active_system/subscriptions/view/widgets/custom_input_form.dart';
 import 'package:active_system/subscriptions/view/widgets/custom_menu.dart';
 import 'package:flutter/material.dart';
@@ -16,10 +17,46 @@ class SubscriptionsView extends StatelessWidget {
             child: SizedBox(
               width: MediaQuery.of(context).size.width,
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   const CustomMenu(),
+                  Expanded(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        //
+                        //here iframe for display data
+                        //
+                        Padding(
+                          padding: const EdgeInsets.only(bottom: 20.0),
+                          child: Row(
+                            textDirection: TextDirection.rtl,
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              CustomButton(
+                                text: "أضافه",
+                                ontap: () {},
+                              ),
+                              CustomButton(
+                                text: "تعديل",
+                                ontap: () {},
+                              ),
+                              CustomButton(
+                                text: "حذف",
+                                ontap: () {},
+                              ),
+                              CustomButton(
+                                text: "طباعة",
+                                ontap: () {},
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  //here is the form that conaines about Input Forms
                   Container(
+                      height: MediaQuery.of(context).size.height,
                       padding: const EdgeInsets.only(left: 8, right: 8),
                       decoration: const BoxDecoration(
                           border: Border(
