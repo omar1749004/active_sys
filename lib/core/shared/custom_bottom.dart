@@ -3,11 +3,12 @@ import 'package:flutter/material.dart';
 import '../../../core/constant/color.dart';
 
 class CustomBottom extends StatelessWidget {
-  const CustomBottom({super.key,required this.ontap, required this.text});
+  const CustomBottom({super.key, required this.ontap, required this.text});
   final Function()? ontap;
-  final String text ;
+  final String text;
   @override
   Widget build(BuildContext context) {
+
     return 
       Align(
         child: Container(
@@ -29,10 +30,12 @@ class CustomBottom extends StatelessWidget {
               
               ),
               ),),
+
               ),
+            ),
+          ),
         ),
-      );
-      
-    
+      ),
+    );
   }
 }

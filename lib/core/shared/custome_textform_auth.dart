@@ -1,4 +1,6 @@
+
 import 'package:active_system/core/constant/styles.dart';
+
 import 'package:flutter/material.dart';
 
 import '../../../core/constant/color.dart';
@@ -8,6 +10,7 @@ class CustomeTextFormAuth extends StatelessWidget {
       {super.key,
       required this.hintText,
       required this.lableText,
+
       required this.myController,
       required this.validator,
        this.icone = Icons.power_off_rounded ,
@@ -15,6 +18,7 @@ class CustomeTextFormAuth extends StatelessWidget {
       this.obscureText = false,
       this.ontap, 
        this.fontSize =16});
+
   final String hintText;
   final String lableText;
   final IconData icone;
@@ -22,11 +26,14 @@ class CustomeTextFormAuth extends StatelessWidget {
   final String? Function(String?)? validator;
   final bool isPhoneNumber;
   final bool obscureText;
+
   final double fontSize;
+
   final void Function()? ontap;
   @override
   Widget build(BuildContext context) {
     //Color color = Color.fromARGB(255, 126, 126, 126);
+
     return  Directionality(
       textDirection: TextDirection.rtl,
       child: TextFormField(
@@ -79,6 +86,7 @@ class CustomeTextFormAuth extends StatelessWidget {
                 : null,
           ),
         
+
       ),
     );
   }

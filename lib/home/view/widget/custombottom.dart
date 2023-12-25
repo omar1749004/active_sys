@@ -11,6 +11,7 @@ class CustomBottoms extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
+
                     width: MediaQuery.of(context).size.width * 0.206,
                     child: ListView.separated(
                       separatorBuilder: (context, index) =>const  SizedBox(
@@ -36,5 +37,6 @@ class CustomBottoms extends GetView<HomeController> {
                       ),
                     ),
                   );
+
   }
 }

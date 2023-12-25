@@ -1,5 +1,5 @@
 import 'package:active_system/core/constant/menu_items.dart';
-import 'package:active_system/subscriptions/view/widgets/custom_button.dart';
+import 'package:active_system/subscriptions/view/widgets/custom_menu_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -10,6 +10,7 @@ class CustomMenu extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       width: 250,
+
       child: ListView.builder(
         scrollDirection: Axis.vertical,
         shrinkWrap: true,
@@ -21,6 +22,7 @@ class CustomMenu extends StatelessWidget {
                 Get.toNamed(serviceId[index]);
               });
         },
+
       ),
     );
   }
