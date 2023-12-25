@@ -1,18 +1,19 @@
+import 'package:active_system/core/constant/menu_items.dart';
 import 'package:flutter/material.dart';
 
-class CustomButton extends StatelessWidget {
-  const CustomButton({super.key, required this.text, required this.ontap});
+class CustomMenuButton extends StatelessWidget {
+  const CustomMenuButton({super.key, required this.text, required this.ontap});
 
   final String text;
   final Function()? ontap;
 
   @override
   Widget build(BuildContext context) {
+    late double height =
+        (MediaQuery.of(context).size.height / serviceName.length);
     return ElevatedButton(
       onPressed: ontap,
       style: ButtonStyle(
-          backgroundColor:
-              MaterialStatePropertyAll(Color.fromARGB(217, 255, 255, 255)),
           shape: MaterialStateProperty.all(
             LinearBorder.bottom(
               side: const BorderSide(
@@ -21,7 +22,7 @@ class CustomButton extends StatelessWidget {
               ),
             ),
           ),
-          fixedSize: MaterialStateProperty.all(Size.copy(Size(120, 40)))),
+          fixedSize: MaterialStateProperty.all(Size.copy(Size(150, height)))),
       child: Text(text),
     );
   }

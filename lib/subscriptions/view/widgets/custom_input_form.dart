@@ -16,7 +16,7 @@ class SubscriptionForm extends StatelessWidget {
               size: 250,
             ),
             CustomInputForm(
-                labelText: 'اسم ألاشتراك', dataType: 'String', size: 250),
+                labelText: 'أسم ألاشتراك', dataType: 'String', size: 250),
             CustomInputForm(
                 labelText: 'نوع ألاشتراك', dataType: 'String', size: 250),
             Row(
