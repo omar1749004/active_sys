@@ -11,12 +11,12 @@ class CustomBottom extends StatelessWidget {
     return 
       Align(
         child: Container(
-          margin: EdgeInsets.symmetric(horizontal: 20),
+          margin:const EdgeInsets.symmetric(horizontal: 20),
             
             
           child: MaterialButton(
             onPressed: ontap,
-            padding: EdgeInsets.all(10),
+            padding:const EdgeInsets.all(10),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(16)
             ),
@@ -24,7 +24,7 @@ class CustomBottom extends StatelessWidget {
             child: 
              
                Center(child: Text(text,
-              style: TextStyle(color: Colors.white,
+              style:const TextStyle(color: Colors.white,
               fontSize: 16,
               
               ),

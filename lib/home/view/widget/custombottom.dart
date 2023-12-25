@@ -5,8 +5,8 @@ import 'package:active_system/home/data/service/static/sup_type.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class CustomBottom extends GetView<HomeController> {
-  const CustomBottom({super.key});
+class CustomBottoms extends GetView<HomeController> {
+  const CustomBottoms({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +26,7 @@ class CustomBottom extends GetView<HomeController> {
                               borderRadius: BorderRadius.circular(16)),
                           onPressed:(){
                             controller.selectSupType(index);
-                            print(controller.supType);
+                           
                           } ,
                            child: Text(
                             supType[index],

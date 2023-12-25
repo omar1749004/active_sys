@@ -10,19 +10,17 @@ class CustomMenu extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       width: 250,
-      child: Expanded(
-        child: ListView.builder(
-          scrollDirection: Axis.vertical,
-          shrinkWrap: true,
-          itemCount: serviceName.length,
-          itemBuilder: (context, index) {
-            return CustomButton(
-                text: serviceName[index],
-                ontap: () {
-                  Get.toNamed(serviceId[index]);
-                });
-          },
-        ),
+      child: ListView.builder(
+        scrollDirection: Axis.vertical,
+        shrinkWrap: true,
+        itemCount: serviceName.length,
+        itemBuilder: (context, index) {
+          return CustomButton(
+              text: serviceName[index],
+              ontap: () {
+                Get.toNamed(serviceId[index]);
+              });
+        },
       ),
     );
   }

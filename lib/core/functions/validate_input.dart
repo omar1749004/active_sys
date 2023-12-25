@@ -2,6 +2,8 @@ import 'package:get/get.dart';
 
  validInput(String val ,int min,int max ,String type )
 {
+if(min == 0){
+
 
   if(val.isEmpty)
   {
@@ -29,6 +31,13 @@ import 'package:get/get.dart';
       return "not valid email";
     }
   }
+    if(type == "num")
+  {
+    if(!GetUtils.isNum(val))
+    {
+      return "not valid age";
+    }
+  }
   
   if(type == "phone")
   {
@@ -37,5 +46,5 @@ import 'package:get/get.dart';
       return "not valid phone";
     }
   }
-  
+  }
 }
