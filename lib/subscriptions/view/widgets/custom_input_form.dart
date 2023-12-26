@@ -1,4 +1,6 @@
+import 'package:active_system/core/functions/validate_input.dart';
 import 'package:active_system/core/shared/custom_input_form.dart';
+import 'package:active_system/core/shared/custome_textform_auth.dart';
 import 'package:flutter/material.dart';
 
 class SubscriptionForm extends StatelessWidget {

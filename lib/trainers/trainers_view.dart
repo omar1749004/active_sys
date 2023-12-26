@@ -4,10 +4,11 @@ import 'package:active_system/core/shared/custom_table.dart';
 import 'package:active_system/subscriptions/view/widgets/custom_button.dart';
 import 'package:active_system/subscriptions/view/widgets/custom_input_form.dart';
 import 'package:active_system/subscriptions/view/widgets/custom_menu.dart';
+import 'package:active_system/trainers/widgets/custom_input_form.dart';
 import 'package:flutter/material.dart';
 
-class SubscriptionsView extends StatelessWidget {
-  SubscriptionsView({super.key});
+class TrainersView extends StatelessWidget {
+  TrainersView({super.key});
 
   TextEditingController search = TextEditingController();
   @override
@@ -133,7 +134,7 @@ class SubscriptionsView extends StatelessWidget {
                         ),
                       ),
                     ),
-                    child: const SubscriptionForm(),
+                    child: const TrainersForm(),
                   )
                 ],
               ),
