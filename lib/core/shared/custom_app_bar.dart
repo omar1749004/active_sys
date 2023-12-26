@@ -19,7 +19,7 @@ class CustomAppBar extends StatelessWidget {
           ),
           Text(
             "Welcome To Your Home",
-            style: Styles.style20,
+            style: Styles.style20.copyWith(color: Colors.white),
           ),
           //here will add another element in the future
           Text("data")
