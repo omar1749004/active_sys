@@ -9,6 +9,7 @@ class HomeController extends GetxController {
   late TextEditingController phone;
   late TextEditingController note;
   late TextEditingController search;
+  
   int supType = 4;
   bool isactive = false;
   selectSupType(int i) {
