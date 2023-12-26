@@ -2,7 +2,8 @@ import 'package:active_system/core/constant/color.dart';
 import 'package:flutter/material.dart';
 
 ThemeData themeEnglish =ThemeData(
-         primarySwatch:  Colors.deepPurple,
+       
+        // primarySwatch:  MaterialColor..(ColorApp.kPrimaryColor),
          appBarTheme:const  AppBarTheme(
           iconTheme: IconThemeData(color: Colors.white),
           backgroundColor: ColorApp.kPrimaryColor,
