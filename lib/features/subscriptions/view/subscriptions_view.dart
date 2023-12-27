@@ -1,15 +1,13 @@
 import 'package:active_system/core/shared/customSearch.dart';
 import 'package:active_system/core/shared/custom_app_bar.dart';
 import 'package:active_system/core/shared/custom_table.dart';
-
 import 'package:active_system/manage_subscriptions/view/widgets/custom_button.dart';
+import 'package:active_system/manage_subscriptions/view/widgets/custom_input_form.dart';
 import 'package:active_system/manage_subscriptions/view/widgets/custom_menu.dart';
-
-import 'package:active_system/trainers/widgets/custom_input_form.dart';
 import 'package:flutter/material.dart';
 
-class TrainersView extends StatelessWidget {
-  TrainersView({super.key});
+class SubscriptionsView extends StatelessWidget {
+  SubscriptionsView({super.key});
 
   final TextEditingController search = TextEditingController();
   @override
@@ -49,8 +47,8 @@ class TrainersView extends StatelessWidget {
                          Expanded(
                           flex: 6,
                           child: Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 15),
-                            child: CustomTable(columnsHeader: const [
+                            padding: EdgeInsets.symmetric(horizontal: 15),
+                            child: CustomTable(columnsHeader:const [
                               Text("1"),
                               Text("2"),
                               Text("3"),
@@ -64,7 +62,9 @@ class TrainersView extends StatelessWidget {
                               Text("4"),
                               Text("1"),
                               Text("2"),
+
                             ], rowInfo: const [
+
                               'data11',
                               "data12",
                               "data13",
@@ -136,7 +136,7 @@ class TrainersView extends StatelessWidget {
                         ),
                       ),
                     ),
-                    child: const TrainersForm(),
+                    child: const SubscriptionForm(),
                   )
                 ],
               ),

@@ -10,7 +10,7 @@ import 'package:active_system/home/data/service/static/header_table.dart';
 import 'package:active_system/home/data/service/static/note_knoladge.dart';
 import 'package:active_system/home/data/service/static/sup_type.dart';
 import 'package:active_system/home/view/widget/client_info.dart';
-import 'package:active_system/subscriptions/view/widgets/custom_menu.dart';
+import 'package:active_system/manage_subscriptions/view/widgets/custom_menu.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

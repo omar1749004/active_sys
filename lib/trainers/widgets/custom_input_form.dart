@@ -1,6 +1,4 @@
-import 'package:active_system/core/functions/validate_input.dart';
 import 'package:active_system/core/shared/custom_input_form.dart';
-import 'package:active_system/core/shared/custome_textform_auth.dart';
 import 'package:flutter/material.dart';
 
 class TrainersForm extends StatelessWidget {
@@ -14,24 +12,21 @@ class TrainersForm extends StatelessWidget {
           children: [
             CustomInputForm(
               labelText: 'الكود',
-              dataType: 'int',
-              size: 250,
+              dataType: int,
+              size: 300,
             ),
-            CustomInputForm(labelText: 'الاسم ', dataType: 'String', size: 250),
+            CustomInputForm(labelText: 'الاسم ', dataType: String, size: 300),
+            CustomInputForm(labelText: 'تليفون ', dataType: String, size: 300),
             CustomInputForm(
-                labelText: 'تليفون ', dataType: 'String', size: 250),
+                labelText: 'موبايل 1 ', dataType: String, size: 300),
             CustomInputForm(
-                labelText: 'موبايل 1 ', dataType: 'String', size: 250),
-            CustomInputForm(
-                labelText: 'موبايل 2 ', dataType: 'String', size: 250),
-            CustomInputForm(
-                labelText: 'العنوان ', dataType: 'String', size: 250),
-            CustomInputForm(
-                labelText: 'النسبة ', dataType: 'String', size: 250),
+                labelText: 'موبايل 2 ', dataType: String, size: 300),
+            CustomInputForm(labelText: 'العنوان ', dataType: String, size: 300),
+            CustomInputForm(labelText: 'النسبة ', dataType: String, size: 300),
             CustomInputForm(
               labelText: 'ملاحظات',
-              dataType: 'String',
-              size: 250,
+              dataType: String,
+              size: 300,
               maxline: 3,
             ),
           ],
