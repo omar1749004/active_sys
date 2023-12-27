@@ -1,8 +1,10 @@
 import 'package:active_system/core/shared/customSearch.dart';
 import 'package:active_system/core/shared/custom_app_bar.dart';
 import 'package:active_system/core/shared/custom_table.dart';
+
 import 'package:active_system/manage_subscriptions/view/widgets/custom_button.dart';
 import 'package:active_system/manage_subscriptions/view/widgets/custom_menu.dart';
+
 import 'package:active_system/trainers/widgets/custom_input_form.dart';
 import 'package:flutter/material.dart';
 
@@ -43,7 +45,8 @@ class TrainersView extends StatelessWidget {
                           ),
                         ),
                         //table that contains data
-                        Expanded(
+
+                         Expanded(
                           flex: 6,
                           child: Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 15),
