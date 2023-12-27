@@ -73,7 +73,7 @@ class ClinetInfo extends GetView<HomeController> {
                              const SizedBox(
                           height: 20,
                         ),
-                        Container(
+                        SizedBox(
                           height: 120,
                           child: CustomeTextFormAuth(
                             fontSize: 35,

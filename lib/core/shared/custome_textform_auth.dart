@@ -57,7 +57,7 @@ class CustomeTextFormAuth extends StatelessWidget {
           //color: check? ColorApp.KPrimaryColor:color
           // ),
 
-          floatingLabelBehavior: FloatingLabelBehavior.always,
+         // floatingLabelBehavior: FloatingLabelBehavior.always,
 
           // color: check ? ColorApp.KPrimaryColor:color,
 

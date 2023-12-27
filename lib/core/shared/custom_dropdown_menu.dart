@@ -6,10 +6,11 @@ class CustomDropDownMenu extends StatelessWidget {
       {super.key,
       required this.items,
       required this.intialValue,
-      this.onChanged});
+      this.onChanged,  this.redius = 16});
   final List items;
   final String intialValue;
   final void Function(String?)? onChanged;
+final double redius  ;
   @override
   Widget build(BuildContext context) {
     return Directionality(
@@ -22,14 +23,14 @@ class CustomDropDownMenu extends StatelessWidget {
                 borderSide: const BorderSide(
                   color: ColorApp.kPrimaryColor,
                 ),
-                borderRadius: BorderRadius.circular(16)),
+                borderRadius: BorderRadius.circular(redius)),
             border: OutlineInputBorder(
                 borderSide:
                     const BorderSide(color: Color.fromARGB(255, 170, 170, 170)),
-                borderRadius: BorderRadius.circular(16)),
+                borderRadius: BorderRadius.circular(redius)),
           ),
           value: intialValue,
-          borderRadius: BorderRadius.all(Radius.circular(16)),
+          borderRadius: BorderRadius.all(Radius.circular(redius)),
           items: items
               .map((item) =>
                   DropdownMenuItem<String>(value: item, child: Text(item)))
