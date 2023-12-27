@@ -1,17 +1,15 @@
 import 'package:active_system/core/constant/color.dart';
 import 'package:active_system/core/constant/image_asset.dart';
 import 'package:active_system/core/constant/styles.dart';
-import 'package:active_system/core/shared/customSearch.dart';
 import 'package:active_system/core/shared/custom_Botton1.dart';
 import 'package:active_system/core/shared/custom_dropdown_menu.dart';
 import 'package:active_system/core/shared/custom_table.dart';
+import 'package:active_system/core/shared/custom_table_header.dart';
 import 'package:active_system/home/controller/home_controller.dart';
 import 'package:active_system/home/data/service/static/header_table.dart';
 import 'package:active_system/home/data/service/static/note_knoladge.dart';
 import 'package:active_system/home/data/service/static/sup_type.dart';
-
 import 'package:active_system/home/view/widget/client_info.dart';
-
 import 'package:active_system/subscriptions/view/widgets/custom_menu.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -67,31 +65,7 @@ class HomePage extends StatelessWidget {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.end,
                             children: [
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Expanded(
-                                    child: Container(
-                                      height: 50,
-                                      padding: const EdgeInsets.only(
-                                          bottom: 10, left: 20, right: 10),
-                                      child: CustomSearch(
-                                        searchController: controller.search,
-                                        titlAppbar: "بحث",
-                                        onChanged: (val) {},
-                                        onPressedSearch: () {},
-                                      ),
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    child: Text(
-                                      "سجل الحضور اليومي",
-                                      style: Styles.style23,
-                                    ),
-                                  ),
-                                ],
-                              ),
+                             CustomTableHeader(searchController: controller.search, header: "سجل الحضور اليومي"),
                               Expanded(
                                 child: CustomTable(
                                     columnsHeader: headerTable, rowInfo: []),
