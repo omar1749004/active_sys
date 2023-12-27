@@ -1,15 +1,15 @@
 import 'package:active_system/core/shared/customSearch.dart';
 import 'package:active_system/core/shared/custom_app_bar.dart';
 import 'package:active_system/core/shared/custom_table.dart';
-import 'package:active_system/subscriptions/view/widgets/custom_button.dart';
-import 'package:active_system/subscriptions/view/widgets/custom_input_form.dart';
-import 'package:active_system/subscriptions/view/widgets/custom_menu.dart';
+import 'package:active_system/manage_subscriptions/view/widgets/custom_button.dart';
+import 'package:active_system/manage_subscriptions/view/widgets/custom_input_form.dart';
+import 'package:active_system/manage_subscriptions/view/widgets/custom_menu.dart';
 import 'package:flutter/material.dart';
 
 class SubscriptionsView extends StatelessWidget {
   SubscriptionsView({super.key});
 
-  TextEditingController search = TextEditingController();
+  final TextEditingController search = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,11 +43,11 @@ class SubscriptionsView extends StatelessWidget {
                           ),
                         ),
                         //table that contains data
-                        const Expanded(
+                        Expanded(
                           flex: 6,
                           child: Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 15),
-                            child: CustomTable(columnsHeader: [
+                            padding: const EdgeInsets.symmetric(horizontal: 15),
+                            child: CustomTable(columnsHeader: const [
                               Text("1"),
                               Text("2"),
                               Text("3"),
@@ -61,7 +61,7 @@ class SubscriptionsView extends StatelessWidget {
                               Text("4"),
                               Text("1"),
                               Text("2"),
-                            ], rowInfo: [
+                            ], rowInfo: const [
                               'data11',
                               "data12",
                               "data13",

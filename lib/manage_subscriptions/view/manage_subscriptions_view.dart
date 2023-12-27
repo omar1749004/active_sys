@@ -1,13 +1,14 @@
 import 'package:active_system/core/shared/customSearch.dart';
 import 'package:active_system/core/shared/custom_app_bar.dart';
 import 'package:active_system/core/shared/custom_table.dart';
+import 'package:active_system/core/shared/custom_table_header.dart';
 import 'package:active_system/manage_subscriptions/view/widgets/custom_button.dart';
+import 'package:active_system/manage_subscriptions/view/widgets/custom_input_form.dart';
 import 'package:active_system/manage_subscriptions/view/widgets/custom_menu.dart';
-import 'package:active_system/trainers/widgets/custom_input_form.dart';
 import 'package:flutter/material.dart';
 
-class TrainersView extends StatelessWidget {
-  TrainersView({super.key});
+class ManageSubscriptionsView extends StatelessWidget {
+  ManageSubscriptionsView({super.key});
 
   final TextEditingController search = TextEditingController();
   @override
@@ -17,6 +18,7 @@ class TrainersView extends StatelessWidget {
         children: [
           //AppBar
           const CustomAppBar(),
+          //content in the middle
           Expanded(
             child: SizedBox(
               width: MediaQuery.of(context).size.width,
@@ -34,11 +36,9 @@ class TrainersView extends StatelessWidget {
                           padding: const EdgeInsets.symmetric(vertical: 10),
                           child: SizedBox(
                             width: MediaQuery.of(context).size.width * 0.5,
-                            child: CustomSearch(
+                            child: CustomTableHeader(
                               searchController: search,
-                              titlAppbar: "بحث",
-                              onChanged: (val) {},
-                              onPressedSearch: () {},
+                              header: "",
                             ),
                           ),
                         ),
@@ -133,7 +133,7 @@ class TrainersView extends StatelessWidget {
                         ),
                       ),
                     ),
-                    child: const TrainersForm(),
+                    child: const SubscriptionForm(),
                   )
                 ],
               ),

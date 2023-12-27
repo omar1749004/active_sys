@@ -9,7 +9,7 @@ class CustomInputForm extends StatelessWidget {
       required this.size,
       this.maxline = 1});
   final String labelText;
-  final String dataType;
+  final Type dataType;
   final double size;
   final int maxline;
   final GlobalKey<FormState> _formKey = GlobalKey();
