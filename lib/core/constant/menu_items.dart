@@ -1,7 +1,7 @@
 const List<String> serviceName = [
   "الصفحه الرئيسيه",
   "اداره الاشتراكات",
-  "اداره الاشتراكات",
+  "اداره المتدربين",
   "اداره المستخدمين",
   "اداره الاشتراكات",
   "اداره الاشتراكات",
@@ -11,4 +11,5 @@ const List<String> serviceName = [
   "اداره الاشتراكات",
 ];
 
-const List<String> serviceId = ['/', 'SubscriptionsView' , "" ,"usersid"];
+const List<String> serviceId = ['/', 'SubscriptionsView', "TrainersView" , "usersid];
+

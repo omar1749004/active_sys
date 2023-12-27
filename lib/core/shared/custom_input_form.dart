@@ -22,18 +22,21 @@ class CustomInputForm extends StatelessWidget {
         key: _formKey,
         child: Column(
           children: [
-            TextFormField(
-              maxLines: maxline,
+            Directionality(
               textDirection: TextDirection.rtl,
-              style: const TextStyle(color: ColorApp.kPrimaryColor),
-              decoration: InputDecoration(
-                labelText: labelText,
+              child: TextFormField(
+                maxLines: maxline,
+                textDirection: TextDirection.rtl,
+                style: const TextStyle(color: ColorApp.kPrimaryColor),
+                decoration: InputDecoration(
+                  labelText: labelText,
+                ),
+                validator: (value) {
+                  if (value.runtimeType != dataType) {
+                    return "there is error";
+                  }
+                },
               ),
-              validator: (value) {
-                if (value.runtimeType != dataType) {
-                  return "there is error";
-                }
-              },
             ),
           ],
         ),
