@@ -43,11 +43,11 @@ class SubscriptionsView extends StatelessWidget {
                           ),
                         ),
                         //table that contains data
-                        const Expanded(
+                         Expanded(
                           flex: 6,
                           child: Padding(
                             padding: EdgeInsets.symmetric(horizontal: 15),
-                            child: CustomTable(columnsHeader: [
+                            child: CustomTable(columnsHeader:const [
                               Text("1"),
                               Text("2"),
                               Text("3"),
@@ -61,7 +61,7 @@ class SubscriptionsView extends StatelessWidget {
                               Text("4"),
                               Text("1"),
                               Text("2"),
-                            ], rowInfo: [
+                            ], rowInfo:const [
                               'data11',
                               "data12",
                               "data13",
