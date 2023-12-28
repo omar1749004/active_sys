@@ -1,6 +1,7 @@
 import 'package:active_system/core/shared/customSearch.dart';
 import 'package:active_system/core/shared/custom_app_bar.dart';
 import 'package:active_system/core/shared/custom_table.dart';
+import 'package:active_system/core/shared/custom_table_header.dart';
 import 'package:active_system/manage_subscriptions/view/widgets/custom_button.dart';
 import 'package:active_system/manage_subscriptions/view/widgets/custom_menu.dart';
 import 'package:active_system/trainers/widgets/custom_input_form.dart';
@@ -15,8 +16,13 @@ class TrainersView extends StatelessWidget {
     return Scaffold(
       body: Column(
         children: [
+          //
           //AppBar
+          //
           const CustomAppBar(),
+          //
+          //content in the middle
+          //
           Expanded(
             child: SizedBox(
               width: MediaQuery.of(context).size.width,
@@ -26,27 +32,26 @@ class TrainersView extends StatelessWidget {
                   const CustomMenu(),
                   //the content in the middle
                   Expanded(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        //search bar
-                        Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 10),
-                          child: SizedBox(
-                            width: MediaQuery.of(context).size.width * 0.5,
-                            child: CustomSearch(
-                              searchController: search,
-                              titlAppbar: "بحث",
-                              onChanged: (val) {},
-                              onPressedSearch: () {},
-                            ),
-                          ),
-                        ),
-                        //table that contains data
-                        Expanded(
-                          flex: 6,
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 15),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 10, horizontal: 15),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          //
+                          //search bar
+                          //
+                          SizedBox(
+                              width: MediaQuery.of(context).size.width * 0.5,
+                              child: CustomTableHeader(
+                                searchController: search,
+                                header: "",
+                              )),
+                          //
+                          //table that contains data
+                          //
+                          Expanded(
+                            flex: 6,
                             child: CustomTable(columnsHeader: const [
                               Text("1"),
                               Text("2"),
@@ -80,12 +85,11 @@ class TrainersView extends StatelessWidget {
                               'data11',
                             ]),
                           ),
-                        ),
-                        //buttons
-                        Expanded(
-                          flex: 1,
-                          child: Padding(
-                            padding: const EdgeInsets.only(bottom: 20.0),
+                          //
+                          //buttons
+                          //
+                          Expanded(
+                            flex: 1,
                             child: Row(
                               textDirection: TextDirection.rtl,
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -109,11 +113,13 @@ class TrainersView extends StatelessWidget {
                               ],
                             ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
+                  //
                   //form input right screen
+                  //
                   Container(
                     height: MediaQuery.of(context).size.height,
                     padding: const EdgeInsets.only(left: 8, right: 8),

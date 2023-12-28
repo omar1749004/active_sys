@@ -11,12 +11,16 @@ class CustomDateField extends StatelessWidget {
       required this.iconSize,
       required this.fontSize,
       this.onChanged,
-      this.validator});
+      this.validator,
+      this.label = "",
+      this.borderRadius = 0});
   final double width;
   final double height;
   final IconData icon;
   final double iconSize;
   final double fontSize;
+  final double borderRadius;
+  final String label;
   final void Function(DateTime?)? onChanged;
   final String? Function(DateTime?)? validator;
 
@@ -34,8 +38,11 @@ class CustomDateField extends StatelessWidget {
           icon,
           size: iconSize,
         ),
-        decoration: const InputDecoration(
-            border: OutlineInputBorder(), contentPadding: EdgeInsets.zero),
+        decoration: InputDecoration(
+            labelText: label,
+            border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(borderRadius)),
+            contentPadding: EdgeInsets.zero),
         textAlign: TextAlign.center,
         style: TextStyle(fontSize: fontSize),
         initialValue: DateTime.now(),

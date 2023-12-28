@@ -1,3 +1,5 @@
+import 'package:active_system/core/constant/color.dart';
+import 'package:active_system/core/shared/custom_Botton1.dart';
 import 'package:active_system/core/shared/custom_app_bar.dart';
 import 'package:active_system/core/shared/custom_date_field.dart';
 import 'package:active_system/core/shared/custom_table.dart';
@@ -5,6 +7,7 @@ import 'package:active_system/core/shared/custom_table_header.dart';
 import 'package:active_system/manage_subscriptions/view/widgets/custom_button.dart';
 import 'package:active_system/manage_subscriptions/view/widgets/custom_input_form.dart';
 import 'package:active_system/manage_subscriptions/view/widgets/custom_menu.dart';
+import 'package:active_system/renew_subscriptions/widgets/renew_subscription_form.dart';
 import 'package:flutter/material.dart';
 
 class RenewSybscriptionsView extends StatelessWidget {
@@ -41,19 +44,44 @@ class RenewSybscriptionsView extends StatelessWidget {
                       //
                       //date
                       //
-                      Row(
-                        children: [
-                          CustomDateField(
-                              width: 150,
-                              height: 30,
-                              icon: Icons.close,
-                              iconSize: 15,
-                              fontSize: 15),
-                          Text(
-                            "الى ",
-                            style: TextStyle(fontSize: 18),
-                          ),
-                        ],
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 10),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            CustomDateField(
+                                width: 150,
+                                height: 30,
+                                icon: Icons.close,
+                                iconSize: 15,
+                                fontSize: 15),
+                            const Text(
+                              "الى ",
+                              style: TextStyle(fontSize: 18),
+                            ),
+                            CustomDateField(
+                                width: 150,
+                                height: 30,
+                                icon: Icons.close,
+                                iconSize: 15,
+                                fontSize: 15),
+                            const Text(
+                              "من ",
+                              style: TextStyle(fontSize: 18),
+                            ),
+                            SizedBox(
+                              child: CustomBotton1(
+                                text: "بحث",
+                                ontap: () {},
+                                color: ColorApp.kPrimaryColor,
+                                marginBottom: 0,
+                                marginLeft: 0,
+                                marginRight: 0,
+                                marginTop: 0,
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                       //
                       //table that contains data
@@ -102,15 +130,7 @@ class RenewSybscriptionsView extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
                             CustomButton(
-                              text: "تجديد",
-                              ontap: () {},
-                            ),
-                            CustomButton(
-                              text: "تعديل",
-                              ontap: () {},
-                            ),
-                            CustomButton(
-                              text: "حذف",
+                              text: "تجميد",
                               ontap: () {},
                             ),
                             CustomButton(
@@ -118,7 +138,15 @@ class RenewSybscriptionsView extends StatelessWidget {
                               ontap: () {},
                             ),
                             CustomButton(
-                              text: "تجميد",
+                              text: "حذف",
+                              ontap: () {},
+                            ),
+                            CustomButton(
+                              text: "تعديل",
+                              ontap: () {},
+                            ),
+                            CustomButton(
+                              text: "تجديد",
                               ontap: () {},
                             )
                           ],
@@ -150,7 +178,7 @@ class RenewSybscriptionsView extends StatelessWidget {
                     ),
                   ),
                 ),
-                child: const SubscriptionForm(),
+                child: const RenewSubscriptionForm(),
               ),
             ],
           ),

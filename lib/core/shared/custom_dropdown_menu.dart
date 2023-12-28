@@ -6,7 +6,9 @@ class CustomDropDownMenu extends StatelessWidget {
       {super.key,
       required this.items,
       required this.intialValue,
+      this.label = "",
       this.onChanged});
+  final String label;
   final List items;
   final String intialValue;
   final void Function(String?)? onChanged;
@@ -18,6 +20,7 @@ class CustomDropDownMenu extends StatelessWidget {
           menuMaxHeight: 150,
           focusColor: const Color.fromARGB(255, 206, 206, 206),
           decoration: InputDecoration(
+            labelText: label,
             focusedBorder: OutlineInputBorder(
                 borderSide: const BorderSide(
                   color: ColorApp.kPrimaryColor,
@@ -29,7 +32,7 @@ class CustomDropDownMenu extends StatelessWidget {
                 borderRadius: BorderRadius.circular(16)),
           ),
           value: intialValue,
-          borderRadius: BorderRadius.all(Radius.circular(16)),
+          borderRadius: const BorderRadius.all(Radius.circular(16)),
           items: items
               .map((item) =>
                   DropdownMenuItem<String>(value: item, child: Text(item)))
