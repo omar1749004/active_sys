@@ -12,6 +12,7 @@ class MyServices extends GetxService
   late SharedPreferences sharedPreferences ;
   Future<MyServices> intial () async
   {
+    
   //   await Firebase.initializeApp(
   //   options: DefaultFirebaseOptions.currentPlatform,
   // );
