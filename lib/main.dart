@@ -6,6 +6,8 @@ import 'package:get/get.dart';
 void main() async{
   runApp(const MyApp());
   await intialService();
+   
+  
 }
 
 class MyApp extends StatelessWidget {
@@ -19,6 +21,10 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: controller.apptheme,
       locale: controller.language,
+      supportedLocales:const [
+         Locale('en', ''), // English
+         Locale('ar', 'SA'), // Arabic
+      ],
       getPages: route,
     ) ;
   }
