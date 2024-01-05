@@ -1,6 +1,8 @@
+import 'package:active_system/attendance/attendance_view.dart';
 import 'package:active_system/core/constant/app_route.dart';
 import 'package:active_system/core/middleware/mymiddleware.dart';
 import 'package:active_system/home/view/screen/home.dart';
+import 'package:active_system/manage_cost/manage_cost_view.dart';
 import 'package:active_system/manage_subscriptions/view/manage_subscriptions_view.dart';
 import 'package:active_system/renew_subscriptions/renew_subscriptions_view.dart';
 import 'package:active_system/safe/view/screen/safe_view.dart';
@@ -29,8 +31,16 @@ List<GetPage<dynamic>> route = [
       name: AppRoute.RenewSybscriptionsView,
       page: () => RenewSybscriptionsView(),
       middlewares: [MyMiddleWare()]),
-      GetPage(
+  GetPage(
       name: AppRoute.safeid,
-      page: () =>const SafeView(),
+      page: () => const SafeView(),
+      middlewares: [MyMiddleWare()]),
+  GetPage(
+      name: AppRoute.managecostviewid,
+      page: () => const ManageCostView(),
+      middlewares: [MyMiddleWare()]),
+  GetPage(
+      name: AppRoute.attendanceid,
+      page: () => const AttendanceView(),
       middlewares: [MyMiddleWare()]),
 ];

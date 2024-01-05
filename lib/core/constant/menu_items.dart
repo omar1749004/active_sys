@@ -5,8 +5,8 @@ const List<String> serviceName = [
   "ادارة المستخدمين",
   "تجديد الاشتراكات",
   "الخزنة",
-  "اداره الاشتراكات",
-  "اداره الاشتراكات",
+  "ادارة المصروفات",
+  "سجل الحضور",
   "اداره الاشتراكات",
   "اداره الاشتراكات",
 ];
@@ -17,6 +17,7 @@ const List<String> serviceId = [
   "TrainersView",
   "usersid",
   "RenewSybscriptionsView",
-  "safeid"
+  "safeid",
+  "ManageCostView",
+  "AttendanceView",
 ];
-
