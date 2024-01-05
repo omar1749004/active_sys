@@ -28,6 +28,7 @@ class HomeController extends GetxController {
 
   @override
   void onInit() {
+   
     username =TextEditingController() ;
     age =TextEditingController() ;
     subscriptions =TextEditingController() ;

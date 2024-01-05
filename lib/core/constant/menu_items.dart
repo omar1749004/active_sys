@@ -4,7 +4,7 @@ const List<String> serviceName = [
   "ادارة المتدربين",
   "ادارة المستخدمين",
   "تجديد الاشتراكات",
-  "اداره الاشتراكات",
+  "الخزنة",
   "اداره الاشتراكات",
   "اداره الاشتراكات",
   "اداره الاشتراكات",
@@ -17,5 +17,6 @@ const List<String> serviceId = [
   "TrainersView",
   "usersid",
   "RenewSybscriptionsView",
+  "safeid"
 ];
 

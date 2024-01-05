@@ -4,4 +4,5 @@ class AppRoute {
   static const String usersid = "/usersid";
   static const String trainerid = "/TrainersView";
   static const String RenewSybscriptionsView = "/RenewSybscriptionsView";
+  static const String safeid = "/safeid";
 }

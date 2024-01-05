@@ -20,7 +20,7 @@ class CustomDateField extends StatelessWidget {
   final void Function(DateTime?)? onChanged;
   final String? Function(DateTime?)? validator;
 
-  final format = DateFormat("yyyy-MM-dd");
+  final format = DateFormat("yyyy-MM-dd" );
 
   @override
   Widget build(BuildContext context) {
@@ -30,6 +30,7 @@ class CustomDateField extends StatelessWidget {
       child: DateTimeField(
         validator: validator,
         onChanged: onChanged,
+        
         resetIcon: Icon(
           icon,
           size: iconSize,
@@ -39,13 +40,16 @@ class CustomDateField extends StatelessWidget {
         textAlign: TextAlign.center,
         style: TextStyle(fontSize: fontSize),
         initialValue: DateTime.now(),
+        
         format: format,
         onShowPicker: (BuildContext context, DateTime? currentValue) {
           return showDatePicker(
               context: context,
+              //locale: const Locale("ar", "SA"),
               firstDate: DateTime(1900),
               initialDate: currentValue ?? DateTime.now(),
               lastDate: DateTime(2100));
+              
         },
       ),
     );
