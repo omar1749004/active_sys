@@ -28,7 +28,7 @@ class HomePage extends StatelessWidget {
                 height: MediaQuery.of(context).size.height * 0.09,
                 child: Row(
                   children: [
-                    Image.asset(ImageAsset.lohgo),
+                    Image.asset(ImageAsset.logo),
                     const Spacer(
                       flex: 2,
                     ),

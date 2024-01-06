@@ -175,6 +175,7 @@ class UsersView extends StatelessWidget {
                                   return validInput(val!, 8, 50, "");
                                 }),
                           ),
+
                           const Align(
                               alignment: Alignment.topRight,
                               child: Text(
@@ -185,6 +186,7 @@ class UsersView extends StatelessWidget {
                               height: 350, child: CustomCheckBoxList()),
                           const SizedBox(
                             height: 10,
+
                           ),
                           CustomeTextFormAuth(
                               hintText: "",

@@ -14,6 +14,13 @@ abstract class Styles {
     height: 0,
   );
   static TextStyle style23 =const TextStyle(
+    color: Colors.white,
+    fontSize: 23,
+    fontFamily: 'Inter',
+    fontWeight: FontWeight.w400,
+    height: 0,
+  );
+   static TextStyle style23B =const TextStyle(
     color: Colors.black,
     fontSize: 23,
     fontFamily: 'Inter',
