@@ -32,7 +32,7 @@ class ManageCostView extends StatelessWidget {
               child: Row(
                 children: [
                   //left menu
-                  const CustomMenu(),
+                  const CustomMenu(pageName: "ادارة المصروفات",),
                   //the content in the middle
                   Expanded(
                     child: Padding(

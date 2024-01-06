@@ -10,6 +10,7 @@ class ManageSubscriptionsView extends StatelessWidget {
   ManageSubscriptionsView({super.key});
 
   final TextEditingController search = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,7 +31,9 @@ class ManageSubscriptionsView extends StatelessWidget {
                   //
                   //left menu
                   //
-                  const CustomMenu(),
+                  const CustomMenu(
+                    pageName: 'ادارة الاشتراكات',
+                  ),
                   //
                   //the content in the middle
                   //

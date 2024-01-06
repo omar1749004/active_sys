@@ -22,7 +22,7 @@ class RenewSybscriptionsView extends StatelessWidget {
           child: Row(
             children: [
               //left menu
-              const CustomMenu(),
+              const CustomMenu(pageName: 'تجديد الاشتراكات',),
               //the content in the middle
               Expanded(
                 child: Padding(

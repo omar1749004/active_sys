@@ -30,7 +30,9 @@ class SafeView extends StatelessWidget {
             child: GetBuilder<SafeControllerImp>(
               builder: (controller) => Row(
                 children: [
-                  const CustomMenu(),
+                  const CustomMenu(
+                    pageName: 'الخزنة',
+                  ),
                   Expanded(
                     flex: 5,
                     child: Container(
@@ -43,7 +45,6 @@ class SafeView extends StatelessWidget {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: [
-                               
                                 CustomDateField(
                                     width: 150,
                                     height: 30,
@@ -75,7 +76,7 @@ class SafeView extends StatelessWidget {
                                     marginTop: 0,
                                   ),
                                 ),
-                                 Text(
+                                Text(
                                   "سجل الخزنة",
                                   style: Styles.style23,
                                 ),

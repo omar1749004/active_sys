@@ -32,7 +32,7 @@ class TrainersView extends StatelessWidget {
               child: Row(
                 children: [
                   //left menu
-                  const CustomMenu(),
+                  const CustomMenu(pageName: 'ادارة المتدربين',),
                   //the content in the middle
                   Expanded(
 

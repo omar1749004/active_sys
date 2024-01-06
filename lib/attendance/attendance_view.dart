@@ -22,7 +22,7 @@ class AttendanceView extends StatelessWidget {
           child: Row(
             children: [
               //left menu
-              const CustomMenu(),
+              const CustomMenu(pageName: 'سجل الحضور',),
               //the content in the middle
               Expanded(
                 child: Padding(

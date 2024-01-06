@@ -23,7 +23,7 @@ class SubscriptionsView extends StatelessWidget {
               child: Row(
                 children: [
                   //left menu
-                  const CustomMenu(),
+                  const CustomMenu(pageName: 'ادارة الاشتراكات',),
                   //the content in the middle
                   Expanded(
                     child: Column(

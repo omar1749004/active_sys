@@ -3,11 +3,10 @@ import 'package:active_system/core/services/services.dart';
 import 'package:active_system/rout.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-void main() async{
+
+void main() async {
   runApp(const MyApp());
   await intialService();
-   
-  
 }
 
 class MyApp extends StatelessWidget {
@@ -16,17 +15,16 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    LocalController controller =Get.put(LocalController()) ;
+    LocalController controller = Get.put(LocalController());
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       theme: controller.apptheme,
       locale: controller.language,
-      supportedLocales:const [
-         Locale('en', ''), // English
-         Locale('ar', 'SA'), // Arabic
+      supportedLocales: const [
+        Locale('en', ''), // English
+        Locale('ar', 'SA'), // Arabic
       ],
       getPages: route,
-    ) ;
+    );
   }
 }
-

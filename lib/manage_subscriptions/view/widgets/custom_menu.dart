@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class CustomMenu extends StatelessWidget {
-  const CustomMenu({super.key});
-
+  const CustomMenu({super.key, required this.pageName});
+  final String pageName;
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -17,10 +17,14 @@ class CustomMenu extends StatelessWidget {
         itemCount: serviceName.length,
         itemBuilder: (context, index) {
           return CustomMenuButton(
-              text: serviceName[index],
-              ontap: () {
-                Get.toNamed(serviceId[index]);
-              });
+            backgroundColor: serviceName[index] == pageName
+                ? const Color.fromARGB(137, 255, 255, 255)
+                : Colors.white,
+            text: serviceName[index],
+            ontap: () {
+              Get.toNamed(serviceId[index]);
+            },
+          );
         },
       ),
     );
