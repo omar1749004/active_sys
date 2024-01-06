@@ -11,6 +11,7 @@ class CustomCheckBoxList extends StatelessWidget {
                               ...List.generate(
                                   serviceName.length,
                                   (index) => Row(
+                                    
                                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                                         children: [
                                           const Text(
@@ -26,7 +27,7 @@ class CustomCheckBoxList extends StatelessWidget {
                                                 val != val;
                                               }),
                                           Container(
-                                              width: 140,
+                                              width: MediaQuery.of(context).size.width* 0.08,
                                               padding:const EdgeInsets.symmetric(
                                                   vertical: 5,
                                                   horizontal: 5),
