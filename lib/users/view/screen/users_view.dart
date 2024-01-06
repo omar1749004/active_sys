@@ -174,12 +174,10 @@ class UsersView extends StatelessWidget {
                                   return validInput(val!, 8, 50, "");
                                 }),
                           ),
-                          const Align(
-                              alignment: Alignment.topRight,
-                              child: Text(
-                                "الصلاحيات",
-                                style: Styles.style15B,
-                              )),
+                         const Text(
+                            "الصلاحيات",
+                            style: Styles.style15B,
+                          ),
                          const SizedBox(
                             height: 350,
                             child: CustomCheckBoxList()

@@ -15,7 +15,12 @@ class CustomeTextFormAuth extends StatelessWidget {
       this.isPhoneNumber = false,
       this.obscureText = false,
       this.ontap,
-      this.fontSize = 16});
+      this.fontSize = 16,
+      this.lableStyle = Styles.style18B,
+      this.onfocuseColor = ColorApp.kPrimaryColor,
+      this.cursorColor = ColorApp.kPrimaryColor,
+      this.hintColor = Colors.black,
+       this.mainText = Colors.black});
 
   final String hintText;
   final String lableText;
@@ -24,9 +29,12 @@ class CustomeTextFormAuth extends StatelessWidget {
   final String? Function(String?)? validator;
   final bool isPhoneNumber;
   final bool obscureText;
-
+  final TextStyle? lableStyle;
   final double fontSize;
-
+  final Color onfocuseColor;
+  final Color hintColor;
+  final Color cursorColor;
+  final Color mainText;
   final void Function()? ontap;
   @override
   Widget build(BuildContext context) {
@@ -39,10 +47,11 @@ class CustomeTextFormAuth extends StatelessWidget {
         keyboardType: isPhoneNumber ? TextInputType.number : TextInputType.text,
         validator: validator,
         controller: myController,
-        cursorColor: ColorApp.kPrimaryColor,
-        style: TextStyle(fontSize: fontSize),
+        cursorColor: cursorColor,
+        style: TextStyle(fontSize: fontSize, color: mainText),
         decoration: InputDecoration(
           hintText: hintText,
+          hintStyle: TextStyle(color: hintColor),
           //hintStyle: TextStyle(fontSize: 14,
           //color: check? ColorApp.KPrimaryColor: color
           // ),
@@ -50,14 +59,14 @@ class CustomeTextFormAuth extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 10),
             child: Text(
               lableText,
-              style: Styles.style18B,
+              style: lableStyle,
             ),
           ),
           //labelStyle: TextStyle(
           //color: check? ColorApp.KPrimaryColor:color
           // ),
 
-         // floatingLabelBehavior: FloatingLabelBehavior.always,
+          // floatingLabelBehavior: FloatingLabelBehavior.always,
 
           // color: check ? ColorApp.KPrimaryColor:color,
 
@@ -69,8 +78,8 @@ class CustomeTextFormAuth extends StatelessWidget {
           //  focusColor: ColorApp.kPrimaryColor,
           focusedBorder: OutlineInputBorder(
               //on focus
-              borderSide: const BorderSide(
-                color: ColorApp.kPrimaryColor,
+              borderSide: BorderSide(
+                color: onfocuseColor,
               ),
               borderRadius: BorderRadius.circular(30)),
           border: OutlineInputBorder(
@@ -85,7 +94,7 @@ class CustomeTextFormAuth extends StatelessWidget {
           suffixIcon: ontap != null
               ? GestureDetector(
                   onTap: ontap,
-                  child: Icon(icone),
+                  child: Icon(icone, color: Colors.white),
                 )
               : null,
         ),

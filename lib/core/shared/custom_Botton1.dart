@@ -5,7 +5,7 @@ class CustomBotton1 extends StatelessWidget {
       {super.key,
       required this.ontap,
       required this.text,
-      this.hieght = 70,
+      this.hieght = 40,
       required this.color,
       this.marginTop = 35,
       this.marginBottom = 0,
@@ -29,7 +29,7 @@ class CustomBotton1 extends StatelessWidget {
             top: marginTop,
             bottom: marginBottom),
         child: MaterialButton(
-          height: 40,
+          height: hieght,
           onPressed: ontap,
           padding: const EdgeInsets.all(10),
           shape:
