@@ -2,19 +2,19 @@ import 'package:active_system/core/constant/color.dart';
 import 'package:active_system/core/shared/custom_Botton1.dart';
 import 'package:active_system/core/shared/custom_app_bar.dart';
 import 'package:active_system/core/shared/custom_date_field.dart';
+import 'package:active_system/core/shared/custom_dropdown_menu.dart';
 import 'package:active_system/core/shared/custom_table.dart';
 import 'package:active_system/core/shared/custom_table_header.dart';
 import 'package:active_system/manage_subscriptions/view/widgets/custom_button.dart';
 import 'package:active_system/manage_subscriptions/view/widgets/custom_menu.dart';
-import 'package:active_system/renew_subscriptions/widgets/renew_subscription_form.dart';
 import 'package:flutter/material.dart';
 
-class RenewSybscriptionsView extends StatelessWidget {
-  RenewSybscriptionsView({super.key});
+class AttendanceView extends StatelessWidget {
+  const AttendanceView({super.key});
 
-  final TextEditingController search = TextEditingController();
   @override
   Widget build(BuildContext context) {
+    final TextEditingController search = TextEditingController();
     return Scaffold(
       body: Column(children: [
         const CustomAppBar(),
@@ -35,7 +35,7 @@ class RenewSybscriptionsView extends StatelessWidget {
                       //search bar
                       //
                       SizedBox(
-                          width: MediaQuery.of(context).size.width * 0.5,
+                          width: MediaQuery.of(context).size.width * 0.8,
                           child: CustomTableHeader(
                             searchController: search,
                             header: "",
@@ -86,7 +86,7 @@ class RenewSybscriptionsView extends StatelessWidget {
                       //table that contains data
                       //
                       Expanded(
-                        flex: 6,
+                        flex: 5,
                         child: CustomTable(columnsHeader: const [
                           Text("1"),
                           Text("2"),
@@ -128,56 +128,69 @@ class RenewSybscriptionsView extends StatelessWidget {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
-                            CustomButton(
-                              text: "تجميد",
-                              ontap: () {},
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                SizedBox(
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.1,
+                                  height: 40,
+                                  child: TextFormField(
+                                    textDirection: TextDirection.rtl,
+                                    textAlignVertical: TextAlignVertical.center,
+                                    textAlign: TextAlign.center,
+                                    readOnly: true,
+                                    decoration: const InputDecoration(
+                                      hintText: "عدد اللاعبين",
+                                      border: OutlineInputBorder(
+                                          borderRadius: BorderRadius.zero,
+                                          borderSide:
+                                              BorderSide(color: Colors.black)),
+                                      focusedBorder: OutlineInputBorder(
+                                          borderSide:
+                                              BorderSide(color: Colors.black)),
+                                      enabledBorder: OutlineInputBorder(
+                                          borderSide:
+                                              BorderSide(color: Colors.black)),
+                                    ),
+                                  ),
+                                ),
+                                const Text(
+                                  " عدد اللاعبين",
+                                )
+                              ],
                             ),
-                            CustomButton(
-                              text: "طباعة",
-                              ontap: () {},
+                            SizedBox(
+                              width: MediaQuery.of(context).size.width * 0.2,
+                              child: CustomDropDownMenu(
+                                items: const ["خاص", "الكل"],
+                                intialValue: 'الكل',
+                                onChanged: (p0) {},
+                                label: "عرض",
+                              ),
                             ),
-                            CustomButton(
-                              text: "حذف",
-                              ontap: () {},
+                            SizedBox(
+                              width: MediaQuery.of(context).size.width * 0.2,
+                              child: CustomDropDownMenu(
+                                items: const ["الفلل", "نادى الشرطه"],
+                                intialValue: 'نادى الشرطه',
+                                onChanged: (p0) {},
+                                label: "فرع",
+                              ),
                             ),
-                            CustomButton(
-                              text: "تعديل",
-                              ontap: () {},
+                            SizedBox(
+                              width: MediaQuery.of(context).size.width * 0.1,
+                              child: CustomButton(
+                                text: "طباعه",
+                                ontap: () {},
+                              ),
                             ),
-                            CustomButton(
-                              text: "تجديد",
-                              ontap: () {},
-                            )
                           ],
                         ),
                       ),
                     ],
                   ),
                 ),
-              ),
-              //
-              //form input right screen
-              //
-              Container(
-                height: MediaQuery.of(context).size.height,
-                padding: const EdgeInsets.only(left: 8, right: 8),
-                decoration: const BoxDecoration(
-                  border: Border(
-                    top: BorderSide(
-                      width: 1,
-                      color: Color.fromRGBO(0, 0, 0, 0.186),
-                    ),
-                    left: BorderSide(
-                      width: 1,
-                      color: Color.fromRGBO(0, 0, 0, 0.186),
-                    ),
-                    bottom: BorderSide(
-                      width: 1,
-                      color: Color.fromRGBO(0, 0, 0, 0.186),
-                    ),
-                  ),
-                ),
-                child: const RenewSubscriptionForm(),
               ),
             ],
           ),
