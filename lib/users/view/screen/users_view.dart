@@ -28,7 +28,9 @@ class UsersView extends StatelessWidget {
             child: GetBuilder<UsersControllerImp>(
               builder: (controller) => Row(
                 children: [
-                  const CustomMenu(),
+                  const CustomMenu(
+                    pageName: 'ادارة المستخدمين',
+                  ),
                   Expanded(
                     flex: 5,
                     child: Container(
@@ -88,7 +90,6 @@ class UsersView extends StatelessWidget {
                                     text: "حذف",
                                     ontap: () {},
                                   ),
-                                  
                                 ],
                               ),
                             ),
@@ -97,7 +98,7 @@ class UsersView extends StatelessWidget {
                       ),
                     ),
                   ),
-                const  VerticalDivider(),
+                  const VerticalDivider(),
                   Expanded(
                     flex: 2,
                     child: Padding(
@@ -180,18 +181,18 @@ class UsersView extends StatelessWidget {
                                 "الصلاحيات",
                                 style: Styles.style15B,
                               )),
-                         const SizedBox(
-                            height: 350,
-                            child: CustomCheckBoxList()
+                          const SizedBox(
+                              height: 350, child: CustomCheckBoxList()),
+                          const SizedBox(
+                            height: 10,
                           ),
-                         const SizedBox(height: 10,),
                           CustomeTextFormAuth(
-                                hintText: "",
-                                lableText: "ملاحظات",
-                                obscureText: true,
-                                validator: (val) {
-                                  return validInput(val!, 8, 50, "");
-                                }),
+                              hintText: "",
+                              lableText: "ملاحظات",
+                              obscureText: true,
+                              validator: (val) {
+                                return validInput(val!, 8, 50, "");
+                              }),
                         ],
                       ),
                     ),

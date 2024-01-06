@@ -56,7 +56,7 @@ class HomePage extends StatelessWidget {
                 height: MediaQuery.of(context).size.height * 0.7,
                 child: Row(
                   children: [
-                    const CustomMenu(),
+                    const CustomMenu(pageName: "الصفحة الرئيسية",),
                     const VerticalDivider(),
                     Expanded(
                         flex: 2,
