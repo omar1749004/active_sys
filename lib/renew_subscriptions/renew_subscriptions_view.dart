@@ -102,22 +102,7 @@ class RenewSybscriptionsView extends StatelessWidget {
                           Text("1"),
                           Text("2"),
                         ], rowInfo: const [
-                          'data11',
-                          "data12",
-                          "data13",
-                          "data14",
-                          'data11',
-                          "data12",
-                          "data13",
-                          "data13",
-                          "data14",
-                          'data11',
-                          "data13",
-                          "data14",
-                          'data11',
-                          "data13",
-                          "data14",
-                          'data11',
+                         
                         ]),
                       ),
                       //
