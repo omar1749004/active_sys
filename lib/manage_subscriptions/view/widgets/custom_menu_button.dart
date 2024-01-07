@@ -8,7 +8,6 @@ class CustomMenuButton extends StatelessWidget {
     required this.text,
     required this.ontap,
     this.backgroundColor = Colors.white,
-
   });
 
   final String text;
@@ -17,11 +16,9 @@ class CustomMenuButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
- 
     late double height =
         (MediaQuery.of(context).size.height / serviceName.length);
     return ElevatedButton(
-     
       autofocus: false,
       onPressed: ontap,
       style: ButtonStyle(

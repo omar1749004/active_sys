@@ -5,17 +5,18 @@ import 'package:flutter/material.dart';
 import '../../../core/constant/color.dart';
 
 class CustomeTextFormAuth extends StatelessWidget {
-  const CustomeTextFormAuth(
-      {super.key,
-      required this.hintText,
-      required this.lableText,
-      this.myController,
-      required this.validator,
-      this.icone = Icons.power_off_rounded,
-      this.isPhoneNumber = false,
-      this.obscureText = false,
-      this.ontap,
-      this.fontSize = 16});
+  const CustomeTextFormAuth({
+    super.key,
+    required this.hintText,
+    required this.lableText,
+    this.myController,
+    required this.validator,
+    this.icone = Icons.power_off_rounded,
+    this.isPhoneNumber = false,
+    this.obscureText = false,
+    this.ontap,
+    this.fontSize = 16,
+  });
 
   final String hintText;
   final String lableText;
@@ -57,7 +58,7 @@ class CustomeTextFormAuth extends StatelessWidget {
           //color: check? ColorApp.KPrimaryColor:color
           // ),
 
-         // floatingLabelBehavior: FloatingLabelBehavior.always,
+          // floatingLabelBehavior: FloatingLabelBehavior.always,
 
           // color: check ? ColorApp.KPrimaryColor:color,
 

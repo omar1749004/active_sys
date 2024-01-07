@@ -22,7 +22,9 @@ class RenewSybscriptionsView extends StatelessWidget {
           child: Row(
             children: [
               //left menu
-              const CustomMenu(pageName: 'تجديد الاشتراكات',),
+              const CustomMenu(
+                pageName: 'تجديد الاشتراكات',
+              ),
               //the content in the middle
               Expanded(
                 child: Padding(
@@ -70,6 +72,7 @@ class RenewSybscriptionsView extends StatelessWidget {
                             ),
                             SizedBox(
                               child: CustomBotton1(
+                                hieght: 40,
                                 text: "بحث",
                                 ontap: () {},
                                 color: ColorApp.kPrimaryColor,
