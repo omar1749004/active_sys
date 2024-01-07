@@ -27,7 +27,7 @@ class CustomTableHeader extends StatelessWidget {
         SizedBox(
           child: Text(
             header,
-            style: Styles.style23,
+            style: Styles.style23B,
           ),
         ),
       ],

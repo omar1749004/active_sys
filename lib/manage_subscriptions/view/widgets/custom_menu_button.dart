@@ -1,4 +1,3 @@
-import 'package:active_system/core/constant/color.dart';
 import 'package:active_system/core/constant/menu_items.dart';
 import 'package:flutter/material.dart';
 
@@ -25,7 +24,14 @@ class CustomMenuButton extends StatelessWidget {
       autofocus: false,
       onPressed: ontap,
       style: ButtonStyle(
-          backgroundColor: MaterialStatePropertyAll(backgroundColor),
+          backgroundColor: MaterialStateProperty.resolveWith<Color?>(
+            (Set<MaterialState> states) {
+              if (states.contains(MaterialState.hovered)) {
+                return const Color.fromARGB(137, 255, 255, 255);
+              }
+              return backgroundColor; // Use the component's default.
+            },
+          ),
           shape: MaterialStateProperty.all(
             LinearBorder.bottom(
               side: const BorderSide(
