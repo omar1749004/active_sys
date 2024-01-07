@@ -48,10 +48,10 @@ class CustomeTextFormAuth extends StatelessWidget {
         validator: validator,
         controller: myController,
         cursorColor: cursorColor,
-        style: TextStyle(fontSize: fontSize, color: mainText),
+        style: TextStyle(fontSize: fontSize, color: mainText ,fontFamily: "NotoSansArabic"),
         decoration: InputDecoration(
           hintText: hintText,
-          hintStyle: TextStyle(color: hintColor),
+          hintStyle: TextStyle(color: hintColor, fontFamily: "NotoSansArabic"),
           //hintStyle: TextStyle(fontSize: 14,
           //color: check? ColorApp.KPrimaryColor: color
           // ),

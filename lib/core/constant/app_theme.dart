@@ -5,12 +5,13 @@ ThemeData themeEnglish =ThemeData(
          
         // primarySwatch:  MaterialColor..(ColorApp.kPrimaryColor),
          appBarTheme:const  AppBarTheme(
+          
           iconTheme: IconThemeData(color: Colors.white),
           backgroundColor: ColorApp.kPrimaryColor,
         centerTitle: true,
         elevation: 0,
         
-        titleTextStyle: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 26)
+        titleTextStyle: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 26,  )
          ) ,
          
         
@@ -19,7 +20,8 @@ ThemeData themeEnglish =ThemeData(
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
           
           backgroundColor: ColorApp.kPrimaryColor),
-         fontFamily: "Pacifico-Regular",
+         fontFamily: "NotoSansArabic",
+         
          
       );
 ThemeData themeArabic =ThemeData(
