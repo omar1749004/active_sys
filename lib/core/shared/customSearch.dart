@@ -20,8 +20,11 @@ class CustomSearch extends StatelessWidget {
         onChanged: onChanged, //بتعرفك ان في سيرش ولا لا
         controller: searchController,
         decoration: InputDecoration(
-          prefixIcon: IconButton(
-              onPressed: onPressedSearch, icon: const Icon(Icons.search)),
+          prefixIcon: Padding(
+            padding: const EdgeInsets.all(5),
+            child: IconButton(
+                onPressed: onPressedSearch, icon: const Icon(Icons.search)),
+          ),
           hintText: titlAppbar,
           hintStyle: const TextStyle(fontSize: 18, height: 1),
           filled: true,
