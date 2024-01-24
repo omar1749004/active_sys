@@ -14,7 +14,7 @@ class CustomAppBar extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Image.asset(
-            ImageAsset.lohgo,
+            ImageAsset.logo,
             width: 100,
           ),
           Text(

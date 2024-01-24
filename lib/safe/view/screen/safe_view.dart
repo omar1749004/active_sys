@@ -1,9 +1,7 @@
 import 'package:active_system/core/constant/color.dart';
 import 'package:active_system/core/constant/styles.dart';
 import 'package:active_system/core/functions/validate_input.dart';
-import 'package:active_system/core/shared/custom_Botton1.dart';
 import 'package:active_system/core/shared/custom_app_bar.dart';
-import 'package:active_system/core/shared/custom_date_field.dart';
 import 'package:active_system/core/shared/custom_table.dart';
 import 'package:active_system/core/shared/custome_textform_auth.dart';
 import 'package:active_system/manage_subscriptions/view/widgets/custom_button.dart';
@@ -12,6 +10,7 @@ import 'package:active_system/safe/controller/safe_controller.dart';
 import 'package:active_system/safe/data/service/static/safe_header_table.dart';
 import 'package:active_system/safe/view/widget/custom_checkbox.dart';
 import 'package:active_system/safe/view/widget/custom_display_many.dart';
+import 'package:active_system/safe/view/widget/custom_search_date.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -40,48 +39,9 @@ class SafeView extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 10),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              children: [
-                                CustomDateField(
-                                    width: 150,
-                                    height: 30,
-                                    icon: Icons.close,
-                                    iconSize: 15,
-                                    fontSize: 15),
-                                const Text(
-                                  "الى ",
-                                  style: TextStyle(fontSize: 18),
-                                ),
-                                CustomDateField(
-                                    width: 150,
-                                    height: 30,
-                                    icon: Icons.close,
-                                    iconSize: 15,
-                                    fontSize: 15),
-                                const Text(
-                                  "من ",
-                                  style: TextStyle(fontSize: 18),
-                                ),
-                                SizedBox(
-                                  child: CustomBotton1(
-                                    text: "بحث",
-                                    ontap: () {},
-                                    color: ColorApp.kPrimaryColor,
-                                    marginBottom: 0,
-                                    marginLeft: 0,
-                                    marginRight: 0,
-                                    marginTop: 0,
-                                  ),
-                                ),
-                                Text(
-                                  "سجل الخزنة",
-                                  style: Styles.style23,
-                                ),
-                              ],
-                            ),
+                        const  Padding(
+                            padding:  EdgeInsets.symmetric(vertical: 10),
+                            child: CustomSearchDate()
                           ),
                           //
                           Expanded(
@@ -89,22 +49,7 @@ class SafeView extends StatelessWidget {
                             child: CustomTable(
                                 columnsHeader: safeHeaderTable,
                                 rowInfo: const [
-                                  'data11',
-                                  "data12",
-                                  "data13",
-                                  "data14",
-                                  'data11',
-                                  "data12",
-                                  "data13",
-                                  "data13",
-                                  "data14",
-                                  'data11',
-                                  "data13",
-                                  "data14",
-                                  'data11',
-                                  "data13",
-                                  "data14",
-                                  'data11',
+                                
                                 ]),
                           ),
                           Expanded(child: Container())
@@ -151,7 +96,7 @@ class SafeView extends StatelessWidget {
                         children: [
                           Text(
                             "بيانات الخزنة",
-                            style: Styles.style23,
+                            style: Styles.style23B,
                           ),
                           CustomDisplyMany(
                               textColor: ColorApp.secondColor,
@@ -165,12 +110,12 @@ class SafeView extends StatelessWidget {
                               textColor: ColorApp.gray,
                               many: 1500,
                               text: "   اجمالي المبيعات"),
-                          Divider(),
+                      const    Divider(),
                           Padding(
                             padding: const EdgeInsets.only(bottom: 5),
                             child: Text(
                               "إضافة عملية",
-                              style: Styles.style23,
+                              style: Styles.style23B,
                             ),
                           ),
                           Row(
