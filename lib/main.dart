@@ -3,6 +3,7 @@ import 'package:active_system/core/services/services.dart';
 import 'package:active_system/rout.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 void main() async {
   runApp(const MyApp());
@@ -20,6 +21,11 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: controller.apptheme,
       locale: controller.language,
+      localizationsDelegates:const [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
       supportedLocales: const [
         Locale('en', ''), // English
         Locale('ar', 'SA'), // Arabic
