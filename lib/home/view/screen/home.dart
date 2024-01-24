@@ -20,6 +20,7 @@ class HomePage extends StatelessWidget {
       body: GetBuilder<HomeController>(
         builder: (controller) => Column(
           children: [
+
             const CustomAppBar(),
             Expanded(
               child: SizedBox(
@@ -84,6 +85,7 @@ class HomePage extends StatelessWidget {
                 ),
               ),
             ),
+
           ],
         ),
       ),

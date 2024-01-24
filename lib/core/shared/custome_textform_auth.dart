@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import '../../../core/constant/color.dart';
 
 class CustomeTextFormAuth extends StatelessWidget {
+
   const CustomeTextFormAuth(
       {super.key,
       required this.hintText,
@@ -21,6 +22,7 @@ class CustomeTextFormAuth extends StatelessWidget {
       this.cursorColor = ColorApp.kPrimaryColor,
       this.hintColor = Colors.black,
        this.mainText = Colors.black});
+
 
   final String hintText;
   final String lableText;

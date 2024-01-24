@@ -2,6 +2,7 @@ import 'package:active_system/core/constant/color.dart';
 import 'package:flutter/material.dart';
 
 
+
 abstract class Styles
 {
   static const TextStyle style25 = TextStyle(
@@ -28,3 +29,4 @@ fontWeight: FontWeight.w600,
 height: 0,
 );
 }
+
