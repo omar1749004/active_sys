@@ -40,7 +40,10 @@ class CustomDisplyMany extends StatelessWidget {
                       color: const Color.fromARGB(255, 170, 170, 170))),
               child: Text(
                 text,
-                style: TextStyle(color: textColor, fontWeight: FontWeight.w600) ,textAlign: TextAlign.center,
+                style: TextStyle(color: textColor, fontWeight: FontWeight.w600),
+                textAlign: TextAlign.center,
+                overflow: TextOverflow.visible,
+                softWrap: false,
               ),
             ),
           ),

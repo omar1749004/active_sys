@@ -1,4 +1,3 @@
-import 'package:active_system/home/data/service/static/header_table.dart';
 import 'package:flutter/material.dart';
 
 class CustomBotton1 extends StatelessWidget {
@@ -33,7 +32,7 @@ class CustomBotton1 extends StatelessWidget {
         child: MaterialButton(
           height: 40,
           onPressed: ontap,
-          padding: const EdgeInsets.all(10),
+          padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
           color: color,

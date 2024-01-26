@@ -1,4 +1,5 @@
-import 'package:active_system/core/shared/custom_input_form.dart';
+import 'package:active_system/core/functions/validate_input.dart';
+import 'package:active_system/core/shared/custome_textform_auth.dart';
 import 'package:flutter/material.dart';
 
 class SubscriptionForm extends StatelessWidget {
@@ -6,67 +7,177 @@ class SubscriptionForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 0.0),
+      padding: const EdgeInsets.symmetric(vertical: 10.0),
       child: SingleChildScrollView(
         child: Column(
           children: [
-            CustomInputForm(
-              labelText: 'الكود',
-              dataType: int,
-              size: 300,
+            SizedBox(
+              width: 300,
+              child: CustomeTextFormAuth(
+                  hintText: "",
+                  lableText: "الكود",
+                  validator: (val) {
+                    return validInput(val!, 5, 50, "username");
+                  }),
             ),
-            CustomInputForm(
-                labelText: 'أسم ألاشتراك', dataType: String, size: 300),
-            CustomInputForm(
-                labelText: 'نوع ألاشتراك', dataType: String, size: 300),
+            const SizedBox(
+              height: 10,
+            ),
+            SizedBox(
+              width: 300,
+              child: CustomeTextFormAuth(
+                  hintText: "",
+                  lableText: " اسم الاشتراك",
+                  validator: (val) {
+                    return validInput(val!, 5, 50, "username");
+                  }),
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            SizedBox(
+              width: 300,
+              child: CustomeTextFormAuth(
+                  hintText: "",
+                  lableText: "نوع الاشتراك",
+                  validator: (val) {
+                    return validInput(val!, 5, 50, "username");
+                  }),
+            ),
+            const SizedBox(
+              height: 10,
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                CustomInputForm(
-                    labelText: 'التخصص', dataType: String, size: 145),
+                SizedBox(
+                  width: 145,
+                  child: CustomeTextFormAuth(
+                      hintText: "",
+                      lableText: "التخصص",
+                      validator: (val) {
+                        return validInput(val!, 5, 50, "username");
+                      }),
+                ),
                 const SizedBox(
                   width: 10,
                 ),
-                CustomInputForm(labelText: 'السعر', dataType: int, size: 145),
+                SizedBox(
+                  width: 145,
+                  child: CustomeTextFormAuth(
+                      hintText: "",
+                      lableText: "السعر",
+                      validator: (val) {
+                        return validInput(val!, 5, 50, "username");
+                      }),
+                ),
               ],
+            ),
+            const SizedBox(
+              height: 10,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                CustomInputForm(
-                    labelText: 'عدد الايام', dataType: int, size: 145),
+                SizedBox(
+                  width: 145,
+                  child: CustomeTextFormAuth(
+                      hintText: "",
+                      lableText: " عدد الايام",
+                      validator: (val) {
+                        return validInput(val!, 5, 50, "username");
+                      }),
+                ),
                 const SizedBox(
                   width: 10,
                 ),
-                CustomInputForm(
-                    labelText: 'عدد الحصص', dataType: int, size: 145),
+                SizedBox(
+                  width: 145,
+                  child: CustomeTextFormAuth(
+                      hintText: "",
+                      lableText: " عدد الحصص",
+                      validator: (val) {
+                        return validInput(val!, 5, 50, "username");
+                      }),
+                ),
               ],
             ),
-            CustomInputForm(
-                labelText: 'أقصى عدد ايام تجميد للمره الواحده',
-                dataType: int,
-                size: 300),
+            const SizedBox(
+              height: 10,
+            ),
+            SizedBox(
+              width: 300,
+              child: CustomeTextFormAuth(
+                  hintText: "",
+                  lableText: "اقصى عدد ايام تجميد للمره الواحده",
+                  validator: (val) {
+                    return validInput(val!, 5, 50, "username");
+                  }),
+            ),
+            const SizedBox(
+              height: 10,
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                CustomInputForm(
-                    labelText: 'عدد الدعوات', dataType: int, size: 145),
+                SizedBox(
+                  width: 145,
+                  child: CustomeTextFormAuth(
+                      hintText: "",
+                      lableText: "عدد الدعوات",
+                      validator: (val) {
+                        return validInput(val!, 5, 50, "username");
+                      }),
+                ),
                 const SizedBox(
                   width: 10,
                 ),
-                CustomInputForm(
-                    labelText: 'عدد الخدمات', dataType: int, size: 145),
+                SizedBox(
+                  width: 145,
+                  child: CustomeTextFormAuth(
+                      hintText: "",
+                      lableText: "عدد الخدمات",
+                      validator: (val) {
+                        return validInput(val!, 5, 50, "username");
+                      }),
+                ),
               ],
             ),
-            CustomInputForm(
-                labelText: 'اقصى عدد دعوات فى اليوم', dataType: int, size: 300),
-            CustomInputForm(
-                labelText: 'اقصى عدد خدمات فى اليوم', dataType: int, size: 300),
-            CustomInputForm(
-              labelText: 'ملاحظات',
-              dataType: String,
-              size: 300,
-              maxline: 3,
+            const SizedBox(
+              height: 10,
+            ),
+            SizedBox(
+              width: 300,
+              child: CustomeTextFormAuth(
+                  hintText: "",
+                  lableText: " اقصى عدد دعوات فى اليوم",
+                  validator: (val) {
+                    return validInput(val!, 5, 50, "username");
+                  }),
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            SizedBox(
+              width: 300,
+              child: CustomeTextFormAuth(
+                  hintText: "",
+                  lableText: "اقصى عدد خدمات فى اليوم",
+                  validator: (val) {
+                    return validInput(val!, 5, 50, "username");
+                  }),
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            SizedBox(
+              width: 300,
+              child: CustomeTextFormAuth(
+                  hintText: "",
+                  lableText: "ملاحظات",
+                  validator: (val) {
+                    return validInput(val!, 5, 50, "username");
+                  }),
             ),
           ],
         ),
