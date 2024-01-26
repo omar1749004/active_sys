@@ -1,5 +1,8 @@
+import 'package:active_system/core/constant/color.dart';
+import 'package:active_system/core/functions/validate_input.dart';
 import 'package:active_system/core/shared/custom_date_field.dart';
-import 'package:active_system/core/shared/custom_input_form.dart';
+import 'package:active_system/core/shared/custome_textform_auth.dart';
+import 'package:active_system/safe/view/widget/custom_display_many.dart';
 import 'package:flutter/material.dart';
 
 class MangeCostForm extends StatelessWidget {
@@ -14,34 +17,17 @@ class MangeCostForm extends StatelessWidget {
             //
             //field الاجمالى
             //
-            SizedBox(
-              width: 300,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  SizedBox(
-                    width: 150,
+            const Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                SizedBox(
+                    width: 300,
                     height: 40,
-                    child: TextFormField(
-                      textDirection: TextDirection.rtl,
-                      textAlignVertical: TextAlignVertical.center,
-                      textAlign: TextAlign.center,
-                      readOnly: true,
-                      decoration: const InputDecoration(
-                        hintText: "ألاجمالى",
-                        border: OutlineInputBorder(
-                            borderRadius: BorderRadius.zero,
-                            borderSide: BorderSide(color: Colors.black)),
-                        focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: Colors.black)),
-                        enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: Colors.black)),
-                      ),
-                    ),
-                  ),
-                  const Text("اجمالى المصروفات")
-                ],
-              ),
+                    child: CustomDisplyMany(
+                        textColor: ColorApp.thirdColor,
+                        many: 25000,
+                        text: "اجمالى المصروفات")),
+              ],
             ),
             const SizedBox(
               height: 20,
@@ -49,33 +35,25 @@ class MangeCostForm extends StatelessWidget {
             //
             //feild رقم المصروف
             //
-            SizedBox(
-              width: 300,
-              height: 40,
-              child: TextFormField(
-                textDirection: TextDirection.rtl,
-                textAlignVertical: TextAlignVertical.center,
-                textAlign: TextAlign.center,
-                readOnly: true,
-                decoration: const InputDecoration(
-                  hintText: "رقم المصروف",
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.zero,
-                      borderSide: BorderSide(color: Colors.black)),
-                  focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.black)),
-                  enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.black)),
-                ),
-              ),
+            const Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                SizedBox(
+                    width: 300,
+                    height: 40,
+                    child: CustomDisplyMany(
+                        textColor: ColorApp.thirdColor,
+                        many: 25000,
+                        text: "رقم المصروفات")),
+              ],
             ),
             const SizedBox(
-              height: 40,
+              height: 20,
             ),
             SizedBox(
               width: 300,
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   CustomDateField(
                       width: 150,
@@ -83,31 +61,48 @@ class MangeCostForm extends StatelessWidget {
                       icon: Icons.close,
                       iconSize: 20,
                       fontSize: 18),
-                  const Text("التاريخ")
+                  const Text(
+                    "التاريخ",
+                    style: TextStyle(fontSize: 18),
+                  )
                 ],
               ),
             ),
             const SizedBox(
-              height: 10,
+              height: 20,
             ),
-            CustomInputForm(
-              labelText: 'تكلفه المصروف',
-              dataType: num,
-              size: 300,
-              maxline: 1,
+            SizedBox(
+              width: 300,
+              child: CustomeTextFormAuth(
+                  hintText: "",
+                  lableText: "تكلفة المصروفات",
+                  validator: (val) {
+                    return validInput(val!, 5, 50, "username");
+                  }),
             ),
-            CustomInputForm(
-              labelText: 'سبب الصرف',
-              dataType: String,
-              size: 300,
-              maxline: 3,
+            const SizedBox(
+              height: 15,
             ),
-
-            CustomInputForm(
-              labelText: 'ملاحظات',
-              dataType: String,
-              size: 300,
-              maxline: 3,
+            SizedBox(
+              width: 300,
+              child: CustomeTextFormAuth(
+                  hintText: "",
+                  lableText: "سبب الصرف",
+                  validator: (val) {
+                    return validInput(val!, 5, 50, "username");
+                  }),
+            ),
+            const SizedBox(
+              height: 15,
+            ),
+            SizedBox(
+              width: 300,
+              child: CustomeTextFormAuth(
+                  hintText: "",
+                  lableText: "ملاحظات",
+                  validator: (val) {
+                    return validInput(val!, 5, 50, "username");
+                  }),
             ),
           ],
         ),

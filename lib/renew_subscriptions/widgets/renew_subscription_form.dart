@@ -1,8 +1,10 @@
 import 'package:active_system/core/constant/color.dart';
+import 'package:active_system/core/functions/validate_input.dart';
 import 'package:active_system/core/shared/custom_Botton1.dart';
 import 'package:active_system/core/shared/custom_date_field.dart';
 import 'package:active_system/core/shared/custom_dropdown_menu.dart';
-import 'package:active_system/core/shared/custom_input_form.dart';
+import 'package:active_system/core/shared/custome_textform_auth.dart';
+import 'package:active_system/safe/view/widget/custom_display_many.dart';
 import 'package:flutter/material.dart';
 
 class RenewSubscriptionForm extends StatelessWidget {
@@ -38,9 +40,17 @@ class RenewSubscriptionForm extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(
-                      width: 40,
+                      width: 20,
                     ),
-                    CustomInputForm(labelText: 'كود', dataType: int, size: 145),
+                    SizedBox(
+                      width: 200,
+                      child: CustomeTextFormAuth(
+                          hintText: "",
+                          lableText: "الكود",
+                          validator: (val) {
+                            return validInput(val!, 5, 50, "username");
+                          }),
+                    ),
                   ],
                 ),
               ),
@@ -50,28 +60,26 @@ class RenewSubscriptionForm extends StatelessWidget {
               //
               //here the text field that will shown number of renew
               //
-              SizedBox(
-                width: 150,
-                height: 40,
-                child: TextFormField(
-                  textDirection: TextDirection.rtl,
-                  textAlignVertical: TextAlignVertical.center,
-                  textAlign: TextAlign.center,
-                  readOnly: false,
-                  decoration: const InputDecoration(
-                    hintText: "رقم التسلسل",
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.zero,
-                        borderSide: BorderSide(color: Colors.black)),
-                    focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.black)),
-                    enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.black)),
-                  ),
-                ),
+              const SizedBox(
+                  width: 300,
+                  height: 40,
+                  child: CustomDisplyMany(
+                    many: 101,
+                    text: "رقم التسلسل",
+                    textColor: ColorApp.thirdColor,
+                  )),
+              const SizedBox(
+                height: 10,
               ),
-              CustomInputForm(
-                  labelText: 'أسم اللاعب ', dataType: String, size: 300),
+              SizedBox(
+                width: 300,
+                child: CustomeTextFormAuth(
+                    hintText: "",
+                    lableText: "اسم اللاعب",
+                    validator: (val) {
+                      return validInput(val!, 5, 50, "username");
+                    }),
+              ),
               const SizedBox(
                 height: 20,
               ),
@@ -165,55 +173,124 @@ class RenewSubscriptionForm extends StatelessWidget {
                   label: "المجموعة",
                 ),
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  CustomInputForm(
-                      labelText: 'عدد الايام', dataType: int, size: 145),
-                  const SizedBox(
-                    width: 20,
-                  ),
-                  CustomInputForm(
-                      labelText: "عدد الحصص", dataType: int, size: 145),
-                ],
+              const SizedBox(
+                height: 10,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  CustomInputForm(
-                      labelText: 'قيمة الاشتراك', dataType: int, size: 145),
+                  SizedBox(
+                    width: 145,
+                    child: CustomeTextFormAuth(
+                        hintText: "",
+                        lableText: "عدد الايام",
+                        validator: (val) {
+                          return validInput(val!, 5, 50, "username");
+                        }),
+                  ),
                   const SizedBox(
                     width: 20,
                   ),
-                  CustomInputForm(labelText: "الخصم", dataType: int, size: 145),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  CustomInputForm(
-                      labelText: 'الصافى', dataType: int, size: 145),
-                  const SizedBox(
-                    width: 20,
+                  SizedBox(
+                    width: 145,
+                    child: CustomeTextFormAuth(
+                        hintText: "",
+                        lableText: "عدد الحصص",
+                        validator: (val) {
+                          return validInput(val!, 5, 50, "username");
+                        }),
                   ),
-                  CustomInputForm(
-                      labelText: "المدفوع", dataType: int, size: 145),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  CustomInputForm(
-                      labelText: 'حساب سابق', dataType: int, size: 145),
-                  const SizedBox(
-                    width: 20,
-                  ),
-                  CustomInputForm(
-                      labelText: "المتبقى", dataType: int, size: 145),
                 ],
               ),
               const SizedBox(
-                height: 20,
+                height: 10,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  SizedBox(
+                    width: 145,
+                    child: CustomeTextFormAuth(
+                        hintText: "",
+                        lableText: "فيمة الاشتراك",
+                        validator: (val) {
+                          return validInput(val!, 5, 50, "username");
+                        }),
+                  ),
+                  const SizedBox(
+                    width: 20,
+                  ),
+                  SizedBox(
+                    width: 145,
+                    child: CustomeTextFormAuth(
+                        hintText: "",
+                        lableText: "الخصم",
+                        validator: (val) {
+                          return validInput(val!, 5, 50, "username");
+                        }),
+                  ),
+                ],
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  SizedBox(
+                    width: 145,
+                    child: CustomeTextFormAuth(
+                        hintText: "",
+                        lableText: "الصافى",
+                        validator: (val) {
+                          return validInput(val!, 5, 50, "username");
+                        }),
+                  ),
+                  const SizedBox(
+                    width: 20,
+                  ),
+                  SizedBox(
+                    width: 145,
+                    child: CustomeTextFormAuth(
+                        hintText: "",
+                        lableText: "المدفوع",
+                        validator: (val) {
+                          return validInput(val!, 5, 50, "username");
+                        }),
+                  ),
+                ],
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  SizedBox(
+                    width: 145,
+                    child: CustomeTextFormAuth(
+                        hintText: "",
+                        lableText: "حساب سابق",
+                        validator: (val) {
+                          return validInput(val!, 5, 50, "username");
+                        }),
+                  ),
+                  const SizedBox(
+                    width: 20,
+                  ),
+                  SizedBox(
+                    width: 145,
+                    child: CustomeTextFormAuth(
+                        hintText: "",
+                        lableText: "المتبقى",
+                        validator: (val) {
+                          return validInput(val!, 5, 50, "username");
+                        }),
+                  ),
+                ],
+              ),
+              const SizedBox(
+                height: 10,
               ),
               Row(
                 children: [
@@ -229,19 +306,43 @@ class RenewSubscriptionForm extends StatelessWidget {
                   const SizedBox(
                     width: 20,
                   ),
-                  CustomInputForm(
-                      labelText: "التلفون", dataType: int, size: 145),
+                  SizedBox(
+                    width: 145,
+                    child: CustomeTextFormAuth(
+                        hintText: "",
+                        lableText: "التلفون",
+                        validator: (val) {
+                          return validInput(val!, 5, 50, "username");
+                        }),
+                  ),
                 ],
+              ),
+              const SizedBox(
+                height: 10,
               ),
               //
               //maybe will change because it is image
               //
-              CustomInputForm(labelText: "الصوره", dataType: Image, size: 300),
-              CustomInputForm(
-                labelText: "الملاحظات",
-                dataType: String,
-                size: 300,
-                maxline: 3,
+              SizedBox(
+                width: 300,
+                child: CustomeTextFormAuth(
+                    hintText: "",
+                    lableText: "الصوره",
+                    validator: (val) {
+                      return validInput(val!, 5, 50, "username");
+                    }),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              SizedBox(
+                width: 300,
+                child: CustomeTextFormAuth(
+                    hintText: "",
+                    lableText: "الملاحظات",
+                    validator: (val) {
+                      return validInput(val!, 5, 50, "username");
+                    }),
               ),
             ],
           ),

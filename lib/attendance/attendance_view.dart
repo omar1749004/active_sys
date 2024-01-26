@@ -7,6 +7,7 @@ import 'package:active_system/core/shared/custom_table.dart';
 import 'package:active_system/core/shared/custom_table_header.dart';
 import 'package:active_system/manage_subscriptions/view/widgets/custom_button.dart';
 import 'package:active_system/manage_subscriptions/view/widgets/custom_menu.dart';
+import 'package:active_system/safe/view/widget/custom_display_many.dart';
 import 'package:flutter/material.dart';
 
 class AttendanceView extends StatelessWidget {
@@ -22,7 +23,9 @@ class AttendanceView extends StatelessWidget {
           child: Row(
             children: [
               //left menu
-              const CustomMenu(pageName: 'سجل الحضور',),
+              const CustomMenu(
+                pageName: 'سجل الحضور',
+              ),
               //the content in the middle
               Expanded(
                 child: Padding(
@@ -132,32 +135,13 @@ class AttendanceView extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 SizedBox(
-                                  width:
-                                      MediaQuery.of(context).size.width * 0.1,
-                                  height: 40,
-                                  child: TextFormField(
-                                    textDirection: TextDirection.rtl,
-                                    textAlignVertical: TextAlignVertical.center,
-                                    textAlign: TextAlign.center,
-                                    readOnly: true,
-                                    decoration: const InputDecoration(
-                                      hintText: "عدد اللاعبين",
-                                      border: OutlineInputBorder(
-                                          borderRadius: BorderRadius.zero,
-                                          borderSide:
-                                              BorderSide(color: Colors.black)),
-                                      focusedBorder: OutlineInputBorder(
-                                          borderSide:
-                                              BorderSide(color: Colors.black)),
-                                      enabledBorder: OutlineInputBorder(
-                                          borderSide:
-                                              BorderSide(color: Colors.black)),
-                                    ),
-                                  ),
-                                ),
-                                const Text(
-                                  " عدد اللاعبين",
-                                )
+                                    width:
+                                        MediaQuery.of(context).size.width * 0.2,
+                                    height: 40,
+                                    child: const CustomDisplyMany(
+                                        textColor: ColorApp.thirdColor,
+                                        many: 110,
+                                        text: "عدد الاعبين")),
                               ],
                             ),
                             SizedBox(

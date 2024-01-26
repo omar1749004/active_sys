@@ -57,12 +57,13 @@ class CustomeTextFormAuth extends StatelessWidget {
           //hintStyle: TextStyle(fontSize: 14,
           //color: check? ColorApp.KPrimaryColor: color
           // ),
-          label: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10),
-            child: Text(
-              lableText,
-              style: lableStyle,
-            ),
+
+          label: Text(
+            lableText,
+            style: Styles.style18B,
+            softWrap: false,
+            overflow: TextOverflow.visible,
+
           ),
           //labelStyle: TextStyle(
           //color: check? ColorApp.KPrimaryColor:color
