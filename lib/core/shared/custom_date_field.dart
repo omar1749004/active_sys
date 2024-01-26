@@ -52,7 +52,7 @@ class CustomDateField extends StatelessWidget {
         onShowPicker: (BuildContext context, DateTime? currentValue) {
           return showDatePicker(
               context: context,
-              //locale: const Locale("ar", "SA"),
+              locale: const Locale("ar", "SA"),
               firstDate: DateTime(1900),
               initialDate: currentValue ?? DateTime.now(),
               lastDate: DateTime(2100));

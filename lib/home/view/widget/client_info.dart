@@ -1,7 +1,11 @@
 import 'package:active_system/core/constant/color.dart';
 import 'package:active_system/core/functions/validate_input.dart';
+import 'package:active_system/core/shared/custom_Botton1.dart';
+import 'package:active_system/core/shared/custom_dropdown_menu.dart';
 import 'package:active_system/core/shared/custome_textform_auth.dart';
 import 'package:active_system/home/controller/home_controller.dart';
+import 'package:active_system/home/data/service/static/note_knoladge.dart';
+import 'package:active_system/home/data/service/static/sup_type.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -14,7 +18,30 @@ class ClinetInfo extends GetView<HomeController> {
       padding: const EdgeInsets.only(top: 10, right: 20),
       child: SingleChildScrollView(
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
+            Row(
+              children: [
+                ...List.generate(
+                    4,
+                    (index) => Expanded(
+                      child: CustomBotton1(
+                       marginTop: 10,
+                        marginBottom: 25,
+                        hieght: 50,
+                        ontap: () {
+                          controller.selectSupType(index);
+                          
+                        },
+                        text: supType[index],
+                        color: controller.supType == index
+                            ? ColorApp.onfoucosColor
+                            : ColorApp.kPrimaryColor,
+                      ),
+                    ),
+                  ),
+              ],
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -28,7 +55,7 @@ class ClinetInfo extends GetView<HomeController> {
                 //   ),
                 // ),
                 Container(
-                  padding: const EdgeInsets.only(top: 20, bottom: 30, left: 30),
+                  padding: const EdgeInsets.only( bottom: 30, left: 30),
                   child: CircleAvatar(
                     backgroundColor: ColorApp.gray,
                     radius: MediaQuery.of(context).size.width * 0.06,
@@ -148,6 +175,17 @@ class ClinetInfo extends GetView<HomeController> {
                 validator: (val) {
                   return validInput(val!, 0, 50, "");
                 }),
+                const SizedBox(
+              height: 15,
+            ),
+                 CustomDropDownMenu(
+                  redius: 30,
+                      items: items,
+                      label: "اشتراك",
+                      intialValue: selectedItem,
+                      onChanged: (val) {},
+                    ),
+                    
           ],
         ),
       ),

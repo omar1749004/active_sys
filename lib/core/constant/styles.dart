@@ -9,28 +9,29 @@ abstract class Styles {
   static TextStyle style20 = const TextStyle(
     color: Color.fromARGB(255, 94, 94, 94),
     fontSize: 20,
-    fontFamily: 'Inter',
+    fontFamily: 'NotoSansArabic',
     fontWeight: FontWeight.w400,
     height: 0,
   );
   static TextStyle style23 = const TextStyle(
+
     color: Colors.black,
     fontSize: 23,
-    fontFamily: 'Inter',
+    fontFamily: 'NotoSansArabic',
     fontWeight: FontWeight.w400,
     height: 0,
   );
   static const TextStyle style18B = TextStyle(
     color: Color.fromARGB(255, 56, 56, 56),
     fontSize: 18,
-    fontFamily: 'Inter',
+    fontFamily: 'NotoSansArabic',
     fontWeight: FontWeight.w600,
     height: 0,
   );
   static const TextStyle style15B = TextStyle(
     color: Colors.black,
     fontSize: 15,
-    fontFamily: 'Inter',
+    fontFamily: 'NotoSansArabic',
     fontWeight: FontWeight.w600,
     height: 0,
   );

@@ -7,5 +7,9 @@ class AppRoute {
   static const String safeid = "/safeid";
   static const String managecostviewid = "/ManageCostView";
   static const String attendanceid = "/AttendanceView";
+
   static const String playersprofileid = "/PlayersProfileView";
+
+  static const String authid = "/authid";
+
 }
