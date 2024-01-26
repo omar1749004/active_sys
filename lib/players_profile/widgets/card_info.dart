@@ -24,7 +24,7 @@ class CardInfo extends StatelessWidget {
             const CustomDisplyMany(
                 textColor: ColorApp.thirdColor, many: 100, text: "رقم العضوية"),
             const CustomDisplyMany(
-                textColor: ColorApp.thirdColor, many: 100, text: " الكود"),
+                textColor: ColorApp.thirdColor, many: 100, text: "الكود"),
             const CustomDisplyMany(
                 textColor: ColorApp.thirdColor, many: 100, text: "الاسم"),
             const CustomDisplyMany(
