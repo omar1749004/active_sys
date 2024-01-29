@@ -2,8 +2,6 @@ import 'package:active_system/core/shared/custom_app_bar.dart';
 import 'package:active_system/core/shared/custom_table.dart';
 import 'package:active_system/core/shared/custom_table_header.dart';
 
-
-
 import 'package:active_system/manage_subscriptions/view/widgets/custom_button.dart';
 import 'package:active_system/manage_subscriptions/view/widgets/custom_menu.dart';
 
@@ -32,10 +30,12 @@ class TrainersView extends StatelessWidget {
               child: Row(
                 children: [
                   //left menu
-                  const CustomMenu(pageName: 'ادارة المتدربين',),
+                  const CustomMenu(
+                    pageName: 'ادارة المتدربين',
+                  ),
                   //the content in the middle
                   Expanded(
-
+                    flex: 2,
                     child: Padding(
                       padding: const EdgeInsets.symmetric(
                           vertical: 10, horizontal: 15),
@@ -56,7 +56,6 @@ class TrainersView extends StatelessWidget {
                           //
                           Expanded(
                             flex: 6,
-
                             child: CustomTable(columnsHeader: const [
                               Text("1"),
                               Text("2"),
@@ -125,26 +124,29 @@ class TrainersView extends StatelessWidget {
                   //
                   //form input right screen
                   //
-                  Container(
-                    height: MediaQuery.of(context).size.height,
-                    padding: const EdgeInsets.only(left: 8, right: 8),
-                    decoration: const BoxDecoration(
-                      border: Border(
-                        top: BorderSide(
-                          width: 1,
-                          color: Color.fromRGBO(0, 0, 0, 0.186),
-                        ),
-                        left: BorderSide(
-                          width: 1,
-                          color: Color.fromRGBO(0, 0, 0, 0.186),
-                        ),
-                        bottom: BorderSide(
-                          width: 1,
-                          color: Color.fromRGBO(0, 0, 0, 0.186),
+                  Expanded(
+                    flex: 1,
+                    child: Container(
+                      height: MediaQuery.of(context).size.height,
+                      padding: const EdgeInsets.only(left: 8, right: 8),
+                      decoration: const BoxDecoration(
+                        border: Border(
+                          top: BorderSide(
+                            width: 1,
+                            color: Color.fromRGBO(0, 0, 0, 0.186),
+                          ),
+                          left: BorderSide(
+                            width: 1,
+                            color: Color.fromRGBO(0, 0, 0, 0.186),
+                          ),
+                          bottom: BorderSide(
+                            width: 1,
+                            color: Color.fromRGBO(0, 0, 0, 0.186),
+                          ),
                         ),
                       ),
+                      child: const TrainersForm(),
                     ),
-                    child: const TrainersForm(),
                   )
                 ],
               ),

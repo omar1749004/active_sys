@@ -20,7 +20,6 @@ class RenewSubscriptionForm extends StatelessWidget {
           child: Column(
             children: [
               Container(
-                width: 300,
                 padding: const EdgeInsets.only(bottom: 15),
                 decoration: const BoxDecoration(
                     border: Border(bottom: BorderSide(width: 1))),
@@ -42,8 +41,7 @@ class RenewSubscriptionForm extends StatelessWidget {
                     const SizedBox(
                       width: 20,
                     ),
-                    SizedBox(
-                      width: 200,
+                    Expanded(
                       child: CustomeTextFormAuth(
                           hintText: "",
                           lableText: "الكود",
@@ -60,34 +58,27 @@ class RenewSubscriptionForm extends StatelessWidget {
               //
               //here the text field that will shown number of renew
               //
-              const SizedBox(
-                  width: 300,
-                  height: 40,
-                  child: CustomDisplyMany(
-                    many: 101,
-                    text: "رقم التسلسل",
-                    textColor: ColorApp.thirdColor,
-                  )),
+              const CustomDisplyMany(
+                many: 101,
+                text: "رقم التسلسل",
+                textColor: ColorApp.thirdColor,
+              ),
               const SizedBox(
                 height: 10,
               ),
-              SizedBox(
-                width: 300,
-                child: CustomeTextFormAuth(
-                    hintText: "",
-                    lableText: "اسم اللاعب",
-                    validator: (val) {
-                      return validInput(val!, 5, 50, "username");
-                    }),
-              ),
+              CustomeTextFormAuth(
+                  hintText: "",
+                  lableText: "اسم اللاعب",
+                  validator: (val) {
+                    return validInput(val!, 5, 50, "username");
+                  }),
               const SizedBox(
                 height: 20,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  SizedBox(
-                    width: 145,
+                  Expanded(
                     child: CustomDropDownMenu(
                       items: const ["عام", "خاص"],
                       intialValue: 'عام',
@@ -98,8 +89,7 @@ class RenewSubscriptionForm extends StatelessWidget {
                   const SizedBox(
                     width: 20,
                   ),
-                  SizedBox(
-                    width: 145,
+                  Expanded(
                     child: CustomDropDownMenu(
                       items: const ["عام", "خاص"],
                       intialValue: 'عام',
@@ -115,25 +105,24 @@ class RenewSubscriptionForm extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  SizedBox(
-                      width: 145,
-                      child: Directionality(
-                        textDirection: TextDirection.rtl,
-                        child: CustomDateField(
-                          label: "تاريخ النهاية",
-                          borderRadius: 15,
-                          fontSize: 15,
-                          width: 145,
-                          height: 50,
-                          icon: Icons.close,
-                          iconSize: 20,
-                        ),
-                      )),
+                  Expanded(
+                    child: Directionality(
+                      textDirection: TextDirection.rtl,
+                      child: CustomDateField(
+                        label: "تاريخ النهاية",
+                        borderRadius: 15,
+                        fontSize: 15,
+                        width: 145,
+                        height: 50,
+                        icon: Icons.close,
+                        iconSize: 20,
+                      ),
+                    ),
+                  ),
                   const SizedBox(
                     width: 20,
                   ),
-                  SizedBox(
-                    width: 145,
+                  Expanded(
                     child: Directionality(
                       textDirection: TextDirection.rtl,
                       child: CustomDateField(
@@ -152,26 +141,20 @@ class RenewSubscriptionForm extends StatelessWidget {
               const SizedBox(
                 height: 20,
               ),
-              SizedBox(
-                width: 300,
-                child: CustomDropDownMenu(
-                  items: const ["فتنس + كارديو مش شهرى", "فتنس + كارديو شهرى"],
-                  intialValue: 'فتنس + كارديو شهرى',
-                  onChanged: (p0) {},
-                  label: "نوع الاشتراك",
-                ),
+              CustomDropDownMenu(
+                items: const ["فتنس + كارديو مش شهرى", "فتنس + كارديو شهرى"],
+                intialValue: 'فتنس + كارديو شهرى',
+                onChanged: (p0) {},
+                label: "نوع الاشتراك",
               ),
               const SizedBox(
                 height: 20,
               ),
-              SizedBox(
-                width: 300,
-                child: CustomDropDownMenu(
-                  items: const ["عام", "خاص"],
-                  intialValue: "عام",
-                  onChanged: (p0) {},
-                  label: "المجموعة",
-                ),
+              CustomDropDownMenu(
+                items: const ["عام", "خاص"],
+                intialValue: "عام",
+                onChanged: (p0) {},
+                label: "المجموعة",
               ),
               const SizedBox(
                 height: 10,
@@ -179,8 +162,7 @@ class RenewSubscriptionForm extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  SizedBox(
-                    width: 145,
+                  Expanded(
                     child: CustomeTextFormAuth(
                         hintText: "",
                         lableText: "عدد الايام",
@@ -191,8 +173,7 @@ class RenewSubscriptionForm extends StatelessWidget {
                   const SizedBox(
                     width: 20,
                   ),
-                  SizedBox(
-                    width: 145,
+                  Expanded(
                     child: CustomeTextFormAuth(
                         hintText: "",
                         lableText: "عدد الحصص",
@@ -208,8 +189,7 @@ class RenewSubscriptionForm extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  SizedBox(
-                    width: 145,
+                  Expanded(
                     child: CustomeTextFormAuth(
                         hintText: "",
                         lableText: "فيمة الاشتراك",
@@ -220,8 +200,7 @@ class RenewSubscriptionForm extends StatelessWidget {
                   const SizedBox(
                     width: 20,
                   ),
-                  SizedBox(
-                    width: 145,
+                  Expanded(
                     child: CustomeTextFormAuth(
                         hintText: "",
                         lableText: "الخصم",
@@ -237,8 +216,7 @@ class RenewSubscriptionForm extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  SizedBox(
-                    width: 145,
+                  Expanded(
                     child: CustomeTextFormAuth(
                         hintText: "",
                         lableText: "الصافى",
@@ -249,8 +227,7 @@ class RenewSubscriptionForm extends StatelessWidget {
                   const SizedBox(
                     width: 20,
                   ),
-                  SizedBox(
-                    width: 145,
+                  Expanded(
                     child: CustomeTextFormAuth(
                         hintText: "",
                         lableText: "المدفوع",
@@ -266,8 +243,7 @@ class RenewSubscriptionForm extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  SizedBox(
-                    width: 145,
+                  Expanded(
                     child: CustomeTextFormAuth(
                         hintText: "",
                         lableText: "حساب سابق",
@@ -278,8 +254,7 @@ class RenewSubscriptionForm extends StatelessWidget {
                   const SizedBox(
                     width: 20,
                   ),
-                  SizedBox(
-                    width: 145,
+                  Expanded(
                     child: CustomeTextFormAuth(
                         hintText: "",
                         lableText: "المتبقى",
@@ -294,8 +269,7 @@ class RenewSubscriptionForm extends StatelessWidget {
               ),
               Row(
                 children: [
-                  SizedBox(
-                    width: 145,
+                  Expanded(
                     child: CustomDropDownMenu(
                       items: const ["غير نقدى", "نقدى"],
                       intialValue: "نقدى",
@@ -306,8 +280,7 @@ class RenewSubscriptionForm extends StatelessWidget {
                   const SizedBox(
                     width: 20,
                   ),
-                  SizedBox(
-                    width: 145,
+                  Expanded(
                     child: CustomeTextFormAuth(
                         hintText: "",
                         lableText: "التلفون",
@@ -323,27 +296,21 @@ class RenewSubscriptionForm extends StatelessWidget {
               //
               //maybe will change because it is image
               //
-              SizedBox(
-                width: 300,
-                child: CustomeTextFormAuth(
-                    hintText: "",
-                    lableText: "الصوره",
-                    validator: (val) {
-                      return validInput(val!, 5, 50, "username");
-                    }),
-              ),
+              CustomeTextFormAuth(
+                  hintText: "",
+                  lableText: "الصوره",
+                  validator: (val) {
+                    return validInput(val!, 5, 50, "username");
+                  }),
               const SizedBox(
                 height: 10,
               ),
-              SizedBox(
-                width: 300,
-                child: CustomeTextFormAuth(
-                    hintText: "",
-                    lableText: "الملاحظات",
-                    validator: (val) {
-                      return validInput(val!, 5, 50, "username");
-                    }),
-              ),
+              CustomeTextFormAuth(
+                  hintText: "",
+                  lableText: "الملاحظات",
+                  validator: (val) {
+                    return validInput(val!, 5, 50, "username");
+                  }),
             ],
           ),
         ),

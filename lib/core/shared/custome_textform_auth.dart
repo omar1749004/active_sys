@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import '../../../core/constant/color.dart';
 
 class CustomeTextFormAuth extends StatelessWidget {
-
   const CustomeTextFormAuth(
       {super.key,
       required this.hintText,
@@ -21,8 +20,7 @@ class CustomeTextFormAuth extends StatelessWidget {
       this.onfocuseColor = ColorApp.kPrimaryColor,
       this.cursorColor = ColorApp.kPrimaryColor,
       this.hintColor = Colors.black,
-       this.mainText = Colors.black});
-
+      this.mainText = Colors.black});
 
   final String hintText;
   final String lableText;
@@ -50,7 +48,8 @@ class CustomeTextFormAuth extends StatelessWidget {
         validator: validator,
         controller: myController,
         cursorColor: cursorColor,
-        style: TextStyle(fontSize: fontSize, color: mainText ,fontFamily: "NotoSansArabic"),
+        style: TextStyle(
+            fontSize: fontSize, color: mainText, fontFamily: "NotoSansArabic"),
         decoration: InputDecoration(
           hintText: hintText,
           hintStyle: TextStyle(color: hintColor, fontFamily: "NotoSansArabic"),
@@ -58,12 +57,14 @@ class CustomeTextFormAuth extends StatelessWidget {
           //color: check? ColorApp.KPrimaryColor: color
           // ),
 
-          label: Text(
-            lableText,
-            style: Styles.style18B,
-            softWrap: false,
-            overflow: TextOverflow.visible,
-
+          label: Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: Text(
+              lableText,
+              style: Styles.style18B,
+              softWrap: false,
+              overflow: TextOverflow.visible,
+            ),
           ),
           //labelStyle: TextStyle(
           //color: check? ColorApp.KPrimaryColor:color

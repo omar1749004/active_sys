@@ -33,24 +33,21 @@ class SafeView extends StatelessWidget {
                     pageName: 'الخزنة',
                   ),
                   Expanded(
-                    flex: 5,
+                    flex: 2,
                     child: Container(
                       padding: const EdgeInsets.only(top: 15, left: 10),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                        const  Padding(
-                            padding:  EdgeInsets.symmetric(vertical: 10),
-                            child: CustomSearchDate()
-                          ),
+                          const Padding(
+                              padding: EdgeInsets.symmetric(vertical: 10),
+                              child: CustomSearchDate()),
                           //
                           Expanded(
                             flex: 6,
                             child: CustomTable(
                                 columnsHeader: safeHeaderTable,
-                                rowInfo: const [
-                                
-                                ]),
+                                rowInfo: const []),
                           ),
                           Expanded(child: Container())
                           //buttons
@@ -89,33 +86,33 @@ class SafeView extends StatelessWidget {
                   ),
                   const VerticalDivider(),
                   Expanded(
-                    flex: 2,
+                    flex: 1,
                     child: Padding(
-                      padding: EdgeInsets.all(15),
+                      padding: const EdgeInsets.all(15),
                       child: Column(
                         children: [
                           Text(
                             "بيانات الخزنة",
-                            style: Styles.style23B,
+                            style: Styles.style23,
                           ),
-                          CustomDisplyMany(
+                          const CustomDisplyMany(
                               textColor: ColorApp.secondColor,
                               many: 1500,
                               text: "المجود بالخزنة الان"),
-                          CustomDisplyMany(
+                          const CustomDisplyMany(
                               textColor: ColorApp.gray,
                               many: 1500,
                               text: "اجمالي المشتريات"),
-                          CustomDisplyMany(
+                          const CustomDisplyMany(
                               textColor: ColorApp.gray,
                               many: 1500,
                               text: "   اجمالي المبيعات"),
-                      const    Divider(),
+                          const Divider(),
                           Padding(
                             padding: const EdgeInsets.only(bottom: 5),
                             child: Text(
                               "إضافة عملية",
-                              style: Styles.style23B,
+                              style: Styles.style23,
                             ),
                           ),
                           Row(

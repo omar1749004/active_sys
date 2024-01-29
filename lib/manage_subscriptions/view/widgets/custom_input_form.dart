@@ -11,47 +11,37 @@ class SubscriptionForm extends StatelessWidget {
       child: SingleChildScrollView(
         child: Column(
           children: [
-            SizedBox(
-              width: 300,
-              child: CustomeTextFormAuth(
-                  hintText: "",
-                  lableText: "الكود",
-                  validator: (val) {
-                    return validInput(val!, 5, 50, "username");
-                  }),
-            ),
+            CustomeTextFormAuth(
+                hintText: "",
+                lableText: "الكود",
+                validator: (val) {
+                  return validInput(val!, 5, 50, "username");
+                }),
             const SizedBox(
               height: 10,
             ),
-            SizedBox(
-              width: 300,
-              child: CustomeTextFormAuth(
-                  hintText: "",
-                  lableText: " اسم الاشتراك",
-                  validator: (val) {
-                    return validInput(val!, 5, 50, "username");
-                  }),
-            ),
+            CustomeTextFormAuth(
+                hintText: "",
+                lableText: " اسم الاشتراك",
+                validator: (val) {
+                  return validInput(val!, 5, 50, "username");
+                }),
             const SizedBox(
               height: 10,
             ),
-            SizedBox(
-              width: 300,
-              child: CustomeTextFormAuth(
-                  hintText: "",
-                  lableText: "نوع الاشتراك",
-                  validator: (val) {
-                    return validInput(val!, 5, 50, "username");
-                  }),
-            ),
+            CustomeTextFormAuth(
+                hintText: "",
+                lableText: "نوع الاشتراك",
+                validator: (val) {
+                  return validInput(val!, 5, 50, "username");
+                }),
             const SizedBox(
               height: 10,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                SizedBox(
-                  width: 145,
+                Expanded(
                   child: CustomeTextFormAuth(
                       hintText: "",
                       lableText: "التخصص",
@@ -62,8 +52,7 @@ class SubscriptionForm extends StatelessWidget {
                 const SizedBox(
                   width: 10,
                 ),
-                SizedBox(
-                  width: 145,
+                Expanded(
                   child: CustomeTextFormAuth(
                       hintText: "",
                       lableText: "السعر",
@@ -79,8 +68,7 @@ class SubscriptionForm extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                SizedBox(
-                  width: 145,
+                Expanded(
                   child: CustomeTextFormAuth(
                       hintText: "",
                       lableText: " عدد الايام",
@@ -91,8 +79,7 @@ class SubscriptionForm extends StatelessWidget {
                 const SizedBox(
                   width: 10,
                 ),
-                SizedBox(
-                  width: 145,
+                Expanded(
                   child: CustomeTextFormAuth(
                       hintText: "",
                       lableText: " عدد الحصص",
@@ -105,23 +92,19 @@ class SubscriptionForm extends StatelessWidget {
             const SizedBox(
               height: 10,
             ),
-            SizedBox(
-              width: 300,
-              child: CustomeTextFormAuth(
-                  hintText: "",
-                  lableText: "اقصى عدد ايام تجميد للمره الواحده",
-                  validator: (val) {
-                    return validInput(val!, 5, 50, "username");
-                  }),
-            ),
+            CustomeTextFormAuth(
+                hintText: "",
+                lableText: "اقصى عدد ايام تجميد للمره الواحده",
+                validator: (val) {
+                  return validInput(val!, 5, 50, "username");
+                }),
             const SizedBox(
               height: 10,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                SizedBox(
-                  width: 145,
+                Expanded(
                   child: CustomeTextFormAuth(
                       hintText: "",
                       lableText: "عدد الدعوات",
@@ -132,52 +115,44 @@ class SubscriptionForm extends StatelessWidget {
                 const SizedBox(
                   width: 10,
                 ),
-                SizedBox(
-                  width: 145,
+                Expanded(
                   child: CustomeTextFormAuth(
-                      hintText: "",
-                      lableText: "عدد الخدمات",
-                      validator: (val) {
-                        return validInput(val!, 5, 50, "username");
-                      }),
+                    hintText: "",
+                    lableText: "عدد الخدمات",
+                    validator: (val) {
+                      return validInput(val!, 5, 50, "username");
+                    },
+                  ),
                 ),
               ],
             ),
             const SizedBox(
               height: 10,
             ),
-            SizedBox(
-              width: 300,
-              child: CustomeTextFormAuth(
-                  hintText: "",
-                  lableText: " اقصى عدد دعوات فى اليوم",
-                  validator: (val) {
-                    return validInput(val!, 5, 50, "username");
-                  }),
-            ),
+            CustomeTextFormAuth(
+                hintText: "",
+                lableText: " اقصى عدد دعوات فى اليوم",
+                validator: (val) {
+                  return validInput(val!, 5, 50, "username");
+                }),
             const SizedBox(
               height: 10,
             ),
-            SizedBox(
-              width: 300,
-              child: CustomeTextFormAuth(
-                  hintText: "",
-                  lableText: "اقصى عدد خدمات فى اليوم",
-                  validator: (val) {
-                    return validInput(val!, 5, 50, "username");
-                  }),
-            ),
+            CustomeTextFormAuth(
+                hintText: "",
+                lableText: "اقصى عدد خدمات فى اليوم",
+                validator: (val) {
+                  return validInput(val!, 5, 50, "username");
+                }),
             const SizedBox(
               height: 10,
             ),
-            SizedBox(
-              width: 300,
-              child: CustomeTextFormAuth(
-                  hintText: "",
-                  lableText: "ملاحظات",
-                  validator: (val) {
-                    return validInput(val!, 5, 50, "username");
-                  }),
+            CustomeTextFormAuth(
+              hintText: "",
+              lableText: "ملاحظات",
+              validator: (val) {
+                return validInput(val!, 5, 50, "username");
+              },
             ),
           ],
         ),

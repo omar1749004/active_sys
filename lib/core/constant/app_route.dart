@@ -11,5 +11,6 @@ class AppRoute {
   static const String playersprofileid = "/PlayersProfileView";
 
   static const String authid = "/authid";
-
+  static const String freezescreenid = "/FreezeScreen";
+  static const String treasuryregisterid = "/TreasuryRegisterView";
 }

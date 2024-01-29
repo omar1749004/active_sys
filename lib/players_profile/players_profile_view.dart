@@ -15,7 +15,7 @@ class PlayersProfileView extends StatefulWidget {
 }
 
 class _PlayersProfileViewState extends State<PlayersProfileView> {
-  int id = 0;
+  int id = 5;
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +37,7 @@ class _PlayersProfileViewState extends State<PlayersProfileView> {
             child: Row(
               children: [
                 Expanded(
-                  flex: 2,
+                  flex: 5,
                   child: Padding(
                     padding: const EdgeInsets.only(
                         top: 5, bottom: 5, right: 5, left: 5),
@@ -54,25 +54,39 @@ class _PlayersProfileViewState extends State<PlayersProfileView> {
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceAround,
                                   children: [
-                                    CustomDateField(
-                                        width: 150,
-                                        height: 30,
-                                        icon: Icons.close,
-                                        iconSize: 15,
-                                        fontSize: 15),
-                                    const Text(
-                                      "الى ",
-                                      style: TextStyle(fontSize: 18),
+                                    Row(
+                                      children: [
+                                        CustomDateField(
+                                            width: 150,
+                                            height: 30,
+                                            icon: Icons.close,
+                                            iconSize: 15,
+                                            fontSize: 15),
+                                        const SizedBox(
+                                          width: 40,
+                                        ),
+                                        const Text(
+                                          "الى ",
+                                          style: TextStyle(fontSize: 18),
+                                        ),
+                                      ],
                                     ),
-                                    CustomDateField(
-                                        width: 150,
-                                        height: 30,
-                                        icon: Icons.close,
-                                        iconSize: 15,
-                                        fontSize: 15),
-                                    const Text(
-                                      "من ",
-                                      style: TextStyle(fontSize: 18),
+                                    Row(
+                                      children: [
+                                        CustomDateField(
+                                            width: 150,
+                                            height: 30,
+                                            icon: Icons.close,
+                                            iconSize: 15,
+                                            fontSize: 15),
+                                        const SizedBox(
+                                          width: 40,
+                                        ),
+                                        const Text(
+                                          "من ",
+                                          style: TextStyle(fontSize: 18),
+                                        ),
+                                      ],
                                     ),
                                     SizedBox(
                                       child: CustomBotton1(
@@ -89,13 +103,13 @@ class _PlayersProfileViewState extends State<PlayersProfileView> {
                                   ],
                                 ),
                               )
-                            : Text("", style: TextStyle(height: 0)),
+                            : const Text("", style: TextStyle(height: 0)),
                         id == 5
                             ? Text(
                                 "مدفوعات",
                                 style: Styles.style20,
                               )
-                            : Text(
+                            : const Text(
                                 "",
                                 style: TextStyle(height: 0),
                               ),
@@ -216,7 +230,10 @@ class _PlayersProfileViewState extends State<PlayersProfileView> {
                 //
                 //client info
                 //
-                const Expanded(flex: 1, child: CardInfo()),
+                const Expanded(
+                  flex: 2,
+                  child: CardInfo(),
+                ),
               ],
             ),
           )
