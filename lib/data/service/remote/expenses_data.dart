@@ -1,8 +1,8 @@
 import 'package:active_system/core/class/api.dart';
 import 'package:active_system/link_api.dart';
 
-class Expenses{
-  Expenses();
+class ExpensesData{
+  ExpensesData();
     view()async{
     var res =await Api().post(uri: linkExpensesView, body: {});
     return res;
@@ -24,6 +24,10 @@ class Expenses{
   }
   dateSearch(Map data)async{
     var res =await Api().post(uri: linkExpensesDateSearch, body: data);
+    return res;
+  }
+    search(Map data)async{
+    var res =await Api().post(uri: linkExpensesSearch, body: data);
     return res;
   }
 }
