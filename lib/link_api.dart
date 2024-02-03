@@ -11,11 +11,17 @@ const String linkSubAdd ="$linkServerName/subscriptions/add.php";
 const String linkSubEdit ="$linkServerName/subscriptions/edit.php";
 const String linkSubDelete ="$linkServerName/subscriptions/delete.php";
 const String linkSubView ="$linkServerName/subscriptions/view.php";
-//users and trainer
+//users 
 const String linkUsersAdd ="$linkServerName/users/add.php";
 const String linkUsersEdit ="$linkServerName/users/edit.php";
 const String linkUsersDelete ="$linkServerName/users/delete.php";
 const String linkUsersSearch ="$linkServerName/users/search.php";
+//trainer
+const String linkTrainerAdd ="$linkServerName/trainer/add.php";
+const String linkTrainerEdit ="$linkServerName/trainer/edit.php";
+const String linkTrainerDelete ="$linkServerName/trainer/delete.php";
+const String linkTrainerSearch ="$linkServerName/trainer/search.php";
+const String linkTrainerView ="$linkServerName/trainer/view.php";
 //renew
 const String linkRenewAdd ="$linkServerName/renewal_subscriptions/add.php";
 const String linkRenewEdit ="$linkServerName/renewal_subscriptions/edit.php";
@@ -51,15 +57,15 @@ const String linkSafeAdd ="$linkServerName/safe/add.php";
 const String linkSafeView ="$linkServerName/safe/view.php";
 const String linkSafeDateSearch ="$linkServerName/safe/date_search.php";
 //expenses
-const String linExpensesAdd ="$linkServerName/expenses/add.php";
-const String linExpensesEdit ="$linkServerName/expenses/edit.php";
-const String linExpensesDelete ="$linkServerName/expenses/delete.php";
-const String linExpensesView ="$linkServerName/expenses/view.php";
+const String linkExpensesAdd ="$linkServerName/expenses/add.php";
+const String linkExpensesEdit ="$linkServerName/expenses/edit.php";
+const String linkExpensesDelete ="$linkServerName/expenses/delete.php";
+const String linkExpensesView ="$linkServerName/expenses/view.php";
 const String linkExpensesDateSearch ="$linkServerName/expenses/date_search.php";
 //frezze
 const String linkFreezeAdd ="$linkServerName/freeze/add.php";
 const String linkFreezeView ="$linkServerName/freeze/view.php";
-const String linkFreezeDateSearch ="$linkServerName/freeze/delet.php";
+const String linkFreezeDelete ="$linkServerName/freeze/delet.php";
 
 //image
 const String linkImageUpload= "$linkServerName/upload";
