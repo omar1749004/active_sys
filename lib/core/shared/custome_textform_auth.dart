@@ -57,6 +57,7 @@ class CustomeTextFormAuth extends StatelessWidget {
           //color: check? ColorApp.KPrimaryColor: color
           // ),
 
+
           label: Padding(
             padding: const EdgeInsets.all(20.0),
             child: Text(
@@ -65,6 +66,7 @@ class CustomeTextFormAuth extends StatelessWidget {
               softWrap: false,
               overflow: TextOverflow.visible,
             ),
+
           ),
           //labelStyle: TextStyle(
           //color: check? ColorApp.KPrimaryColor:color

@@ -10,6 +10,7 @@ class CustomSearchDate extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
+
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
         CustomDateField(
@@ -49,5 +50,6 @@ class CustomSearchDate extends StatelessWidget {
         ),
       ],
     );
+
   }
 }
