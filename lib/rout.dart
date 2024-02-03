@@ -2,16 +2,16 @@ import 'package:active_system/attendance/attendance_view.dart';
 import 'package:active_system/auth/view/screen/auth_view.dart';
 import 'package:active_system/core/constant/app_route.dart';
 import 'package:active_system/core/middleware/mymiddleware.dart';
-import 'package:active_system/home/view/screen/home.dart';
-import 'package:active_system/manage_cost/manage_cost_view.dart';
-import 'package:active_system/manage_subscriptions/view/manage_subscriptions_view.dart';
-import 'package:active_system/players_profile/players_profile_view.dart';
-import 'package:active_system/renew_subscriptions/renew_subscriptions_view.dart';
-import 'package:active_system/renew_subscriptions/subscreen/freeze_screen.dart';
-import 'package:active_system/safe/view/screen/safe_view.dart';
-import 'package:active_system/treasury_register/treasury_register_view.dart';
-import 'package:active_system/users/view/screen/users_view.dart';
-import 'package:active_system/trainers/trainers_view.dart';
+import 'package:active_system/features/home/view/screen/home.dart';
+import 'package:active_system/features/manage_cost/manage_cost_view.dart';
+import 'package:active_system/features/manage_subscriptions/view/manage_subscriptions_view.dart';
+import 'package:active_system/features/players_profile/players_profile_view.dart';
+import 'package:active_system/features/renew_subscriptions/renew_subscriptions_view.dart';
+import 'package:active_system/features/renew_subscriptions/subscreen/freeze_screen.dart';
+import 'package:active_system/features/safe/view/screen/safe_view.dart';
+import 'package:active_system/features/treasury_register/treasury_register_view.dart';
+import 'package:active_system/features/users/view/screen/users_view.dart';
+import 'package:active_system/features/trainers/trainers_view.dart';
 import 'package:get/get.dart';
 
 List<GetPage<dynamic>> route = [
