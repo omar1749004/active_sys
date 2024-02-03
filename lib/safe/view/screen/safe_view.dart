@@ -96,7 +96,7 @@ class SafeView extends StatelessWidget {
                         children: [
                           Text(
                             "بيانات الخزنة",
-                            style: Styles.style23B,
+                            style: Styles.style23,
                           ),
                           CustomDisplyMany(
                               textColor: ColorApp.secondColor,
@@ -115,7 +115,7 @@ class SafeView extends StatelessWidget {
                             padding: const EdgeInsets.only(bottom: 5),
                             child: Text(
                               "إضافة عملية",
-                              style: Styles.style23B,
+                              style: Styles.style23,
                             ),
                           ),
                           Row(

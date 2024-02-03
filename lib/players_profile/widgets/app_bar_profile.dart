@@ -39,7 +39,7 @@ class AppBarProfilePage extends StatelessWidget {
                   ),
                 ),
                 Image.asset(
-                  ImageAsset.lohgo,
+                  ImageAsset.logo,
                   width: 100,
                 ),
               ],

@@ -107,7 +107,7 @@ class UsersView extends StatelessWidget {
                         children: [
                           Text(
                             "بيانات المستخدم",
-                            style: Styles.style23B,
+                            style: Styles.style23,
                           ),
                           Row(
                             children: [

@@ -45,7 +45,7 @@ class CustomSearchDate extends StatelessWidget {
                                 ),
                                 Text(
                                   "سجل الخزنة",
-                                  style: Styles.style23B,
+                                  style: Styles.style23,
                                 ),
                               ],
                             );

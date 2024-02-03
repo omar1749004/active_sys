@@ -50,7 +50,7 @@ List<GetPage<dynamic>> route = [
       name: AppRoute.playersprofileid,
       page: () => const PlayersProfileView(),
       middlewares: [MyMiddleWare()]),
-      ),
+      
       GetPage(
       name: AppRoute.authid,
       page: () => const AuthView(),)

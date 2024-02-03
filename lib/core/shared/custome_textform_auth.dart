@@ -61,9 +61,9 @@ class CustomeTextFormAuth extends StatelessWidget {
           label: Text(
             lableText,
             style: Styles.style18B,
-            softWrap: false,
+            softWrap: false,  
             overflow: TextOverflow.visible,
-
+          
           ),
           //labelStyle: TextStyle(
           //color: check? ColorApp.KPrimaryColor:color
