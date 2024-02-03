@@ -1,21 +1,20 @@
 import 'package:active_system/core/constant/color.dart';
-import 'package:active_system/core/shared/custom_Botton1.dart';
 import 'package:active_system/core/shared/custom_app_bar.dart';
-import 'package:active_system/core/shared/custom_date_field.dart';
 import 'package:active_system/core/shared/custom_table.dart';
 import 'package:active_system/core/shared/custom_table_header.dart';
-import 'package:active_system/manage_cost/widgets/manage_cost_form.dart';
 import 'package:active_system/manage_subscriptions/view/widgets/custom_button.dart';
 import 'package:active_system/manage_subscriptions/view/widgets/custom_menu.dart';
+import 'package:active_system/safe/view/widget/custom_display_many.dart';
+import 'package:active_system/trainers/widgets/custom_input_form.dart';
+import 'package:active_system/treasury_register/widgets/treasury_register_form.dart';
 import 'package:flutter/material.dart';
 
-class ManageCostView extends StatelessWidget {
-  const ManageCostView({super.key});
+class TreasuryRegisterView extends StatelessWidget {
+  const TreasuryRegisterView({super.key});
 
   @override
   Widget build(BuildContext context) {
     final TextEditingController search = TextEditingController();
-
     return Scaffold(
       body: Column(
         children: [
@@ -35,7 +34,7 @@ class ManageCostView extends StatelessWidget {
                   //left menu
                   //
                   const CustomMenu(
-                    pageName: "ادارة المصروفات",
+                    pageName: 'سجل الخزنة',
                   ),
                   //
                   //the content in the middle
@@ -49,61 +48,10 @@ class ManageCostView extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
                           //
-                          //search bar
-                          //
-                          SizedBox(
-                              width: MediaQuery.of(context).size.width * 0.5,
-                              child: CustomTableHeader(
-                                searchController: search,
-                                header: "",
-                              )),
-                          //
-                          //date
-                          //
-                          Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 10),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              children: [
-                                CustomDateField(
-                                    width: 150,
-                                    height: 30,
-                                    icon: Icons.close,
-                                    iconSize: 15,
-                                    fontSize: 15),
-                                const Text(
-                                  "الى ",
-                                  style: TextStyle(fontSize: 18),
-                                ),
-                                CustomDateField(
-                                    width: 150,
-                                    height: 30,
-                                    icon: Icons.close,
-                                    iconSize: 15,
-                                    fontSize: 15),
-                                const Text(
-                                  "من ",
-                                  style: TextStyle(fontSize: 18),
-                                ),
-                                SizedBox(
-                                  child: CustomBotton1(
-                                    text: "بحث",
-                                    ontap: () {},
-                                    color: ColorApp.kPrimaryColor,
-                                    marginBottom: 0,
-                                    marginLeft: 0,
-                                    marginRight: 0,
-                                    marginTop: 0,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          //
                           //table that contains data
                           //
                           Expanded(
-                            flex: 6,
+                            flex: 11,
                             child: CustomTable(columnsHeader: const [
                               Text("1"),
                               Text("2"),
@@ -138,28 +86,64 @@ class ManageCostView extends StatelessWidget {
                             ]),
                           ),
                           //
+                          //data of table
+                          //
+                          const Expanded(
+                            flex: 2,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Expanded(
+                                  child: Padding(
+                                    padding:
+                                        EdgeInsets.symmetric(horizontal: 5.0),
+                                    child: CustomDisplyMany(
+                                        textColor: ColorApp.thirdColor,
+                                        many: 10000,
+                                        text: "الاجمالى"),
+                                  ),
+                                ),
+                                Expanded(
+                                  child: Padding(
+                                    padding:
+                                        EdgeInsets.symmetric(horizontal: 5.0),
+                                    child: CustomDisplyMany(
+                                        textColor: ColorApp.thirdColor,
+                                        many: 10000,
+                                        text: "الصافى"),
+                                  ),
+                                ),
+                                Expanded(
+                                  child: Padding(
+                                    padding:
+                                        EdgeInsets.symmetric(horizontal: 5.0),
+                                    child: CustomDisplyMany(
+                                        textColor: ColorApp.thirdColor,
+                                        many: 10000,
+                                        text: "الصافى"),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          //
                           //buttons
                           //
                           Expanded(
                             flex: 1,
                             child: Row(
                               textDirection: TextDirection.rtl,
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 CustomButton(
-                                  text: "أضافه",
+                                  text: "تنفيذ",
                                   ontap: () {},
                                 ),
-                                CustomButton(
-                                  text: "تعديل",
-                                  ontap: () {},
+                                const SizedBox(
+                                  width: 15,
                                 ),
                                 CustomButton(
-                                  text: "حذف",
-                                  ontap: () {},
-                                ),
-                                CustomButton(
-                                  text: "طباعة",
+                                  text: "تنفيذ وطباعه",
                                   ontap: () {},
                                 ),
                               ],
@@ -175,6 +159,7 @@ class ManageCostView extends StatelessWidget {
                   Expanded(
                     flex: 1,
                     child: Container(
+                      width: 300,
                       height: MediaQuery.of(context).size.height,
                       padding: const EdgeInsets.only(left: 8, right: 8),
                       decoration: const BoxDecoration(
@@ -193,7 +178,7 @@ class ManageCostView extends StatelessWidget {
                           ),
                         ),
                       ),
-                      child: const MangeCostForm(),
+                      child: const TreasuryRegisterForm(),
                     ),
                   )
                 ],

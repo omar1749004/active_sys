@@ -9,23 +9,19 @@ class CustomButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      
       onPressed: ontap,
       style: ButtonStyle(
-          
-          backgroundColor:
-              MaterialStatePropertyAll(Color.fromARGB(217, 255, 255, 255)),
+          backgroundColor: const MaterialStatePropertyAll(
+              Color.fromARGB(217, 255, 255, 255)),
           shape: MaterialStateProperty.all(
             LinearBorder.bottom(
-              
               side: const BorderSide(
                 width: 1,
                 color: Color.fromARGB(64, 0, 0, 0),
               ),
             ),
           ),
-        
-          fixedSize: MaterialStateProperty.all(Size.copy(Size(120, 40)))),
+          fixedSize: MaterialStateProperty.all(Size.copy(const Size(120, 40)))),
       child: Text(text),
     );
   }

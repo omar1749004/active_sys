@@ -12,99 +12,75 @@ class TrainersForm extends StatelessWidget {
       child: SingleChildScrollView(
         child: Column(
           children: [
-            SizedBox(
-              width: 300,
-              child: CustomeTextFormAuth(
-                  hintText: "",
-                  lableText: "الكود",
-                  validator: (val) {
-                    return validInput(val!, 5, 50, "username");
-                  }),
-            ),
+            CustomeTextFormAuth(
+                hintText: "",
+                lableText: "الكود",
+                validator: (val) {
+                  return validInput(val!, 5, 50, "username");
+                }),
             const SizedBox(
               height: 10,
             ),
-            SizedBox(
-              width: 300,
-              child: CustomeTextFormAuth(
-                  hintText: "",
-                  lableText: "الاسم",
-                  validator: (val) {
-                    return validInput(val!, 5, 50, "username");
-                  }),
-            ),
+            CustomeTextFormAuth(
+                hintText: "",
+                lableText: "الاسم",
+                validator: (val) {
+                  return validInput(val!, 5, 50, "username");
+                }),
             const SizedBox(
               height: 10,
             ),
-            SizedBox(
-              width: 300,
-              child: CustomeTextFormAuth(
-                  hintText: "",
-                  lableText: "التلفون",
-                  validator: (val) {
-                    return validInput(val!, 5, 50, "username");
-                  }),
-            ),
+            CustomeTextFormAuth(
+                hintText: "",
+                lableText: "التلفون",
+                validator: (val) {
+                  return validInput(val!, 5, 50, "username");
+                }),
             const SizedBox(
               height: 10,
             ),
-            SizedBox(
-              width: 300,
-              child: CustomeTextFormAuth(
-                  hintText: "",
-                  lableText: "موبايل 1",
-                  validator: (val) {
-                    return validInput(val!, 5, 50, "username");
-                  }),
-            ),
+            CustomeTextFormAuth(
+                hintText: "",
+                lableText: "موبايل 1",
+                validator: (val) {
+                  return validInput(val!, 5, 50, "username");
+                }),
             const SizedBox(
               height: 10,
             ),
-            SizedBox(
-              width: 300,
-              child: CustomeTextFormAuth(
-                  hintText: "",
-                  lableText: "موبايل 2",
-                  validator: (val) {
-                    return validInput(val!, 5, 50, "username");
-                  }),
-            ),
+            CustomeTextFormAuth(
+                hintText: "",
+                lableText: "موبايل 2",
+                validator: (val) {
+                  return validInput(val!, 5, 50, "username");
+                }),
             const SizedBox(
               height: 10,
             ),
-            SizedBox(
-              width: 300,
-              child: CustomeTextFormAuth(
-                  hintText: "",
-                  lableText: "العنوان",
-                  validator: (val) {
-                    return validInput(val!, 5, 50, "username");
-                  }),
-            ),
+            CustomeTextFormAuth(
+                hintText: "",
+                lableText: "العنوان",
+                validator: (val) {
+                  return validInput(val!, 5, 50, "username");
+                }),
             const SizedBox(
               height: 10,
             ),
-            SizedBox(
-              width: 300,
-              child: CustomeTextFormAuth(
-                  hintText: "",
-                  lableText: "النسبه",
-                  validator: (val) {
-                    return validInput(val!, 5, 50, "username");
-                  }),
-            ),
+            CustomeTextFormAuth(
+                hintText: "",
+                lableText: "النسبه",
+                validator: (val) {
+                  return validInput(val!, 5, 50, "username");
+                }),
             const SizedBox(
               height: 10,
             ),
-            SizedBox(
-              width: 300,
-              child: CustomeTextFormAuth(
-                  hintText: "",
-                  lableText: "الملاحظات",
-                  validator: (val) {
-                    return validInput(val!, 5, 50, "username");
-                  }),
-            ),
+            CustomeTextFormAuth(
+                hintText: "",
+                lableText: "الملاحظات",
+                validator: (val) {
+                  return validInput(val!, 5, 50, "username");
+                }),
           ],
         ),
       ),

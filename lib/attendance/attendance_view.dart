@@ -37,39 +37,57 @@ class AttendanceView extends StatelessWidget {
                       //
                       //search bar
                       //
-                      SizedBox(
-                          width: MediaQuery.of(context).size.width * 0.8,
-                          child: CustomTableHeader(
-                            searchController: search,
-                            header: "",
-                          )),
+                      CustomTableHeader(
+                        searchController: search,
+                        header: "سجل الحضور ",
+                      ),
                       //
                       //date
                       //
                       Padding(
                         padding: const EdgeInsets.symmetric(vertical: 10),
                         child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            CustomDateField(
-                                width: 150,
-                                height: 30,
-                                icon: Icons.close,
-                                iconSize: 15,
-                                fontSize: 15),
-                            const Text(
-                              "الى ",
-                              style: TextStyle(fontSize: 18),
+                            Row(
+                              children: [
+                                CustomDateField(
+                                    width: 150,
+                                    height: 30,
+                                    icon: Icons.close,
+                                    iconSize: 15,
+                                    fontSize: 15),
+                                const SizedBox(
+                                  width: 50,
+                                ),
+                                const Text(
+                                  " الى ",
+                                  style: TextStyle(fontSize: 18),
+                                ),
+                              ],
                             ),
-                            CustomDateField(
-                                width: 150,
-                                height: 30,
-                                icon: Icons.close,
-                                iconSize: 15,
-                                fontSize: 15),
-                            const Text(
-                              "من ",
-                              style: TextStyle(fontSize: 18),
+                            const SizedBox(
+                              width: 50,
+                            ),
+                            Row(
+                              children: [
+                                CustomDateField(
+                                    width: 150,
+                                    height: 30,
+                                    icon: Icons.close,
+                                    iconSize: 15,
+                                    fontSize: 15),
+                                const SizedBox(
+                                  width: 50,
+                                ),
+                                const Text(
+                                  " من ",
+                                  style: TextStyle(fontSize: 18),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(
+                              width: 50,
                             ),
                             SizedBox(
                               child: CustomBotton1(
@@ -135,13 +153,14 @@ class AttendanceView extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 SizedBox(
-                                    width:
-                                        MediaQuery.of(context).size.width * 0.2,
-                                    height: 40,
-                                    child: const CustomDisplyMany(
-                                        textColor: ColorApp.thirdColor,
-                                        many: 110,
-                                        text: "عدد الاعبين")),
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.2,
+                                  height: 40,
+                                  child: const CustomDisplyMany(
+                                      textColor: ColorApp.thirdColor,
+                                      many: 110,
+                                      text: "عدد الاعبين"),
+                                ),
                               ],
                             ),
                             SizedBox(

@@ -20,7 +20,6 @@ class HomePage extends StatelessWidget {
       body: GetBuilder<HomeController>(
         builder: (controller) => Column(
           children: [
-
             const CustomAppBar(),
             Expanded(
               child: SizedBox(
@@ -47,7 +46,8 @@ class HomePage extends StatelessWidget {
                                 Expanded(
                                   flex: 6,
                                   child: CustomTable(
-                                      columnsHeader: headerTable, rowInfo: []),
+                                      columnsHeader: headerTable,
+                                      rowInfo: const []),
                                 ),
                                 Expanded(
                                   child: Row(
@@ -60,7 +60,9 @@ class HomePage extends StatelessWidget {
                                           children: [
                                             Container(
                                               margin: const EdgeInsets.only(
-                                                  right: 10, left: 10 ,),
+                                                right: 10,
+                                                left: 10,
+                                              ),
                                               width: 50,
                                               height: 25,
                                               color: val[index],
@@ -80,12 +82,14 @@ class HomePage extends StatelessWidget {
                           ),
                         )),
                     const VerticalDivider(),
-                    Expanded(flex: 1, child: ClinetInfo()),
+                    const Expanded(
+                      flex: 1,
+                      child: ClinetInfo(),
+                    ),
                   ],
                 ),
               ),
             ),
-
           ],
         ),
       ),
