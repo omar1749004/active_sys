@@ -62,6 +62,7 @@ const String linkExpensesEdit ="$linkServerName/expenses/edit.php";
 const String linkExpensesDelete ="$linkServerName/expenses/delete.php";
 const String linkExpensesView ="$linkServerName/expenses/view.php";
 const String linkExpensesDateSearch ="$linkServerName/expenses/date_search.php";
+const String linkExpensesSearch ="$linkServerName/expenses/search.php";
 //frezze
 const String linkFreezeAdd ="$linkServerName/freeze/add.php";
 const String linkFreezeView ="$linkServerName/freeze/view.php";
