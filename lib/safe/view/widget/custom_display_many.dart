@@ -5,10 +5,14 @@ class CustomDisplyMany extends StatelessWidget {
       {super.key,
       required this.textColor,
       required this.many,
-      required this.text});
+      required this.text,
+      this.flexOfLabel = 1,
+      this.flexOfMany = 1});
   final Color textColor;
   final double many;
   final String text;
+  final int flexOfLabel;
+  final int flexOfMany;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -17,9 +21,10 @@ class CustomDisplyMany extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Expanded(
+            flex: flexOfMany,
             child: Container(
                 padding:
-                    const EdgeInsets.symmetric(horizontal: 25, vertical: 5),
+                    const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                 decoration: BoxDecoration(
                   border: Border.all(
                       color: const Color.fromARGB(255, 170, 170, 170)),
@@ -33,6 +38,7 @@ class CustomDisplyMany extends StatelessWidget {
             width: 10,
           ),
           Expanded(
+            flex: flexOfLabel,
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 5),
               decoration: BoxDecoration(

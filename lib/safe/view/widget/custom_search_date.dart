@@ -10,44 +10,46 @@ class CustomSearchDate extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              children: [
-                                CustomDateField(
-                                    width: 150,
-                                    height: 30,
-                                    icon: Icons.close,
-                                    iconSize: 15,
-                                    fontSize: 15),
-                                const Text(
-                                  "الى ",
-                                  style: TextStyle(fontSize: 18),
-                                ),
-                                CustomDateField(
-                                    width: 150,
-                                    height: 30,
-                                    icon: Icons.close,
-                                    iconSize: 15,
-                                    fontSize: 15),
-                                const Text(
-                                  "من ",
-                                  style: TextStyle(fontSize: 18),
-                                ),
-                                SizedBox(
-                                  child: CustomBotton1(
-                                    text: "بحث",
-                                    ontap: () {},
-                                    color: ColorApp.kPrimaryColor,
-                                    marginBottom: 0,
-                                    marginLeft: 0,
-                                    marginRight: 0,
-                                    marginTop: 0,
-                                  ),
-                                ),
-                                Text(
-                                  "سجل الخزنة",
-                                  style: Styles.style23,
-                                ),
-                              ],
-                            );
+
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      children: [
+        CustomDateField(
+            width: 150,
+            height: 30,
+            icon: Icons.close,
+            iconSize: 15,
+            fontSize: 15),
+        const Text(
+          "الى ",
+          style: TextStyle(fontSize: 18),
+        ),
+        CustomDateField(
+            width: 150,
+            height: 30,
+            icon: Icons.close,
+            iconSize: 15,
+            fontSize: 15),
+        const Text(
+          "من ",
+          style: TextStyle(fontSize: 18),
+        ),
+        SizedBox(
+          child: CustomBotton1(
+            text: "بحث",
+            ontap: () {},
+            color: ColorApp.kPrimaryColor,
+            marginBottom: 0,
+            marginLeft: 0,
+            marginRight: 0,
+            marginTop: 0,
+          ),
+        ),
+        Text(
+          "سجل الخزنة",
+          style: Styles.style23,
+        ),
+      ],
+    );
+
   }
 }

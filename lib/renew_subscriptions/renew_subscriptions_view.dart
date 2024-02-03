@@ -8,6 +8,7 @@ import 'package:active_system/manage_subscriptions/view/widgets/custom_button.da
 import 'package:active_system/manage_subscriptions/view/widgets/custom_menu.dart';
 import 'package:active_system/renew_subscriptions/widgets/renew_subscription_form.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class RenewSybscriptionsView extends StatelessWidget {
   RenewSybscriptionsView({super.key});
@@ -27,6 +28,7 @@ class RenewSybscriptionsView extends StatelessWidget {
               ),
               //the content in the middle
               Expanded(
+                flex: 2,
                 child: Padding(
                   padding:
                       const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
@@ -104,9 +106,7 @@ class RenewSybscriptionsView extends StatelessWidget {
                           Text("4"),
                           Text("1"),
                           Text("2"),
-                        ], rowInfo: const [
-                         
-                        ]),
+                        ], rowInfo: const []),
                       ),
                       //
                       //buttons
@@ -118,7 +118,9 @@ class RenewSybscriptionsView extends StatelessWidget {
                           children: [
                             CustomButton(
                               text: "تجميد",
-                              ontap: () {},
+                              ontap: () {
+                                Get.toNamed("/FreezeScreen");
+                              },
                             ),
                             CustomButton(
                               text: "طباعة",
@@ -146,26 +148,29 @@ class RenewSybscriptionsView extends StatelessWidget {
               //
               //form input right screen
               //
-              Container(
-                height: MediaQuery.of(context).size.height,
-                padding: const EdgeInsets.only(left: 8, right: 8),
-                decoration: const BoxDecoration(
-                  border: Border(
-                    top: BorderSide(
-                      width: 1,
-                      color: Color.fromRGBO(0, 0, 0, 0.186),
-                    ),
-                    left: BorderSide(
-                      width: 1,
-                      color: Color.fromRGBO(0, 0, 0, 0.186),
-                    ),
-                    bottom: BorderSide(
-                      width: 1,
-                      color: Color.fromRGBO(0, 0, 0, 0.186),
+              Expanded(
+                flex: 1,
+                child: Container(
+                  height: MediaQuery.of(context).size.height,
+                  padding: const EdgeInsets.only(left: 8, right: 8),
+                  decoration: const BoxDecoration(
+                    border: Border(
+                      top: BorderSide(
+                        width: 1,
+                        color: Color.fromRGBO(0, 0, 0, 0.186),
+                      ),
+                      left: BorderSide(
+                        width: 1,
+                        color: Color.fromRGBO(0, 0, 0, 0.186),
+                      ),
+                      bottom: BorderSide(
+                        width: 1,
+                        color: Color.fromRGBO(0, 0, 0, 0.186),
+                      ),
                     ),
                   ),
+                  child: const RenewSubscriptionForm(),
                 ),
-                child: const RenewSubscriptionForm(),
               ),
             ],
           ),

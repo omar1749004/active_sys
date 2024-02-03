@@ -38,6 +38,7 @@ class ManageSubscriptionsView extends StatelessWidget {
                   //the content in the middle
                   //
                   Expanded(
+                    flex: 2,
                     child: Padding(
                       padding: const EdgeInsets.symmetric(
                           horizontal: 15, vertical: 10),
@@ -125,26 +126,29 @@ class ManageSubscriptionsView extends StatelessWidget {
                   //
                   //form input right screen
                   //
-                  Container(
-                    height: MediaQuery.of(context).size.height,
-                    padding: const EdgeInsets.only(left: 8, right: 8),
-                    decoration: const BoxDecoration(
-                      border: Border(
-                        top: BorderSide(
-                          width: 1,
-                          color: Color.fromRGBO(0, 0, 0, 0.186),
-                        ),
-                        left: BorderSide(
-                          width: 1,
-                          color: Color.fromRGBO(0, 0, 0, 0.186),
-                        ),
-                        bottom: BorderSide(
-                          width: 1,
-                          color: Color.fromRGBO(0, 0, 0, 0.186),
+                  Expanded(
+                    flex: 1,
+                    child: Container(
+                      height: MediaQuery.of(context).size.height,
+                      padding: const EdgeInsets.only(left: 8, right: 8),
+                      decoration: const BoxDecoration(
+                        border: Border(
+                          top: BorderSide(
+                            width: 1,
+                            color: Color.fromRGBO(0, 0, 0, 0.186),
+                          ),
+                          left: BorderSide(
+                            width: 1,
+                            color: Color.fromRGBO(0, 0, 0, 0.186),
+                          ),
+                          bottom: BorderSide(
+                            width: 1,
+                            color: Color.fromRGBO(0, 0, 0, 0.186),
+                          ),
                         ),
                       ),
+                      child: const SubscriptionForm(),
                     ),
-                    child: const SubscriptionForm(),
                   )
                 ],
               ),

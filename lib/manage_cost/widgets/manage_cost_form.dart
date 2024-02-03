@@ -20,13 +20,14 @@ class MangeCostForm extends StatelessWidget {
             const Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                SizedBox(
-                    width: 300,
-                    height: 40,
-                    child: CustomDisplyMany(
-                        textColor: ColorApp.thirdColor,
-                        many: 25000,
-                        text: "اجمالى المصروفات")),
+                Expanded(
+                  child: SizedBox(
+                      height: 40,
+                      child: CustomDisplyMany(
+                          textColor: ColorApp.thirdColor,
+                          many: 25000,
+                          text: "اجمالى المصروفات")),
+                ),
               ],
             ),
             const SizedBox(
@@ -38,72 +39,68 @@ class MangeCostForm extends StatelessWidget {
             const Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                SizedBox(
-                    width: 300,
-                    height: 40,
-                    child: CustomDisplyMany(
-                        textColor: ColorApp.thirdColor,
-                        many: 25000,
-                        text: "رقم المصروفات")),
+                Expanded(
+                  child: SizedBox(
+                      height: 40,
+                      child: CustomDisplyMany(
+                          textColor: ColorApp.thirdColor,
+                          many: 25000,
+                          text: "رقم المصروفات")),
+                ),
               ],
             ),
             const SizedBox(
               height: 20,
             ),
+            //
+            //date button
+            //
             SizedBox(
-              width: 300,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  CustomDateField(
-                      width: 150,
-                      height: 40,
-                      icon: Icons.close,
-                      iconSize: 20,
-                      fontSize: 18),
-                  const Text(
-                    "التاريخ",
-                    style: TextStyle(fontSize: 18),
-                  )
-                ],
+              child: Expanded(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    CustomDateField(
+                        width: 200,
+                        height: 40,
+                        icon: Icons.close,
+                        iconSize: 20,
+                        fontSize: 18),
+                    const Text(
+                      "التاريخ",
+                      style: TextStyle(fontSize: 18),
+                    )
+                  ],
+                ),
               ),
             ),
             const SizedBox(
               height: 20,
             ),
-            SizedBox(
-              width: 300,
-              child: CustomeTextFormAuth(
-                  hintText: "",
-                  lableText: "تكلفة المصروفات",
-                  validator: (val) {
-                    return validInput(val!, 5, 50, "username");
-                  }),
-            ),
+            CustomeTextFormAuth(
+                hintText: "",
+                lableText: "تكلفة المصروفات",
+                validator: (val) {
+                  return validInput(val!, 5, 50, "username");
+                }),
             const SizedBox(
               height: 15,
             ),
-            SizedBox(
-              width: 300,
-              child: CustomeTextFormAuth(
-                  hintText: "",
-                  lableText: "سبب الصرف",
-                  validator: (val) {
-                    return validInput(val!, 5, 50, "username");
-                  }),
-            ),
+            CustomeTextFormAuth(
+                hintText: "",
+                lableText: "سبب الصرف",
+                validator: (val) {
+                  return validInput(val!, 5, 50, "username");
+                }),
             const SizedBox(
               height: 15,
             ),
-            SizedBox(
-              width: 300,
-              child: CustomeTextFormAuth(
-                  hintText: "",
-                  lableText: "ملاحظات",
-                  validator: (val) {
-                    return validInput(val!, 5, 50, "username");
-                  }),
-            ),
+            CustomeTextFormAuth(
+                hintText: "",
+                lableText: "ملاحظات",
+                validator: (val) {
+                  return validInput(val!, 5, 50, "username");
+                }),
           ],
         ),
       ),

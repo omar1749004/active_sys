@@ -32,7 +32,7 @@ class UsersView extends StatelessWidget {
                     pageName: 'ادارة المستخدمين',
                   ),
                   Expanded(
-                    flex: 5,
+                    flex: 2,
                     child: Container(
                       padding: const EdgeInsets.only(top: 15, left: 10),
                       child: Column(
@@ -100,9 +100,9 @@ class UsersView extends StatelessWidget {
                   ),
                   const VerticalDivider(),
                   Expanded(
-                    flex: 2,
+                    flex: 1,
                     child: Padding(
-                      padding: EdgeInsets.all(15),
+                      padding: const EdgeInsets.all(15),
                       child: Column(
                         children: [
                           Text(
@@ -136,13 +136,13 @@ class UsersView extends StatelessWidget {
                             ],
                           ),
                           Padding(
-                            padding: EdgeInsets.symmetric(vertical: 12),
+                            padding: const EdgeInsets.symmetric(vertical: 12),
                             child: Row(
                               children: [
                                 Expanded(
                                     flex: 3,
                                     child: CustomDropDownMenu(
-                                      items: ["مدير", "بائع"],
+                                      items: const ["مدير", "بائع"],
                                       intialValue: "مدير",
                                       onChanged: (val) {},
                                       redius: 30,
@@ -175,7 +175,6 @@ class UsersView extends StatelessWidget {
                                   return validInput(val!, 8, 50, "");
                                 }),
                           ),
-
                           const Align(
                               alignment: Alignment.topRight,
                               child: Text(
@@ -186,7 +185,6 @@ class UsersView extends StatelessWidget {
                               height: 350, child: CustomCheckBoxList()),
                           const SizedBox(
                             height: 10,
-
                           ),
                           CustomeTextFormAuth(
                               hintText: "",

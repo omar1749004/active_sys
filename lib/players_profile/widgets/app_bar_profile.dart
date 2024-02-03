@@ -2,11 +2,12 @@ import 'package:active_system/core/constant/color.dart';
 import 'package:active_system/core/constant/image_asset.dart';
 import 'package:active_system/core/shared/custom_Botton1.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-typedef void IntCallback(int id);
+typedef IntCallback = void Function(int id);
 
 class AppBarProfilePage extends StatelessWidget {
-  AppBarProfilePage({super.key, required this.buttonId});
+  const AppBarProfilePage({super.key, required this.buttonId});
 
   final IntCallback buttonId;
 
@@ -32,7 +33,9 @@ class AppBarProfilePage extends StatelessWidget {
                 ElevatedButton(
                   style: const ButtonStyle(
                       padding: MaterialStatePropertyAll(EdgeInsets.all(0))),
-                  onPressed: () {},
+                  onPressed: () {
+                    Get.back();
+                  },
                   child: const Icon(
                     Icons.close,
                     size: 30,
