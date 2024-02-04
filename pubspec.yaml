@@ -35,6 +35,7 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
   get: ^4.6.6
+  http: ^1.2.0
   shared_preferences: ^2.2.2
   datetime_picker_formfield_new: ^2.1.0
   flutter_localizations:
@@ -51,7 +52,6 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^2.0.0
-  http: ^0.13.6
   flutter_ringtone_player: ^3.2.0
   jiffy: ^6.2.1
   url_launcher: ^6.1.12

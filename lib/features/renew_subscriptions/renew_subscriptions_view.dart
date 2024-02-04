@@ -1,3 +1,4 @@
+import 'package:active_system/controller/renew_controller.dart';
 import 'package:active_system/core/constant/color.dart';
 import 'package:active_system/core/shared/custom_Botton1.dart';
 import 'package:active_system/core/shared/custom_app_bar.dart';
@@ -16,12 +17,16 @@ class RenewSybscriptionsView extends StatelessWidget {
   final TextEditingController search = TextEditingController();
   @override
   Widget build(BuildContext context) {
+    Get.put(RenewControllerImp());
     return Scaffold(
       body: Column(children: [
         const CustomAppBar(),
         Expanded(
-          child: Row(
-            children: [
+          child:
+          GetBuilder<RenewControllerImp>(builder: (controller) => 
+           Row(
+            children: 
+            [
               //left menu
               const CustomMenu(
                 pageName: 'تجديد الاشتراكات',
@@ -174,7 +179,7 @@ class RenewSybscriptionsView extends StatelessWidget {
               ),
             ],
           ),
-        )
+        ),)
       ]),
     );
   }
