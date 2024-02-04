@@ -13,7 +13,7 @@ import 'package:http/http.dart' as http;
     };
 
 class Api {
-  Future<dynamic> get({required String url ,@required String? token}) async {
+  Future<dynamic> get({required String url , String? token}) async {
     
      Map<String, String> headers = {};
            if (token != null) {
@@ -55,7 +55,6 @@ class Api {
      if(response.statusCode == 200 || response.statusCode == 201){
       
     Map data =jsonDecode(response.body);
-    
     return data;
      }
      else{

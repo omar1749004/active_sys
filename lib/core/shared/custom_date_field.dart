@@ -1,4 +1,5 @@
 import 'package:datetime_picker_formfield_new/datetime_picker_formfield.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -7,11 +8,13 @@ class CustomDateField extends StatelessWidget {
       {super.key,
       required this.width,
       required this.height,
-      required this.icon,
+       this.icon =CupertinoIcons.calendar,
       required this.iconSize,
       required this.fontSize,
       this.onChanged,
       this.validator,
+      this.currentValue,
+      this.isaccess = true,
       this.label = "",
       this.borderRadius = 0});
   final double width;
@@ -23,9 +26,9 @@ class CustomDateField extends StatelessWidget {
   final String label;
   final void Function(DateTime?)? onChanged;
   final String? Function(DateTime?)? validator;
-
+  final bool isaccess ;
   final format = DateFormat("yyyy-MM-dd" );
-
+  final DateTime? currentValue ;
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -34,15 +37,17 @@ class CustomDateField extends StatelessWidget {
       child: DateTimeField(
         validator: validator,
         onChanged: onChanged,
-        
-        resetIcon: Icon(
+        resetIcon: null,
+        enabled: isaccess,
+        decoration: InputDecoration(
+          icon: Icon(
           icon,
           size: iconSize,
         ),
-        decoration: InputDecoration(
             labelText: label,
             border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(borderRadius)),
+                borderRadius: BorderRadius.circular(borderRadius)
+                ),
             contentPadding: EdgeInsets.zero),
         textAlign: TextAlign.center,
         style: TextStyle(fontSize: fontSize),

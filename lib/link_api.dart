@@ -1,5 +1,7 @@
 //server name
-const String linkServerName = "http://10.0.2.2/activegym_app/system";
+
+//const String linkServerName = "http://10.0.2.2/activegym_app/system";
+const String linkServerName = "http://localhost/activegym_app/system";
 
 //admin system 
 const String linkAdminAdd ="$linkServerName/adminSys/add.php";
@@ -10,6 +12,7 @@ const String linkAdminView ="$linkServerName/adminSys/view.php";
 const String linkSubAdd ="$linkServerName/subscriptions/add.php";
 const String linkSubEdit ="$linkServerName/subscriptions/edit.php";
 const String linkSubDelete ="$linkServerName/subscriptions/delete.php";
+//const String linkSubView ="https://d579-156-210-185-111.ngrok-free.app/activegym_app/system/subscriptions/view.php";
 const String linkSubView ="$linkServerName/subscriptions/view.php";
 //users 
 const String linkUsersAdd ="$linkServerName/users/add.php";
