@@ -20,7 +20,8 @@ class CustomeTextFormAuth extends StatelessWidget {
       this.onfocuseColor = ColorApp.kPrimaryColor,
       this.cursorColor = ColorApp.kPrimaryColor,
       this.hintColor = Colors.black,
-      this.mainText = Colors.black});
+      this.mainText = Colors.black,
+      this.isreadonly = false});
 
   final String hintText;
   final String lableText;
@@ -35,6 +36,7 @@ class CustomeTextFormAuth extends StatelessWidget {
   final Color hintColor;
   final Color cursorColor;
   final Color mainText;
+  final bool isreadonly;
   final void Function()? ontap;
   @override
   Widget build(BuildContext context) {
@@ -48,6 +50,7 @@ class CustomeTextFormAuth extends StatelessWidget {
         validator: validator,
         controller: myController,
         cursorColor: cursorColor,
+        readOnly: isreadonly  ,
         style: TextStyle(
             fontSize: fontSize, color: mainText, fontFamily: "NotoSansArabic"),
         decoration: InputDecoration(

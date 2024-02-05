@@ -22,7 +22,7 @@ abstract class Styles {
     height: 0,
   );
   static const TextStyle style18B = TextStyle(
-    color: Color.fromARGB(255, 56, 56, 56),
+    color: Color.fromARGB(255, 107, 107, 107),//Color.fromARGB(255, 56, 56, 56)
     fontSize: 18,
     fontFamily: 'NotoSansArabic',
     fontWeight: FontWeight.w600,

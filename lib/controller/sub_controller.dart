@@ -1,9 +1,11 @@
-import 'package:active_system/data/service/remote/sub_data.dart';
+// import 'package:active_system/data/service/remote/sub_data.dart';
+
 
 void a() async {
   var res = await SubData().view();
   print(res.toString());
 }
+
 // var res = await SubData().add(
 //   {
 //     "name": text,

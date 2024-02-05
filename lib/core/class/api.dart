@@ -9,10 +9,13 @@ String _basicAuth = 'Basic ' + base64Encode(utf8.encode('omar:omar194004'));
 Map<String, String> myheaders = {'authorization': _basicAuth};
 
 class Api {
-  Future<dynamic> get({required String url, @required String? token}) async {
-    Map<String, String> headers = {};
-    if (token != null) {
-      headers.addAll(
+
+  Future<dynamic> get({required String url , String? token}) async {
+    
+     Map<String, String> headers = {};
+           if (token != null) {
+         headers.addAll(
+
         {"Authorization": "Bearer $token"},
       );
     }
@@ -41,15 +44,19 @@ class Api {
       );
     }
 
-    try {
-      http.Response response = await http.post(Uri.parse(uri),
-          body: body, headers: headers); //myheaders
+    
+     try {
+  http.Response response =
+     await http.post(Uri.parse(uri), body: body ,headers: headers);  //myheaders
+     
+     if(response.statusCode == 200 || response.statusCode == 201){
+      
+    Map data =jsonDecode(response.body);
+    return data;
+     }
+     else{
+      
 
-      if (response.statusCode == 200 || response.statusCode == 201) {
-        Map data = jsonDecode(response.body);
-
-        return data;
-      } else {
         throw Exception(
             "there id problem with status code${response.statusCode} with body${jsonDecode(response.body)}");
       }

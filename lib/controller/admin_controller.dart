@@ -1,4 +1,5 @@
-import 'package:active_system/data/service/remote/admin_data.dart';
+// import 'package:active_system/data/service/remote/admin_data.dart';
+
 
 
 
@@ -21,6 +22,7 @@ import 'package:active_system/data/service/remote/admin_data.dart';
 //   "note": note,
 //   "powers": powers,
 //   }
+
 
 // );
 // var res = await AdminData().delete(
