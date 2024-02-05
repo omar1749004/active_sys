@@ -51,7 +51,7 @@ class CustomDateField extends StatelessWidget {
             contentPadding: EdgeInsets.zero),
         textAlign: TextAlign.center,
         style: TextStyle(fontSize: fontSize),
-        initialValue: DateTime.now(),
+         initialValue: currentValue ?? DateTime.now(),
         
         format: format,
         onShowPicker: (BuildContext context, DateTime? currentValue) {

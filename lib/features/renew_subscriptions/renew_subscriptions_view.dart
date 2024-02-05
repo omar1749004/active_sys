@@ -141,7 +141,9 @@ class RenewSybscriptionsView extends StatelessWidget {
                             ),
                             CustomButton(
                               text: "تجديد",
-                              ontap: () {},
+                              ontap: () {
+                                controller.addRenew();
+                              },
                             )
                           ],
                         ),

@@ -10,7 +10,8 @@ class CustomeTextFormAuth extends StatelessWidget {
       required this.hintText,
       required this.lableText,
       this.myController,
-      required this.validator,
+       this.validator,
+      this.onChanged,
       this.icone = Icons.power_off_rounded,
       this.isPhoneNumber = false,
       this.obscureText = false,
@@ -38,6 +39,7 @@ class CustomeTextFormAuth extends StatelessWidget {
   final Color mainText;
   final bool isreadonly;
   final void Function()? ontap;
+  final void Function(String)? onChanged;
   @override
   Widget build(BuildContext context) {
     //Color color = Color.fromARGB(255, 126, 126, 126);
@@ -45,6 +47,7 @@ class CustomeTextFormAuth extends StatelessWidget {
     return Directionality(
       textDirection: TextDirection.rtl,
       child: TextFormField(
+        onChanged: onChanged,
         obscureText: obscureText,
         keyboardType: isPhoneNumber ? TextInputType.number : TextInputType.text,
         validator: validator,

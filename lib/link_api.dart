@@ -2,8 +2,6 @@
 
 //const String linkServerName = "http://10.0.2.2/activegym_app/system";
 const String linkServerName = "http://localhost/activegym_app/system";
-
-
 //admin system
 const String linkAdminAdd = "$linkServerName/adminSys/add.php";
 const String linkAdminEdit = "$linkServerName/adminSys/edit.php";
