@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:active_system/core/class/statuscode.dart';
 import 'package:active_system/data/models/renew_model.dart';
 import 'package:active_system/data/models/sub_mode.dart';
@@ -19,6 +17,10 @@ abstract class RenewController extends GetxController {
   void setEndDate(DateTime start);
   void barcodeSearch();
   void addRenew();
+  void viewAll();
+
+  void dateSearch(DateTime startD, DateTime endD);
+  void handlTable(bool isdate);
 }
 
 class RenewControllerImp extends RenewController {
@@ -29,6 +31,8 @@ class RenewControllerImp extends RenewController {
   late TextEditingController note;
   late TextEditingController phone;
   late TextEditingController preNote;
+
+  late TextEditingController searchVal;
 
   late TextEditingController sessionNum;
   late TextEditingController dayNum;
@@ -45,6 +49,12 @@ class RenewControllerImp extends RenewController {
   List<String> trainerNameList = ["عام"];
   late SubscriptionModel subscriptionModel;
   late RenewModel renewUser;
+  //search
+   List<RenewModel> renewList = [];
+   bool isSearch = false;
+   bool isdateSearch = true;
+  DateTime startSearch = DateTime.now();
+  DateTime endSearch = DateTime.now();
 
   String trainerValue = "عام";
   String subValue = "عام";
@@ -52,6 +62,7 @@ class RenewControllerImp extends RenewController {
   late String _amountMid;
   late TextEditingController end;
   DateTime start = DateTime.now();
+  
   @override
   void onInit() {
     barcodeNum = TextEditingController();
@@ -69,6 +80,7 @@ class RenewControllerImp extends RenewController {
     remining = TextEditingController();
     note = TextEditingController();
     end = TextEditingController();
+    searchVal =TextEditingController();
     preNote.text = " ";
     descound.text = "0";
     amount.text = "0";
@@ -77,6 +89,7 @@ class RenewControllerImp extends RenewController {
 
     getSub();
     getTrainer();
+    dateSearch(startSearch, endSearch);
     update();
 
     super.onInit();
@@ -225,13 +238,13 @@ class RenewControllerImp extends RenewController {
   void addRenew() async {
     statusRequs = StatusRequst.loading;
     update();
-        String offe = _getDesc();
-        String ow =_getowed();
-       try{
-              var res = await RenewData().add({
+    String offe = _getDesc();
+    String ow = _getowed();
+    try {
+      var res = await RenewData().add({
         "userid": renewUser.usersId.toString(),
         "name": renewUser.usersName,
-        "captinId": renewUser.captiantid.toString(),
+        "captinId": renewUser.usersCaptiantid.toString(),
         "barcodeId": renewUser.barcodeId.toString(),
         "subscriptionsId": renewUser.subscriptionsId.toString(),
         "note": note.text,
@@ -249,10 +262,10 @@ class RenewControllerImp extends RenewController {
       } else {
         statusRequs = StatusRequst.failure;
       }
-       }catch(e){
-        print(e);
-       }
-      update();
+    } catch (e) {
+      print(e);
+    }
+    update();
   }
 
   String _getDesc() {
@@ -271,6 +284,94 @@ class RenewControllerImp extends RenewController {
     } else {
       return "0";
     }
+  }
+
+  @override
+  void dateSearch(DateTime startD, DateTime endD) async {
+    statusRequs = StatusRequst.loading;
+    update();
+    if (isdateSearch) {
+      var res = await RenewData().dateSearch({
+        "start_date": startD.toString(),
+        "end_date": endD.toString(),
+      });
+      if (res["status"] == "failure") {
+        statusRequs = StatusRequst.failure;
+      } else if (res["status"] == "success") {
+        List data = res["data"];
+        renewList.addAll(data.map((e) => RenewModel.fromJson(e)));
+        statusRequs = StatusRequst.sucsess;
+      } else {
+        statusRequs = StatusRequst.failure;
+      }
+    }
+    update();
+  }
+  
+   void checkSearch(String val)
+  {
+    if(val.isEmpty)
+    {
+      statusRequs = StatusRequst.non;
+      isSearch =false;
+
+    }
+    else{
+      isSearch =true;
+      _search();
+    }
+    update();
+  }
+
+  void _search() async{
+     statusRequs = StatusRequst.loading;
+     update();
+     var res = await RenewData().search(
+      {
+        "search": searchVal.text
+      }
+     );
+      if (res["status"] == "failure") {
+        statusRequs = StatusRequst.failure;
+      } else if (res["status"] == "success") {
+        List data = res["data"];
+        renewList = [] ;
+        renewList.addAll(data.map((e) => RenewModel.fromJson(e)));
+        statusRequs = StatusRequst.sucsess;
+      } else {
+        statusRequs = StatusRequst.failure;
+      }
+      update();
+  }
+  
+  @override
+  void viewAll() async{
+    statusRequs = StatusRequst.loading;
+     update();
+     var res = await RenewData().view();
+      if (res["status"] == "failure") {
+        statusRequs = StatusRequst.failure;
+      } else if (res["status"] == "success") {
+        List data = res["data"];
+        renewList = [] ;
+        renewList.addAll(data.map((e) => RenewModel.fromJson(e)));
+        statusRequs = StatusRequst.sucsess;
+      } else {
+        statusRequs = StatusRequst.failure;
+      }
+      update();
+  }
+  
+  @override
+  void handlTable(bool isdate) {
+    isdateSearch =  isdate ;
+    
+    if(isdateSearch){
+     dateSearch(startSearch ,endSearch) ;
+    }else{
+      viewAll();
+    }
+    
   }
 }
 

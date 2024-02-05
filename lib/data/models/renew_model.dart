@@ -2,7 +2,7 @@ class RenewModel {
 String? usersName;
 int? usersId;
 String? usersPhone;
-int? captiantid;
+String? usersCaptiantid;
 DateTime? usersCreate;
 int? renewalId;
 String? renewalNote;
@@ -31,10 +31,10 @@ int? totalPlayer;
     required this.usersId,
     required this.usersPhone,
     required this.usersCreate,
-    required this.captiantid,
     required this.renewalId,
     required this.renewalNote,
     required this.barcodeId,
+    required this.usersCaptiantid,
     required this.barcode,
     required this.renewalCreate,
     required this.renewalAdminId,
@@ -58,8 +58,8 @@ int? totalPlayer;
     return RenewModel(
       usersName: json['users_name'],
       usersId: json['users_id'],
+      usersCaptiantid: json['users_captiantid'],
       usersPhone: json['users_phone'],
-      captiantid: json['users_captiantid'],
       usersCreate: DateTime.parse(json['users_create']),
       renewalId: json['renewal_id'],
       renewalNote: json['renewal_note'],

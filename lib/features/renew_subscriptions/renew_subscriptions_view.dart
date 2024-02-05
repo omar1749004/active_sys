@@ -12,9 +12,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class RenewSybscriptionsView extends StatelessWidget {
-  RenewSybscriptionsView({super.key});
+ const RenewSybscriptionsView({super.key});
 
-  final TextEditingController search = TextEditingController();
   @override
   Widget build(BuildContext context) {
     Get.put(RenewControllerImp());
@@ -46,7 +45,10 @@ class RenewSybscriptionsView extends StatelessWidget {
                       SizedBox(
                           width: MediaQuery.of(context).size.width * 0.5,
                           child: CustomTableHeader(
-                            searchController: search,
+                            searchController: controller.searchVal,
+                            onChanged: (val) {
+                              controller.checkSearch(val);
+                            },
                             header: "",
                           )),
                       //
@@ -61,6 +63,10 @@ class RenewSybscriptionsView extends StatelessWidget {
                                 width: 150,
                                 height: 30,
                                 icon: Icons.close,
+                                onChanged: (p0) {
+                                  controller.endSearch = p0! ;
+                                  controller.dateSearch(controller.startSearch, controller.endSearch);
+                                },
                                 iconSize: 15,
                                 fontSize: 15),
                             const Text(
@@ -70,6 +76,10 @@ class RenewSybscriptionsView extends StatelessWidget {
                             CustomDateField(
                                 width: 150,
                                 height: 30,
+                                onChanged: (p0) {
+                                  controller.startSearch = p0! ;
+                                  controller.dateSearch(controller.startSearch, controller.endSearch);
+                                },
                                 icon: Icons.close,
                                 iconSize: 15,
                                 fontSize: 15),
@@ -81,8 +91,17 @@ class RenewSybscriptionsView extends StatelessWidget {
                               child: CustomBotton1(
                                 hieght: 40,
                                 text: "بحث",
-                                ontap: () {},
-                                color: ColorApp.kPrimaryColor,
+                                ontap: () {
+                                  controller.isdateSearch = !controller.isdateSearch;
+                                  controller.handlTable(controller.isdateSearch);
+                                  // if(controller.isdateSearch){
+                                  //  controller.dateSearch(controller.startSearch, controller.endSearch);
+                                  // }else{
+                                  //   controller.viewAll();
+                                  // }
+                                  
+                                },
+                                color: controller.isdateSearch ?ColorApp.onfoucosColor : ColorApp.kPrimaryColor,
                                 marginBottom: 0,
                                 marginLeft: 0,
                                 marginRight: 0,
