@@ -61,19 +61,17 @@ class ManageSubscriptionsView extends StatelessWidget {
                           //
                           Expanded(
                               flex: 6,
-                              child: Expanded(
-                                child: CustomModernTable(
-                                  data: [],
-                                  widths: const [250, 250, 100, 100, 100, 100],
-                                  header: const [
-                                    "ألاسم",
-                                    "ملاحظات",
-                                    "الرقم المسلسل",
-                                    "الكود",
-                                    "الكود",
-                                    "الكود"
-                                  ],
-                                ),
+                              child: CustomModernTable(
+                                data: [],
+                                widths: const [250, 250, 100, 100, 100, 100],
+                                header: const [
+                                  "ألاسم",
+                                  "ملاحظات",
+                                  "الرقم المسلسل",
+                                  "الكود",
+                                  "الكود",
+                                  "الكود"
+                                ],
                               )),
                           //
                           //buttons

@@ -1,4 +1,4 @@
-import 'package:active_system/attendance/attendance_view.dart';
+import 'package:active_system/features/attendance/attendance_view.dart';
 import 'package:active_system/auth/view/screen/auth_view.dart';
 import 'package:active_system/core/constant/app_route.dart';
 import 'package:active_system/core/middleware/mymiddleware.dart';

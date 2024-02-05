@@ -4,9 +4,10 @@ import 'package:flutter/material.dart';
 
 class CustomTableHeader extends StatelessWidget {
   const CustomTableHeader(
-      {super.key, required this.searchController, required this.header});
+      {super.key, required this.searchController, required this.header, this.onChanged});
   final TextEditingController searchController;
   final String header;
+  final void Function(String)? onChanged ;
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -19,7 +20,7 @@ class CustomTableHeader extends StatelessWidget {
             child: CustomSearch(
               searchController: searchController,
               titlAppbar: "بحث",
-              onChanged: (val) {},
+              onChanged:onChanged,
               onPressedSearch: () {},
             ),
           ),
