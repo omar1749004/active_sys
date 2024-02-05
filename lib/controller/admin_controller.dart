@@ -1,5 +1,8 @@
 // import 'package:active_system/data/service/remote/admin_data.dart';
 
+
+
+
 // var res = await AdminData().add(
 //   {
 //     "name": text,
@@ -19,6 +22,7 @@
 //   "note": note,
 //   "powers": powers,
 //   }
+
 
 // );
 // var res = await AdminData().delete(
