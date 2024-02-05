@@ -1,34 +1,37 @@
 class RenewModel {
-  String usersName;
-  int usersId;
-  String usersPhone;
-  DateTime usersCreate;
-  int renewalId;
-  String renewalNote;
-  int barcodeId;
-  int barcode;
-  DateTime renewalCreate;
-  int renewalAdminId;
-  DateTime renewalStart;
-  DateTime renewalEnd;
-  int renewalSessionAttend;
-  int subscriptionsId;
-  String subscriptionsName;
-  double subscriptionsPrice;
-  int subscriptionsDay;
-  int sessionsNumber;
-  int subscriptionsSpecialization;
-  int subscriptionsInvitationsNumber;
-  int subscriptionsMaxInvitation;
-  int subscriptionsServiceNumber;
-  int subscriptionsMaxService;
-  int totalPlayer;
+String? usersName;
+int? usersId;
+String? usersPhone;
+int? captiantid;
+DateTime? usersCreate;
+int? renewalId;
+String? renewalNote;
+int? barcodeId;
+int? barcode;
+DateTime? renewalCreate;
+int? renewalAdminId;
+DateTime? renewalStart;
+DateTime? renewalEnd;
+int? renewalSessionAttend;
+int? subscriptionsId;
+String? subscriptionsName;
+double? subscriptionsPrice;
+int? subscriptionsDay;
+int? sessionsNumber;
+int? subscriptionsSpecialization;
+int? subscriptionsInvitationsNumber;
+int? subscriptionsMaxInvitation;
+int? subscriptionsServiceNumber;
+int? subscriptionsMaxService;
+int? totalPlayer;
+
 
   RenewModel({
     required this.usersName,
     required this.usersId,
     required this.usersPhone,
     required this.usersCreate,
+    required this.captiantid,
     required this.renewalId,
     required this.renewalNote,
     required this.barcodeId,
@@ -56,6 +59,7 @@ class RenewModel {
       usersName: json['users_name'],
       usersId: json['users_id'],
       usersPhone: json['users_phone'],
+      captiantid: json['users_captiantid'],
       usersCreate: DateTime.parse(json['users_create']),
       renewalId: json['renewal_id'],
       renewalNote: json['renewal_note'],

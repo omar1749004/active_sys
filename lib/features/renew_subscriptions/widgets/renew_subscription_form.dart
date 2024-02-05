@@ -1,11 +1,11 @@
 import 'package:active_system/controller/renew_controller.dart';
 import 'package:active_system/core/constant/color.dart';
+import 'package:active_system/core/constant/styles.dart';
 import 'package:active_system/core/functions/validate_input.dart';
 import 'package:active_system/core/shared/custom_Botton1.dart';
 import 'package:active_system/core/shared/custom_date_field.dart';
 import 'package:active_system/core/shared/custom_dropdown_menu.dart';
 import 'package:active_system/core/shared/custome_textform_auth.dart';
-import 'package:active_system/features/safe/view/widget/custom_display_many.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -23,6 +23,10 @@ class RenewSubscriptionForm extends StatelessWidget {
          SingleChildScrollView(
           child: Column(
             children: [
+              Text(
+                            "بيانات المستخدم",
+                            style: Styles.style23,
+                          ),
               Container(
                 padding: const EdgeInsets.only(bottom: 15),
                 decoration: const BoxDecoration(
@@ -34,7 +38,9 @@ class RenewSubscriptionForm extends StatelessWidget {
                       child: CustomBotton1(
                         hieght: 40,
                         text: "بحث",
-                        ontap: () {},
+                        ontap: () {
+                          controller.barcodeSearch();
+                        },
                         color: ColorApp.kPrimaryColor,
                         marginBottom: 0,
                         marginLeft: 0,
@@ -47,6 +53,7 @@ class RenewSubscriptionForm extends StatelessWidget {
                     ),
                     Expanded(
                       child: CustomeTextFormAuth(
+                        myController: controller.barcodeNum,
                           hintText: "",
                           lableText: "الكود",
                           validator: (val) {
@@ -62,17 +69,19 @@ class RenewSubscriptionForm extends StatelessWidget {
               //
               //here the text field that will shown number of renew
               //
-              const CustomDisplyMany(
-                many: 101,
-                text: "رقم التسلسل",
-                textColor: ColorApp.thirdColor,
-              ),
+              // const CustomDisplyMany(
+              //   many: 101,
+              //   text: "رقم التسلسل",
+              //   textColor: ColorApp.thirdColor,
+              // ),
               const SizedBox(
                 height: 10,
               ),
               CustomeTextFormAuth(
                   hintText: "",
                   lableText: "اسم اللاعب",
+                  myController: controller.userName,
+                  isreadonly: true,
                   validator: (val) {
                     return validInput(val!, 5, 50, "username");
                   }),
@@ -96,8 +105,9 @@ class RenewSubscriptionForm extends StatelessWidget {
                   Expanded(
                     child: CustomDropDownMenu(
                       items: controller.trainerNameList,
-                      intialValue: controller.trainerNameList[0],
+                      intialValue: controller.trainerValue,
                       onChanged: (p0) {
+                         
                       },
                       label: "المدرب",
                     ),
@@ -111,18 +121,25 @@ class RenewSubscriptionForm extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Expanded(
-                    child: Directionality(
-                      textDirection: TextDirection.rtl,
-                      child: CustomDateField(
-                        label: "تاريخ النهاية",
-                        borderRadius: 15,
-                        fontSize: 15,
-                        width: 145,
-                        height: 50,
-                        iconSize: 20,
-                        isaccess: false,
-                      ),
-                    ),
+                    child: CustomeTextFormAuth(
+                      
+                       myController: controller.end,
+                       isreadonly: true,
+                        hintText: "",
+                        lableText: "تاريخ النهاية"),
+                    // child: Directionality(
+                    //   textDirection: TextDirection.rtl,
+                    //   child: CustomDateField(
+                    //     label: "تاريخ النهاية",
+                    //     borderRadius: 15,
+                    //     fontSize: 15,
+                    //     currentValue: controller.end,
+                    //     width: 145,
+                    //     height: 50,
+                    //     iconSize: 20,
+                    //     isaccess: false,
+                    //   ),
+                    // ),
                   ),
                   const SizedBox(
                     width: 20,
@@ -134,6 +151,9 @@ class RenewSubscriptionForm extends StatelessWidget {
                         label: "تاريخ البداية",
                         borderRadius: 15,
                         fontSize: 15,
+                        onChanged: (p0) {
+                          controller.setEndDate(p0!);
+                        },
                         width: 145,
                         height: 50,
                         iconSize: 20,
@@ -147,7 +167,7 @@ class RenewSubscriptionForm extends StatelessWidget {
               ),
               CustomDropDownMenu(
                 items: controller.subNameList,
-                intialValue: controller.subNameList[0],
+                intialValue: controller.subValue,
                 onChanged: (p0) {
                   controller.changemodel(p0!) ;
                 },
@@ -204,6 +224,9 @@ class RenewSubscriptionForm extends StatelessWidget {
                       myController: controller.descound,
                         hintText: "",
                         lableText: "الخصم",
+                        onChanged: (vla) {
+                          controller.calAfterDesc(vla);
+                        },
                         validator: (val) {
                           return validInput(val!, 5, 50, "username");
                         }),
@@ -236,6 +259,7 @@ class RenewSubscriptionForm extends StatelessWidget {
                         hintText: "",
                         lableText: "المدفوع",
                         mainText: Colors.red,
+                        onChanged:(val) => controller.calPayed(val),
                         validator: (val) {
                           return validInput(val!, 5, 50, "username");
                         }),
@@ -305,6 +329,7 @@ class RenewSubscriptionForm extends StatelessWidget {
                   ),
                   Expanded(
                     child: CustomeTextFormAuth(
+                      myController: controller.phone,
                         hintText: "",
                         lableText: "التلفون",
                         validator: (val) {
@@ -329,6 +354,18 @@ class RenewSubscriptionForm extends StatelessWidget {
                 height: 10,
               ),
               CustomeTextFormAuth(
+                myController: controller.preNote,
+                  hintText: "",
+                  lableText: "ملاحظات الللاعب",
+                  isreadonly: true,
+                  validator: (val) {
+                    return validInput(val!, 0, 50, "username");
+                  }),
+              const SizedBox(
+                height: 10,
+              ),
+              CustomeTextFormAuth(
+                myController: controller.note,
                   hintText: "",
                   lableText: "الملاحظات",
                   validator: (val) {
