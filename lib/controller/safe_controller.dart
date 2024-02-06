@@ -143,7 +143,6 @@ class SafeControllerImp extends SafeController {
 
   @override
   void addTrandsAction() async {
-    // /print("object");
     if (formKey.currentState!.validate()) 
     {
        statusRequs = StatusRequst.loading;

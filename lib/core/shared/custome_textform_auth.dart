@@ -12,6 +12,7 @@ class CustomeTextFormAuth extends StatelessWidget {
       this.myController,
        this.validator,
       this.onChanged,
+      this.isShowIcone =false,
       this.icone = Icons.power_off_rounded,
       this.isPhoneNumber = false,
       this.obscureText = false,
@@ -31,6 +32,7 @@ class CustomeTextFormAuth extends StatelessWidget {
   final String? Function(String?)? validator;
   final bool isPhoneNumber;
   final bool obscureText;
+  final bool isShowIcone ;
   final TextStyle? lableStyle;
   final double fontSize;
   final Color onfocuseColor;
@@ -103,10 +105,10 @@ class CustomeTextFormAuth extends StatelessWidget {
                   const BorderSide(color: Color.fromARGB(255, 170, 170, 170)),
               borderRadius: BorderRadius.circular(30)),
 
-          suffixIcon: ontap != null
+          suffixIcon: isShowIcone
               ? GestureDetector(
                   onTap: ontap,
-                  child: Icon(icone, color: Colors.white),
+                  child: Icon(icone, color: const Color.fromARGB(255, 0, 0, 0)),
                 )
               : null,
         ),

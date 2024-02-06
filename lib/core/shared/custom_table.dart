@@ -1,6 +1,5 @@
 import 'package:active_system/core/constant/styles.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 class CustomTable extends StatelessWidget {
   CustomTable({super.key, required this.columnsHeader, required this.rowInfo});
