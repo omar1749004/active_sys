@@ -1,5 +1,6 @@
 import 'package:active_system/core/constant/color.dart';
 import 'package:active_system/core/constant/styles.dart';
+import 'package:active_system/core/shared/ModernTable/custom_modern_table.dart';
 import 'package:active_system/core/shared/custom_Botton1.dart';
 import 'package:active_system/core/shared/custom_date_field.dart';
 import 'package:active_system/core/shared/custom_table.dart';
@@ -119,47 +120,79 @@ class _PlayersProfileViewState extends State<PlayersProfileView> {
                         Expanded(
                           flex: 5,
                           child: Container(
-                            decoration: BoxDecoration(
-                                border: Border.all(
-                                    color: const Color.fromARGB(
-                                        255, 231, 230, 230),
-                                    width: 5)),
-                            child: CustomTable(
-                              columnsHeader: const [
-                                Text("1"),
-                                Text("2"),
-                                Text("3"),
-                                Text("4"),
-                                Text("1"),
-                                Text("2"),
-                                Text("3"),
-                                Text("1"),
-                                Text("2"),
-                                Text("3"),
-                                Text("4"),
-                                Text("1"),
-                                Text("2"),
-                              ],
-                              rowInfo: const [
-                                'data11',
-                                "data12",
-                                "data13",
-                                "data14",
-                                'data11',
-                                "data12",
-                                "data13",
-                                "data13",
-                                "data14",
-                                'data11',
-                                "data13",
-                                "data14",
-                                'data11',
-                                "data13",
-                                "data14",
-                                'data11',
-                              ],
-                            ),
-                          ),
+                              decoration: BoxDecoration(
+                                  border: Border.all(
+                                      color: Color.fromARGB(255, 218, 218, 218),
+                                      width: 5)),
+                              child: CustomModernTable(
+                                data: [
+                                  [
+                                    "aaaaa",
+                                    "bbbbbb",
+                                    "cccccccc",
+                                    "qqqqqqqqqqqqq",
+                                    "eeeeeee",
+                                    "mmmmmmm"
+                                  ],
+                                  [
+                                    "aaaaa",
+                                    "bbbbbb",
+                                    "cccccccc",
+                                    "qqqqqqqqqqqqq",
+                                    "eeeeeee",
+                                    "mmmmmmm"
+                                  ],
+                                  [
+                                    "aaaaa",
+                                    "bbbbbb",
+                                    "cccccccc",
+                                    "qqqqqqqqqqqqq",
+                                    "eeeeeee",
+                                    "mmmmmmm"
+                                  ],
+                                  [
+                                    "aaaaa",
+                                    "bbbbbb",
+                                    "cccccccc",
+                                    "qqqqqqqqqqqqq",
+                                    "eeeeeee",
+                                    "mmmmmmm"
+                                  ],
+                                  [
+                                    "aaaaa",
+                                    "bbbbbb",
+                                    "cccccccc",
+                                    "qqqqqqqqqqqqq",
+                                    "eeeeeee",
+                                    "mmmmmmm"
+                                  ],
+                                  [
+                                    "aaaaa",
+                                    "bbbbbb",
+                                    "cccccccc",
+                                    "qqqqqqqqqqqqq",
+                                    "eeeeeee",
+                                    "mmmmmmm"
+                                  ],
+                                  [
+                                    "dddddddd",
+                                    "fffffffff",
+                                    "vvvvvvvvv",
+                                    "pppppp",
+                                    "ooooooooo",
+                                    "xxxxxxx"
+                                  ]
+                                ],
+                                widths: const [250, 250, 200, 200, 200, 100],
+                                header: const [
+                                  "ألاسم",
+                                  "ملاحظات",
+                                  "الرقم المسلسل",
+                                  "الكود",
+                                  "الكود",
+                                  "الكود"
+                                ],
+                              )),
                         ),
                         //
                         //second table
@@ -177,47 +210,95 @@ class _PlayersProfileViewState extends State<PlayersProfileView> {
                                     Expanded(
                                       flex: 4,
                                       child: Container(
-                                        decoration: BoxDecoration(
-                                            border: Border.all(
-                                                color: const Color.fromARGB(
-                                                    255, 231, 230, 230),
-                                                width: 10)),
-                                        child: CustomTable(
-                                          columnsHeader: const [
-                                            Text("1"),
-                                            Text("2"),
-                                            Text("3"),
-                                            Text("4"),
-                                            Text("1"),
-                                            Text("2"),
-                                            Text("3"),
-                                            Text("1"),
-                                            Text("2"),
-                                            Text("3"),
-                                            Text("4"),
-                                            Text("1"),
-                                            Text("2"),
-                                          ],
-                                          rowInfo: const [
-                                            'data11',
-                                            "data12",
-                                            "data13",
-                                            "data14",
-                                            'data11',
-                                            "data12",
-                                            "data13",
-                                            "data13",
-                                            "data14",
-                                            'data11',
-                                            "data13",
-                                            "data14",
-                                            'data11',
-                                            "data13",
-                                            "data14",
-                                            'data11',
-                                          ],
-                                        ),
-                                      ),
+                                          decoration: BoxDecoration(
+                                              border: Border.all(
+                                                  color: Color.fromARGB(
+                                                      255, 218, 218, 218),
+                                                  width: 10)),
+                                          child: CustomModernTable(
+                                            data: [
+                                              [
+                                                "aaaaa",
+                                                "bbbbbb",
+                                                "cccccccc",
+                                                "qqqqqqqqqqqqq",
+                                                "eeeeeee",
+                                                "mmmmmmm"
+                                              ],
+                                              [
+                                                "aaaaa",
+                                                "bbbbbb",
+                                                "cccccccc",
+                                                "qqqqqqqqqqqqq",
+                                                "eeeeeee",
+                                                "mmmmmmm"
+                                              ],
+                                              [
+                                                "aaaaa",
+                                                "bbbbbb",
+                                                "cccccccc",
+                                                "qqqqqqqqqqqqq",
+                                                "eeeeeee",
+                                                "mmmmmmm"
+                                              ],
+                                              [
+                                                "aaaaa",
+                                                "bbbbbb",
+                                                "cccccccc",
+                                                "qqqqqqqqqqqqq",
+                                                "eeeeeee",
+                                                "mmmmmmm"
+                                              ],
+                                              [
+                                                "aaaaa",
+                                                "bbbbbb",
+                                                "cccccccc",
+                                                "qqqqqqqqqqqqq",
+                                                "eeeeeee",
+                                                "mmmmmmm"
+                                              ],
+                                              [
+                                                "aaaaa",
+                                                "bbbbbb",
+                                                "cccccccc",
+                                                "qqqqqqqqqqqqq",
+                                                "eeeeeee",
+                                                "mmmmmmm"
+                                              ],
+                                              [
+                                                "aaaaa",
+                                                "bbbbbb",
+                                                "cccccccc",
+                                                "qqqqqqqqqqqqq",
+                                                "eeeeeee",
+                                                "mmmmmmm"
+                                              ],
+                                              [
+                                                "dddddddd",
+                                                "fffffffff",
+                                                "vvvvvvvvv",
+                                                "pppppp",
+                                                "ooooooooo",
+                                                "xxxxxxx"
+                                              ]
+                                            ],
+                                            widths: const [
+                                              250,
+                                              250,
+                                              200,
+                                              200,
+                                              200,
+                                              100
+                                            ],
+                                            header: const [
+                                              "ألاسم",
+                                              "ملاحظات",
+                                              "الرقم المسلسل",
+                                              "الكود",
+                                              "الكود",
+                                              "الكود"
+                                            ],
+                                          )),
                                     ),
                                   ],
                                 ),
