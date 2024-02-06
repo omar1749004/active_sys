@@ -1,12 +1,15 @@
-import 'package:active_system/core/constant/color.dart';
+
+import 'package:active_system/controller/safe_controller.dart';
 import 'package:active_system/core/constant/styles.dart';
 import 'package:active_system/core/shared/custom_Botton1.dart';
 import 'package:active_system/core/shared/custom_date_field.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-class CustomSearchDate extends StatelessWidget {
-  const CustomSearchDate({super.key});
-
+class CustomSearchDate extends GetView<SafeControllerImp> {
+  const CustomSearchDate({super.key,required this.color, this.ontap,});
+final Color color ;
+final void Function()? ontap ;
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -17,6 +20,10 @@ class CustomSearchDate extends StatelessWidget {
             width: 150,
             height: 30,
             icon: Icons.close,
+            onChanged: (p0) {
+              controller.endSearch =p0! ;
+              controller.dateSearch(controller.startSearch, controller.endSearch);
+            },
             iconSize: 15,
             fontSize: 15),
         const Text(
@@ -27,6 +34,10 @@ class CustomSearchDate extends StatelessWidget {
             width: 150,
             height: 30,
             icon: Icons.close,
+            onChanged: (p0) {
+              controller.startSearch =p0! ;
+              controller.dateSearch(controller.startSearch, controller.endSearch);
+            },
             iconSize: 15,
             fontSize: 15),
         const Text(
@@ -36,8 +47,8 @@ class CustomSearchDate extends StatelessWidget {
         SizedBox(
           child: CustomBotton1(
             text: "بحث",
-            ontap: () {},
-            color: ColorApp.kPrimaryColor,
+            ontap: ontap,
+            color: color,  
             marginBottom: 0,
             marginLeft: 0,
             marginRight: 0,

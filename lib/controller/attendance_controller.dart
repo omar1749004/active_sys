@@ -6,7 +6,7 @@ import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 
 abstract class AttendController extends GetxController {
   // void viewAll();
-  // void dateSearch(DateTime startD, DateTime endD);
+  void dateSearch(DateTime startD, DateTime endD);
   // void handlTable(bool isdate);
 }
 class AttendControllerImp extends AttendController{
@@ -29,7 +29,7 @@ class AttendControllerImp extends AttendController{
     @override
   void dateSearch(DateTime startD, DateTime endD) async {
     statusRequs = StatusRequst.loading;
-    print("object");
+   
     update();
     if (isdateSearch) {
       var res = await AttendData().dateSearch({
@@ -40,8 +40,7 @@ class AttendControllerImp extends AttendController{
         statusRequs = StatusRequst.failure;
       } else if (res["status"] == "success") {
         List data = res["data"];
-        // totalPlayer = res["moreInfo"][0]["totalPlayers"] ?? 0 ;
-        // print(totalPlayer);
+        totalPlayer = res["moreInfo"][0]["totalPlayers"] ?? 0 ;
         attendList = [] ;
         attendList.addAll(data.map((e) => AttendModel.fromJson(e)));
         
@@ -52,68 +51,56 @@ class AttendControllerImp extends AttendController{
     }
     update();
   }
-    // @override
-  // void viewAll() async{
-  //   statusRequs = StatusRequst.loading;
-  //    update();
-  //    var res = await RenewData().view();
-  //     if (res["status"] == "failure") {
-  //       statusRequs = StatusRequst.failure;
-  //     } else if (res["status"] == "success") {
-  //       List data = res["data"];
-  //       renewList = [] ;
-  //       renewList.addAll(data.map((e) => RenewModel.fromJson(e)));
-  //       statusRequs = StatusRequst.sucsess;
-  //     } else {
-  //       statusRequs = StatusRequst.failure;
-  //     }
-  //     update();
-  // }
-
-  // void checkSearch(String val)
-  // {
-  //   if(val.isEmpty)
-  //   {
-  //     statusRequs = StatusRequst.non;
-  //     isSearch =false;
-
-  //   }
-  //   else{
-  //     isSearch =true;
-  //     _search();
-  //   }
-  //   update();
-  // }
    
-  //   void _search() async{
-  //    statusRequs = StatusRequst.loading;
-  //    update();
-  //    var res = await RenewData().search(
-  //     {
-  //       "search": searchVal.text
-  //     }
-  //    );
-  //     if (res["status"] == "failure") {
-  //       statusRequs = StatusRequst.failure;
-  //     } else if (res["status"] == "success") {
-  //       List data = res["data"];
-  //       renewList = [] ;
-  //       renewList.addAll(data.map((e) => RenewModel.fromJson(e)));
-  //       statusRequs = StatusRequst.sucsess;
-  //     } else {
-  //       statusRequs = StatusRequst.failure;
-  //     }
-  //     update();
-  // }
-  //    @override
-  //   void handlTable(bool isdate) {
-  //   isdateSearch =  isdate ;
+   
+
+  void checkSearch(String val)
+  {
+    if(val.isEmpty)
+    {
+      statusRequs = StatusRequst.non;
+      isSearch =false;
+
+    }
+    else{
+      isSearch =true;
+      _search();
+    }
+    update();
+  }
+   
+    void _search() async{
+ statusRequs = StatusRequst.loading;
+     update();
+     
+     var res = await AttendData().search(
+      {
+        "search" : searchVal.text ,
+      }
+     );
+      if (res["status"] == "failure") {
+        statusRequs = StatusRequst.failure;
+      } else if (res["status"] == "success") {
+        List data = res["data"];
+        totalPlayer = res["moreInfo"][0]["totalPlayers"] ?? 0 ;
+        
+        attendList = [] ;
+        attendList.addAll(data.map((e) => AttendModel.fromJson(e)));
+        statusRequs = StatusRequst.sucsess;
+      } else {
+        statusRequs = StatusRequst.failure;
+      }
+      update();
+  }
+    //  @override
+    // void handlTable(bool isdate) {
+    // isdateSearch =  isdate ;
     
-  //   if(isdateSearch){
-  //    dateSearch(startSearch ,endSearch) ;
-  //   }else{
-  //     viewAll();
-  //   }
+    // if(isdateSearch){
+    //  dateSearch(startSearch ,endSearch) ;
+    // }else{
+    //   viewAll();
+    // }
     
   // }
   

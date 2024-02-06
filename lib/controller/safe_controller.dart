@@ -1,24 +1,172 @@
+import 'package:active_system/core/class/statuscode.dart';
+import 'package:active_system/data/models/safe_model.dart';
+import 'package:active_system/data/service/remote/safe_data.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:get/get.dart';
 
-// import 'package:active_system/data/service/remote/safe_data.dart';
+abstract class SafeController extends GetxController {
+  void dateSearch(DateTime startD, DateTime endD);
+  void viewAll();
+  void handlTable(bool isdate);
+  void changeSfarType(int type);
+  void validatenum(String mid);
+  String changeReson();
+  String changeDate();
+  void addTrandsAction();
+}
 
-// var res = await SafeData().add(
-//   {
-//     "reason": text,
-//     "incoming":  text,
-//     "outgoing": ,
-//     "adminId":  text,
-//     "type": ,
-//   },
-// );
+class SafeControllerImp extends SafeController {
+  StatusRequst statusRequs = StatusRequst.non;
+  GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  DateTime startSearch = DateTime.now();
+  DateTime endSearch = DateTime.now();
+  bool isdateSearch = true;
+  double toralSafe = 0;
+  double toralIncoming = 0;
+  double toralOutcoming = 0;
+  int typeOfSafe = 3;
 
+  List<SafeModel> safeList = [];
+  late TextEditingController reason;
+  late TextEditingController amount;
+  late TextEditingController adminName;
+  double incoming = 0;
+  double outgoing = 0;
 
+  @override
+  void onInit() {
+    reason = TextEditingController();
+    amount = TextEditingController();
+    adminName = TextEditingController();
+    adminName.text = "omar";
+    dateSearch(startSearch, endSearch);
+    super.onInit();
+  }
 
+  @override
+  void dateSearch(DateTime startD, DateTime endD) async {
+    statusRequs = StatusRequst.loading;
+    update();
+    if (isdateSearch) {
+      var res = await SafeData().dateSearch({
+        "start_date": startD.toString().substring(0,11),
+        "end_date": endD.toString().substring(0,11),
+      });
+      if (res["status"] == "failure") {
+        statusRequs = StatusRequst.failure;
+        toralIncoming = 0;
+        toralOutcoming = 0;
+        toralSafe = 0;
+      } else if (res["status"] == "success") {
+        List data = res["data"];
+        toralIncoming = double.parse(res["moreInfo"][0]["totalincoming"]);
+        toralOutcoming = double.parse(res["moreInfo"][0]["totalOutgioing"]);
+        toralSafe = toralIncoming - toralOutcoming;
+        safeList = [];
+        safeList.addAll(data.map((e) => SafeModel.fromJson(e)));
+        statusRequs = StatusRequst.sucsess;
+      } else {
+        statusRequs = StatusRequst.failure;
+      }
+    }
+    update();
+  }
 
-// var res = await SafeData().dateSearch(
-//   {
-//    "start_date": id,
-//    "end_date": id,
-//   }
-  
-// );
+  @override
+  void viewAll() async {
+    statusRequs = StatusRequst.loading;
+    update();
+    var res = await SafeData().view();
+    if (res["status"] == "failure") {
+      statusRequs = StatusRequst.failure;
+    } else if (res["status"] == "success") {
+      List data = res["data"];
+      toralIncoming = double.parse(res["moreInfo"]["totalincoming"]);
+      toralOutcoming = double.parse(res["moreInfo"]["totalOutgioing"]);
+      toralSafe = toralIncoming - toralOutcoming;
+      safeList = [];
+      safeList.addAll(data.map((e) => SafeModel.fromJson(e)));
+      statusRequs = StatusRequst.sucsess;
+    } else {
+      statusRequs = StatusRequst.failure;
+    }
+    update();
+  }
+
+  @override
+  void handlTable(bool isdate) {
+    isdateSearch = isdate;
+
+    if (isdateSearch) {
+      dateSearch(startSearch, endSearch);
+    } else {
+      viewAll();
+    }
+    update();
+  }
+
+  @override
+  void changeSfarType(int type) {
+    if (typeOfSafe != type) {
+      typeOfSafe = type;
+      incoming =0;
+      outgoing =0;
+      changeDate();
+      changeReson();
+      update();
+    }
+  }
+
+  @override
+  String changeDate() {
+    return typeOfSafe == 3 ? "تاريخ السحب" : "تاريخ الايداع";
+  }
+
+  @override
+  String changeReson() {
+    return typeOfSafe == 3 ? "سبب السحب" : "سبب الايداع";
+  }
+
+  @override
+  void validatenum(String mid) {
+    try {
+      if (typeOfSafe == 3) {
+        outgoing = double.parse(mid);
+      } else {
+        incoming = double.parse(mid);
+      }
+    } catch (e) {
+      amount.text = "";
+      update();
+    }
+  }
+
+  @override
+  void addTrandsAction() async {
+    // /print("object");
+    if (formKey.currentState!.validate()) 
+    {
+       statusRequs = StatusRequst.loading;
+      update();
+      var res = await SafeData().add(
+        {
+          "reason": reason.text,
+          "incoming": incoming.toString(),
+          "outgoing": outgoing.toString(),
+          "adminId": "1",
+          "type": typeOfSafe.toString(),
+        },
+      );
+      if (res["status"] == "failure") {
+        statusRequs = StatusRequst.failure;
+      } else if (res["status"] == "success") {
+        statusRequs = StatusRequst.sucsess;
+      } else {
+        statusRequs = StatusRequst.failure;
+      }
+
+    }
+    update();
+  }
+}
 

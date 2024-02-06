@@ -1,15 +1,15 @@
 class SafeModel {
-  int safeId;
-  String safeIncoming;
-  String safeOutgoing;
-  String safeDesc;
-  DateTime safeDate;
-  int safeType;
-  int safeAdminId;
-  String adminSysName;
-  String remaining;
-  String totalIncoming;
-  String totalOutgoing;
+  int? safeId;
+  String? safeIncoming;
+  String? safeOutgoing;
+  String ?safeDesc;
+  DateTime ?safeDate;
+  int? safeType;
+  int? safeAdminId;
+  String? adminSysName;
+  String? remaining;
+  String? totalIncoming;
+  String? totalOutgoing;
 
   SafeModel({
     required this.safeId,
