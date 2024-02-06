@@ -69,6 +69,7 @@ const String linkAttendanceDateSearch =
 const String linkSafeAdd = "$linkServerName/safe/add.php";
 const String linkSafeView = "$linkServerName/safe/view.php";
 const String linkSafeDateSearch = "$linkServerName/safe/date_search.php";
+const String linkSafeSearch = "$linkServerName/safe/search.php";
 //expenses
 const String linkExpensesAdd = "$linkServerName/expenses/add.php";
 const String linkExpensesEdit = "$linkServerName/expenses/edit.php";

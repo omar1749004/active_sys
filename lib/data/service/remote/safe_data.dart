@@ -17,7 +17,10 @@ class SafeData{
    dateSearch(Map data )async{
      var res =await Api().post(uri: linkSafeDateSearch, body: data);
     return res;
-    
+  }
+  search(Map data )async{
+     var res =await Api().post(uri: linkSafeSearch, body: data);
+    return res;
   }
 
 }

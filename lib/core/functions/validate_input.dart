@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 
 validInput(String val, int min, int max, String type) {
-  if (min == 0) {
+  if (min != 0) {
     if (val.isEmpty) {
       return "can't be Empty";
     }

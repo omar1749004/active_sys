@@ -1,23 +1,24 @@
+import 'package:active_system/controller/treasury_register_controller.dart';
 import 'package:active_system/core/constant/color.dart';
 import 'package:active_system/core/shared/ModernTable/custom_modern_table.dart';
 import 'package:active_system/core/shared/custom_app_bar.dart';
-import 'package:active_system/core/shared/custom_table.dart';
-import 'package:active_system/core/shared/custom_table_header.dart';
 import 'package:active_system/features/manage_subscriptions/view/widgets/custom_button.dart';
 import 'package:active_system/features/manage_subscriptions/view/widgets/custom_menu.dart';
 import 'package:active_system/features/safe/view/widget/custom_display_many.dart';
-import 'package:active_system/features/trainers/widgets/custom_input_form.dart';
 import 'package:active_system/features/treasury_register/widgets/treasury_register_form.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class TreasuryRegisterView extends StatelessWidget {
   const TreasuryRegisterView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final TextEditingController search = TextEditingController();
+    Get.put(TreasuryRegisterControllerImp());
     return Scaffold(
-      body: Column(
+      body:
+      GetBuilder<TreasuryRegisterControllerImp>(builder: (controller) => 
+       Column(
         children: [
           //
           //AppBar
@@ -141,16 +142,6 @@ class TreasuryRegisterView extends StatelessWidget {
                                     child: CustomDisplyMany(
                                         textColor: ColorApp.thirdColor,
                                         many: 10000,
-                                        text: "الاجمالى"),
-                                  ),
-                                ),
-                                Expanded(
-                                  child: Padding(
-                                    padding:
-                                        EdgeInsets.symmetric(horizontal: 5.0),
-                                    child: CustomDisplyMany(
-                                        textColor: ColorApp.thirdColor,
-                                        many: 10000,
                                         text: "الصافى"),
                                   ),
                                 ),
@@ -161,7 +152,17 @@ class TreasuryRegisterView extends StatelessWidget {
                                     child: CustomDisplyMany(
                                         textColor: ColorApp.thirdColor,
                                         many: 10000,
-                                        text: "الصافى"),
+                                        text: "الصادر"),
+                                  ),
+                                ),
+                                Expanded(
+                                  child: Padding(
+                                    padding:
+                                        EdgeInsets.symmetric(horizontal: 5.0),
+                                    child: CustomDisplyMany(
+                                        textColor: ColorApp.thirdColor,
+                                        many: 10000,
+                                        text: "الوارد"),
                                   ),
                                 ),
                               ],
@@ -178,14 +179,18 @@ class TreasuryRegisterView extends StatelessWidget {
                               children: [
                                 CustomButton(
                                   text: "تنفيذ",
-                                  ontap: () {},
+                                  ontap: () {
+                                    controller.makeSearch();
+                                  },
                                 ),
                                 const SizedBox(
                                   width: 15,
                                 ),
                                 CustomButton(
                                   text: "تنفيذ وطباعه",
-                                  ontap: () {},
+                                  ontap: () {
+                                    
+                                  },
                                 ),
                               ],
                             ),
@@ -227,7 +232,7 @@ class TreasuryRegisterView extends StatelessWidget {
             ),
           ),
         ],
-      ),
+      ),)
     );
   }
 }

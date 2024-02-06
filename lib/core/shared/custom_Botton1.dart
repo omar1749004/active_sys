@@ -11,7 +11,7 @@ class CustomBotton1 extends StatelessWidget {
       this.marginBottom = 0,
       this.marginRight = 20,
       this.marginLeft = 20});
-  final Function()? ontap;
+  final void Function()? ontap;
   final String text;
   final double hieght;
   final Color color;

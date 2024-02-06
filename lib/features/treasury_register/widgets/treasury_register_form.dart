@@ -1,3 +1,4 @@
+import 'package:active_system/controller/treasury_register_controller.dart';
 import 'package:active_system/core/constant/color.dart';
 import 'package:active_system/core/constant/styles.dart';
 import 'package:active_system/core/functions/validate_input.dart';
@@ -5,16 +6,13 @@ import 'package:active_system/core/shared/custom_date_field.dart';
 import 'package:active_system/core/shared/custom_dropdown_menu.dart';
 import 'package:active_system/core/shared/custome_textform_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-class TreasuryRegisterForm extends StatefulWidget {
+
+class TreasuryRegisterForm extends GetView<TreasuryRegisterControllerImp> {
+
   const TreasuryRegisterForm({super.key});
 
-  @override
-  State<TreasuryRegisterForm> createState() => _TreasuryRegisterFormState();
-}
-
-class _TreasuryRegisterFormState extends State<TreasuryRegisterForm> {
-  bool? _checkedValue = false;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -32,8 +30,10 @@ class _TreasuryRegisterFormState extends State<TreasuryRegisterForm> {
                   child: CustomDateField(
                       width: 300,
                       height: 40,
-                      icon: Icons.close,
                       iconSize: 18,
+                      onChanged: (p0) {
+                        controller.startSearch =p0! ;
+                      },
                       fontSize: 15),
                 ),
                 const SizedBox(
@@ -46,7 +46,7 @@ class _TreasuryRegisterFormState extends State<TreasuryRegisterForm> {
                         const EdgeInsets.symmetric(horizontal: 25, vertical: 5),
                     decoration: BoxDecoration(
                         border: Border.all(
-                            color: const Color.fromARGB(255, 170, 170, 170))),
+                        color: const Color.fromARGB(255, 170, 170, 170))),
                     child: const Text(
                       "من تاريخ",
                       style: TextStyle(
@@ -73,8 +73,10 @@ class _TreasuryRegisterFormState extends State<TreasuryRegisterForm> {
                   child: CustomDateField(
                       width: 300,
                       height: 40,
-                      icon: Icons.close,
                       iconSize: 18,
+                      onChanged: (p0) {
+                        controller.endSearch = p0! ;
+                      },
                       fontSize: 15),
                 ),
                 const SizedBox(
@@ -124,6 +126,7 @@ class _TreasuryRegisterFormState extends State<TreasuryRegisterForm> {
             ),
             CustomeTextFormAuth(
                 hintText: "",
+                myController: controller.reason,
                 lableText: "بحث (الوصف)",
                 validator: (val) {
                   return validInput(val!, 5, 50, "username");
@@ -140,6 +143,7 @@ class _TreasuryRegisterFormState extends State<TreasuryRegisterForm> {
             const SizedBox(
               height: 10,
             ),
+            GetBuilder<TreasuryRegisterControllerImp>(builder:(controller) => 
             CheckboxListTile(
               title: const Padding(
                 padding: EdgeInsets.only(left: 15),
@@ -148,13 +152,11 @@ class _TreasuryRegisterFormState extends State<TreasuryRegisterForm> {
                   style: Styles.style18B,
                 ),
               ),
-              value: _checkedValue,
+              value: controller.checkedValue,
               onChanged: (value) {
-                setState(() {
-                  _checkedValue = value;
-                });
+                controller.cnangeCheack(value!);
               },
-            ),
+            ),)
           ],
         ),
       ),

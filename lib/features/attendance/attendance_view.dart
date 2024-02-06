@@ -5,7 +5,6 @@ import 'package:active_system/core/shared/custom_Botton1.dart';
 import 'package:active_system/core/shared/custom_app_bar.dart';
 import 'package:active_system/core/shared/custom_date_field.dart';
 import 'package:active_system/core/shared/custom_dropdown_menu.dart';
-import 'package:active_system/core/shared/custom_table.dart';
 import 'package:active_system/core/shared/custom_table_header.dart';
 import 'package:active_system/features/manage_subscriptions/view/widgets/custom_button.dart';
 import 'package:active_system/features/manage_subscriptions/view/widgets/custom_menu.dart';
@@ -20,11 +19,11 @@ class AttendanceView extends StatelessWidget {
   Widget build(BuildContext context) {
     Get.put(AttendControllerImp());
     return Scaffold(
-      body: Column(children: [
+      body:GetBuilder<AttendControllerImp>(
+            builder: (controller) => Column(children: [
         const CustomAppBar(),
         Expanded(
-          child: GetBuilder<AttendControllerImp>(
-            builder: (controller) => Row(
+          child:  Row(
               children: [
                 //left menu
                 const CustomMenu(
@@ -44,7 +43,9 @@ class AttendanceView extends StatelessWidget {
                         //search bar
                         //
                         CustomTableHeader(
-                          onChanged: (p0) {},
+                          onChanged: (val) {
+                                controller.checkSearch(val);
+                          },
                           searchController: controller.searchVal,
                           header: "سجل الحضور ",
                         ),
@@ -112,7 +113,7 @@ class AttendanceView extends StatelessWidget {
                                 child: CustomBotton1(
                                   text: "بحث",
                                   ontap: () {},
-                                  color: ColorApp.kPrimaryColor,
+                                  color: ColorApp.onfoucosColor,
                                   marginBottom: 0,
                                   marginLeft: 0,
                                   marginRight: 0,
@@ -188,7 +189,7 @@ class AttendanceView extends StatelessWidget {
                                   "xxxxxxx"
                                 ]
                               ],
-                              widths: const [250, 250, 200, 200, 200, 100],
+                              widths: const [250, 250, 300, 300, 300, 100],
                               header: const [
                                 "ألاسم",
                                 "ملاحظات",
@@ -216,9 +217,9 @@ class AttendanceView extends StatelessWidget {
                                     width:
                                         MediaQuery.of(context).size.width * 0.2,
                                     height: 40,
-                                    child: const CustomDisplyMany(
+                                    child:  CustomDisplyMany(
                                         textColor: ColorApp.thirdColor,
-                                        many: 110,
+                                        many: double.parse(controller.totalPlayer.toString()),
                                         text: "عدد الاعبين"),
                                   ),
                                 ],
@@ -258,8 +259,8 @@ class AttendanceView extends StatelessWidget {
               ],
             ),
           ),
-        )
-      ]),
+        ]),
+    ),
     );
   }
 }

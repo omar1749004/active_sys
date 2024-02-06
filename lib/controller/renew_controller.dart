@@ -213,7 +213,7 @@ class RenewControllerImp extends RenewController {
         renewUser = RenewModel.fromJson(res["data"]);
         userName.text = renewUser.usersName!;
         phone.text = renewUser.usersPhone!;
-        preNote.text == renewUser.renewalNote ?? " ";
+        preNote.text = renewUser.renewalNote ?? " ";
 
         if (renewUser.subscriptionsName != Null) {
           for (int i = 0; i < subNameList.length; i++) {
@@ -240,7 +240,6 @@ class RenewControllerImp extends RenewController {
     update();
     String offe = _getDesc();
     String ow = _getowed();
-    try {
       var res = await RenewData().add({
         "userid": renewUser.usersId.toString(),
         "name": renewUser.usersName,
@@ -262,9 +261,7 @@ class RenewControllerImp extends RenewController {
       } else {
         statusRequs = StatusRequst.failure;
       }
-    } catch (e) {
-      print(e);
-    }
+
     update();
   }
 
@@ -292,8 +289,8 @@ class RenewControllerImp extends RenewController {
     update();
     if (isdateSearch) {
       var res = await RenewData().dateSearch({
-        "start_date": startD.toString(),
-        "end_date": endD.toString(),
+        "start_date": startD.toString().substring(0,11),
+        "end_date": endD.toString().substring(0,11),
       });
       if (res["status"] == "failure") {
         statusRequs = StatusRequst.failure;
