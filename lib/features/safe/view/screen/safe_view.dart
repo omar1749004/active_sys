@@ -1,6 +1,7 @@
 import 'package:active_system/core/constant/color.dart';
 import 'package:active_system/core/constant/styles.dart';
 import 'package:active_system/core/functions/validate_input.dart';
+import 'package:active_system/core/shared/ModernTable/custom_modern_table.dart';
 import 'package:active_system/core/shared/custom_app_bar.dart';
 import 'package:active_system/core/shared/custom_table.dart';
 import 'package:active_system/core/shared/custome_textform_auth.dart';
@@ -45,9 +46,78 @@ class SafeView extends StatelessWidget {
                           //
                           Expanded(
                             flex: 6,
-                            child: CustomTable(
-                                columnsHeader: safeHeaderTable,
-                                rowInfo: const []),
+                            child: Container(
+                              color: Color.fromARGB(255, 218, 218, 218),
+                              child: CustomModernTable(
+                                data: [
+                                  [
+                                    "aaaaa",
+                                    "bbbbbb",
+                                    "cccccccc",
+                                    "qqqqqqqqqqqqq",
+                                    "eeeeeee",
+                                    "mmmmmmm"
+                                  ],
+                                  [
+                                    "aaaaa",
+                                    "bbbbbb",
+                                    "cccccccc",
+                                    "qqqqqqqqqqqqq",
+                                    "eeeeeee",
+                                    "mmmmmmm"
+                                  ],
+                                  [
+                                    "aaaaa",
+                                    "bbbbbb",
+                                    "cccccccc",
+                                    "qqqqqqqqqqqqq",
+                                    "eeeeeee",
+                                    "mmmmmmm"
+                                  ],
+                                  [
+                                    "aaaaa",
+                                    "bbbbbb",
+                                    "cccccccc",
+                                    "qqqqqqqqqqqqq",
+                                    "eeeeeee",
+                                    "mmmmmmm"
+                                  ],
+                                  [
+                                    "aaaaa",
+                                    "bbbbbb",
+                                    "cccccccc",
+                                    "qqqqqqqqqqqqq",
+                                    "eeeeeee",
+                                    "mmmmmmm"
+                                  ],
+                                  [
+                                    "aaaaa",
+                                    "bbbbbb",
+                                    "cccccccc",
+                                    "qqqqqqqqqqqqq",
+                                    "eeeeeee",
+                                    "mmmmmmm"
+                                  ],
+                                  [
+                                    "dddddddd",
+                                    "fffffffff",
+                                    "vvvvvvvvv",
+                                    "pppppp",
+                                    "ooooooooo",
+                                    "xxxxxxx"
+                                  ]
+                                ],
+                                widths: const [250, 250, 200, 200, 200, 100],
+                                header: const [
+                                  "ألاسم",
+                                  "ملاحظات",
+                                  "الرقم المسلسل",
+                                  "الكود",
+                                  "الكود",
+                                  "الكود"
+                                ],
+                              ),
+                            ),
                           ),
                           Expanded(child: Container())
                           //buttons

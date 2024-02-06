@@ -1,4 +1,5 @@
 import 'package:active_system/core/constant/color.dart';
+import 'package:active_system/core/shared/ModernTable/custom_modern_table.dart';
 import 'package:active_system/core/shared/custom_app_bar.dart';
 import 'package:active_system/core/shared/custom_table.dart';
 import 'package:active_system/core/shared/custom_table_header.dart';
@@ -52,38 +53,78 @@ class TreasuryRegisterView extends StatelessWidget {
                           //
                           Expanded(
                             flex: 11,
-                            child: CustomTable(columnsHeader: const [
-                              Text("1"),
-                              Text("2"),
-                              Text("3"),
-                              Text("4"),
-                              Text("1"),
-                              Text("2"),
-                              Text("3"),
-                              Text("1"),
-                              Text("2"),
-                              Text("3"),
-                              Text("4"),
-                              Text("1"),
-                              Text("2"),
-                            ], rowInfo: const [
-                              'data11',
-                              "data12",
-                              "data13",
-                              "data14",
-                              'data11',
-                              "data12",
-                              "data13",
-                              "data13",
-                              "data14",
-                              'data11',
-                              "data13",
-                              "data14",
-                              'data11',
-                              "data13",
-                              "data14",
-                              'data11',
-                            ]),
+                            child: Container(
+                              color: Color.fromARGB(255, 218, 218, 218),
+                              child: CustomModernTable(
+                                data: [
+                                  [
+                                    "aaaaa",
+                                    "bbbbbb",
+                                    "cccccccc",
+                                    "qqqqqqqqqqqqq",
+                                    "eeeeeee",
+                                    "mmmmmmm"
+                                  ],
+                                  [
+                                    "aaaaa",
+                                    "bbbbbb",
+                                    "cccccccc",
+                                    "qqqqqqqqqqqqq",
+                                    "eeeeeee",
+                                    "mmmmmmm"
+                                  ],
+                                  [
+                                    "aaaaa",
+                                    "bbbbbb",
+                                    "cccccccc",
+                                    "qqqqqqqqqqqqq",
+                                    "eeeeeee",
+                                    "mmmmmmm"
+                                  ],
+                                  [
+                                    "aaaaa",
+                                    "bbbbbb",
+                                    "cccccccc",
+                                    "qqqqqqqqqqqqq",
+                                    "eeeeeee",
+                                    "mmmmmmm"
+                                  ],
+                                  [
+                                    "aaaaa",
+                                    "bbbbbb",
+                                    "cccccccc",
+                                    "qqqqqqqqqqqqq",
+                                    "eeeeeee",
+                                    "mmmmmmm"
+                                  ],
+                                  [
+                                    "aaaaa",
+                                    "bbbbbb",
+                                    "cccccccc",
+                                    "qqqqqqqqqqqqq",
+                                    "eeeeeee",
+                                    "mmmmmmm"
+                                  ],
+                                  [
+                                    "dddddddd",
+                                    "fffffffff",
+                                    "vvvvvvvvv",
+                                    "pppppp",
+                                    "ooooooooo",
+                                    "xxxxxxx"
+                                  ]
+                                ],
+                                widths: const [250, 250, 200, 200, 200, 100],
+                                header: const [
+                                  "ألاسم",
+                                  "ملاحظات",
+                                  "الرقم المسلسل",
+                                  "الكود",
+                                  "الكود",
+                                  "الكود"
+                                ],
+                              ),
+                            ),
                           ),
                           //
                           //data of table

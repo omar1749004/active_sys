@@ -1,20 +1,26 @@
+import 'package:active_system/core/shared/global_variable.dart';
 import 'package:active_system/core/shared/ModernTable/custom_row_table.dart';
 import 'package:flutter/material.dart';
 
-final ScrollController hscrollController = ScrollController();
-final ScrollController vscrollController = ScrollController();
-
-class CustomModernTable extends StatelessWidget {
-  const CustomModernTable(
-      {super.key,
-      required this.data,
-      required this.widths,
-      required this.header});
+class CustomModernTable extends StatefulWidget {
+  const CustomModernTable({
+    super.key,
+    required this.data,
+    required this.widths,
+    required this.header,
+  });
 
   final List<List<String>> data;
   final List<double> widths;
   final List<String> header;
 
+  @override
+  State<CustomModernTable> createState() => _CustomModernTableState();
+}
+
+class _CustomModernTableState extends State<CustomModernTable> {
+  final ScrollController hscrollController = ScrollController();
+  final ScrollController vscrollController = ScrollController();
   @override
   Widget build(BuildContext context) {
     return Directionality(
@@ -39,16 +45,18 @@ class CustomModernTable extends StatelessWidget {
               child: Column(
                 children: [
                   CustomRowTable(
-                    dataCell: header,
-                    widths: widths,
+                    dataCell: widget.header,
+                    widths: widget.widths,
                     isPressed: false,
                     align: Alignment.center,
                   ),
                   Column(
                     children: List.generate(
-                        data.length,
+                        widget.data.length,
                         (index) => CustomRowTable(
-                            dataCell: data[index], widths: widths)),
+                              dataCell: widget.data[index],
+                              widths: widget.widths,
+                            )),
                   ),
                 ],
               ),

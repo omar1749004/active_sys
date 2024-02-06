@@ -1,3 +1,4 @@
+import 'package:active_system/core/shared/global_variable.dart';
 import 'package:active_system/core/shared/ModernTable/custom_modern_table.dart';
 import 'package:active_system/core/shared/custom_app_bar.dart';
 import 'package:active_system/core/shared/custom_table_header.dart';
@@ -60,10 +61,69 @@ class ManageSubscriptionsView extends StatelessWidget {
                           //table that contains data
                           //
                           Expanded(
-                              flex: 6,
+                            flex: 6,
+                            child: Container(
+                              color: Color.fromARGB(255, 218, 218, 218),
                               child: CustomModernTable(
-                                data: [],
-                                widths: const [250, 250, 100, 100, 100, 100],
+                                data: [
+                                  [
+                                    "aaaaa",
+                                    "bbbbbb",
+                                    "cccccccc",
+                                    "qqqqqqqqqqqqq",
+                                    "eeeeeee",
+                                    "mmmmmmm"
+                                  ],
+                                  [
+                                    "aaaaa",
+                                    "bbbbbb",
+                                    "cccccccc",
+                                    "qqqqqqqqqqqqq",
+                                    "eeeeeee",
+                                    "mmmmmmm"
+                                  ],
+                                  [
+                                    "aaaaa",
+                                    "bbbbbb",
+                                    "cccccccc",
+                                    "qqqqqqqqqqqqq",
+                                    "eeeeeee",
+                                    "mmmmmmm"
+                                  ],
+                                  [
+                                    "aaaaa",
+                                    "bbbbbb",
+                                    "cccccccc",
+                                    "qqqqqqqqqqqqq",
+                                    "eeeeeee",
+                                    "mmmmmmm"
+                                  ],
+                                  [
+                                    "aaaaa",
+                                    "bbbbbb",
+                                    "cccccccc",
+                                    "qqqqqqqqqqqqq",
+                                    "eeeeeee",
+                                    "mmmmmmm"
+                                  ],
+                                  [
+                                    "aaaaa",
+                                    "bbbbbb",
+                                    "cccccccc",
+                                    "qqqqqqqqqqqqq",
+                                    "eeeeeee",
+                                    "mmmmmmm"
+                                  ],
+                                  [
+                                    "dddddddd",
+                                    "fffffffff",
+                                    "vvvvvvvvv",
+                                    "pppppp",
+                                    "ooooooooo",
+                                    "xxxxxxx"
+                                  ]
+                                ],
+                                widths: const [250, 250, 200, 200, 200, 100],
                                 header: const [
                                   "ألاسم",
                                   "ملاحظات",
@@ -72,7 +132,9 @@ class ManageSubscriptionsView extends StatelessWidget {
                                   "الكود",
                                   "الكود"
                                 ],
-                              )),
+                              ),
+                            ),
+                          ),
                           //
                           //buttons
                           //
