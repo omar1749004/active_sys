@@ -1,10 +1,8 @@
+import 'package:active_system/controller/home_controller.dart';
 import 'package:active_system/core/constant/styles.dart';
 import 'package:active_system/core/shared/ModernTable/custom_modern_table.dart';
 import 'package:active_system/core/shared/custom_app_bar.dart';
-import 'package:active_system/core/shared/custom_table.dart';
 import 'package:active_system/core/shared/custom_table_header.dart';
-import 'package:active_system/features/home/controller/home_controller.dart';
-import 'package:active_system/features/home/data/service/static/header_table.dart';
 import 'package:active_system/features/home/data/service/static/note_knoladge.dart';
 import 'package:active_system/features/home/view/widget/client_info.dart';
 import 'package:active_system/features/manage_subscriptions/view/widgets/custom_menu.dart';
@@ -16,9 +14,9 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Get.put(HomeController());
+    Get.put(HomeControllerImp());
     return Scaffold(
-      body: GetBuilder<HomeController>(
+      body: GetBuilder<HomeControllerImp>(
         builder: (controller) => Column(
           children: [
             const CustomAppBar(),
@@ -42,6 +40,9 @@ class HomePage extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.end,
                               children: [
                                 CustomTableHeader(
+                                  onChanged: (p0) {
+                                    controller.searchFun();
+                                  },
                                     searchController: controller.search,
                                     header: "سجل الحضور اليومي"),
                                 Expanded(
