@@ -10,9 +10,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 abstract class AdminController extends GetxController {
-  // void addAdmin();
   void showPassword();
-  IconData changeIcone();
+  void changeIcone();
   void getPowers();
   void organizePowers();
   void handleselectPoewr(int power, bool isSelect);
@@ -34,7 +33,7 @@ class AdminControllerImp extends AdminController {
   IconData icone = CupertinoIcons.eye_slash;
   List<int> selectpowerList = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14];
   Map<int, List<int>> powersMap = {};
-  GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  GlobalKey<FormState> formAdminKey = GlobalKey<FormState>();
   @override
   void onInit() {
     search = TextEditingController();
@@ -53,9 +52,9 @@ class AdminControllerImp extends AdminController {
   }
 
   @override
-  IconData changeIcone() {
+  void changeIcone() {
+  icone = isHidepass ? CupertinoIcons.eye_slash : CupertinoIcons.eye;
     update();
-    return icone = isHidepass ? CupertinoIcons.eye_slash : CupertinoIcons.eye;
   }
 
   @override
@@ -124,7 +123,7 @@ class AdminControllerImp extends AdminController {
 
   @override
   void addAdmin() async {
-    if (formKey.currentState!.validate()) {
+     if (formAdminKey.currentState!.validate()) {
       if(pass.text!=repass.text)
       {
        Get.defaultDialog(

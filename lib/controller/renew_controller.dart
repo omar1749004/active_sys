@@ -69,7 +69,6 @@ class RenewControllerImp extends RenewController {
     userName = TextEditingController();
     phone = TextEditingController();
     preNote = TextEditingController();
-
     sessionNum = TextEditingController();
     dayNum = TextEditingController();
     price = TextEditingController();

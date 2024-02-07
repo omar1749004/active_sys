@@ -258,7 +258,7 @@ class RenewSubscriptionForm extends StatelessWidget {
                       myController: controller.amount,
                         hintText: "",
                         lableText: "المدفوع",
-                        mainText: Colors.red,
+                        mainTextColor: Colors.red,
                         onChanged:(val) => controller.calPayed(val),
                         validator: (val) {
                           return validInput(val!, 5, 50, "username");

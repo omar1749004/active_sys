@@ -305,6 +305,7 @@ class SafeView extends StatelessWidget {
                       ),
                     ),
                   )
+            
                 ],
               ),
             ),

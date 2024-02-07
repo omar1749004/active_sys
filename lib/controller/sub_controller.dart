@@ -1,6 +1,248 @@
-// import 'package:active_system/data/service/remote/sub_data.dart';
+import 'package:active_system/core/class/statuscode.dart';
+import 'package:active_system/data/models/sub_mode.dart';
+import 'package:active_system/data/service/remote/sub_data.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:get/get.dart';
 
+abstract class MangeSubController extends GetxController {
+  void handlePrice();
+  void handleFrezzDay();
+  void handleDay();
+  void handleSessionsNumber();
+  void handleFrezzNumber();
+  void handleMaxFrezzDay();
+  void handleInvitationsNumber();
+  void handleMaxInvitation();
+  void handleServiceNumber();
+  void handleMaxService();
+  void handleAllowedNumber();
+  void addSub();
+  void viewAll();
+  void assignModel(SubscriptionModel privetModel);
+}
 
+class MangeSubControllerImp extends MangeSubController {
+  StatusRequst statusRequs = StatusRequst.non;
+  GlobalKey<FormState> formKey = GlobalKey<FormState>();
+
+  List<SubscriptionModel> sunList = [];
+  late SubscriptionModel submodel;
+
+  late TextEditingController name;
+  late TextEditingController type;
+  late TextEditingController specialization;
+  late TextEditingController price;
+  late TextEditingController day;
+  late TextEditingController sessionsNumber;
+  late TextEditingController frezzDay;
+  late TextEditingController frezzNumber;
+  late TextEditingController maxFrezzDay;
+  late TextEditingController invitationsNumber;
+  late TextEditingController maxInvitation;
+  late TextEditingController serviceNumber;
+  late TextEditingController maxService;
+  late TextEditingController allowedNumber;
+  late TextEditingController notes;
+  late TextEditingController search;
+
+  @override
+  void onInit() {
+    name = TextEditingController();
+    type = TextEditingController();
+    specialization = TextEditingController();
+    price = TextEditingController();
+    day = TextEditingController();
+    sessionsNumber = TextEditingController();
+    frezzDay = TextEditingController();
+    frezzNumber = TextEditingController();
+    maxFrezzDay = TextEditingController();
+    invitationsNumber = TextEditingController();
+    maxInvitation = TextEditingController();
+    serviceNumber = TextEditingController();
+    maxService = TextEditingController();
+    allowedNumber = TextEditingController();
+    notes = TextEditingController();
+    search = TextEditingController();
+
+    specialization.text = "عام";
+    price.text = "0";
+    day.text = "0";
+    sessionsNumber.text = "0";
+    frezzDay.text = "0";
+    frezzNumber.text = "0";
+    maxFrezzDay.text = "0";
+    invitationsNumber.text = "0";
+    maxInvitation.text = "0";
+    serviceNumber.text = "0";
+    maxService.text = "0";
+    allowedNumber.text = "0";
+    notes.text = "0";
+     viewAll();
+    super.onInit();
+  }
+
+  @override
+  void addSub() async {
+    if (formKey.currentState!.validate()) {
+      statusRequs = StatusRequst.loading;
+      update();
+      var res = await SubData().add(
+        {
+          "name": name.text,
+          "type": "0",
+          "specialization": "0",
+          "price": price.text,
+          "day": day.text,
+          "sessions_number": sessionsNumber.text,
+          "frezz_day": frezzDay.text,
+          "frezz_number": frezzNumber.text,
+          "max_frezz_day": maxFrezzDay.text,
+          "invitations_number": invitationsNumber.text,
+          "max_invitation": maxInvitation.text,
+          "service_number": serviceNumber.text,
+          "max_service": maxService.text,
+          "allowed_number": allowedNumber.text,
+          "notes": notes.text,
+        },
+      );
+      if (res["status"] == "failure") {
+        statusRequs = StatusRequst.failure;
+      } else if (res["status"] == "success") {
+        statusRequs = StatusRequst.sucsess;
+      } else {
+        statusRequs = StatusRequst.failure;
+      }
+    }
+    update();
+  }
+
+ @override
+ void assignModel(SubscriptionModel privetModel){
+    
+    name.text = privetModel.subscriptionsName ;
+    type.text = privetModel.subscriptionsType.toString() ;
+    price.text = privetModel.subscriptionsPrice.toString();
+    day.text =  privetModel.subscriptionsDay.toString();
+    sessionsNumber.text = privetModel.subscriptionsSessionsNumber.toString();
+    frezzDay.text = privetModel.subscriptionsFrezzDay.toString();
+    frezzNumber.text = privetModel.subscriptionsFrezzNumber.toString();
+    maxFrezzDay.text = privetModel.subscriptionsMaxFrezzDay.toString();
+    invitationsNumber.text = privetModel.subscriptionsInvitationsNumber.toString();
+    maxInvitation.text = privetModel.subscriptionsMaxInvitation.toString();
+    serviceNumber.text = privetModel.subscriptionsServiceNumber.toString();
+    maxService.text = privetModel.subscriptionsMaxService.toString();
+    allowedNumber.text = privetModel.subscriptionsAllowedNumber.toString();
+    notes.text = privetModel.subscriptionsNotes.toString();
+    
+ }
+
+   @override
+  void viewAll() async {
+    statusRequs = StatusRequst.loading;
+    update();
+    var res = await SubData().view();
+    if (res["status"] == "failure") {
+      statusRequs = StatusRequst.failure;
+    } else if (res["status"] == "success") {
+      List data = res["data"];
+      sunList = [];
+      sunList.addAll(data.map((e) => SubscriptionModel.fromJson(e)));
+      
+      statusRequs = StatusRequst.sucsess;
+    } else {
+      statusRequs = StatusRequst.failure;
+    }
+    update();
+  }
+
+  @override
+  void handleAllowedNumber() {
+    int? mid = int.tryParse(allowedNumber.text);
+    if (mid == null) {
+      allowedNumber.text = "0";
+    }
+  }
+
+  @override
+  void handleDay() {
+    int? mid = int.tryParse(day.text);
+    if (mid == null) {
+      day.text = "0";
+    }
+  }
+
+  @override
+  void handleFrezzDay() {
+    int? mid = int.tryParse(frezzDay.text);
+    if (mid == null) {
+      frezzDay.text = "0";
+    }
+  }
+
+  @override
+  void handleFrezzNumber() {
+    int? mid = int.tryParse(frezzNumber.text);
+    if (mid == null) {
+      frezzNumber.text = "0";
+    }
+  }
+
+  @override
+  void handleInvitationsNumber() {
+    int? mid = int.tryParse(invitationsNumber.text);
+    if (mid == null) {
+      invitationsNumber.text = "0";
+    }
+  }
+
+  @override
+  void handleMaxFrezzDay() {
+    int? mid = int.tryParse(maxFrezzDay.text);
+    if (mid == null) {
+      maxFrezzDay.text = "0";
+    }
+  }
+
+  @override
+  void handleMaxInvitation() {
+    int? mid = int.tryParse(maxInvitation.text);
+    if (mid == null) {
+      maxInvitation.text = "0";
+    }
+  }
+
+  @override
+  void handleMaxService() {
+    int? mid = int.tryParse(maxService.text);
+    if (mid == null) {
+      maxService.text = "0";
+    }
+  }
+
+  @override
+  void handlePrice() {
+    double? mid = double.tryParse(price.text);
+    if (mid == null) {
+      price.text = "0";
+    }
+  }
+
+  @override
+  void handleServiceNumber() {
+    double? mid = double.tryParse(serviceNumber.text);
+    if (mid == null) {
+      serviceNumber.text = "0";
+    }
+  }
+
+  @override
+  void handleSessionsNumber() {
+    double? mid = double.tryParse(sessionsNumber.text);
+    if (mid == null) {
+      sessionsNumber.text = "0";
+    }
+  }
+}
 // void a() async {
 //   var res = await SubData().view();
 //   print(res.toString());

@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 
 validInput(String val, int min, int max, String type) {
+
   if (min != 0) {
     if (val.isEmpty) {
       return "can't be Empty";
@@ -22,8 +23,10 @@ validInput(String val, int min, int max, String type) {
       }
     }
     if (type == "num") {
-      if (!GetUtils.isNum(val)) {
-        return "not valid age";
+        int valid = int.tryParse(val)! ;
+        
+      if (!GetUtils.isNum(val) ||  valid < 1) {
+        return "غير متاح ادخال 0";
       }
     }
 
