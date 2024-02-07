@@ -1,3 +1,4 @@
+
 import 'package:active_system/controller/admin_controller.dart';
 import 'package:active_system/core/constant/styles.dart';
 import 'package:active_system/core/functions/validate_input.dart';
@@ -159,11 +160,11 @@ class UsersView extends StatelessWidget {
                     child: Padding(
                       padding: const EdgeInsets.all(15),
                       child: Form(
-                        key: controller.formKey,
+                        key: controller.formAdminKey,
                         child: ListView(
                           children: [
                             Text(
-                              "بيانات المستخدم",
+                              "بيانات المستخدم",textAlign: TextAlign.center,
                               style: Styles.style23,
                             ),
                             CustomeTextFormAuth(
@@ -203,9 +204,11 @@ class UsersView extends StatelessWidget {
                                 isShowIcone: true,
                                 myController: controller.pass,
                                 ontap:() {
-                                  controller.showPassword();},
+                                  controller.showPassword();
+                                  controller.changeIcone();
+                                  },
                                 lableText: "كلمة السر",
-                                icone: controller.changeIcone(),
+                                icone: controller.icone,
                                 obscureText: controller.isHidepass,
                                 validator: (val) {
                                   return validInput(val!, 5, 50, "");

@@ -1,22 +1,27 @@
-import 'package:active_system/core/shared/global_variable.dart';
+
+import 'package:active_system/controller/sub_controller.dart';
 import 'package:active_system/core/shared/ModernTable/custom_modern_table.dart';
 import 'package:active_system/core/shared/custom_app_bar.dart';
 import 'package:active_system/core/shared/custom_table_header.dart';
-import 'package:active_system/data/models/sub_mode.dart';
 import 'package:active_system/features/manage_subscriptions/view/widgets/custom_button.dart';
 import 'package:active_system/features/manage_subscriptions/view/widgets/custom_input_form.dart';
 import 'package:active_system/features/manage_subscriptions/view/widgets/custom_menu.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class ManageSubscriptionsView extends StatelessWidget {
   ManageSubscriptionsView({super.key});
 
-  final TextEditingController search = TextEditingController();
+
 
   @override
   Widget build(BuildContext context) {
+    Get.put(MangeSubControllerImp());
+
     return Scaffold(
-      body: Column(
+      body: 
+      GetBuilder<MangeSubControllerImp>(builder: (controller) => 
+      Column(
         children: [
           //
           //AppBar
@@ -28,7 +33,9 @@ class ManageSubscriptionsView extends StatelessWidget {
           Expanded(
             child: SizedBox(
               width: MediaQuery.of(context).size.width,
-              child: Row(
+              child:
+              
+               Row(
                 children: [
                   //
                   //left menu
@@ -53,7 +60,7 @@ class ManageSubscriptionsView extends StatelessWidget {
                           SizedBox(
                             width: MediaQuery.of(context).size.width * 0.5,
                             child: CustomTableHeader(
-                              searchController: search,
+                              searchController: controller.search,
                               header: "",
                             ),
                           ),
@@ -146,7 +153,9 @@ class ManageSubscriptionsView extends StatelessWidget {
                               children: [
                                 CustomButton(
                                   text: "أضافه",
-                                  ontap: () {},
+                                  ontap: () {
+                                    controller.addSub();
+                                  },
                                 ),
                                 CustomButton(
                                   text: "تعديل",
@@ -163,11 +172,12 @@ class ManageSubscriptionsView extends StatelessWidget {
                               ],
                             ),
                           ),
+                       
                         ],
                       ),
                     ),
                   ),
-                  //
+                  
                   //form input right screen
                   //
                   Expanded(
@@ -194,11 +204,13 @@ class ManageSubscriptionsView extends StatelessWidget {
                       child: const SubscriptionForm(),
                     ),
                   )
+                
                 ],
-              ),
+             
+              )
+              ,)
             ),
-          ),
-        ],
+        ],)
       ),
     );
   }

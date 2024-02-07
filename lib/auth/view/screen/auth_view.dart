@@ -59,7 +59,7 @@ class AuthView extends StatelessWidget {
                 myController: controller.name,
                 hintColor: Colors.white,
                 cursorColor: Colors.white,
-                mainText: Colors.white,
+                mainTextColor: Colors.white,
               ),
               const SizedBox(
                 height: 20,
@@ -79,7 +79,7 @@ class AuthView extends StatelessWidget {
                 myController: controller.password,
                 hintColor: Colors.white,
                 obscureText: controller.isHidepass,
-                 mainText: Colors.white,
+                 mainTextColor: Colors.white,
                  cursorColor: Colors.white,
               ),
                const SizedBox(

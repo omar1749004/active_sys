@@ -20,7 +20,7 @@ const List<String> serviceId = [
   "RenewSybscriptionsView",
   "TrainersView",
   "usersid",
-  "safeid",
+  "safeciew",
   "ManageCostView",
   "PlayersProfileView",
   "AttendanceView",
