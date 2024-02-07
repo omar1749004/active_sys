@@ -1,13 +1,12 @@
-import 'package:active_system/core/constant/color.dart';
+import 'package:active_system/controller/home_controller.dart';
 import 'package:active_system/core/constant/styles.dart';
-import 'package:active_system/features/home/controller/home_controller.dart';
 import 'package:active_system/features/home/data/service/static/sup_type.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class CustomBottoms extends GetView<HomeController> {
-  const CustomBottoms({super.key});
-
+class CustomBottoms extends GetView<HomeControllerImp> {
+  const CustomBottoms({required this.color, super.key});
+ final Color color ;
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -21,9 +20,7 @@ class CustomBottoms extends GetView<HomeController> {
         itemBuilder: (context, index) => Container(
           margin: const EdgeInsets.symmetric(vertical: 10),
           child: MaterialButton(
-            color: controller.supType == index
-                ? ColorApp.onfoucosColor
-                : ColorApp.kPrimaryColor,
+            color: color,
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
             onPressed: () {

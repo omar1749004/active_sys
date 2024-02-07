@@ -214,7 +214,7 @@ class RenewControllerImp extends RenewController {
         phone.text = renewUser.usersPhone!;
         preNote.text = renewUser.renewalNote ?? " ";
 
-        if (renewUser.subscriptionsName != Null) {
+        if (renewUser.subscriptionsName != null) {
           for (int i = 0; i < subNameList.length; i++) {
             if (renewUser.subscriptionsName == subNameList[i]) {
               subValue = subNameList[i];
