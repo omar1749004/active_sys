@@ -130,18 +130,19 @@ class ClinetInfo extends StatelessWidget {
                   lableText: "الاسم",
                   myController: controller.username,
                   validator: (val) {
-                    return validInput(val!, 5, 50, "username");
+                    return validInput(val!, 2, 50, "");
                   }),
               const SizedBox(
                 height: 15,
               ),
-              CustomeTextFormAuth(
+                   CustomeTextFormAuth(
                   hintText: "",
-                  lableText: "العمر",
-                  myController: controller.age,
+                  lableText: "الهاتف",
+                  myController: controller.phone,
                   validator: (val) {
-                    return validInput(val!, 1, 5, "num");
+                    return validInput(val!, 5, 11, "num");
                   }),
+              
               const SizedBox(
                 height: 15,
               ),
@@ -149,9 +150,8 @@ class ClinetInfo extends StatelessWidget {
                   hintText: "",
                   lableText: "الاشتراك",
                   myController: controller.subscriptions,
-                  validator: (val) {
-                    return validInput(val!, 0, 50, "");
-                  }),
+
+                  ),
               const SizedBox(
                 height: 15,
               ),
@@ -159,19 +159,17 @@ class ClinetInfo extends StatelessWidget {
                   hintText: "",
                   lableText: "انتهاء",
                   myController: controller.deadline,
-                  validator: (val) {
-                    return validInput(val!, 0, 50, "");
-                  }),
+
+                  ),
               const SizedBox(
                 height: 15,
               ),
               CustomeTextFormAuth(
                   hintText: "",
-                  lableText: "الهاتف",
-                  myController: controller.phone,
-                  validator: (val) {
-                    return validInput(val!, 5, 11, "phone");
-                  }),
+                  lableText: "العمر",
+                  myController: controller.age,
+
+                  ),
               const SizedBox(
                 height: 15,
               ),
@@ -179,9 +177,8 @@ class ClinetInfo extends StatelessWidget {
                   hintText: "",
                   lableText: "ملاحظات",
                   myController: controller.note,
-                  validator: (val) {
-                    return validInput(val!, 0, 50, "");
-                  }),
+
+                  ),
                   const SizedBox(
                 height: 15,
               ),

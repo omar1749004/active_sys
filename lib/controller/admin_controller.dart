@@ -1,5 +1,3 @@
-// import 'package:active_system/data/service/remote/admin_data.dart';
-
 import 'package:active_system/core/class/statuscode.dart';
 import 'package:active_system/data/models/admin_mode.dart';
 import 'package:active_system/data/models/adminpowers_model.dart';

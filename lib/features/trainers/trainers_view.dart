@@ -1,22 +1,24 @@
+import 'package:active_system/controller/safe_controller.dart';
+import 'package:active_system/controller/trainer_controller.dart';
 import 'package:active_system/core/shared/ModernTable/custom_modern_table.dart';
 import 'package:active_system/core/shared/custom_app_bar.dart';
-import 'package:active_system/core/shared/custom_table.dart';
 import 'package:active_system/core/shared/custom_table_header.dart';
-
 import 'package:active_system/features/manage_subscriptions/view/widgets/custom_button.dart';
 import 'package:active_system/features/manage_subscriptions/view/widgets/custom_menu.dart';
-
 import 'package:active_system/features/trainers/widgets/custom_input_form.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class TrainersView extends StatelessWidget {
-  TrainersView({super.key});
+ const TrainersView({super.key});
 
-  final TextEditingController search = TextEditingController();
   @override
   Widget build(BuildContext context) {
+    Get.put(TrainersControllerImp());
     return Scaffold(
-      body: Column(
+      body:
+      GetBuilder<TrainersControllerImp>(builder: (controller) => 
+       Column(
         children: [
           //
           //AppBar
@@ -49,7 +51,10 @@ class TrainersView extends StatelessWidget {
                           SizedBox(
                               width: MediaQuery.of(context).size.width * 0.5,
                               child: CustomTableHeader(
-                                searchController: search,
+                                searchController: controller.search,
+                                onChanged: (p0) {
+                                  controller.checkSearch(p0);
+                                },
                                 header: "",
                               )),
                           //
@@ -141,7 +146,9 @@ class TrainersView extends StatelessWidget {
                               children: [
                                 CustomButton(
                                   text: "أضافه",
-                                  ontap: () {},
+                                  ontap: () {
+                                    controller.addTrainer();
+                                  },
                                 ),
                                 CustomButton(
                                   text: "تعديل",
@@ -194,7 +201,7 @@ class TrainersView extends StatelessWidget {
             ),
           ),
         ],
-      ),
+      ),)
     );
   }
 }
