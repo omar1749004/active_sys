@@ -16,7 +16,7 @@ abstract class RenewController extends GetxController {
   void calPayed(String payed);
   void setEndDate(DateTime start);
   void barcodeSearch();
-  void addRenew();
+   void addRenew();
   void viewAll();
 
   void dateSearch(DateTime startD, DateTime endD);
@@ -260,7 +260,6 @@ class RenewControllerImp extends RenewController {
       } else {
         statusRequs = StatusRequst.failure;
       }
-
     update();
   }
 

@@ -2,7 +2,7 @@ class RenewModel {
 String? usersName;
 int? usersId;
 String? usersPhone;
-String? usersCaptiantid;
+int? usersCaptiantid;
 DateTime? usersCreate;
 int? renewalId;
 String? renewalNote;
