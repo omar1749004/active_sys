@@ -55,7 +55,7 @@ GlobalKey<FormState> formKey = GlobalKey<FormState>();
     note = TextEditingController();
     search = TextEditingController();
     viewAll();
-    getSub();
+  //  getSub();
     super.onInit();
   }
 
@@ -73,18 +73,88 @@ GlobalKey<FormState> formKey = GlobalKey<FormState>();
   }
 
   @override
-  void addInvition() {
-    // TODO: implement addInvition
+  void addInvition() async{
+     statusRequs = StatusRequst.loading;
+      update();
+      var res = await AttendData().addInvitation({
+        "barcode": barcode.text,
+        "adminID": "1",
+      });
+      if (res["msg"] == "subscription expired") {
+        statusRequs = StatusRequst.failure;
+        print("no");
+      } else if (res["status"] == "success") {
+        print("fukk");
+        attendmodel =  AttendModel.fromJson(res["data"]);
+          for (int i = 0; i < subNameList.length; i++) {
+            if (attendmodel.subscriptionsName == subNameList[i]) {
+              subValue = subNameList[i];
+            }
+          }
+        statusRequs = StatusRequst.sucsess;
+      } else if(res["msg"] == "invitition expired"){
+        print("noooo");
+        statusRequs = StatusRequst.failure;
+    }
+     update();
   }
 
   @override
-  void addService() {
-    // TODO: implement addService
+  void addService()async {
+      statusRequs = StatusRequst.loading;
+      update();
+      var res = await AttendData().addInvitation({
+        "barcode": barcode.text,
+        "adminID": "1",
+      });
+      if (res["msg"] == "subscription expired") {
+        statusRequs = StatusRequst.failure;
+        print("no");
+      } else if (res["status"] == "success") {
+        print("fukk");
+        attendmodel =  AttendModel.fromJson(res["data"]);
+          for (int i = 0; i < subNameList.length; i++) {
+            if (attendmodel.subscriptionsName == subNameList[i]) {
+              subValue = subNameList[i];
+            }
+          }
+        statusRequs = StatusRequst.sucsess;
+      } else if(res["msg"] == "service expired"){
+        print("noooo");
+        statusRequs = StatusRequst.failure;
+    }
+     update();
   }
 
   @override
-  void addSession() {
-    // TODO: implement addSession
+  void addSession() async{
+    //    statusRequs = StatusRequst.loading;
+    //    if(barcode.text.isEmpty &&   ){
+        
+    //    }
+    //   update();
+    //   if()
+    //   var res = await AttendData().addSessions({
+    //     "barcode": barcode.text,
+    //     "adminID": "1",
+    //   });
+    //   if (res["msg"] == "subscription expired") {
+    //     statusRequs = StatusRequst.failure;
+    //     print("no");
+    //   } else if (res["status"] == "success") {
+    //     print("fukk");
+    //     attendmodel =  AttendModel.fromJson(res["data"]);
+    //       for (int i = 0; i < subNameList.length; i++) {
+    //         if (attendmodel.subscriptionsName == subNameList[i]) {
+    //           subValue = subNameList[i];
+    //         }
+    //       }
+    //     statusRequs = StatusRequst.sucsess;
+    //   } else if(res["msg"] == "service expired"){
+    //     print("noooo");
+    //     statusRequs = StatusRequst.failure;
+    // }
+    //  update();
   }
 
   @override

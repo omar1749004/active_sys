@@ -56,3 +56,17 @@ class UserModel {
     );
   }
 }
+class TrainerNumberModel {
+  final int userid;
+  final String phone;
+
+  TrainerNumberModel({required this.userid, required this.phone});
+
+  factory TrainerNumberModel.fromJson(Map<String, dynamic> json) {
+    return TrainerNumberModel(
+      userid: json['users_id'],
+      phone: json['users_phone'],
+    );
+  }
+}
+

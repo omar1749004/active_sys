@@ -24,7 +24,7 @@ class TrainerData{
     return res;
   }
    search(Map data)async{
-    var res =await Api().post(uri: linkTrainerDelete, body: data);
+    var res =await Api().post(uri: linkTrainerSearch, body: data);
     return res;
   }
 }

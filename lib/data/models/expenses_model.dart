@@ -1,9 +1,9 @@
 class ExpensesModel {
-  int expensesId;
-  DateTime expensesDate;
-  String expensesReason;
-  double expensesValue;
-  int expensesAdminId;
+  int ?expensesId;
+  DateTime? expensesDate;
+  String ?expensesReason;
+  double ?expensesValue;
+  int ?expensesAdminId;
 
   ExpensesModel({
     required this.expensesId,

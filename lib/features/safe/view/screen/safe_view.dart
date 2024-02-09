@@ -124,37 +124,37 @@ class SafeView extends StatelessWidget {
                               ),
                             ),
                           ),
-                          Expanded(child: Container())
+                          // /Expanded(child: Container())
                           //buttons
-                          // Expanded(
-                          //   flex: 1,
-                          //   child: Padding(
-                          //     padding: const EdgeInsets.only(bottom: 20.0),
-                          //     child: Row(
-                          //       textDirection: TextDirection.rtl,
-                          //       mainAxisAlignment:
-                          //           MainAxisAlignment.spaceEvenly,
-                          //       children: [
-                          //         CustomButton(
-                          //           text: "أضافه",
-                          //           ontap: () {},
-                          //         ),
-                          //         CustomButton(
-                          //           text: "حفظ",
-                          //           ontap: () {},
-                          //         ),
-                          //         CustomButton(
-                          //           text: "تعديل",
-                          //           ontap: () {},
-                          //         ),
-                          //         CustomButton(
-                          //           text: "حذف",
-                          //           ontap: () {},
-                          //         ),
-                          //       ],
-                          //     ),
-                          //   ),
-                          // ),
+                          Expanded(
+                            flex: 1,
+                            child: Padding(
+                              padding: const EdgeInsets.only(bottom: 20.0),
+                              child: Row(
+                                textDirection: TextDirection.rtl,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  CustomButton(
+                                    text: "أضافه",
+                                    ontap: () {},
+                                  ),
+                                  CustomButton(
+                                    text: "حفظ",
+                                    ontap: () {},
+                                  ),
+                                  CustomButton(
+                                    text: "تعديل",
+                                    ontap: () {},
+                                  ),
+                                  CustomButton(
+                                    text: "حذف",
+                                    ontap: () {},
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
                         ],
                       ),
                     ),
