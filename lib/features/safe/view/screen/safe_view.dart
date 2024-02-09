@@ -19,7 +19,7 @@ class SafeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Get.put(SafeControllerImp());
+   SafeControllerImp controller ;
     return Scaffold(
       body: Column(
         children: [

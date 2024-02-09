@@ -1,4 +1,3 @@
-
 import 'package:active_system/controller/admin_controller.dart';
 import 'package:active_system/core/constant/styles.dart';
 import 'package:active_system/core/functions/validate_input.dart';
@@ -20,15 +19,12 @@ class UsersView extends StatelessWidget {
   Widget build(BuildContext context) {
     Get.put(AdminControllerImp());
     return Scaffold(
-      body:
-      GetBuilder<AdminControllerImp>(
-              builder: (controller) =>
-       Column(
-        children: [
+      body: GetBuilder<AdminControllerImp>(
+        builder: (controller) => Column(children: [
           const CustomAppBar(),
           Expanded(
-              child: SizedBox(
-            child:  Row(
+            child: SizedBox(
+              child: Row(
                 children: [
                   const CustomMenu(
                     pageName: 'ادارة المستخدمين',
@@ -131,7 +127,7 @@ class UsersView extends StatelessWidget {
                                     text: "أضافه",
                                     ontap: () {
                                       controller.addAdmin();
-                                     // controller.assignSelectAdminPowers(controller.powersMap[1]!);
+                                      // controller.assignSelectAdminPowers(controller.powersMap[1]!);
                                     },
                                   ),
                                   CustomButton(
@@ -164,7 +160,8 @@ class UsersView extends StatelessWidget {
                         child: ListView(
                           children: [
                             Text(
-                              "بيانات المستخدم",textAlign: TextAlign.center,
+                              "بيانات المستخدم",
+                              textAlign: TextAlign.center,
                               style: Styles.style23,
                             ),
                             CustomeTextFormAuth(
@@ -203,10 +200,10 @@ class UsersView extends StatelessWidget {
                                 hintText: "",
                                 isShowIcone: true,
                                 myController: controller.pass,
-                                ontap:() {
+                                ontap: () {
                                   controller.showPassword();
                                   controller.changeIcone();
-                                  },
+                                },
                                 lableText: "كلمة السر",
                                 icone: controller.icone,
                                 obscureText: controller.isHidepass,
@@ -224,22 +221,21 @@ class UsersView extends StatelessWidget {
                                     return validInput(val!, 5, 50, "");
                                   }),
                             ),
-                          const  CustomeTextFormAuth(
-                                hintText: "",
-                                lableText: "ملاحظات",
-                                obscureText: true,),
+                            const CustomeTextFormAuth(
+                              hintText: "",
+                              lableText: "ملاحظات",
+                              obscureText: true,
+                            ),
                             const Align(
                                 alignment: Alignment.topRight,
                                 child: Text(
                                   "الصلاحيات",
                                   style: Styles.style15B,
                                 )),
-                             SizedBox(
-                                height: 400, child: CustomCheckBoxList()),
+                            SizedBox(height: 400, child: CustomCheckBoxList()),
                             const SizedBox(
                               height: 10,
                             ),
-                            
                           ],
                         ),
                       ),
