@@ -56,22 +56,20 @@ class MangeCostForm extends StatelessWidget {
             //date button
             //
             SizedBox(
-              child: Expanded(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    CustomDateField(
-                        width: 200,
-                        height: 40,
-                        icon: Icons.close,
-                        iconSize: 20,
-                        fontSize: 18),
-                    const Text(
-                      "التاريخ",
-                      style: TextStyle(fontSize: 18),
-                    )
-                  ],
-                ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  CustomDateField(
+                      width: 200,
+                      height: 40,
+                      icon: Icons.close,
+                      iconSize: 20,
+                      fontSize: 18),
+                  const Text(
+                    "التاريخ",
+                    style: TextStyle(fontSize: 18),
+                  )
+                ],
               ),
             ),
             const SizedBox(

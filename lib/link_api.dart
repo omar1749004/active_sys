@@ -6,7 +6,7 @@ const String linkServerName = "http://localhost/activegym_app/system";
 const String linkAdminAdd = "$linkServerName/adminSys/add.php";
 const String linkAdminEdit = "$linkServerName/adminSys/edit.php";
 const String linkAdminDelete = "$linkServerName/adminSys/delete.php";
-const String linkAdminView = "$linkServerName/adminSys/view.php";
+const String linkAdminView = "$linkServerName/adminSys/view.php";   
 //subscriptions
 
 const String linkSubAdd ="$linkServerName/subscriptions/add.php";

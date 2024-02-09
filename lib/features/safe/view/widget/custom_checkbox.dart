@@ -2,10 +2,11 @@ import 'package:active_system/core/constant/color.dart';
 import 'package:flutter/material.dart';
 
 class CustomCheckBox extends StatelessWidget {
-  const CustomCheckBox({super.key, required this.ischeck, required this.text, this.onTap});
+  const CustomCheckBox(
+      {super.key, required this.ischeck, required this.text, this.onTap});
   final bool ischeck;
   final String text;
-  final void Function()? onTap ;
+  final void Function()? onTap;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -18,9 +19,12 @@ class CustomCheckBox extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          Text(
-            text,
-            style: const TextStyle(fontSize: 17),
+          Expanded(
+            child: Text(
+              text,
+              style: const TextStyle(fontSize: 17),
+              overflow: TextOverflow.ellipsis,
+            ),
           ),
           // SizedBox(width: 15,),
           InkWell(
