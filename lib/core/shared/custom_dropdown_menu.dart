@@ -6,21 +6,20 @@ class CustomDropDownMenu extends StatelessWidget {
       {super.key,
       required this.items,
       required this.intialValue,
-      this.onChanged, 
+      this.onChanged,
       this.label = "",
-       this.redius = 16});
-         final String label;
+      this.redius = 16});
+  final String label;
 
   final List items;
   final String intialValue;
   final void Function(String?)? onChanged;
-final double redius  ;
+  final double redius;
   @override
   Widget build(BuildContext context) {
     return Directionality(
       textDirection: TextDirection.rtl,
       child: DropdownButtonFormField<String>(
-         
           menuMaxHeight: 150,
           focusColor: const Color.fromARGB(255, 206, 206, 206),
           decoration: InputDecoration(
@@ -36,9 +35,7 @@ final double redius  ;
                 borderRadius: BorderRadius.circular(redius)),
           ),
           value: intialValue,
-        
           borderRadius: BorderRadius.all(Radius.circular(redius)),
-        
           items: items
               .map((item) =>
                   DropdownMenuItem<String>(value: item, child: Text(item)))

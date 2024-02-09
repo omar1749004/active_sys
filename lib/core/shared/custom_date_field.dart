@@ -8,7 +8,7 @@ class CustomDateField extends StatelessWidget {
       {super.key,
       required this.width,
       required this.height,
-       this.icon =CupertinoIcons.calendar,
+      this.icon = CupertinoIcons.calendar,
       required this.iconSize,
       required this.fontSize,
       this.onChanged,
@@ -26,9 +26,9 @@ class CustomDateField extends StatelessWidget {
   final String label;
   final void Function(DateTime?)? onChanged;
   final String? Function(DateTime?)? validator;
-  final bool isaccess ;
-  final format = DateFormat("yyyy-MM-dd" );
-  final DateTime? currentValue ;
+  final bool isaccess;
+  final format = DateFormat("yyyy-MM-dd");
+  final DateTime? currentValue;
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -40,19 +40,17 @@ class CustomDateField extends StatelessWidget {
         resetIcon: null,
         enabled: isaccess,
         decoration: InputDecoration(
-          icon: Icon(
-          icon,
-          size: iconSize,
-        ),
+            icon: Icon(
+              icon,
+              size: iconSize,
+            ),
             labelText: label,
             border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(borderRadius)
-                ),
+                borderRadius: BorderRadius.circular(borderRadius)),
             contentPadding: EdgeInsets.zero),
         textAlign: TextAlign.center,
         style: TextStyle(fontSize: fontSize),
-         initialValue: currentValue ?? DateTime.now(),
-        
+        initialValue: currentValue ?? DateTime.now(),
         format: format,
         onShowPicker: (BuildContext context, DateTime? currentValue) {
           return showDatePicker(
@@ -61,7 +59,6 @@ class CustomDateField extends StatelessWidget {
               firstDate: DateTime(1900),
               initialDate: currentValue ?? DateTime.now(),
               lastDate: DateTime(2100));
-              
         },
       ),
     );

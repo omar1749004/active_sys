@@ -15,6 +15,7 @@ class MangeCostForm extends GetView<ExpensesControllerImp> {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10.0),
       child: SingleChildScrollView(
+
         child: Form(
           key: controller.formKey,
           child: Column(
@@ -67,6 +68,7 @@ class MangeCostForm extends GetView<ExpensesControllerImp> {
                     )
                   ],
                 ),
+
               ),
               const SizedBox(
                 height: 20,
