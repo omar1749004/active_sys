@@ -219,7 +219,7 @@ class AttendanceView extends StatelessWidget {
                                     height: 40,
                                     child:  CustomDisplyMany(
                                         textColor: ColorApp.thirdColor,
-                                        many: double.parse(controller.totalPlayer.toString()),
+                                        many: controller.totalPlayer.toString(),
                                         text: "عدد الاعبين"),
                                   ),
                                 ],

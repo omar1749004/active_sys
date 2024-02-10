@@ -174,15 +174,15 @@ class SafeView extends StatelessWidget {
                             ),
                              CustomDisplyMany(
                                 textColor: ColorApp.secondColor,
-                                many: controller.toralSafe,
+                                many: controller.toralSafe.toString(),
                                 text: "المجود بالخزنة الان"),
                              CustomDisplyMany(
                                 textColor: ColorApp.gray,
-                                many: controller.toralOutcoming,
+                                many: controller.toralOutcoming.toString(),
                                 text: "اجمالي المشتريات"),
                              CustomDisplyMany(
                                 textColor: ColorApp.gray,
-                                many: controller.toralIncoming,
+                                many: controller.toralIncoming.toString(),
                                 text: "   اجمالي المبيعات"),
                             const Divider(),
                             Padding(

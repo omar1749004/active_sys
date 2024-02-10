@@ -256,7 +256,7 @@ class ManageCostView extends StatelessWidget {
                       ),
                     ),
                     child:  MangeCostForm(
-                      many: controller.totalExpenses!,
+                      many: controller.totalExpenses.toString(),
                     ),
                   ),
                 )

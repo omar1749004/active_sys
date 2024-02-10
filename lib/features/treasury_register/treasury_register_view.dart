@@ -130,7 +130,7 @@ class TreasuryRegisterView extends StatelessWidget {
                           //
                           //data of table
                           //
-                          const Expanded(
+                           Expanded(
                             flex: 2,
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -138,30 +138,30 @@ class TreasuryRegisterView extends StatelessWidget {
                                 Expanded(
                                   child: Padding(
                                     padding:
-                                        EdgeInsets.symmetric(horizontal: 5.0),
+                                     const   EdgeInsets.symmetric(horizontal: 5.0),
                                     child: CustomDisplyMany(
                                         textColor: ColorApp.thirdColor,
-                                        many: 10000,
+                                        many: controller.toralSafe.toString(),
                                         text: "الصافى"),
                                   ),
                                 ),
                                 Expanded(
                                   child: Padding(
                                     padding:
-                                        EdgeInsets.symmetric(horizontal: 5.0),
+                                       const EdgeInsets.symmetric(horizontal: 5.0),
                                     child: CustomDisplyMany(
                                         textColor: ColorApp.thirdColor,
-                                        many: 10000,
+                                        many: controller.toralIncoming.toString(),
                                         text: "الصادر"),
                                   ),
                                 ),
                                 Expanded(
                                   child: Padding(
                                     padding:
-                                        EdgeInsets.symmetric(horizontal: 5.0),
+                                     const   EdgeInsets.symmetric(horizontal: 5.0),
                                     child: CustomDisplyMany(
                                         textColor: ColorApp.thirdColor,
-                                        many: 10000,
+                                        many: controller.toralOutcoming.toString(),
                                         text: "الوارد"),
                                   ),
                                 ),

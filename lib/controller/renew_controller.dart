@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:active_system/core/class/statuscode.dart';
+import 'package:active_system/core/constant/app_route.dart';
 import 'package:active_system/data/models/renew_model.dart';
 import 'package:active_system/data/models/sub_mode.dart';
 import 'package:active_system/data/models/user_model.dart';
@@ -16,9 +19,9 @@ abstract class RenewController extends GetxController {
   void calPayed(String payed);
   void setEndDate(DateTime start);
   void barcodeSearch();
-   void addRenew();
+  void addRenew();
   void viewAll();
-
+  void gotoFrezze(RenewModel privteModel);
   void dateSearch(DateTime startD, DateTime endD);
   void handlTable(bool isdate);
 }
@@ -50,9 +53,9 @@ class RenewControllerImp extends RenewController {
   late SubscriptionModel subscriptionModel;
   late RenewModel renewUser;
   //search
-   List<RenewModel> renewList = [];
-   bool isSearch = false;
-   bool isdateSearch = true;
+  List<RenewModel> renewList = [];
+  bool isSearch = false;
+  bool isdateSearch = true;
   DateTime startSearch = DateTime.now();
   DateTime endSearch = DateTime.now();
 
@@ -62,7 +65,7 @@ class RenewControllerImp extends RenewController {
   late String _amountMid;
   late TextEditingController end;
   DateTime start = DateTime.now();
-  
+
   @override
   void onInit() {
     barcodeNum = TextEditingController();
@@ -79,7 +82,7 @@ class RenewControllerImp extends RenewController {
     remining = TextEditingController();
     note = TextEditingController();
     end = TextEditingController();
-    searchVal =TextEditingController();
+    searchVal = TextEditingController();
     preNote.text = " ";
     descound.text = "0";
     amount.text = "0";
@@ -90,7 +93,7 @@ class RenewControllerImp extends RenewController {
     getTrainer();
     dateSearch(startSearch, endSearch);
     update();
-
+  viewAll();
     super.onInit();
   }
 
@@ -239,27 +242,27 @@ class RenewControllerImp extends RenewController {
     update();
     String offe = _getDesc();
     String ow = _getowed();
-      var res = await RenewData().add({
-        "userid": renewUser.usersId.toString(),
-        "name": renewUser.usersName,
-        "captinId": renewUser.usersCaptiantid.toString(),
-        "barcodeId": renewUser.barcodeId.toString(),
-        "subscriptionsId": renewUser.subscriptionsId.toString(),
-        "note": note.text,
-        "start": start.toString(),
-        "end": end.toString(),
-        "offer": offe,
-        "amount": amount.text,
-        "amount_owed": ow,
-        "renewal_adminId": "1",
-      });
-      if (res["status"] == "failure") {
-        statusRequs = StatusRequst.failure;
-      } else if (res["status"] == "success") {
-        statusRequs = StatusRequst.sucsess;
-      } else {
-        statusRequs = StatusRequst.failure;
-      }
+    var res = await RenewData().add({
+      "userid": renewUser.usersId.toString(),
+      "name": renewUser.usersName,
+      "captinId": renewUser.usersCaptiantid.toString(),
+      "barcodeId": renewUser.barcodeId.toString(),
+      "subscriptionsId": renewUser.subscriptionsId.toString(),
+      "note": note.text,
+      "start": start.toString(),
+      "end": end.text,
+      "offer": offe,
+      "amount": amount.text,
+      "amount_owed": ow,
+      "renewal_adminId": "1",
+    });
+    if (res["status"] == "failure") {
+      statusRequs = StatusRequst.failure;
+    } else if (res["status"] == "success") {
+      statusRequs = StatusRequst.sucsess;
+    } else {
+      statusRequs = StatusRequst.failure;
+    }
     update();
   }
 
@@ -287,8 +290,8 @@ class RenewControllerImp extends RenewController {
     update();
     if (isdateSearch) {
       var res = await RenewData().dateSearch({
-        "start_date": startD.toString().substring(0,11),
-        "end_date": endD.toString().substring(0,11),
+        "start_date": startD.toString().substring(0, 11),
+        "end_date": endD.toString().substring(0, 11),
       });
       if (res["status"] == "failure") {
         statusRequs = StatusRequst.failure;
@@ -302,71 +305,86 @@ class RenewControllerImp extends RenewController {
     }
     update();
   }
-  
-   void checkSearch(String val)
-  {
-    if(val.isEmpty)
-    {
-      statusRequs = StatusRequst.non;
-      isSearch =false;
 
-    }
-    else{
-      isSearch =true;
+  void checkSearch(String val) {
+    if (val.isEmpty) {
+      statusRequs = StatusRequst.non;
+      isSearch = false;
+    } else {
+      isSearch = true;
       _search();
     }
     update();
   }
 
-  void _search() async{
-     statusRequs = StatusRequst.loading;
-     update();
-     var res = await RenewData().search(
-      {
-        "search": searchVal.text
-      }
-     );
-      if (res["status"] == "failure") {
-        statusRequs = StatusRequst.failure;
-      } else if (res["status"] == "success") {
-        List data = res["data"];
-        renewList = [] ;
-        renewList.addAll(data.map((e) => RenewModel.fromJson(e)));
-        statusRequs = StatusRequst.sucsess;
-      } else {
-        statusRequs = StatusRequst.failure;
-      }
-      update();
-  }
-  
-  @override
-  void viewAll() async{
+  void _search() async {
     statusRequs = StatusRequst.loading;
-     update();
-     var res = await RenewData().view();
-      if (res["status"] == "failure") {
-        statusRequs = StatusRequst.failure;
-      } else if (res["status"] == "success") {
-        List data = res["data"];
-        renewList = [] ;
-        renewList.addAll(data.map((e) => RenewModel.fromJson(e)));
-        statusRequs = StatusRequst.sucsess;
-      } else {
-        statusRequs = StatusRequst.failure;
-      }
-      update();
+    update();
+    var res = await RenewData().search({"search": searchVal.text});
+    if (res["status"] == "failure") {
+      statusRequs = StatusRequst.failure;
+    } else if (res["status"] == "success") {
+      List data = res["data"];
+      renewList = [];
+      renewList.addAll(data.map((e) => RenewModel.fromJson(e)));
+      statusRequs = StatusRequst.sucsess;
+    } else {
+      statusRequs = StatusRequst.failure;
+    }
+    update();
   }
-  
+
+  @override
+  void viewAll() async {
+    statusRequs = StatusRequst.loading;
+    update();
+    var res = await RenewData().view();
+    if (res["status"] == "failure") {
+      statusRequs = StatusRequst.failure;
+    } else if (res["status"] == "success") {
+      List data = res["data"];
+      
+      renewList = [];
+      renewList.addAll(data.map((e) => RenewModel.fromJson(e)));
+      renewUser = renewList[0];
+      gotoFrezze(renewUser);
+      statusRequs = StatusRequst.sucsess;
+    } else {
+      statusRequs = StatusRequst.failure;
+    }
+    update();
+  }
+
   @override
   void handlTable(bool isdate) {
-    isdateSearch =  isdate ;
-    
-    if(isdateSearch){
-     dateSearch(startSearch ,endSearch) ;
-    }else{
+    isdateSearch = isdate;
+
+    if (isdateSearch) {
+      dateSearch(startSearch, endSearch);
+    } else {
       viewAll();
     }
+  }
+
+  @override
+  void gotoFrezze(RenewModel privteModel) {
     
+    if (privteModel.renewalEnd?.isAfter(DateTime.now()) ?? false) {
+     Get.toNamed(AppRoute.freezescreenid,arguments: {
+        "RenewModel"  : privteModel
+    });
+    }else{
+        Get.defaultDialog(
+          title: "تحذير",
+          middleText: "اللاعب اشتراكه منتهي",
+          actions: [
+            ElevatedButton(
+                onPressed: () {
+                  Get.back();
+                },
+                child: const Text("ok")),
+          ]);
+    }
   }
 }
 

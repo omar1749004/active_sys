@@ -14,6 +14,11 @@ AdminData() ;
     );
     return res;
   }
+  login(Map data)async{
+    var res =await Api().post(uri: linkAdmiLogin, body: data,
+    );
+    return res;
+  }
    edit(Map data )async{
      var res =await Api().post(uri: linkAdminEdit, body: data);
     return res;
