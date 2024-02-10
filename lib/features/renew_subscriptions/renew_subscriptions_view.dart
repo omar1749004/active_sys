@@ -205,7 +205,7 @@ class RenewSybscriptionsView extends StatelessWidget {
                               CustomButton(
                                 text: "تجميد",
                                 ontap: () {
-                                  Get.toNamed("/FreezeScreen");
+                                  controller.gotoFrezze(controller.renewUser);
                                 },
                               ),
                               CustomButton(

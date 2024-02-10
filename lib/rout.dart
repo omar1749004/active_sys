@@ -1,13 +1,13 @@
 import 'package:active_system/features/attendance/attendance_view.dart';
-import 'package:active_system/auth/view/screen/auth_view.dart';
+import 'package:active_system/features/auth/view/screen/auth_view.dart';
 import 'package:active_system/core/constant/app_route.dart';
 import 'package:active_system/core/middleware/mymiddleware.dart';
+import 'package:active_system/features/freeze/screen/freeze_screen.dart';
 import 'package:active_system/features/home/view/screen/home.dart';
 import 'package:active_system/features/manage_cost/manage_cost_view.dart';
 import 'package:active_system/features/manage_subscriptions/view/manage_subscriptions_view.dart';
 import 'package:active_system/features/players_profile/players_profile_view.dart';
 import 'package:active_system/features/renew_subscriptions/renew_subscriptions_view.dart';
-import 'package:active_system/features/renew_subscriptions/subscreen/freeze_screen.dart';
 import 'package:active_system/features/safe/view/screen/safe_view.dart';
 import 'package:active_system/features/treasury_register/treasury_register_view.dart';
 import 'package:active_system/features/users/view/screen/users_view.dart';
@@ -25,7 +25,7 @@ List<GetPage<dynamic>> route = [
   ),
   GetPage(
     name: AppRoute.trainerid,
-    page: () => TrainersView(),
+    page: () =>const TrainersView(),
   ),
   GetPage(
     name: AppRoute.usersid,
@@ -33,7 +33,7 @@ List<GetPage<dynamic>> route = [
   ),
   GetPage(
     name: AppRoute.RenewSybscriptionsView,
-    page: () => RenewSybscriptionsView(),
+    page: () =>const RenewSybscriptionsView(),
   ),
   GetPage(
     name: AppRoute.safeid,

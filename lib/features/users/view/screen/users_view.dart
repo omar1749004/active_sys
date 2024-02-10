@@ -170,6 +170,7 @@ class UsersView extends StatelessWidget {
                             CustomeTextFormAuth(
                                 hintText: "",
                                 lableText: "الاسم",
+                                myController: controller.name,
                                 validator: (val) {
                                   return validInput(val!, 2, 20, "");
                                 }),
@@ -211,7 +212,7 @@ class UsersView extends StatelessWidget {
                                 icone: controller.icone,
                                 obscureText: controller.isHidepass,
                                 validator: (val) {
-                                  return validInput(val!, 5, 50, "");
+                                  return validInput(val!, 4, 50, "");
                                 }),
                             Padding(
                               padding: const EdgeInsets.symmetric(vertical: 12),
@@ -221,7 +222,7 @@ class UsersView extends StatelessWidget {
                                   lableText: "تأكيد كلمة السر",
                                   obscureText: true,
                                   validator: (val) {
-                                    return validInput(val!, 5, 50, "");
+                                    return validInput(val!, 4, 50, "");
                                   }),
                             ),
                           const  CustomeTextFormAuth(
