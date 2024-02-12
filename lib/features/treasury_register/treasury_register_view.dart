@@ -148,7 +148,7 @@ class TreasuryRegisterView extends StatelessWidget {
                                           EdgeInsets.symmetric(horizontal: 5.0),
                                       child: CustomDisplyMany(
                                           textColor: ColorApp.thirdColor,
-                                          many: 10000,
+                                          many: "10000",
                                           text: "الصافى"),
                                     ),
                                   ),
@@ -158,7 +158,7 @@ class TreasuryRegisterView extends StatelessWidget {
                                           EdgeInsets.symmetric(horizontal: 5.0),
                                       child: CustomDisplyMany(
                                           textColor: ColorApp.thirdColor,
-                                          many: 10000,
+                                          many: "10000",
                                           text: "الصادر"),
                                     ),
                                   ),
@@ -168,7 +168,7 @@ class TreasuryRegisterView extends StatelessWidget {
                                           EdgeInsets.symmetric(horizontal: 5.0),
                                       child: CustomDisplyMany(
                                           textColor: ColorApp.thirdColor,
-                                          many: 10000,
+                                          many: "10000",
                                           text: "الوارد"),
                                     ),
                                   ),

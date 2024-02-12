@@ -190,8 +190,6 @@ class SafeControllerImp extends SafeController {
    
     update();
   }
-}
-
 
   //function to assign data inside List
   void assignDataInsideTable() {

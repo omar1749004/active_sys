@@ -42,200 +42,177 @@ class AttendanceView extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(
                           vertical: 10, horizontal: 15),
                       child: Column(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          //
-                          //search bar
-                          //
-                          CustomTableHeader(
-                            onChanged: (val) {
-                              controller.checkSearch(val);
-                            },
-                            searchController: controller.searchVal,
-                            header: "سجل الحضور ",
-                          ),
-                          //
-                          //date
-                          //
-                          Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 10),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Row(
-                                  children: [
-                                    CustomDateField(
-                                        width: 150,
-                                        height: 30,
-                                        icon: Icons.close,
-                                        onChanged: (p0) {
-                                          controller.endSearch = p0!;
-                                          controller.dateSearch(
-                                              controller.startSearch,
-                                              controller.endSearch);
-                                        },
-                                        iconSize: 15,
-                                        fontSize: 15),
-                                    const SizedBox(
-                                      width: 50,
-                                    ),
-                                    const Text(
-                                      " الى ",
-                                      style: TextStyle(fontSize: 18),
-                                    ),
-                                  ],
-                                ),
-                                const SizedBox(
-                                  width: 50,
-                                ),
-                                Row(
-                                  children: [
-                                    CustomDateField(
-                                        width: 150,
-                                        height: 30,
-                                        icon: Icons.close,
-                                        onChanged: (p0) {
-                                          controller.startSearch = p0!;
-                                          controller.dateSearch(
-                                              controller.startSearch,
-                                              controller.endSearch);
-                                        },
-                                        iconSize: 15,
-                                        fontSize: 15),
-                                    const SizedBox(
-                                      width: 50,
-                                    ),
-                                    const Text(
-                                      " من ",
-                                      style: TextStyle(fontSize: 18),
-                                    ),
-                                  ],
-                                ),
-                                const SizedBox(
-                                  width: 50,
-                                ),
-                                SizedBox(
-                                  child: CustomBotton1(
-                                    text: "بحث",
-                                    ontap: () {},
-                                    color: ColorApp.onfoucosColor,
-                                    marginBottom: 0,
-                                    marginLeft: 0,
-                                    marginRight: 0,
-                                    marginTop: 0,
-                                  ),
-                                ),
-                              ],
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            //
+                            //search bar
+                            //
+                            CustomTableHeader(
+                              onChanged: (val) {
+                                controller.checkSearch(val);
+                              },
+                              searchController: controller.searchVal,
+                              header: "سجل الحضور ",
                             ),
-                          ),
-
-                          //
-                          //table that contains data
-                          //
-                          Expanded(
-                            flex: 5,
-                            child: Container(
-                              color: Color.fromARGB(255, 218, 218, 218),
-                              child: CustomModernTable(
-                                data: controller.dataInTable,
-                                widths: const [250, 250, 300, 300, 300, 100],
-                                header: const [
-                                  "ألاسم",
-                                  "ملاحظات",
-                                  "الرقم المسلسل",
-                                  "الكود",
-                                  "الكود",
-                                  "الكود"
-
-                        ),
-                        //
-                        //buttons
-                        //
-                        Expanded(
-                          flex: 1,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
+                            //
+                            //date
+                            //
+                            Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 10),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
+                                  Row(
+                                    children: [
+                                      CustomDateField(
+                                          width: 150,
+                                          height: 30,
+                                          icon: Icons.close,
+                                          onChanged: (p0) {
+                                            controller.endSearch = p0!;
+                                            controller.dateSearch(
+                                                controller.startSearch,
+                                                controller.endSearch);
+                                          },
+                                          iconSize: 15,
+                                          fontSize: 15),
+                                      const SizedBox(
+                                        width: 50,
+                                      ),
+                                      const Text(
+                                        " الى ",
+                                        style: TextStyle(fontSize: 18),
+                                      ),
+                                    ],
+                                  ),
+                                  const SizedBox(
+                                    width: 50,
+                                  ),
+                                  Row(
+                                    children: [
+                                      CustomDateField(
+                                          width: 150,
+                                          height: 30,
+                                          icon: Icons.close,
+                                          onChanged: (p0) {
+                                            controller.startSearch = p0!;
+                                            controller.dateSearch(
+                                                controller.startSearch,
+                                                controller.endSearch);
+                                          },
+                                          iconSize: 15,
+                                          fontSize: 15),
+                                      const SizedBox(
+                                        width: 50,
+                                      ),
+                                      const Text(
+                                        " من ",
+                                        style: TextStyle(fontSize: 18),
+                                      ),
+                                    ],
+                                  ),
+                                  const SizedBox(
+                                    width: 50,
+                                  ),
+                                  SizedBox(
+                                    child: CustomBotton1(
+                                      text: "بحث",
+                                      ontap: () {},
+                                      color: ColorApp.onfoucosColor,
+                                      marginBottom: 0,
+                                      marginLeft: 0,
+                                      marginRight: 0,
+                                      marginTop: 0,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+
+                            //
+                            //table that contains data
+                            //
+                            Expanded(
+                              flex: 5,
+                              child: Container(
+                                color: Color.fromARGB(255, 218, 218, 218),
+                                child: CustomModernTable(
+                                  data: controller.dataInTable,
+                                  widths: const [250, 250, 300, 300, 300, 100],
+                                  header: const [
+                                    "ألاسم",
+                                    "ملاحظات",
+                                    "الرقم المسلسل",
+                                    "الكود",
+                                    "الكود",
+                                    "الكود"
+                                  ],
+                                  nameOfGlobalID: 'attendance',
+                                  onRowTap: () {},
+                                ),
+                              ),
+                            ),
+
+                            //
+                            //buttons
+                            //
+                            Expanded(
+                              flex: 1,
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      SizedBox(
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                                0.2,
+                                        height: 40,
+                                        child: CustomDisplyMany(
+                                            textColor: ColorApp.thirdColor,
+                                            many: controller.totalPlayer
+                                                .toString(),
+                                            text: "عدد الاعبين"),
+                                      ),
+                                    ],
+                                  ),
                                   SizedBox(
                                     width:
                                         MediaQuery.of(context).size.width * 0.2,
-                                    height: 40,
-                                    child:  CustomDisplyMany(
-                                        textColor: ColorApp.thirdColor,
-                                        many: controller.totalPlayer.toString(),
-                                        text: "عدد الاعبين"),
+                                    child: CustomDropDownMenu(
+                                      items: const ["خاص", "الكل"],
+                                      intialValue: 'الكل',
+                                      onChanged: (p0) {},
+                                      label: "عرض",
+                                    ),
                                   ),
-
+                                  SizedBox(
+                                    width:
+                                        MediaQuery.of(context).size.width * 0.2,
+                                    child: CustomDropDownMenu(
+                                      items: const ["الفلل", "نادى الشرطه"],
+                                      intialValue: 'نادى الشرطه',
+                                      onChanged: (p0) {},
+                                      label: "فرع",
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width:
+                                        MediaQuery.of(context).size.width * 0.1,
+                                    child: CustomButton(
+                                      text: "طباعه",
+                                      ontap: () {},
+                                    ),
+                                  ),
                                 ],
-                                nameOfGlobalID: 'attendance',
-                                onRowTap: () {},
                               ),
                             ),
-                          ),
-                          //
-                          //buttons
-                          //
-                          Expanded(
-                            flex: 1,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    SizedBox(
-                                      width: MediaQuery.of(context).size.width *
-                                          0.2,
-                                      height: 40,
-                                      child: CustomDisplyMany(
-                                          textColor: ColorApp.thirdColor,
-                                          many: double.parse(controller
-                                              .totalPlayer
-                                              .toString()),
-                                          text: "عدد الاعبين"),
-                                    ),
-                                  ],
-                                ),
-                                SizedBox(
-                                  width:
-                                      MediaQuery.of(context).size.width * 0.2,
-                                  child: CustomDropDownMenu(
-                                    items: const ["خاص", "الكل"],
-                                    intialValue: 'الكل',
-                                    onChanged: (p0) {},
-                                    label: "عرض",
-                                  ),
-                                ),
-                                SizedBox(
-                                  width:
-                                      MediaQuery.of(context).size.width * 0.2,
-                                  child: CustomDropDownMenu(
-                                    items: const ["الفلل", "نادى الشرطه"],
-                                    intialValue: 'نادى الشرطه',
-                                    onChanged: (p0) {},
-                                    label: "فرع",
-                                  ),
-                                ),
-                                SizedBox(
-                                  width:
-                                      MediaQuery.of(context).size.width * 0.1,
-                                  child: CustomButton(
-                                    text: "طباعه",
-                                    ontap: () {},
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
+                          ]),
                     ),
-                  ),
+                  )
                 ],
               ),
             ),
