@@ -124,6 +124,7 @@ class SafeView extends StatelessWidget {
                           ),
                         ),
                       ),
+
                       const VerticalDivider(),
                       Expanded(
                         flex: 1,
@@ -132,6 +133,43 @@ class SafeView extends StatelessWidget {
                           child: Form(
                             key: controller.formKey,
                             child: Column(
+                    ),
+                  ),
+                  const VerticalDivider(),
+                  Expanded(
+                    flex: 1,
+                    child: Padding(
+                      padding: const EdgeInsets.all(15),
+                      child: Form(
+                        key: controller.formKey,
+                        child: Column(
+                          children: [
+                            Text(
+                              "بيانات الخزنة",
+                              style: Styles.style23,
+                            ),
+                             CustomDisplyMany(
+                                textColor: ColorApp.secondColor,
+                                many: controller.toralSafe.toString(),
+                                text: "المجود بالخزنة الان"),
+                             CustomDisplyMany(
+                                textColor: ColorApp.gray,
+                                many: controller.toralOutcoming.toString(),
+                                text: "اجمالي المشتريات"),
+                             CustomDisplyMany(
+                                textColor: ColorApp.gray,
+                                many: controller.toralIncoming.toString(),
+                                text: "   اجمالي المبيعات"),
+                            const Divider(),
+                            Padding(
+                              padding: const EdgeInsets.only(bottom: 5),
+                              child: Text(
+                                "إضافة عملية",
+                                style: Styles.style23,
+                              ),
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
                                   "بيانات الخزنة",

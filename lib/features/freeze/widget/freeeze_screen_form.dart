@@ -1,6 +1,8 @@
+import 'package:active_system/controller/freeze_controller.dart';
 import 'package:active_system/core/constant/color.dart';
 import 'package:active_system/features/safe/view/widget/custom_display_many.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class FreezeScreenForm extends StatelessWidget {
   const FreezeScreenForm({super.key});
@@ -12,24 +14,26 @@ class FreezeScreenForm extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 10),
         child: SingleChildScrollView(
-          child: Column(
+          child: 
+          GetBuilder<FreezeControllerImp>(builder: (controller) => 
+          Column(
             children: [
               Container(
                 padding: const EdgeInsets.only(bottom: 15),
                 decoration: const BoxDecoration(
                     border: Border(bottom: BorderSide(width: 1))),
-                child: const Column(
+                child:  Column(
                   children: [
                     CustomDisplyMany(
-                      many: 101,
+                      many: controller.barcode!,
                       text: "كود الاعب",
                       textColor: ColorApp.thirdColor,
                     ),
-                    SizedBox(
+                  const  SizedBox(
                       height: 10,
                     ),
                     CustomDisplyMany(
-                      many: 101,
+                      many: controller.name!,
                       text: "اسم الاعب",
                       textColor: ColorApp.thirdColor,
                     ),
@@ -39,62 +43,62 @@ class FreezeScreenForm extends StatelessWidget {
               const SizedBox(
                 height: 20,
               ),
-              const Column(
+               Column(
                 children: [
                   CustomDisplyMany(
-                    many: 101,
+                    many: controller.startrenew!.substring(0,11),
                     text: "بداية ألاشتراك",
                     textColor: ColorApp.thirdColor,
                   ),
-                  SizedBox(
+                const  SizedBox(
                     height: 10,
                   ),
                   CustomDisplyMany(
-                    many: 101,
+                    many: controller.endrenew!.substring(0,11),
                     text: "نهاية ألاشتراك",
                     textColor: ColorApp.thirdColor,
                   ),
-                  SizedBox(
+                 const SizedBox(
                     height: 10,
                   ),
                   CustomDisplyMany(
-                    many: 101,
+                    many: controller.subName!,
                     text: "أسم ألاشتراك",
                     textColor: ColorApp.thirdColor,
                   ),
-                  SizedBox(
+                 const SizedBox(
                     height: 10,
                   ),
                   CustomDisplyMany(
-                    many: 101,
+                    many: controller.days!,
                     text: "عدد الايام",
                     textColor: ColorApp.thirdColor,
                   ),
-                  SizedBox(
+                 const SizedBox(
                     height: 10,
                   ),
                   CustomDisplyMany(
-                    many: 101,
+                    many: controller.frezzeDay.toString(),
                     text: "عدد ايام التجميد",
                     textColor: ColorApp.thirdColor,
                   ),
-                  SizedBox(
+                 const SizedBox(
                     height: 10,
                   ),
                   CustomDisplyMany(
                     flexOfLabel: 4,
                     flexOfMany: 2,
-                    many: 101,
+                    many: controller.freezeNum.toString(),
                     text: "عدد مرات التجميد",
                     textColor: ColorApp.thirdColor,
                   ),
-                  SizedBox(
+                const  SizedBox(
                     height: 10,
                   ),
                   CustomDisplyMany(
                     flexOfLabel: 4,
                     flexOfMany: 2,
-                    many: 101,
+                    many: controller.maxFreeze.toString(),
                     text: "اقصى عدد ايام تجميد  ",
                     textColor: ColorApp.thirdColor,
                   ),
@@ -102,7 +106,7 @@ class FreezeScreenForm extends StatelessWidget {
               ),
             ],
           ),
-        ),
+        ),)
       ),
     );
   }

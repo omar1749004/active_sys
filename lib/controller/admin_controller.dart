@@ -28,6 +28,7 @@ class AdminControllerImp extends AdminController {
   late TextEditingController repass;
   late TextEditingController note;
   bool isHidepass = true;
+  
   IconData icone = CupertinoIcons.eye_slash;
   List<int> selectpowerList = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14];
   Map<int, List<int>> powersMap = {};

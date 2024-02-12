@@ -70,7 +70,7 @@ class CustomeTextFormAuth extends StatelessWidget {
             padding: const EdgeInsets.all(20.0),
             child: Text(
               lableText,
-              style: Styles.style18B,
+              style: lableStyle,
               softWrap: false,
               overflow: TextOverflow.visible,
             ),

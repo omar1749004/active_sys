@@ -9,7 +9,7 @@ import 'package:get/get.dart';
 
 class MangeCostForm extends GetView<ExpensesControllerImp> {
   const MangeCostForm({required this.many, super.key});
-  final double many ;
+  final String many ;
   @override
   Widget build(BuildContext context) {
     return Padding(

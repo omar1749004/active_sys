@@ -179,8 +179,48 @@ class RenewSybscriptionsView extends StatelessWidget {
                               ],
                             ),
                           ),
+
                         ],
                       ),
+
+                        ),
+                        //
+                        //buttons
+                        //
+                        Expanded(
+                          flex: 1,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              CustomButton(
+                                text: "تجميد",
+                                ontap: () {
+                                  controller.gotoFrezze(controller.renewUser);
+                                },
+                              ),
+                              CustomButton(
+                                text: "طباعة",
+                                ontap: () {},
+                              ),
+                              CustomButton(
+                                text: "حذف",
+                                ontap: () {},
+                              ),
+                              CustomButton(
+                                text: "تعديل",
+                                ontap: () {},
+                              ),
+                              CustomButton(
+                                text: "تجديد",
+                                ontap: () {
+                                  controller.addRenew();
+                                },
+                              )
+                            ],
+                          ),
+                        ),
+                      ],
+
                     ),
                   ),
                   //

@@ -1,20 +1,26 @@
+import 'package:active_system/controller/freeze_controller.dart';
 import 'package:active_system/core/constant/color.dart';
+import 'package:active_system/core/functions/validate_input.dart';
 import 'package:active_system/core/shared/custom_app_bar.dart';
 import 'package:active_system/core/shared/custom_date_field.dart';
 import 'package:active_system/core/shared/custom_table.dart';
 import 'package:active_system/core/shared/custome_textform_auth.dart';
 import 'package:active_system/features/manage_subscriptions/view/widgets/custom_button.dart';
 import 'package:active_system/features/manage_subscriptions/view/widgets/custom_menu.dart';
-import 'package:active_system/features/renew_subscriptions/widgets/freeeze_screen_form.dart';
+import 'package:active_system/features/freeze/widget/freeeze_screen_form.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class FreezeScreen extends StatelessWidget {
   const FreezeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    Get.put(FreezeControllerImp());
     return Scaffold(
-      body: Column(children: [
+      body:
+      GetBuilder<FreezeControllerImp>(builder: (controller) => 
+       Column(children: [
         const CustomAppBar(),
         Expanded(
           child: Row(
@@ -72,7 +78,9 @@ class FreezeScreen extends StatelessWidget {
                                   children: [
                                     CustomButton(
                                       text: "تجميد",
-                                      ontap: () {},
+                                      ontap: () {
+                                        controller.addFreeze();
+                                      },
                                     ),
                                     const SizedBox(
                                       height: 10,
@@ -92,68 +100,78 @@ class FreezeScreen extends StatelessWidget {
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    Row(
-                                      children: [
-                                        Expanded(
-                                          child: CustomeTextFormAuth(
-                                            hintText: "",
-                                            lableText: "عدد الايام",
-                                            validator: (p0) {},
+                                    Form(
+                                      key: controller.formKey,
+                                      child: Row(
+                                        children: [
+                                          Expanded(
+                                            child: CustomeTextFormAuth(
+                                                hintText: "",
+                                                lableText: "عدد الايام",
+                                                myController: controller.day,
+                                                isreadonly: true,
+                                                validator: (val) {
+                                                  return validInput(
+                                                      val!, 1, 50, "num");
+                                                }),
                                           ),
-                                        ),
-                                        const SizedBox(
-                                          width: 10,
-                                        ),
-                                        Expanded(
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            children: [
-                                              Expanded(
-                                                flex: 5,
-                                                child: CustomDateField(
-                                                    width: 200,
-                                                    height: 40,
-                                                    icon: Icons.close,
-                                                    iconSize: 18,
-                                                    fontSize: 15),
-                                              ),
-                                              const SizedBox(
-                                                width: 10,
-                                              ),
-                                              Expanded(
-                                                flex: 3,
-                                                child: Container(
-                                                  padding: const EdgeInsets
-                                                      .symmetric(
-                                                      horizontal: 25,
-                                                      vertical: 5),
-                                                  decoration: BoxDecoration(
-                                                      border: Border.all(
-                                                          color: const Color
-                                                              .fromARGB(255,
-                                                              170, 170, 170))),
-                                                  child: const Text(
-                                                    "فى تاريخ",
-                                                    style: TextStyle(
-                                                        color:
-                                                            ColorApp.thirdColor,
-                                                        fontWeight:
-                                                            FontWeight.w600),
-                                                    textAlign: TextAlign.center,
-                                                    overflow:
-                                                        TextOverflow.visible,
-                                                    softWrap: false,
+                                          const SizedBox(
+                                            width: 10,
+                                          ),
+                                          Expanded(
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                Expanded(
+                                                  flex: 5,
+                                                  child: CustomDateField(
+                                                      width: 200,
+                                                      height: 40,
+                                                      iconSize: 18,
+                                                      onChanged: (p0) {
+                                                        controller.startSearch = p0! ;
+                                                        controller.calcDays();
+                                                      },
+                                                      fontSize: 15),
+                                                ),
+                                                const SizedBox(
+                                                  width: 10,
+                                                ),
+                                                Expanded(
+                                                  flex: 3,
+                                                  child: Container(
+                                                    padding: const EdgeInsets
+                                                        .symmetric(
+                                                        horizontal: 25,
+                                                        vertical: 5),
+                                                    decoration: BoxDecoration(
+                                                        border: Border.all(
+                                                            color: const Color
+                                                                .fromARGB(255,
+                                                                170, 170, 170))),
+                                                    child: const Text(
+                                                      "فى تاريخ",
+                                                      style: TextStyle(
+                                                          color:
+                                                              ColorApp.thirdColor,
+                                                          fontWeight:
+                                                              FontWeight.w600),
+                                                      textAlign: TextAlign.center,
+                                                      overflow:
+                                                          TextOverflow.visible,
+                                                      softWrap: false,
+                                                    ),
                                                   ),
                                                 ),
-                                              ),
-                                            ],
+                                              ],
+                                            ),
                                           ),
-                                        ),
-                                        const SizedBox(
-                                          height: 20,
-                                        ),
-                                      ],
+                                          const SizedBox(
+                                            height: 20,
+                                          ),
+                                        ],
+                                      ),
                                     ),
                                     const SizedBox(
                                       height: 10,
@@ -163,8 +181,8 @@ class FreezeScreen extends StatelessWidget {
                                         Expanded(
                                           child: CustomeTextFormAuth(
                                             hintText: "",
+                                            myController: controller.note,
                                             lableText: "ملاحظات",
-                                            validator: (p0) {},
                                           ),
                                         ),
                                         const SizedBox(
@@ -178,8 +196,11 @@ class FreezeScreen extends StatelessWidget {
                                                 child: CustomDateField(
                                                     width: 150,
                                                     height: 40,
-                                                    icon: Icons.close,
                                                     iconSize: 18,
+                                                    onChanged: (p0) {
+                                                      controller.endSearch = p0! ;
+                                                      controller.calcDays();
+                                                    },
                                                     fontSize: 15),
                                               ),
                                               const SizedBox(
@@ -257,7 +278,7 @@ class FreezeScreen extends StatelessWidget {
             ],
           ),
         )
-      ]),
+      ]),)
     );
   }
 }

@@ -128,6 +128,7 @@ class AttendanceView extends StatelessWidget {
                               ],
                             ),
                           ),
+
                           //
                           //table that contains data
                           //
@@ -145,6 +146,30 @@ class AttendanceView extends StatelessWidget {
                                   "الكود",
                                   "الكود",
                                   "الكود"
+
+                        ),
+                        //
+                        //buttons
+                        //
+                        Expanded(
+                          flex: 1,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  SizedBox(
+                                    width:
+                                        MediaQuery.of(context).size.width * 0.2,
+                                    height: 40,
+                                    child:  CustomDisplyMany(
+                                        textColor: ColorApp.thirdColor,
+                                        many: controller.totalPlayer.toString(),
+                                        text: "عدد الاعبين"),
+                                  ),
+
                                 ],
                                 nameOfGlobalID: 'attendance',
                                 onRowTap: () {},

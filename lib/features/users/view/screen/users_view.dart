@@ -164,6 +164,7 @@ class UsersView extends StatelessWidget {
                         ),
                       ),
                     ),
+
                     const VerticalDivider(),
                     Expanded(
                       flex: 1,
@@ -212,6 +213,24 @@ class UsersView extends StatelessWidget {
                                 ),
                               ),
                               CustomeTextFormAuth(
+
+                                hintText: "",
+                                isShowIcone: true,
+                                myController: controller.pass,
+                                ontap:() {
+                                  controller.showPassword();
+                                  controller.changeIcone();
+                                  },
+                                lableText: "كلمة السر",
+                                icone: controller.icone,
+                                obscureText: controller.isHidepass,
+                                validator: (val) {
+                                  return validInput(val!, 4, 50, "");
+                                }),
+                            Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 12),
+                              child: CustomeTextFormAuth(
+
                                   hintText: "",
                                   isShowIcone: true,
                                   myController: controller.pass,
@@ -223,7 +242,7 @@ class UsersView extends StatelessWidget {
                                   icone: controller.icone,
                                   obscureText: controller.isHidepass,
                                   validator: (val) {
-                                    return validInput(val!, 5, 50, "");
+                                    return validInput(val!, 4, 50, "");
                                   }),
                               Padding(
                                 padding:

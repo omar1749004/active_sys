@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:active_system/core/class/statuscode.dart';
+import 'package:active_system/core/constant/app_route.dart';
 import 'package:active_system/data/models/renew_model.dart';
 import 'package:active_system/data/models/sub_mode.dart';
 import 'package:active_system/data/models/user_model.dart';
@@ -18,7 +21,7 @@ abstract class RenewController extends GetxController {
   void barcodeSearch();
   void addRenew();
   void viewAll();
-
+  void gotoFrezze(RenewModel privteModel);
   void dateSearch(DateTime startD, DateTime endD);
   void handlTable(bool isdate);
 }
@@ -51,7 +54,9 @@ class RenewControllerImp extends RenewController {
   late RenewModel renewUser;
   //search
   List<RenewModel> renewList = [];
+
   List<List<String>> dataInTable = [];
+
   bool isSearch = false;
   bool isdateSearch = true;
   DateTime startSearch = DateTime.now();
@@ -91,6 +96,7 @@ class RenewControllerImp extends RenewController {
     getTrainer();
     dateSearch(startSearch, endSearch);
     update();
+
     viewAll();
 
     super.onInit();
@@ -249,7 +255,7 @@ class RenewControllerImp extends RenewController {
       "subscriptionsId": renewUser.subscriptionsId.toString(),
       "note": note.text,
       "start": start.toString(),
-      "end": end.toString(),
+      "end": end.text,
       "offer": offe,
       "amount": amount.text,
       "amount_owed": ow,
@@ -327,7 +333,9 @@ class RenewControllerImp extends RenewController {
       List data = res["data"];
       renewList = [];
       renewList.addAll(data.map((e) => RenewModel.fromJson(e)));
+
       assignDataInsideTable();
+
       statusRequs = StatusRequst.sucsess;
     } else {
       statusRequs = StatusRequst.failure;
@@ -344,6 +352,7 @@ class RenewControllerImp extends RenewController {
       statusRequs = StatusRequst.failure;
     } else if (res["status"] == "success") {
       List data = res["data"];
+
       renewList = [];
       renewList.addAll(data.map((e) => RenewModel.fromJson(e)));
       assignDataInsideTable();
@@ -365,6 +374,7 @@ class RenewControllerImp extends RenewController {
     }
   }
 
+
   //function to assign data inside List
   void assignDataInsideTable() {
     dataInTable = [];
@@ -377,6 +387,26 @@ class RenewControllerImp extends RenewController {
         renewList[i].usersId.toString(),
         renewList[i].renewalCreate.toString(),
       ]);
+
+  @override
+  void gotoFrezze(RenewModel privteModel) {
+    
+    if (privteModel.renewalEnd?.isAfter(DateTime.now()) ?? false) {
+     Get.toNamed(AppRoute.freezescreenid,arguments: {
+        "RenewModel"  : privteModel
+    });
+    }else{
+        Get.defaultDialog(
+          title: "تحذير",
+          middleText: "اللاعب اشتراكه منتهي",
+          actions: [
+            ElevatedButton(
+                onPressed: () {
+                  Get.back();
+                },
+                child: const Text("ok")),
+          ]);
+
     }
   }
 }

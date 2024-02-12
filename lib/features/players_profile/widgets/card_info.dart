@@ -22,33 +22,33 @@ class CardInfo extends StatelessWidget {
               ),
             ),
             const CustomDisplyMany(
-                textColor: ColorApp.thirdColor, many: 100, text: "رقم العضوية"),
+                textColor: ColorApp.thirdColor, many: "100", text: "رقم العضوية"),
             const CustomDisplyMany(
-                textColor: ColorApp.thirdColor, many: 100, text: "الكود"),
+                textColor: ColorApp.thirdColor, many: "100", text: "الكود"),
             const CustomDisplyMany(
-                textColor: ColorApp.thirdColor, many: 100, text: "الاسم"),
+                textColor: ColorApp.thirdColor, many: "100", text: "الاسم"),
             const CustomDisplyMany(
-                textColor: ColorApp.thirdColor, many: 100, text: "العمر"),
+                textColor: ColorApp.thirdColor, many: "100", text: "العمر"),
             const CustomDisplyMany(
-                textColor: ColorApp.thirdColor, many: 100, text: "النوع"),
+                textColor: ColorApp.thirdColor, many: "100", text: "النوع"),
             const CustomDisplyMany(
                 textColor: ColorApp.thirdColor,
-                many: 100,
+                many: "100",
                 text: "تاريخ الميلاد"),
             const CustomDisplyMany(
                 textColor: ColorApp.thirdColor,
-                many: 100,
+                many: "100",
                 text: "تاريخ الانضمام"),
             const CustomDisplyMany(
-                textColor: ColorApp.thirdColor, many: 100, text: "البائع"),
+                textColor: ColorApp.thirdColor, many: "100", text: "البائع"),
             const CustomDisplyMany(
-                textColor: ColorApp.thirdColor, many: 100, text: "المدرب"),
+                textColor: ColorApp.thirdColor, many: "100", text: "المدرب"),
             const CustomDisplyMany(
-                textColor: ColorApp.thirdColor, many: 100, text: "موبايل"),
+                textColor: ColorApp.thirdColor, many: "100", text: "موبايل"),
             const CustomDisplyMany(
-                textColor: ColorApp.thirdColor, many: 100, text: "حساب"),
+                textColor: ColorApp.thirdColor, many: "100", text: "حساب"),
             const CustomDisplyMany(
-                textColor: ColorApp.thirdColor, many: 100, text: "ملاحظات"),
+                textColor: ColorApp.thirdColor, many: "100", text: "ملاحظات"),
           ],
         ),
       ),
