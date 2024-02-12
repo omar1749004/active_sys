@@ -52,7 +52,7 @@ class AdminControllerImp extends AdminController {
 
   @override
   void changeIcone() {
-  icone = isHidepass ? CupertinoIcons.eye_slash : CupertinoIcons.eye;
+    icone = isHidepass ? CupertinoIcons.eye_slash : CupertinoIcons.eye;
     update();
   }
 
@@ -122,38 +122,40 @@ class AdminControllerImp extends AdminController {
 
   @override
   void addAdmin() async {
-     if (formAdminKey.currentState!.validate()) {
-      if(pass.text!=repass.text)
-      {
-       Get.defaultDialog(
-       title :"Waring",
-        middleText: "Password Not Match",actions: [
-      ElevatedButton(onPressed: (){
-        Get.back();
-      }, child:const Text("Ok")) ]
-       );
-      }else{
-      statusRequs = StatusRequst.loading;
-      update();
-      
-      var res = await AdminData().add(
-        {
-          "name": name.text,
-          "type": "0",
-          "password": pass.text,
-          "note": note.text,
-          "powers": selectpowerList.toString(),
-        },
-      );
-      if (res["status"] == "failure") {
-        statusRequs = StatusRequst.failure;
-      } else if (res["status"] == "success") {
-        statusRequs = StatusRequst.sucsess;
+    if (formAdminKey.currentState!.validate()) {
+      if (pass.text != repass.text) {
+        Get.defaultDialog(
+            title: "Waring",
+            middleText: "Password Not Match",
+            actions: [
+              ElevatedButton(
+                  onPressed: () {
+                    Get.back();
+                  },
+                  child: const Text("Ok"))
+            ]);
       } else {
-        statusRequs = StatusRequst.failure;
+        statusRequs = StatusRequst.loading;
+        update();
+
+        var res = await AdminData().add(
+          {
+            "name": name.text,
+            "type": "0",
+            "password": pass.text,
+            "note": note.text,
+            "powers": selectpowerList.toString(),
+          },
+        );
+        if (res["status"] == "failure") {
+          statusRequs = StatusRequst.failure;
+        } else if (res["status"] == "success") {
+          statusRequs = StatusRequst.sucsess;
+        } else {
+          statusRequs = StatusRequst.failure;
+        }
       }
     }
-      }
     update();
   }
 }

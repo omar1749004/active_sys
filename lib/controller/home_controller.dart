@@ -15,9 +15,9 @@ abstract class HomeController extends GetxController {
   void viewAll();
   void getSub();
   void assignModel(AttendModel privetModel);
-  void  handlebarcode();
-  void  handleFunctionsAdd();
-  void rightSearch() ;
+  void handlebarcode();
+  void handleFunctionsAdd();
+  void rightSearch();
   void searchFun();
 }
 
@@ -33,13 +33,13 @@ class HomeControllerImp extends HomeController {
   late TextEditingController note;
   late TextEditingController search;
 
-GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   late AttendModel attendmodel;
   int supType = 0;
   bool isactive = false;
   List<AttendModel> attendList = [];
-
+  List<List<String>> dataInTable = [];
   final List<SubscriptionModel> _subList = [];
   List<String> subNameList = ["عام"];
   String subValue = "عام";
@@ -55,16 +55,15 @@ GlobalKey<FormState> formKey = GlobalKey<FormState>();
     note = TextEditingController();
     search = TextEditingController();
     viewAll();
-  //  getSub();
+    //  getSub();
     super.onInit();
   }
 
   selectSupType(int i) {
     if (i != supType) {
-     supType = i;
-    update();
+      supType = i;
+      update();
     }
-
   }
 
   selectActive(bool i) {
@@ -73,64 +72,64 @@ GlobalKey<FormState> formKey = GlobalKey<FormState>();
   }
 
   @override
-  void addInvition() async{
-     statusRequs = StatusRequst.loading;
-      update();
-      var res = await AttendData().addInvitation({
-        "barcode": barcode.text,
-        "adminID": "1",
-      });
-      if (res["msg"] == "subscription expired") {
-        statusRequs = StatusRequst.failure;
-        print("no");
-      } else if (res["status"] == "success") {
-        print("fukk");
-        attendmodel =  AttendModel.fromJson(res["data"]);
-          for (int i = 0; i < subNameList.length; i++) {
-            if (attendmodel.subscriptionsName == subNameList[i]) {
-              subValue = subNameList[i];
-            }
-          }
-        statusRequs = StatusRequst.sucsess;
-      } else if(res["msg"] == "invitition expired"){
-        print("noooo");
-        statusRequs = StatusRequst.failure;
+  void addInvition() async {
+    statusRequs = StatusRequst.loading;
+    update();
+    var res = await AttendData().addInvitation({
+      "barcode": barcode.text,
+      "adminID": "1",
+    });
+    if (res["msg"] == "subscription expired") {
+      statusRequs = StatusRequst.failure;
+      print("no");
+    } else if (res["status"] == "success") {
+      print("fukk");
+      attendmodel = AttendModel.fromJson(res["data"]);
+      for (int i = 0; i < subNameList.length; i++) {
+        if (attendmodel.subscriptionsName == subNameList[i]) {
+          subValue = subNameList[i];
+        }
+      }
+      statusRequs = StatusRequst.sucsess;
+    } else if (res["msg"] == "invitition expired") {
+      print("noooo");
+      statusRequs = StatusRequst.failure;
     }
-     update();
+    update();
   }
 
   @override
-  void addService()async {
-      statusRequs = StatusRequst.loading;
-      update();
-      var res = await AttendData().addInvitation({
-        "barcode": barcode.text,
-        "adminID": "1",
-      });
-      if (res["msg"] == "subscription expired") {
-        statusRequs = StatusRequst.failure;
-        print("no");
-      } else if (res["status"] == "success") {
-        print("fukk");
-        attendmodel =  AttendModel.fromJson(res["data"]);
-          for (int i = 0; i < subNameList.length; i++) {
-            if (attendmodel.subscriptionsName == subNameList[i]) {
-              subValue = subNameList[i];
-            }
-          }
-        statusRequs = StatusRequst.sucsess;
-      } else if(res["msg"] == "service expired"){
-        print("noooo");
-        statusRequs = StatusRequst.failure;
+  void addService() async {
+    statusRequs = StatusRequst.loading;
+    update();
+    var res = await AttendData().addInvitation({
+      "barcode": barcode.text,
+      "adminID": "1",
+    });
+    if (res["msg"] == "subscription expired") {
+      statusRequs = StatusRequst.failure;
+      print("no");
+    } else if (res["status"] == "success") {
+      print("fukk");
+      attendmodel = AttendModel.fromJson(res["data"]);
+      for (int i = 0; i < subNameList.length; i++) {
+        if (attendmodel.subscriptionsName == subNameList[i]) {
+          subValue = subNameList[i];
+        }
+      }
+      statusRequs = StatusRequst.sucsess;
+    } else if (res["msg"] == "service expired") {
+      print("noooo");
+      statusRequs = StatusRequst.failure;
     }
-     update();
+    update();
   }
 
   @override
-  void addSession() async{
+  void addSession() async {
     //    statusRequs = StatusRequst.loading;
     //    if(barcode.text.isEmpty &&   ){
-        
+
     //    }
     //   update();
     //   if()
@@ -159,45 +158,44 @@ GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   @override
   void addSub() async {
-      statusRequs = StatusRequst.loading;
-      update();
-      var res = await AttendData().addSub({
-        "barcode": barcode.text,
-        "adminID": "1",
-      });
-      if (res["msg"] == "subscription expired") {
-        statusRequs = StatusRequst.failure;
-        print("no");
-      } else if (res["status"] == "success") {
-        print("fukk");
-        attendmodel =  AttendModel.fromJson(res["data"]);
-          for (int i = 0; i < subNameList.length; i++) {
-            if (attendmodel.subscriptionsName == subNameList[i]) {
-              subValue = subNameList[i];
-            }
-          }
-        statusRequs = StatusRequst.sucsess;
-      } else if(res["msg"] == "not subscription"){
-        print("noooo");
-        statusRequs = StatusRequst.failure;
+    statusRequs = StatusRequst.loading;
+    update();
+    var res = await AttendData().addSub({
+      "barcode": barcode.text,
+      "adminID": "1",
+    });
+    if (res["msg"] == "subscription expired") {
+      statusRequs = StatusRequst.failure;
+      print("no");
+    } else if (res["status"] == "success") {
+      print("fukk");
+      attendmodel = AttendModel.fromJson(res["data"]);
+      for (int i = 0; i < subNameList.length; i++) {
+        if (attendmodel.subscriptionsName == subNameList[i]) {
+          subValue = subNameList[i];
+        }
+      }
+      statusRequs = StatusRequst.sucsess;
+    } else if (res["msg"] == "not subscription") {
+      print("noooo");
+      statusRequs = StatusRequst.failure;
     }
-     update();
-
+    update();
   }
 
   @override
   void assignModel(AttendModel privetModel) {
-         username.text = privetModel.usersName!;
-        phone.text = privetModel.usersPhone!;
-        barcode.text = privetModel.barcode.toString() ;
-        deadline.text = privetModel.renewalEnd.toString().substring(0,11) ;
-        note.text = privetModel.usersNote! ;
-        subValue = privetModel.subscriptionsName!;
+    username.text = privetModel.usersName!;
+    phone.text = privetModel.usersPhone!;
+    barcode.text = privetModel.barcode.toString();
+    deadline.text = privetModel.renewalEnd.toString().substring(0, 11);
+    note.text = privetModel.usersNote!;
+    subValue = privetModel.subscriptionsName!;
   }
 
   @override
   void getSub() async {
-        statusRequs = StatusRequst.loading;
+    statusRequs = StatusRequst.loading;
     update();
     var res = await SubData().view();
     if (res["status"] == "failure") {
@@ -238,86 +236,92 @@ GlobalKey<FormState> formKey = GlobalKey<FormState>();
     }
     update();
   }
-  
+
   @override
   void handlebarcode() {
-     double? mid = double.tryParse(barcode.text);
+    double? mid = double.tryParse(barcode.text);
     if (mid == null) {
       barcode.text = "";
     }
   }
-  
+
   @override
   void handleFunctionsAdd() {
-    if(supType == 0){
-
-    }else if(supType == 1){
-
-    }else if(supType == 2){
-
-    }else{
-
-    }
+    if (supType == 0) {
+    } else if (supType == 1) {
+    } else if (supType == 2) {
+    } else {}
   }
-  
+
   @override
-  void rightSearch() async{
-     statusRequs = StatusRequst.loading;
-     String? search ;
-      update();
-      if(barcode.text.isNotEmpty || (username.text.isEmpty && barcode.text.isNotEmpty)){
-        search = barcode.text ;
-      }else if(username.text.isEmpty && barcode.text.isEmpty){
-         
-      }else{
-         search = username.text ;
-      }
-      var res = await AttendData().usersSearch({
-        "search": search,
-      });
-        if (res["status"] == "success") {
-        print("fukk");
-        attendmodel =  AttendModel.fromJson(res["data"]);
-        print(attendmodel.attendanceBarcodeId);
-          for (int i = 0; i < subNameList.length; i++) {
-            if (attendmodel.subscriptionsName == subNameList[i]) {
-              subValue = subNameList[i];
-            }
-          }
-        
-        username.text = attendmodel.usersName!;
-        phone.text = attendmodel.usersPhone!;
-        barcode.text = attendmodel.barcode.toString() ;
-        deadline.text = attendmodel.renewalEnd.toString().substring(0,11) ;
-        note.text = attendmodel.usersNote! ;
-        subValue = attendmodel.subscriptionsName!;
-        statusRequs = StatusRequst.sucsess;
-      } else if(res["status"] == "failure"){
-        print("noooo");
-        statusRequs = StatusRequst.failure;
+  void rightSearch() async {
+    statusRequs = StatusRequst.loading;
+    String? search;
+    update();
+    if (barcode.text.isNotEmpty ||
+        (username.text.isEmpty && barcode.text.isNotEmpty)) {
+      search = barcode.text;
+    } else if (username.text.isEmpty && barcode.text.isEmpty) {
+    } else {
+      search = username.text;
     }
-     update();
+    var res = await AttendData().usersSearch({
+      "search": search,
+    });
+    if (res["status"] == "success") {
+      print("fukk");
+      attendmodel = AttendModel.fromJson(res["data"]);
+      print(attendmodel.attendanceBarcodeId);
+      for (int i = 0; i < subNameList.length; i++) {
+        if (attendmodel.subscriptionsName == subNameList[i]) {
+          subValue = subNameList[i];
+        }
+      }
+
+      username.text = attendmodel.usersName!;
+      phone.text = attendmodel.usersPhone!;
+      barcode.text = attendmodel.barcode.toString();
+      deadline.text = attendmodel.renewalEnd.toString().substring(0, 11);
+      note.text = attendmodel.usersNote!;
+      subValue = attendmodel.subscriptionsName!;
+      statusRequs = StatusRequst.sucsess;
+    } else if (res["status"] == "failure") {
+      print("noooo");
+      statusRequs = StatusRequst.failure;
+    }
+    update();
   }
-  
+
   @override
-  void searchFun() async{
-        statusRequs = StatusRequst.loading;
-     update();
-     var res = await AttendData().search(
-      {
-        "search": search.text
-      }
-     );
-      if (res["status"] == "failure") {
-        statusRequs = StatusRequst.failure;
-      } else if (res["status"] == "success") {
-        List data = res["data"];
-        attendList = [] ;
-        attendList.addAll(data.map((e) => AttendModel.fromJson(e)));
-        statusRequs = StatusRequst.sucsess;
-      } else {
-        statusRequs = StatusRequst.failure;
-      }
-      update();
+  void searchFun() async {
+    statusRequs = StatusRequst.loading;
+    update();
+    var res = await AttendData().search({"search": search.text});
+    if (res["status"] == "failure") {
+      statusRequs = StatusRequst.failure;
+    } else if (res["status"] == "success") {
+      List data = res["data"];
+      attendList = [];
+      attendList.addAll(data.map((e) => AttendModel.fromJson(e)));
+      statusRequs = StatusRequst.sucsess;
+    } else {
+      statusRequs = StatusRequst.failure;
+    }
+    update();
+  }
+
+  //function to assign data inside List
+  void assignDataInsideTable() {
+    dataInTable = [];
+    for (var i = 0; i < attendList.length; i++) {
+      dataInTable.add([
+        attendList[i].adminSysName.toString(),
+        attendList[i].attendanceBarcodeId.toString(),
+        attendList[i].barcode.toString(),
+        attendList[i].usersName.toString(),
+        attendList[i].attendanceStart.toString(),
+        attendList[i].barcode.toString(),
+      ]);
+    }
   }
 }

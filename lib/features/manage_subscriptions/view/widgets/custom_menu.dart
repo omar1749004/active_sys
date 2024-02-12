@@ -24,7 +24,7 @@ class CustomMenu extends StatelessWidget {
                 : Colors.white,
             text: serviceName[index],
             ontap: () {
-              Get.toNamed(serviceId[index]);
+              Get.offAndToNamed(serviceId[index]);
             },
           );
         },

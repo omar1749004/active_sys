@@ -54,6 +54,9 @@ class RenewControllerImp extends RenewController {
   late RenewModel renewUser;
   //search
   List<RenewModel> renewList = [];
+
+  List<List<String>> dataInTable = [];
+
   bool isSearch = false;
   bool isdateSearch = true;
   DateTime startSearch = DateTime.now();
@@ -93,7 +96,9 @@ class RenewControllerImp extends RenewController {
     getTrainer();
     dateSearch(startSearch, endSearch);
     update();
-  viewAll();
+
+    viewAll();
+
     super.onInit();
   }
 
@@ -298,6 +303,7 @@ class RenewControllerImp extends RenewController {
       } else if (res["status"] == "success") {
         List data = res["data"];
         renewList.addAll(data.map((e) => RenewModel.fromJson(e)));
+        assignDataInsideTable();
         statusRequs = StatusRequst.sucsess;
       } else {
         statusRequs = StatusRequst.failure;
@@ -327,6 +333,9 @@ class RenewControllerImp extends RenewController {
       List data = res["data"];
       renewList = [];
       renewList.addAll(data.map((e) => RenewModel.fromJson(e)));
+
+      assignDataInsideTable();
+
       statusRequs = StatusRequst.sucsess;
     } else {
       statusRequs = StatusRequst.failure;
@@ -343,11 +352,10 @@ class RenewControllerImp extends RenewController {
       statusRequs = StatusRequst.failure;
     } else if (res["status"] == "success") {
       List data = res["data"];
-      
+
       renewList = [];
       renewList.addAll(data.map((e) => RenewModel.fromJson(e)));
-      renewUser = renewList[0];
-      gotoFrezze(renewUser);
+      assignDataInsideTable();
       statusRequs = StatusRequst.sucsess;
     } else {
       statusRequs = StatusRequst.failure;
@@ -365,6 +373,20 @@ class RenewControllerImp extends RenewController {
       viewAll();
     }
   }
+
+
+  //function to assign data inside List
+  void assignDataInsideTable() {
+    dataInTable = [];
+    for (var i = 0; i < renewList.length; i++) {
+      dataInTable.add([
+        renewList[i].renewalId.toString(),
+        renewList[i].usersCreate.toString(),
+        renewList[i].barcode.toString(),
+        renewList[i].usersName.toString(),
+        renewList[i].usersId.toString(),
+        renewList[i].renewalCreate.toString(),
+      ]);
 
   @override
   void gotoFrezze(RenewModel privteModel) {
@@ -384,6 +406,7 @@ class RenewControllerImp extends RenewController {
                 },
                 child: const Text("ok")),
           ]);
+
     }
   }
 }
