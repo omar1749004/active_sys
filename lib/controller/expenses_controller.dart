@@ -23,6 +23,7 @@ class ExpensesControllerImp extends ExpensesController {
   double? totalExpenses = 0;
 
   List<ExpensesModel> expensesList = [];
+  List<List<String>> dataInTable = [];
   late ExpensesModel expensesModel;
   late TextEditingController reason;
   late TextEditingController amount;
@@ -37,6 +38,7 @@ class ExpensesControllerImp extends ExpensesController {
     search = TextEditingController();
     amount.text = "0";
     dateSearch(startSearch, endSearch);
+    viewAll();
     super.onInit();
   }
 
@@ -57,6 +59,7 @@ class ExpensesControllerImp extends ExpensesController {
         totalExpenses = double.tryParse(res["moreInfo"][0]["totalExpenses"]);
         expensesList = [];
         expensesList.addAll(data.map((e) => ExpensesModel.fromJson(e)));
+        assignDataInsideTable();
         statusRequs = StatusRequst.sucsess;
       } else {
         statusRequs = StatusRequst.failure;
@@ -74,10 +77,11 @@ class ExpensesControllerImp extends ExpensesController {
       statusRequs = StatusRequst.failure;
     } else if (res["status"] == "success") {
       List data = res["data"];
-      
+
       totalExpenses = double.tryParse(res["moreInfo"][0]["totalExpenses"]);
       expensesList = [];
       expensesList.addAll(data.map((e) => ExpensesModel.fromJson(e)));
+      assignDataInsideTable();
       statusRequs = StatusRequst.sucsess;
     } else {
       statusRequs = StatusRequst.failure;
@@ -149,17 +153,33 @@ class ExpensesControllerImp extends ExpensesController {
       print(data);
       expensesList = [];
       expensesList.addAll(data.map((e) => ExpensesModel.fromJson(e)));
+
+      assignDataInsideTable();
+
       statusRequs = StatusRequst.sucsess;
     } else {
       statusRequs = StatusRequst.failure;
     }
     update();
   }
-  
+
   @override
   void assignModel(ExpensesModel privetModel) {
-    reason.text = privetModel.expensesReason ?? "" ;
-    amount.text = privetModel.expensesValue.toString() ;
+    reason.text = privetModel.expensesReason ?? "";
+    amount.text = privetModel.expensesValue.toString();
+  }
+
+//function to assign data inside List
+  void assignDataInsideTable() {
+    dataInTable = [];
+    for (var i = 0; i < expensesList.length; i++) {
+      dataInTable.add([
+        expensesList[i].expensesId.toString(),
+        expensesList[i].expensesValue.toString(),
+        expensesList[i].expensesReason.toString(),
+        expensesList[i].expensesDate.toString(),
+      ]);
+    }
   }
 }
 

@@ -6,13 +6,13 @@ import 'package:active_system/core/shared/custom_Botton1.dart';
 import 'package:active_system/core/shared/custom_app_bar.dart';
 import 'package:active_system/core/shared/custom_date_field.dart';
 import 'package:active_system/core/shared/custom_table_header.dart';
+import 'package:active_system/core/shared/global_variable.dart';
+import 'package:active_system/core/shared/loading_indecator.dart';
 import 'package:active_system/features/manage_cost/widgets/manage_cost_form.dart';
 import 'package:active_system/features/manage_subscriptions/view/widgets/custom_button.dart';
 import 'package:active_system/features/manage_subscriptions/view/widgets/custom_menu.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_state_manager/src/simple/list_notifier.dart';
-import 'package:loading_indicator/loading_indicator.dart';
 
 class ManageCostView extends StatefulWidget {
   const ManageCostView({super.key});
@@ -29,28 +29,7 @@ class _ManageCostViewState extends State<ManageCostView> {
       body: GetBuilder<ExpensesControllerImp>(
         builder: (controller) {
           if (controller.statusRequs == StatusRequst.loading) {
-            return Container(
-              width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height,
-              color: Colors.white,
-              child: const Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  SizedBox(
-                    width: 60,
-                    height: 60,
-                    child: LoadingIndicator(
-                      colors: [
-                        ColorApp.kPrimaryColor,
-                        ColorApp.secondColor,
-                        ColorApp.thirdColor
-                      ],
-                      indicatorType: Indicator.lineSpinFadeLoader,
-                    ),
-                  ),
-                ],
-              ),
-            );
+            return const CustomLoadingIndecator();
           } else {
             return Column(
               children: [
@@ -67,7 +46,7 @@ class _ManageCostViewState extends State<ManageCostView> {
                       //
                       //left menu
                       //
-                      CustomMenu(
+                      const CustomMenu(
                         pageName: "ادارة المصروفات",
                       ),
                       //
@@ -164,82 +143,24 @@ class _ManageCostViewState extends State<ManageCostView> {
                               Expanded(
                                 flex: 6,
                                 child: Container(
-                                  color: Color.fromARGB(255, 218, 218, 218),
+                                  color:
+                                      const Color.fromARGB(255, 218, 218, 218),
                                   child: CustomModernTable(
-                                    data: [
-                                      [
-                                        "aaaaa",
-                                        "bbbbbb",
-                                        "cccccccc",
-                                        "qqqqqqqqqqqqq",
-                                        "eeeeeee",
-                                        "mmmmmmm"
-                                      ],
-                                      [
-                                        "aaaaa",
-                                        "bbbbbb",
-                                        "cccccccc",
-                                        "qqqqqqqqqqqqq",
-                                        "eeeeeee",
-                                        "mmmmmmm"
-                                      ],
-                                      [
-                                        "aaaaa",
-                                        "bbbbbb",
-                                        "cccccccc",
-                                        "qqqqqqqqqqqqq",
-                                        "eeeeeee",
-                                        "mmmmmmm"
-                                      ],
-                                      [
-                                        "aaaaa",
-                                        "bbbbbb",
-                                        "cccccccc",
-                                        "qqqqqqqqqqqqq",
-                                        "eeeeeee",
-                                        "mmmmmmm"
-                                      ],
-                                      [
-                                        "aaaaa",
-                                        "bbbbbb",
-                                        "cccccccc",
-                                        "qqqqqqqqqqqqq",
-                                        "eeeeeee",
-                                        "mmmmmmm"
-                                      ],
-                                      [
-                                        "aaaaa",
-                                        "bbbbbb",
-                                        "cccccccc",
-                                        "qqqqqqqqqqqqq",
-                                        "eeeeeee",
-                                        "mmmmmmm"
-                                      ],
-                                      [
-                                        "dddddddd",
-                                        "fffffffff",
-                                        "vvvvvvvvv",
-                                        "pppppp",
-                                        "ooooooooo",
-                                        "xxxxxxx"
-                                      ]
-                                    ],
+                                    data: controller.dataInTable,
                                     widths: const [
+                                      100,
+                                      150,
                                       250,
                                       250,
-                                      200,
-                                      200,
-                                      200,
-                                      100
                                     ],
                                     header: const [
-                                      "ألاسم",
-                                      "ملاحظات",
-                                      "الرقم المسلسل",
-                                      "الكود",
-                                      "الكود",
-                                      "الكود"
+                                      "رقم التسلسل",
+                                      "قيمة المصروف",
+                                      "سبب الصرف",
+                                      "تاريخ الصرف",
                                     ],
+                                    nameOfGlobalID: 'manageCost',
+                                    onRowTap: () {},
                                   ),
                                 ),
                               ),

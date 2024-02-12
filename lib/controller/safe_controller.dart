@@ -27,6 +27,7 @@ class SafeControllerImp extends SafeController {
   int typeOfSafe = 3;
 
   List<SafeModel> safeList = [];
+  List<List<String>> dataInTable = [];
   late TextEditingController reason;
   late TextEditingController amount;
   late TextEditingController adminName;
@@ -49,8 +50,8 @@ class SafeControllerImp extends SafeController {
     update();
     if (isdateSearch) {
       var res = await SafeData().dateSearch({
-        "start_date": startD.toString().substring(0,11),
-        "end_date": endD.toString().substring(0,11),
+        "start_date": startD.toString().substring(0, 11),
+        "end_date": endD.toString().substring(0, 11),
       });
       if (res["status"] == "failure") {
         statusRequs = StatusRequst.failure;
@@ -64,6 +65,7 @@ class SafeControllerImp extends SafeController {
         toralSafe = toralIncoming - toralOutcoming;
         safeList = [];
         safeList.addAll(data.map((e) => SafeModel.fromJson(e)));
+        assignDataInsideTable();
         statusRequs = StatusRequst.sucsess;
       } else {
         statusRequs = StatusRequst.failure;
@@ -86,6 +88,7 @@ class SafeControllerImp extends SafeController {
       toralSafe = toralIncoming - toralOutcoming;
       safeList = [];
       safeList.addAll(data.map((e) => SafeModel.fromJson(e)));
+      assignDataInsideTable();
       statusRequs = StatusRequst.sucsess;
     } else {
       statusRequs = StatusRequst.failure;
@@ -109,8 +112,8 @@ class SafeControllerImp extends SafeController {
   void changeSfarType(int type) {
     if (typeOfSafe != type) {
       typeOfSafe = type;
-      incoming =0;
-      outgoing =0;
+      incoming = 0;
+      outgoing = 0;
       changeDate();
       changeReson();
       update();
@@ -143,9 +146,8 @@ class SafeControllerImp extends SafeController {
 
   @override
   void addTrandsAction() async {
-    if (formKey.currentState!.validate()) 
-    {
-       statusRequs = StatusRequst.loading;
+    if (formKey.currentState!.validate()) {
+      statusRequs = StatusRequst.loading;
       update();
       var res = await SafeData().add(
         {
@@ -163,9 +165,23 @@ class SafeControllerImp extends SafeController {
       } else {
         statusRequs = StatusRequst.failure;
       }
-
     }
     update();
   }
-}
 
+  //function to assign data inside List
+  void assignDataInsideTable() {
+    dataInTable = [];
+    for (var i = 0; i < safeList.length; i++) {
+      dataInTable.add([
+        safeList[i].safeId.toString(),
+        safeList[i].safeDesc.toString(),
+        safeList[i].safeDate.toString(),
+        safeList[i].safeIncoming.toString(),
+        safeList[i].safeOutgoing.toString(),
+        safeList[i].remaining.toString(),
+        safeList[i].adminSysName.toString(),
+      ]);
+    }
+  }
+}

@@ -2,7 +2,8 @@
 
 //const String linkServerName = "http://10.0.2.2/activegym_app/system";
 const String linkServerName =
-    "https://124a-197-54-170-167.ngrok-free.app/activegym_app/system";
+    "https://e0bb-197-54-194-21.ngrok-free.app/activegym_app/system";
+   
 //admin system
 const String linkAdminAdd = "$linkServerName/adminSys/add.php";
 const String linkAdminEdit = "$linkServerName/adminSys/edit.php";

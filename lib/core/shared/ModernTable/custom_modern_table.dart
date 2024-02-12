@@ -1,6 +1,7 @@
 import 'package:active_system/core/shared/global_variable.dart';
 import 'package:active_system/core/shared/ModernTable/custom_row_table.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class CustomModernTable extends StatefulWidget {
   const CustomModernTable({
@@ -8,12 +9,15 @@ class CustomModernTable extends StatefulWidget {
     required this.data,
     required this.widths,
     required this.header,
+    required this.nameOfGlobalID,
+    required this.onRowTap,
   });
 
   final List<List<String>> data;
   final List<double> widths;
   final List<String> header;
-
+  final String nameOfGlobalID;
+  final void Function() onRowTap;
   @override
   State<CustomModernTable> createState() => _CustomModernTableState();
 }
@@ -49,14 +53,21 @@ class _CustomModernTableState extends State<CustomModernTable> {
                     widths: widget.widths,
                     isPressed: false,
                     align: Alignment.center,
+                    nameOfVar: "",
+                    ind: -1,
+                    OnTap: () {},
                   ),
                   Column(
                     children: List.generate(
-                        widget.data.length,
-                        (index) => CustomRowTable(
-                              dataCell: widget.data[index],
-                              widths: widget.widths,
-                            )),
+                      widget.data.length,
+                      (index) => CustomRowTable(
+                        dataCell: widget.data[index],
+                        widths: widget.widths,
+                        ind: index,
+                        nameOfVar: widget.nameOfGlobalID,
+                        OnTap: widget.onRowTap,
+                      ),
+                    ),
                   ),
                 ],
               ),
