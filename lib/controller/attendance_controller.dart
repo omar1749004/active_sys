@@ -9,27 +9,29 @@ abstract class AttendController extends GetxController {
   void dateSearch(DateTime startD, DateTime endD);
   // void handlTable(bool isdate);
 }
-class AttendControllerImp extends AttendController{
-   StatusRequst statusRequs = StatusRequst.non;
 
-   late TextEditingController searchVal;
-   bool isSearch = false;
-   bool isdateSearch = true;
-   DateTime startSearch = DateTime.now();
-   DateTime endSearch = DateTime.now();
-   int totalPlayer = 0 ;
-   List<AttendModel> attendList = [] ; 
-   @override
+class AttendControllerImp extends AttendController {
+  StatusRequst statusRequs = StatusRequst.non;
+
+  late TextEditingController searchVal;
+  bool isSearch = false;
+  bool isdateSearch = true;
+  DateTime startSearch = DateTime.now();
+  DateTime endSearch = DateTime.now();
+  int totalPlayer = 0;
+  List<AttendModel> attendList = [];
+  List<List<String>> dataInTable = [];
+  @override
   void onInit() {
-    searchVal =TextEditingController();
-    dateSearch(startSearch,endSearch) ;
+    searchVal = TextEditingController();
+    dateSearch(startSearch, endSearch);
     super.onInit();
   }
-  
-    @override
+
+  @override
   void dateSearch(DateTime startD, DateTime endD) async {
     statusRequs = StatusRequst.loading;
-   
+
     update();
     if (isdateSearch) {
       var res = await AttendData().dateSearch({
@@ -40,10 +42,10 @@ class AttendControllerImp extends AttendController{
         statusRequs = StatusRequst.failure;
       } else if (res["status"] == "success") {
         List data = res["data"];
-        totalPlayer = res["moreInfo"][0]["totalPlayers"] ?? 0 ;
-        attendList = [] ;
+        totalPlayer = res["moreInfo"][0]["totalPlayers"] ?? 0;
+        attendList = [];
         attendList.addAll(data.map((e) => AttendModel.fromJson(e)));
-        
+
         statusRequs = StatusRequst.sucsess;
       } else {
         statusRequs = StatusRequst.failure;
@@ -52,55 +54,67 @@ class AttendControllerImp extends AttendController{
     update();
   }
 
-  void checkSearch(String val)
-  {
-    if(val.isEmpty)
-    {
+  void checkSearch(String val) {
+    if (val.isEmpty) {
       statusRequs = StatusRequst.non;
-      isSearch =false;
-
-    }
-    else{
-      isSearch =true;
+      isSearch = false;
+    } else {
+      isSearch = true;
       _search();
     }
     update();
   }
-   
-    void _search() async{
- statusRequs = StatusRequst.loading;
-     update();
-     
-     var res = await AttendData().search(
-      {
-        "search" : searchVal.text ,
-      }
-     );
-      if (res["status"] == "failure") {
-        statusRequs = StatusRequst.failure;
-      } else if (res["status"] == "success") {
-        List data = res["data"];
-        totalPlayer = res["moreInfo"][0]["totalPlayers"] ?? 0 ;
-        
-        attendList = [] ;
-        attendList.addAll(data.map((e) => AttendModel.fromJson(e)));
-        statusRequs = StatusRequst.sucsess;
-      } else {
-        statusRequs = StatusRequst.failure;
-      }
-      update();
-  }
-    //  @override
-    // void handlTable(bool isdate) {
-    // isdateSearch =  isdate ;
-    
-    // if(isdateSearch){
-    //  dateSearch(startSearch ,endSearch) ;
-    // }else{
-    //   viewAll();
-    // }
-    
-  // }
-  
 
+  void _search() async {
+    statusRequs = StatusRequst.loading;
+    update();
+
+    var res = await AttendData().search({
+      "search": searchVal.text,
+    });
+    if (res["status"] == "failure") {
+      statusRequs = StatusRequst.failure;
+    } else if (res["status"] == "success") {
+      List data = res["data"];
+      totalPlayer = res["moreInfo"][0]["totalPlayers"] ?? 0;
+
+      attendList = [];
+      attendList.addAll(data.map((e) => AttendModel.fromJson(e)));
+
+      //assign data inside table
+      assignDataInsideTable();
+
+      statusRequs = StatusRequst.sucsess;
+    } else {
+      statusRequs = StatusRequst.failure;
+    }
+    update();
+  }
+
+//function to assign data inside List 
+  void assignDataInsideTable() {
+    dataInTable = [];
+    for (var i = 0; i < attendList.length; i++) {
+      dataInTable.add([
+        attendList[i].attendanceBarcodeId.toString(),
+        attendList[i].attendanceId.toString(),
+        attendList[i].subscriptionsName.toString(),
+        attendList[i].usersName.toString(),
+        attendList[i].usersPhone.toString(),
+        attendList[i].attendanceType.toString(),
+        attendList[i].barcode.toString(),
+      ]);
+    }
+  }
+  //  @override
+  // void handlTable(bool isdate) {
+  // isdateSearch =  isdate ;
+
+  // if(isdateSearch){
+  //  dateSearch(startSearch ,endSearch) ;
+  // }else{
+  //   viewAll();
+  // }
+
+  // }
 }

@@ -16,9 +16,9 @@ abstract class HomeController extends GetxController {
   void viewAll();
   void getSub();
   void assignModel(AttendModel privetModel);
-  void  handlebarcode();
-  void  handleFunctionsAdd();
-  void rightSearch() ;
+  void handlebarcode();
+  void handleFunctionsAdd();
+  void rightSearch();
   void searchFun();
   void deleteTransAction();
 }
@@ -35,13 +35,13 @@ class HomeControllerImp extends HomeController {
   late TextEditingController note;
   late TextEditingController search;
 
-GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   late AttendModel attendmodel;
   int supType = 0;
   bool isactive = false;
   List<AttendModel> attendList = [];
-
+  List<List<String>> dataInTable = [];
   final List<SubscriptionModel> _subList = [];
   List<String> subNameList = ["عام"];
   String subValue = "عام";
@@ -58,6 +58,7 @@ GlobalKey<FormState> formKey = GlobalKey<FormState>();
     search = TextEditingController();
     viewAll();
     getSub();
+
     super.onInit();
   }
 
@@ -70,9 +71,8 @@ GlobalKey<FormState> formKey = GlobalKey<FormState>();
        ////////////////////////////////////////////////
         handleSubType();
      }
-    
-    }
 
+    }
   }
 
 void handleSubType()
@@ -109,6 +109,7 @@ void handleSubType()
   }
 
   @override
+
   void addInvition() async{
      statusRequs = StatusRequst.loading;
       update();
@@ -133,10 +134,11 @@ void handleSubType()
         globalAlert("الاعب تخطى عدد الدعوات");
         statusRequs = StatusRequst.failure;
     }
-     update();
+    update();
   }
 
   @override
+
   void addService()async {
       statusRequs = StatusRequst.loading;
       update();
@@ -160,11 +162,13 @@ void handleSubType()
       } else if(res["msg"] == "service expired"){
         globalAlert("الاعب تخطى عدد الخدمات");
         statusRequs = StatusRequst.failure;
+
     }
-     update();
+    update();
   }
 
   @override
+
   void addSession() async{
        statusRequs = StatusRequst.loading;
       update();
@@ -238,8 +242,7 @@ void handleSubType()
         globalAlert("اشتراك اللاعب منتهي");
         statusRequs = StatusRequst.failure;
     }
-     update();
-
+    update();
   }
 
   @override
@@ -255,7 +258,7 @@ void handleSubType()
 
   @override
   void getSub() async {
-        statusRequs = StatusRequst.loading;
+    statusRequs = StatusRequst.loading;
     update();
     var res = await SubData().view();
     if (res["status"] == "failure") {
@@ -302,15 +305,15 @@ void handleSubType()
     }
     update();
   }
-  
+
   @override
   void handlebarcode() {
-     double? mid = double.tryParse(barcode.text);
+    double? mid = double.tryParse(barcode.text);
     if (mid == null) {
       barcode.text = "";
     }
   }
-  
+
   @override
   void handleFunctionsAdd() {
     if(supType == 0){
@@ -318,71 +321,79 @@ void handleSubType()
     }else if(supType == 1){
      addSession();
     }else if(supType == 2){
-
-    }else{
-
-    }
+    } else {}
   }
-  
+
   @override
-  void rightSearch() async{
-     statusRequs = StatusRequst.loading;
-     String? search ;
-      update();
-      if(barcode.text.isNotEmpty || (username.text.isEmpty && barcode.text.isNotEmpty)){
-        search = barcode.text ;
-      }else if(username.text.isEmpty && barcode.text.isEmpty){
-         
-      }else{
-         search = username.text ;
-      }
-      var res = await AttendData().usersSearch({
-        "search": search,
-      });
-        if (res["status"] == "success") {
-        print("fukk");
-        attendmodel =  AttendModel.fromJson(res["data"]);
-        print(attendmodel.attendanceBarcodeId);
-          for (int i = 0; i < subNameList.length; i++) {
-            if (attendmodel.subscriptionsName == subNameList[i]) {
-              subValue = subNameList[i];
-            }
-          }
-        
-        username.text = attendmodel.usersName!;
-        phone.text = attendmodel.usersPhone!;
-        barcode.text = attendmodel.barcode.toString() ;
-        deadline.text = attendmodel.renewalEnd.toString().substring(0,11) ;
-        note.text = attendmodel.usersNote! ;
-        subValue = attendmodel.subscriptionsName!;
-        statusRequs = StatusRequst.sucsess;
-      } else if(res["status"] == "failure"){
-        print("noooo");
-        statusRequs = StatusRequst.failure;
+  void rightSearch() async {
+    statusRequs = StatusRequst.loading;
+    String? search;
+    update();
+    if (barcode.text.isNotEmpty ||
+        (username.text.isEmpty && barcode.text.isNotEmpty)) {
+      search = barcode.text;
+    } else if (username.text.isEmpty && barcode.text.isEmpty) {
+    } else {
+      search = username.text;
     }
-     update();
+    var res = await AttendData().usersSearch({
+      "search": search,
+    });
+    if (res["status"] == "success") {
+      print("fukk");
+      attendmodel = AttendModel.fromJson(res["data"]);
+      print(attendmodel.attendanceBarcodeId);
+      for (int i = 0; i < subNameList.length; i++) {
+        if (attendmodel.subscriptionsName == subNameList[i]) {
+          subValue = subNameList[i];
+        }
+      }
+
+      username.text = attendmodel.usersName!;
+      phone.text = attendmodel.usersPhone!;
+      barcode.text = attendmodel.barcode.toString();
+      deadline.text = attendmodel.renewalEnd.toString().substring(0, 11);
+      note.text = attendmodel.usersNote!;
+      subValue = attendmodel.subscriptionsName!;
+      statusRequs = StatusRequst.sucsess;
+    } else if (res["status"] == "failure") {
+      print("noooo");
+      statusRequs = StatusRequst.failure;
+    }
+    update();
   }
-  
+
   @override
-  void searchFun() async{
-        statusRequs = StatusRequst.loading;
-     update();
-     var res = await AttendData().search(
-      {
-        "search": search.text
-      }
-     );
-      if (res["status"] == "failure") {
-        statusRequs = StatusRequst.failure;
-      } else if (res["status"] == "success") {
-        List data = res["data"];
-        attendList = [] ;
-        attendList.addAll(data.map((e) => AttendModel.fromJson(e)));
-        statusRequs = StatusRequst.sucsess;
-      } else {
-        statusRequs = StatusRequst.failure;
-      }
-      update();
+  void searchFun() async {
+    statusRequs = StatusRequst.loading;
+    update();
+    var res = await AttendData().search({"search": search.text});
+    if (res["status"] == "failure") {
+      statusRequs = StatusRequst.failure;
+    } else if (res["status"] == "success") {
+      List data = res["data"];
+      attendList = [];
+      attendList.addAll(data.map((e) => AttendModel.fromJson(e)));
+      statusRequs = StatusRequst.sucsess;
+    } else {
+      statusRequs = StatusRequst.failure;
+    }
+    update();
+  }
+
+  //function to assign data inside List
+  void assignDataInsideTable() {
+    dataInTable = [];
+    for (var i = 0; i < attendList.length; i++) {
+      dataInTable.add([
+        attendList[i].adminSysName.toString(),
+        attendList[i].attendanceBarcodeId.toString(),
+        attendList[i].barcode.toString(),
+        attendList[i].usersName.toString(),
+        attendList[i].attendanceStart.toString(),
+        attendList[i].barcode.toString(),
+      ]);
+    }
   }
 
  @override

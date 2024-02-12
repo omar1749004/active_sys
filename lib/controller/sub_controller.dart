@@ -27,7 +27,8 @@ class MangeSubControllerImp extends MangeSubController {
   StatusRequst statusRequs = StatusRequst.non;
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
-  List<SubscriptionModel> sunList = [];
+  List<SubscriptionModel> subList = [];
+  List<List<String>> dataInTable = [];
   late SubscriptionModel submodel;
   String type = "0";
   late TextEditingController name;
@@ -77,7 +78,7 @@ class MangeSubControllerImp extends MangeSubController {
     maxService.text = "0";
     allowedNumber.text = "0";
     notes.text = "0";
-     viewAll();
+    viewAll();
     super.onInit();
   }
 
@@ -117,18 +118,19 @@ class MangeSubControllerImp extends MangeSubController {
     update();
   }
 
- @override
- void assignModel(SubscriptionModel privetModel){
-    
-    name.text = privetModel.subscriptionsName ;
-     type = privetModel.subscriptionsType.toString() ;
+
+  @override
+  void assignModel(SubscriptionModel privetModel) {
+    name.text = privetModel.subscriptionsName;
+    type.text = privetModel.subscriptionsType.toString();
     price.text = privetModel.subscriptionsPrice.toString();
-    day.text =  privetModel.subscriptionsDay.toString();
+    day.text = privetModel.subscriptionsDay.toString();
     sessionsNumber.text = privetModel.subscriptionsSessionsNumber.toString();
     frezzDay.text = privetModel.subscriptionsFrezzDay.toString();
     frezzNumber.text = privetModel.subscriptionsFrezzNumber.toString();
     maxFrezzDay.text = privetModel.subscriptionsMaxFrezzDay.toString();
-    invitationsNumber.text = privetModel.subscriptionsInvitationsNumber.toString();
+    invitationsNumber.text =
+        privetModel.subscriptionsInvitationsNumber.toString();
     maxInvitation.text = privetModel.subscriptionsMaxInvitation.toString();
     serviceNumber.text = privetModel.subscriptionsServiceNumber.toString();
     maxService.text = privetModel.subscriptionsMaxService.toString();
@@ -137,7 +139,8 @@ class MangeSubControllerImp extends MangeSubController {
     submodel = privetModel ;
  }
 
-   @override
+
+  @override
   void viewAll() async {
     statusRequs = StatusRequst.loading;
     update();
@@ -146,9 +149,9 @@ class MangeSubControllerImp extends MangeSubController {
       statusRequs = StatusRequst.failure;
     } else if (res["status"] == "success") {
       List data = res["data"];
-      sunList = [];
-      sunList.addAll(data.map((e) => SubscriptionModel.fromJson(e)));
-      
+      subList = [];
+      subList.addAll(data.map((e) => SubscriptionModel.fromJson(e)));
+      assignDataInsideTable();
       statusRequs = StatusRequst.sucsess;
     } else {
       statusRequs = StatusRequst.failure;
@@ -244,6 +247,7 @@ class MangeSubControllerImp extends MangeSubController {
     }
   }
 
+
 @override
   void deleteSub()async{
      var res = await SubData().delete(
@@ -267,6 +271,20 @@ class MangeSubControllerImp extends MangeSubController {
      update();
   }
 
+
+//function to assign data inside List
+  void assignDataInsideTable() {
+    dataInTable = [];
+    for (var i = 0; i < subList.length; i++) {
+      dataInTable.add([
+        subList[i].subscriptionsId.toString(),
+        subList[i].subscriptionsName,
+        subList[i].subscriptionsPrice.toString(),
+        subList[i].subscriptionsType.toString(),
+        subList[i].subscriptionsDay.toString(),
+      ]);
+    }
+  }
 }
 // void a() async {
 //   var res = await SubData().view();

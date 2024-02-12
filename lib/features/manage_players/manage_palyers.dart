@@ -77,7 +77,7 @@ class ManagePlayers extends StatelessWidget {
                             flex: 8,
                             child: Container(
                               color: const Color.fromARGB(255, 218, 218, 218),
-                              child: const CustomModernTable(
+                              child: CustomModernTable(
                                 data: [
                                   [
                                     "aaaaa",
@@ -169,6 +169,8 @@ class ManagePlayers extends StatelessWidget {
                                   "الكود",
                                   "الكود"
                                 ],
+                                nameOfGlobalID: 'managePlayers',
+                                onRowTap: () {},
                               ),
                             ),
                           ),

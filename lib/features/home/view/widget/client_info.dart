@@ -4,6 +4,7 @@ import 'package:active_system/core/functions/validate_input.dart';
 import 'package:active_system/core/shared/custom_Botton1.dart';
 import 'package:active_system/core/shared/custom_dropdown_menu.dart';
 import 'package:active_system/core/shared/custome_textform_auth.dart';
+import 'package:active_system/core/shared/global_variable.dart';
 import 'package:active_system/features/home/data/service/static/sup_type.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -14,186 +15,178 @@ class ClinetInfo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.only(top: 10, right: 20),
-      child: SingleChildScrollView(
-        child: GetBuilder<HomeControllerImp>(builder:(controller) => 
-        Form(
-          key: controller.formKey,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              
-              Row(
+        padding: const EdgeInsets.only(top: 10, right: 20),
+        child: SingleChildScrollView(
+          child: GetBuilder<HomeControllerImp>(
+            builder: (controller) => Form(
+              key: controller.formKey,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  ...List.generate(
-                      4,
-                      (index) => Expanded(
-                        child: CustomBotton1(
-                         marginTop: 10,
-                          marginBottom: 25,
-                          hieght: 50,
-                          ontap: () {
-                            controller.selectSupType(index);
-                            
-                          },
-                          text: supType[index],
-                          color: controller.supType == index
-                              ? ColorApp.onfoucosColor
-                              : ColorApp.kPrimaryColor,
+                  Row(
+                    children: [
+                      ...List.generate(
+                        4,
+                        (index) => Expanded(
+                          child: CustomBotton1(
+                            marginTop: 10,
+                            marginBottom: 25,
+                            hieght: 50,
+                            ontap: () {
+                              controller.selectSupType(index);
+                            },
+                            text: supType[index],
+                            color: controller.supType == index
+                                ? ColorApp.onfoucosColor
+                                : ColorApp.kPrimaryColor,
+                          ),
                         ),
                       ),
-                    ),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  // IconButton(
-                  //   onPressed: () {},
-                  //   icon: Icon(
-                  //     CupertinoIcons.antenna_radiowaves_left_right,
-                  //     color: ColorApp.kPrimaryColor,
-                  //     size: MediaQuery.of(context).size.width * 0.04,
-                  //   ),
-                  // ),
-                  Container(
-                    padding: const EdgeInsets.only( bottom: 30, left: 30),
-                    child: CircleAvatar(
-                      backgroundColor: ColorApp.gray,
-                      radius: MediaQuery.of(context).size.width * 0.06,
-                    ),
+                    ],
                   ),
-                  Expanded(
-                    child: Container(
-                      margin: const EdgeInsets.only(
-                        left: 30,
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      // IconButton(
+                      //   onPressed: () {},
+                      //   icon: Icon(
+                      //     CupertinoIcons.antenna_radiowaves_left_right,
+                      //     color: ColorApp.kPrimaryColor,
+                      //     size: MediaQuery.of(context).size.width * 0.04,
+                      //   ),
+                      // ),
+                      Container(
+                        padding: const EdgeInsets.only(bottom: 30, left: 30),
+                        child: CircleAvatar(
+                          backgroundColor: ColorApp.gray,
+                          radius: MediaQuery.of(context).size.width * 0.06,
+                        ),
                       ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          MaterialButton(
-                            minWidth: 180,
-                            color: ColorApp.secondColor,
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(16)),
-                            onPressed: () {
-                              controller.rightSearch();
-                            },
-                            child: const Icon(
-                              Icons.search,
-                              color: Colors.white,
-                              size: 50,
-                            ),
+                      Expanded(
+                        child: Container(
+                          margin: const EdgeInsets.only(
+                            left: 30,
                           ),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          MaterialButton(
-                            minWidth: 180,
-                              padding: const EdgeInsets.symmetric(
-                                   vertical: 20),
-                              color: ColorApp.secondColor,
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(16)),
-                              onPressed: () {
-                                controller.handleFunctionsAdd();
-                              },
-                              child: const Text(
-                                "حضور",
-                                style:
-                                    TextStyle(color: Colors.white, fontSize: 20),
-                              )),
-                               const SizedBox(
-                            height: 20,
-                          ),
-                          SizedBox(
-                            height: 120,
-                            child: CustomeTextFormAuth(
-                              fontSize: 30,
-                                hintText: "",
-                                lableText: "الكود",
-                                myController: controller.barcode,
-                                onChanged: (p0) {
-                                  controller.handlebarcode();
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              MaterialButton(
+                                minWidth: 180,
+                                color: ColorApp.secondColor,
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(16)),
+                                onPressed: () {
+                                  controller.rightSearch();
                                 },
+                                child: const Icon(
+                                  Icons.search,
+                                  color: Colors.white,
+                                  size: 50,
                                 ),
+                              ),
+                              const SizedBox(
+                                height: 10,
+                              ),
+                              MaterialButton(
+                                  minWidth: 180,
+                                  padding:
+                                      const EdgeInsets.symmetric(vertical: 20),
+                                  color: ColorApp.secondColor,
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(16)),
+                                  onPressed: () {
+                                    controller.handleFunctionsAdd();
+                                  },
+                                  child: const Text(
+                                    "حضور",
+                                    style: TextStyle(
+                                        color: Colors.white, fontSize: 20),
+                                  )),
+                              const SizedBox(
+                                height: 20,
+                              ),
+                              SizedBox(
+                                height: 120,
+                                child: CustomeTextFormAuth(
+                                  fontSize: 30,
+                                  hintText: "",
+                                  lableText: "الكود",
+                                  myController: controller.barcode,
+                                  onChanged: (p0) {
+                                    controller.handlebarcode();
+                                  },
+                                ),
+                              ),
+                            ],
                           ),
-                        ],
-                      ),
-                    ),
-                  )
-                ],
-              ),
-              CustomeTextFormAuth(
-                  hintText: "",
-                  lableText: "الاسم",
-                  myController: controller.username,
-                  validator: (val) {
-                    return validInput(val!, 2, 50, "");
-                  }),
-              const SizedBox(
-                height: 15,
-              ),
-                   CustomeTextFormAuth(
-                  hintText: "",
-                  lableText: "الهاتف",
-                  myController: controller.phone,
-                  validator: (val) {
-                    return validInput(val!, 5, 11, "num");
-                  }),
-              
-              const SizedBox(
-                height: 15,
-              ),
-              CustomeTextFormAuth(
-                  hintText: "",
-                  lableText: "الاشتراك",
-                  myController: controller.subscriptions,
-
+                        ),
+                      )
+                    ],
                   ),
-              const SizedBox(
-                height: 15,
-              ),
-              CustomeTextFormAuth(
-                  hintText: "",
-                  lableText: "انتهاء",
-                  myController: controller.deadline,
-
+                  CustomeTextFormAuth(
+                      hintText: "",
+                      lableText: "الاسم",
+                      myController: controller.username,
+                      validator: (val) {
+                        return validInput(val!, 2, 50, "");
+                      }),
+                  const SizedBox(
+                    height: 15,
                   ),
-              const SizedBox(
-                height: 15,
-              ),
-              CustomeTextFormAuth(
-                  hintText: "",
-                  lableText: "العمر",
-                  myController: controller.age,
-
+                  CustomeTextFormAuth(
+                      hintText: "",
+                      lableText: "الهاتف",
+                      myController: controller.phone,
+                      validator: (val) {
+                        return validInput(val!, 5, 11, "num");
+                      }),
+                  const SizedBox(
+                    height: 15,
                   ),
-              const SizedBox(
-                height: 15,
-              ),
-              CustomeTextFormAuth(
-                  hintText: "",
-                  lableText: "ملاحظات",
-                  myController: controller.note,
-
+                  CustomeTextFormAuth(
+                    hintText: "",
+                    lableText: "الاشتراك",
+                    myController: controller.subscriptions,
                   ),
                   const SizedBox(
-                height: 15,
-              ),
-                   CustomDropDownMenu(
+                    height: 15,
+                  ),
+                  CustomeTextFormAuth(
+                    hintText: "",
+                    lableText: "انتهاء",
+                    myController: controller.deadline,
+                  ),
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  CustomeTextFormAuth(
+                    hintText: "",
+                    lableText: "العمر",
+                    myController: controller.age,
+                  ),
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  CustomeTextFormAuth(
+                    hintText: "",
+                    lableText: "ملاحظات",
+                    myController: controller.note,
+                  ),
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  CustomDropDownMenu(
                     redius: 30,
-                        items: controller.subNameList,
-                        label: "اشتراك",
-                        intialValue: controller.subValue,
-                        onChanged: (val) {},
-                      ),
-                      
-            ],
+                    items: controller.subNameList,
+                    label: "اشتراك",
+                    intialValue: controller.subValue,
+                    onChanged: (val) {},
+                  ),
+                ],
+              ),
+            ),
           ),
-        ),
-      ),)
-    );
+        ));
   }
 }

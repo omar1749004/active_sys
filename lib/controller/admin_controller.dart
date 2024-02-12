@@ -56,7 +56,7 @@ class AdminControllerImp extends AdminController {
 
   @override
   void changeIcone() {
-  icone = isHidepass ? CupertinoIcons.eye_slash : CupertinoIcons.eye;
+    icone = isHidepass ? CupertinoIcons.eye_slash : CupertinoIcons.eye;
     update();
   }
 
@@ -164,10 +164,27 @@ class AdminControllerImp extends AdminController {
       } else if (res["status"] == "success") {
         statusRequs = StatusRequst.sucsess;
       } else {
-        statusRequs = StatusRequst.failure;
+        statusRequs = StatusRequst.loading;
+        update();
+
+        var res = await AdminData().add(
+          {
+            "name": name.text,
+            "type": "0",
+            "password": pass.text,
+            "note": note.text,
+            "powers": selectpowerList.toString(),
+          },
+        );
+        if (res["status"] == "failure") {
+          statusRequs = StatusRequst.failure;
+        } else if (res["status"] == "success") {
+          statusRequs = StatusRequst.sucsess;
+        } else {
+          statusRequs = StatusRequst.failure;
+        }
       }
     }
-      }
     update();
   }
 
