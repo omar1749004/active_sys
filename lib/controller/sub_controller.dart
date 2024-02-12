@@ -122,7 +122,6 @@ class MangeSubControllerImp extends MangeSubController {
   @override
   void assignModel(SubscriptionModel privetModel) {
     name.text = privetModel.subscriptionsName;
-    type.text = privetModel.subscriptionsType.toString();
     price.text = privetModel.subscriptionsPrice.toString();
     day.text = privetModel.subscriptionsDay.toString();
     sessionsNumber.text = privetModel.subscriptionsSessionsNumber.toString();
@@ -262,7 +261,7 @@ class MangeSubControllerImp extends MangeSubController {
       statusRequs = StatusRequst.failure;
      }else if(res["status"] =="success"){
       
-      sunList.removeWhere((element) => element.subscriptionsId ==submodel.subscriptionsId) ;
+      subList.removeWhere((element) => element.subscriptionsId ==submodel.subscriptionsId) ;
       statusRequs =StatusRequst.sucsess;
      }
      else{

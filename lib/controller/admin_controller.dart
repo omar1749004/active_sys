@@ -187,7 +187,8 @@ class AdminControllerImp extends AdminController {
     }
     update();
   }
-
+  }
+  
   @override
   void deleteAdmin()async{
      var res = await AdminData().delete(

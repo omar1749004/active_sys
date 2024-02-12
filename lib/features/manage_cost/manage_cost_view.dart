@@ -6,7 +6,6 @@ import 'package:active_system/core/shared/custom_Botton1.dart';
 import 'package:active_system/core/shared/custom_app_bar.dart';
 import 'package:active_system/core/shared/custom_date_field.dart';
 import 'package:active_system/core/shared/custom_table_header.dart';
-import 'package:active_system/core/shared/global_variable.dart';
 import 'package:active_system/core/shared/loading_indecator.dart';
 import 'package:active_system/features/manage_cost/widgets/manage_cost_form.dart';
 import 'package:active_system/features/manage_subscriptions/view/widgets/custom_button.dart';
@@ -224,7 +223,7 @@ class _ManageCostViewState extends State<ManageCostView> {
                             ),
                           ),
                           child: MangeCostForm(
-                            many: controller.totalExpenses!,
+                            many: controller.totalExpenses.toString(),
                           ),
                         ),
                       )
