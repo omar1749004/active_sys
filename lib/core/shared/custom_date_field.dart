@@ -16,7 +16,8 @@ class CustomDateField extends StatelessWidget {
       this.currentValue,
       this.isaccess = true,
       this.label = "",
-      this.borderRadius = 0});
+      DateFormat? format, 
+      this.borderRadius = 0}): format = format ?? DateFormat("yyyy-MM-dd");
   final double width;
   final double height;
   final IconData icon;
@@ -26,8 +27,8 @@ class CustomDateField extends StatelessWidget {
   final String label;
   final void Function(DateTime?)? onChanged;
   final String? Function(DateTime?)? validator;
-  final bool isaccess;
-  final format = DateFormat("yyyy-MM-dd");
+  final  bool isaccess;
+  final DateFormat format ;
   final DateTime? currentValue;
   @override
   Widget build(BuildContext context) {

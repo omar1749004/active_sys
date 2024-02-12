@@ -1,6 +1,7 @@
 import 'package:active_system/controller/sub_controller.dart';
 import 'package:active_system/core/constant/styles.dart';
 import 'package:active_system/core/functions/validate_input.dart';
+import 'package:active_system/core/shared/custom_dropdown_menu.dart';
 import 'package:active_system/core/shared/custome_textform_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -34,13 +35,16 @@ class SubscriptionForm extends GetView<MangeSubControllerImp> {
               const SizedBox(
                 height: 20,
               ),
-              CustomeTextFormAuth(
-                  hintText: "",
-                  lableText: "نوع الاشتراك",
-                  myController: controller.type,
-                  validator: (val) {
-                    return validInput(val!, 3, 50, "");
-                  }),
+              CustomDropDownMenu(
+                    redius: 30,
+                        items:const ["اشتراك","حصة"],
+                        label: "اشتراك",
+                        intialValue: "اشتراك",
+                        onChanged: (val) {
+                          controller.type = val! == "اشتراك"? "0" :"1" ;
+                          print(controller.type);
+                        },
+                      ),
               const SizedBox(
                 height: 20,
               ),

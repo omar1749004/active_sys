@@ -1,11 +1,11 @@
 import 'package:active_system/core/class/statuscode.dart';
 import 'package:active_system/core/constant/app_route.dart';
+import 'package:active_system/core/functions/global_alert.dart';
 import 'package:active_system/core/services/services.dart';
 import 'package:active_system/data/models/admin_mode.dart';
 import 'package:active_system/data/models/adminpowers_model.dart';
 import 'package:active_system/data/service/remote/admin_data.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 abstract class AuthController extends GetxController 
@@ -52,13 +52,7 @@ class AuthControllerImp extends AuthController {
      if(res["msg"] =="wrong pass")
      {
       statusRequs = StatusRequst.failure;
-       Get.defaultDialog(
-       title :"Waring",
-        middleText: "Email Or Passowrd Not Correct",actions: [
-      ElevatedButton(onPressed: (){
-        Get.back();
-      }, child:const Text("Ok")) ]
-       );
+       globalAlert("اسم المستخدم أو كلمة المرور غير صحيحة");
      }else if(res["status"] =="success"){
       adminModel = AdminSys.fromJson(res["data"]);
        organizePowers();
@@ -69,6 +63,7 @@ class AuthControllerImp extends AuthController {
       Get.offNamed(AppRoute.homeid);
       
      }else if(res["msg"] =="no powers"){
+      
        Get.offNamed(AppRoute.homeid);
      }
 

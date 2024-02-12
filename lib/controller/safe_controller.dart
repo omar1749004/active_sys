@@ -1,4 +1,6 @@
 import 'package:active_system/core/class/statuscode.dart';
+import 'package:active_system/core/constant/app_route.dart';
+import 'package:active_system/core/functions/global_alert.dart';
 import 'package:active_system/data/models/safe_model.dart';
 import 'package:active_system/data/service/remote/safe_data.dart';
 import 'package:flutter/cupertino.dart';
@@ -13,6 +15,7 @@ abstract class SafeController extends GetxController {
   String changeReson();
   String changeDate();
   void addTrandsAction();
+  void getpdf();
 }
 
 class SafeControllerImp extends SafeController {
@@ -159,6 +162,7 @@ class SafeControllerImp extends SafeController {
         },
       );
       if (res["status"] == "failure") {
+        globalAlert("يرجى إعادة المحاولة في وقت لاحق",title: "!خطأ");
         statusRequs = StatusRequst.failure;
       } else if (res["status"] == "success") {
         statusRequs = StatusRequst.sucsess;
@@ -168,6 +172,26 @@ class SafeControllerImp extends SafeController {
     }
     update();
   }
+
+ @override
+  void getpdf() async {
+    statusRequs = StatusRequst.loading;
+    update();
+    var res = await SafeData().getpdf(
+      {
+        "start_date": startSearch.toString().substring(0,11),
+        "end_date": endSearch.toString().substring(0,11),
+      }
+    );
+
+      Get.offAllNamed(AppRoute.pdfId,arguments: {
+        "pdf"  : res["data"]
+    });
+   
+    update();
+  }
+}
+
 
   //function to assign data inside List
   void assignDataInsideTable() {

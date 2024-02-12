@@ -9,6 +9,7 @@ class AppRoute {
   static const String attendanceid = "/AttendanceView";
 
   static const String playersprofileid = "/PlayersProfileView";
+    static const String pdfId = "/pdfId";
 
   static const String authid = "/authid";
   static const String freezescreenid = "/FreezeScreen";

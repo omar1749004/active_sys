@@ -1,3 +1,4 @@
+
 import 'package:active_system/core/class/api.dart';
 import 'package:active_system/link_api.dart';
 
@@ -6,6 +7,10 @@ class SafeData{
 
     view()async{
     var res =await Api().post(uri: linkSafeView, body: {});
+    return res;
+  }
+  getpdf(Map data)async{
+    var res =await Api().post(uri: linkpdfSafe, body: data);
     return res;
   }
 

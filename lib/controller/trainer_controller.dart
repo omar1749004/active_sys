@@ -1,4 +1,5 @@
 import 'package:active_system/core/class/statuscode.dart';
+import 'package:active_system/core/functions/global_alert.dart';
 import 'package:active_system/data/models/user_model.dart';
 import 'package:active_system/data/service/remote/trainer_data.dart';
 import 'package:flutter/cupertino.dart';
@@ -10,6 +11,7 @@ abstract class TrainersController extends GetxController {
   void addTrainer();
   void assignModel(UserModel privetModel);
   void organizePhone();
+  void deleteTrainer();
 }
 
 class TrainersControllerImp extends TrainersController {
@@ -92,6 +94,7 @@ class TrainersControllerImp extends TrainersController {
         },
       );
       if (res["status"] == "failure") {
+        globalAlert("يرجى إعادة المحاولة في وقت لاحق",title: "!خطأ");
         statusRequs = StatusRequst.failure;
       } else if (res["status"] == "success") {
         statusRequs = StatusRequst.sucsess;
@@ -148,6 +151,29 @@ class TrainersControllerImp extends TrainersController {
     }
     
     
+  }
+
+@override
+  void deleteTrainer()async{
+     var res = await TrainerData().delete(
+      {
+        "id" : userModel.usersId.toString(),
+      }
+     );
+     
+     if(res["status"] =="failure")
+     {
+      globalAlert("يرجى إعادة المحاولة في وقت لاحق",title: "!خطأ");
+      statusRequs = StatusRequst.failure;
+     }else if(res["status"] =="success"){
+      
+      usersList.removeWhere((element) => element.usersId ==userModel.usersId) ;
+      statusRequs =StatusRequst.sucsess;
+     }
+     else{
+      statusRequs =StatusRequst.failure;
+     }
+     update();
   }
 }
 

@@ -1,3 +1,4 @@
+import 'package:active_system/controller/mange_player.dart';
 import 'package:active_system/core/constant/color.dart';
 import 'package:active_system/core/constant/styles%20copy.dart';
 import 'package:active_system/core/functions/validate_input.dart';
@@ -7,8 +8,9 @@ import 'package:active_system/core/shared/custome_textform_auth.dart';
 import 'package:active_system/features/safe/view/widget/custom_checkbox.dart';
 import 'package:active_system/features/safe/view/widget/custom_display_many.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-class ManagePlayersForm extends StatelessWidget {
+class ManagePlayersForm extends GetView<MangeUsersControllerImp> {
   const ManagePlayersForm({super.key});
 
   @override
@@ -17,7 +19,9 @@ class ManagePlayersForm extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 10.0),
       child: SingleChildScrollView(
         child: Form(
-          child: Column(
+          key: controller.formKey,
+          child: GetBuilder<MangeUsersControllerImp>(builder:(controller) => 
+          Column(
             children: [
               const Text(
                 "إدارة الاعبين",
@@ -29,7 +33,7 @@ class ManagePlayersForm extends StatelessWidget {
               ),
               const CustomDisplyMany(
                   textColor: ColorApp.thirdColor,
-                  many: 1000,
+                  many: "1000",
                   text: "رقم العضوية"),
               const SizedBox(
                 height: 20,
@@ -37,8 +41,12 @@ class ManagePlayersForm extends StatelessWidget {
               CustomeTextFormAuth(
                   hintText: "",
                   lableText: "الكود",
+                  myController: controller.barcodeNum,
+                  onChanged: (p0) {
+                    controller.handleBarcode();
+                  },
                   validator: (val) {
-                    return validInput(val!, 3, 50, "");
+                    return validInput(val!, 1, 50, "num");
                   }),
               const SizedBox(
                 height: 10,
@@ -46,8 +54,9 @@ class ManagePlayersForm extends StatelessWidget {
               CustomeTextFormAuth(
                   hintText: "",
                   lableText: "الاسم",
+                  myController: controller.userName,
                   validator: (val) {
-                    return validInput(val!, 3, 50, "");
+                    return validInput(val!, 2, 50, "");
                   }),
               const SizedBox(
                 height: 10,
@@ -58,6 +67,7 @@ class ManagePlayersForm extends StatelessWidget {
                   Expanded(
                       flex: 2,
                       child: CustomDateField(
+                        borderRadius: 20,
                           width: 0, height: 40, iconSize: 16, fontSize: 15)),
                   const SizedBox(
                     width: 10,
@@ -76,46 +86,51 @@ class ManagePlayersForm extends StatelessWidget {
               CustomeTextFormAuth(
                   hintText: "",
                   lableText: "العمر",
+                  myController: controller.age,
+                  onChanged: (p0) {
+                    controller.handleAge();
+                  },
                   validator: (val) {
-                    return validInput(val!, 3, 50, "");
+                    return validInput(val!,1, 50, "");
                   }),
               const SizedBox(
-                height: 10,
+                height: 20,
               ),
-              const CustomDropDownMenu(
-                  label: "البائع",
-                  items: ["الكل", "مخصص"],
-                  intialValue: "مخصص"),
-              const SizedBox(
-                height: 10,
-              ),
-              const CustomDropDownMenu(
+              
+               CustomDropDownMenu(
                   label: "المدرب",
-                  items: ["الكل", "مخصص"],
-                  intialValue: "مخصص"),
+                  items: controller.trainerNameList,
+                  onChanged: (p0) {
+                    controller.changeTrainermodel(p0!);
+                  },
+                  intialValue:controller.trainerValue ),
               const SizedBox(
-                height: 10,
+                height: 20,
               ),
-              const CustomDropDownMenu(
-                  label: "الاشتراك",
-                  items: ["الكل", "مخصص"],
-                  intialValue: "مخصص"),
+               CustomDropDownMenu(
+                  label: "الإشتراك",
+                  items: controller.subNameList,
+                  onChanged: (p0) {
+                    controller.changemodel(p0!);
+                    
+                  },
+                  intialValue: controller.subValue),
               const SizedBox(
-                height: 10,
+                height: 20,
               ),
-              const CustomDropDownMenu(
-                  label: "المجموعه",
-                  items: ["الكل", "مخصص"],
-                  intialValue: "مخصص"),
-              const SizedBox(
-                height: 10,
-              ),
+              
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Expanded(
+                  
+                   Expanded(
                     child:
-                        CustomCheckBox(ischeck: true, text: "تفعيل الاشتراك"),
+                        CustomCheckBox(ischeck: controller.isactiveSub, text: "تفعيل الاشتراك",
+                        onTap: () {
+                          controller.changeActiveSub(controller.isactiveSub) ;
+                        },
+                        color: Colors.red,
+                        ),
                   ),
                   const SizedBox(
                     width: 10,
@@ -123,6 +138,8 @@ class ManagePlayersForm extends StatelessWidget {
                   Expanded(
                     child: CustomeTextFormAuth(
                         hintText: "",
+                        myController: controller.price,
+                        isreadonly: true,
                         lableText: "قيمة الاشتراك",
                         mainTextColor: Colors.red,
                         validator: (val) {
@@ -137,15 +154,16 @@ class ManagePlayersForm extends StatelessWidget {
               CustomeTextFormAuth(
                   hintText: "",
                   lableText: "تليفون",
-                  mainTextColor: Colors.red,
+                  myController: controller.phone,
                   validator: (val) {
-                    return validInput(val!, 1, 50, "num");
+                    return validInput(val!, 4, 50, "phone");
                   }),
               const SizedBox(
                 height: 10,
               ),
-              const CustomeTextFormAuth(
+               CustomeTextFormAuth(
                 hintText: "",
+                myController: controller.note,
                 lableText: "ملاحظات",
               ),
               const SizedBox(
@@ -165,7 +183,7 @@ class ManagePlayersForm extends StatelessWidget {
             ],
           ),
         ),
-      ),
+      ),),
     );
   }
 }

@@ -1,9 +1,9 @@
 //server name
 
-//const String linkServerName = "http://10.0.2.2/activegym_app/system";
-const String linkServerName =
-    "https://e0bb-197-54-194-21.ngrok-free.app/activegym_app/system";
-   
+
+// /const String linkServerName = "http://10.0.2.2/activegym_app/system";
+const String linkServerName = "http://localhost/activegym_app/system";
+
 //admin system
 const String linkAdminAdd = "$linkServerName/adminSys/add.php";
 const String linkAdmiLogin = "$linkServerName/adminSys/login.php";
@@ -73,6 +73,7 @@ const String linkSafeAdd = "$linkServerName/safe/add.php";
 const String linkSafeView = "$linkServerName/safe/view.php";
 const String linkSafeDateSearch = "$linkServerName/safe/date_search.php";
 const String linkSafeSearch = "$linkServerName/safe/search.php";
+const String linkpdfSafe = "$linkServerName/safe/create_pdf.php";
 //expenses
 const String linkExpensesAdd = "$linkServerName/expenses/add.php";
 const String linkExpensesEdit = "$linkServerName/expenses/edit.php";
@@ -87,4 +88,6 @@ const String linkFreezeView = "$linkServerName/freeze/view.php";
 const String linkFreezeDelete = "$linkServerName/freeze/delet.php";
 
 //image
-const String linkImageUpload = "$linkServerName/upload";
+const String linkImageUpload = "http://localhost/activegym_app/upload";
+//pdfs
+const String linkPDFs = "http://localhost/activegym_app/pdfs";

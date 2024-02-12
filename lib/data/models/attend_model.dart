@@ -4,7 +4,8 @@ class AttendModel {
   String attendanceStart;
   String attendanceEnd;
   int? attendanceBarcodeId;
-  int barcode;
+  int? attendanceRenewalid;
+  int? barcode;
   int attendanceType;
   String? usersName;
   String? usersPhone;
@@ -14,7 +15,7 @@ class AttendModel {
   String? adminSysName;
   String? subscriptionsName;
   int? subscriptionsSessionsNumber;
-  String renewAmountOwed;
+  String? renewAmountOwed;
   int renewalSessionAttend;
   int? isOwed;
   int? isClose;
@@ -27,6 +28,7 @@ class AttendModel {
     this.attendanceBarcodeId,
     required this.barcode,
     required this.attendanceType,
+    this.attendanceRenewalid,
     this.usersName,
     required this.renewalEnd,
     this.usersPhone,
@@ -48,6 +50,7 @@ class AttendModel {
       attendanceStart: json['attendance_start'],
       attendanceEnd: json['attendance_end'],
       attendanceBarcodeId: json['attendance_barcodeId'],
+      attendanceRenewalid:json["attendance_renewalid"],
       barcode: json['barcode'],
       attendanceType: json['attendance_type'],
       usersName: json['users_name'],
