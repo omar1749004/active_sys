@@ -1,20 +1,26 @@
+import 'package:active_system/controller/mange_player.dart';
 import 'package:active_system/core/constant/color.dart';
 import 'package:active_system/core/shared/ModernTable/custom_modern_table.dart';
 import 'package:active_system/core/shared/custom_app_bar.dart';
 import 'package:active_system/core/shared/custom_table_header.dart';
 import 'package:active_system/features/manage_players/widgets/manage_players_form.dart';
 import 'package:active_system/features/manage_players/widgets/search_tools.dart';
+import 'package:active_system/features/manage_subscriptions/view/widgets/custom_button.dart';
 import 'package:active_system/features/manage_subscriptions/view/widgets/custom_menu.dart';
 import 'package:active_system/features/safe/view/widget/custom_display_many.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class ManagePlayers extends StatelessWidget {
   const ManagePlayers({super.key});
 
   @override
   Widget build(BuildContext context) {
+    Get.put(MangeUsersControllerImp());
     return Scaffold(
-      body: Column(
+      body:
+      GetBuilder<MangeUsersControllerImp>(builder: (controller) => 
+       Column(
         children: [
           //
           //AppBar
@@ -50,11 +56,11 @@ class ManagePlayers extends StatelessWidget {
                           //
                           Row(
                             children: [
-                              const Expanded(
+                               Expanded(
                                 flex: 1,
                                 child: CustomDisplyMany(
                                     textColor: ColorApp.thirdColor,
-                                    many: 1500,
+                                    many: controller.totalPlayers.toString(),
                                     text: "عدد الاعبين"),
                               ),
                               Expanded(
@@ -66,15 +72,9 @@ class ManagePlayers extends StatelessWidget {
                               ),
                             ],
                           ),
-                          //
-                          //DropDown and checkbox for search
-                          //
-                          const Expanded(child: SearchTools()),
-                          //
-                          //table that contains data
-                          //
+                          
                           Expanded(
-                            flex: 2,
+                            flex: 8,
                             child: Container(
                               color: const Color.fromARGB(255, 218, 218, 218),
                               child: const CustomModernTable(
@@ -173,8 +173,45 @@ class ManagePlayers extends StatelessWidget {
                             ),
                           ),
                           //
-                          //buttons
+                          //DropDown and checkbox for search
                           //
+                          const Expanded(
+                            flex: 2,
+                            child: SearchTools()),
+                          //
+                          //table that contains data
+                          //
+                          Expanded(
+                            flex: 1,
+                            child: Padding(
+                              padding: const EdgeInsets.only(bottom: 20.0),
+                              child: Row(
+                                textDirection: TextDirection.rtl,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  CustomButton(
+                                    text: "أضافه",
+                                    ontap: () {
+                                      controller.addUsers();
+                                    },
+                                  ),
+                                  CustomButton(
+                                    text: "حفظ",
+                                    ontap: () {},
+                                  ),
+                                  CustomButton(
+                                    text: "تعديل",
+                                    ontap: () {},
+                                  ),
+                                  CustomButton(
+                                    text: "حذف",
+                                    ontap: () {},
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
                         ],
                       ),
                     ),
@@ -211,7 +248,7 @@ class ManagePlayers extends StatelessWidget {
             ),
           ),
         ],
-      ),
+      ),)
     );
   }
 }

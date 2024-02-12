@@ -1,4 +1,5 @@
 import 'package:active_system/core/class/statuscode.dart';
+import 'package:active_system/core/functions/global_alert.dart';
 import 'package:active_system/data/models/sub_mode.dart';
 import 'package:active_system/data/service/remote/sub_data.dart';
 import 'package:flutter/cupertino.dart';
@@ -19,6 +20,7 @@ abstract class MangeSubController extends GetxController {
   void addSub();
   void viewAll();
   void assignModel(SubscriptionModel privetModel);
+  void deleteSub();
 }
 
 class MangeSubControllerImp extends MangeSubController {
@@ -27,9 +29,8 @@ class MangeSubControllerImp extends MangeSubController {
 
   List<SubscriptionModel> sunList = [];
   late SubscriptionModel submodel;
-
+  String type = "0";
   late TextEditingController name;
-  late TextEditingController type;
   late TextEditingController specialization;
   late TextEditingController price;
   late TextEditingController day;
@@ -48,7 +49,6 @@ class MangeSubControllerImp extends MangeSubController {
   @override
   void onInit() {
     name = TextEditingController();
-    type = TextEditingController();
     specialization = TextEditingController();
     price = TextEditingController();
     day = TextEditingController();
@@ -89,7 +89,7 @@ class MangeSubControllerImp extends MangeSubController {
       var res = await SubData().add(
         {
           "name": name.text,
-          "type": "0",
+          "type": type,
           "specialization": "0",
           "price": price.text,
           "day": day.text,
@@ -106,6 +106,7 @@ class MangeSubControllerImp extends MangeSubController {
         },
       );
       if (res["status"] == "failure") {
+        globalAlert("يرجى إعادة المحاولة في وقت لاحق",title: "!خطأ");
         statusRequs = StatusRequst.failure;
       } else if (res["status"] == "success") {
         statusRequs = StatusRequst.sucsess;
@@ -120,7 +121,7 @@ class MangeSubControllerImp extends MangeSubController {
  void assignModel(SubscriptionModel privetModel){
     
     name.text = privetModel.subscriptionsName ;
-    type.text = privetModel.subscriptionsType.toString() ;
+     type = privetModel.subscriptionsType.toString() ;
     price.text = privetModel.subscriptionsPrice.toString();
     day.text =  privetModel.subscriptionsDay.toString();
     sessionsNumber.text = privetModel.subscriptionsSessionsNumber.toString();
@@ -133,7 +134,7 @@ class MangeSubControllerImp extends MangeSubController {
     maxService.text = privetModel.subscriptionsMaxService.toString();
     allowedNumber.text = privetModel.subscriptionsAllowedNumber.toString();
     notes.text = privetModel.subscriptionsNotes.toString();
-    
+    submodel = privetModel ;
  }
 
    @override
@@ -242,6 +243,30 @@ class MangeSubControllerImp extends MangeSubController {
       sessionsNumber.text = "0";
     }
   }
+
+@override
+  void deleteSub()async{
+     var res = await SubData().delete(
+      {
+        "id" : submodel.subscriptionsId.toString(),
+      }
+     );
+     
+     if(res["status"] =="failure")
+     {
+      globalAlert("يرجى إعادة المحاولة في وقت لاحق",title: "!خطأ");
+      statusRequs = StatusRequst.failure;
+     }else if(res["status"] =="success"){
+      
+      sunList.removeWhere((element) => element.subscriptionsId ==submodel.subscriptionsId) ;
+      statusRequs =StatusRequst.sucsess;
+     }
+     else{
+      statusRequs =StatusRequst.failure;
+     }
+     update();
+  }
+
 }
 // void a() async {
 //   var res = await SubData().view();

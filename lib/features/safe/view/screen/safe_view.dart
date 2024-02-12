@@ -149,7 +149,9 @@ class SafeView extends StatelessWidget {
                                   ),
                                   CustomButton(
                                     text: "حذف",
-                                    ontap: () {},
+                                    ontap: () {
+                                      controller.getpdf();
+                                    },
                                   ),
                                 ],
                               ),

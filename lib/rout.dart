@@ -3,6 +3,7 @@ import 'package:active_system/features/attendance/attendance_view.dart';
 import 'package:active_system/features/auth/view/screen/auth_view.dart';
 import 'package:active_system/core/constant/app_route.dart';
 import 'package:active_system/core/middleware/mymiddleware.dart';
+import 'package:active_system/features/create_pdf.dart';
 import 'package:active_system/features/freeze/screen/freeze_screen.dart';
 import 'package:active_system/features/home/view/screen/home.dart';
 import 'package:active_system/features/manage_cost/manage_cost_view.dart';
@@ -48,11 +49,11 @@ List<GetPage<dynamic>> route = [
   GetPage(
       name: AppRoute.attendanceid,
       page: () => const AttendanceView(),
-      middlewares: [MyMiddleWare()]),
+      ),
   GetPage(
       name: AppRoute.playersprofileid,
       page: () => const PlayersProfileView(),
-      middlewares: [MyMiddleWare()]),
+      ),
   GetPage(
     name: AppRoute.authid,
     page: () => const AuthView(),
@@ -60,13 +61,17 @@ List<GetPage<dynamic>> route = [
   GetPage(
       name: AppRoute.freezescreenid,
       page: () => const FreezeScreen(),
-      middlewares: [MyMiddleWare()]),
+      ),
   GetPage(
       name: AppRoute.treasuryregisterid,
       page: () => const TreasuryRegisterView(),
-      middlewares: [MyMiddleWare()]),
+      ),
   GetPage(
       name: AppRoute.managePlayers,
       page: () => const ManagePlayers(),
-      middlewares: [MyMiddleWare()]),
+      ),
+  GetPage(
+      name: AppRoute.pdfId,
+      page: () => const CreatePdf(),
+      ),
 ];

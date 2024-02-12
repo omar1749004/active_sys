@@ -50,7 +50,7 @@ class Api {
      await http.post(Uri.parse(uri), body: body ,headers: headers);  //myheaders
      
      if(response.statusCode == 200 || response.statusCode == 201){
-      
+
     Map data =jsonDecode(response.body);
     return data;
      }
@@ -65,7 +65,7 @@ class Api {
     }
   }
 
-  Future<dynamic> postJsonType({
+  Future<dynamic> postpdf({
     required String uri,
     required body,
     String? token,
@@ -81,12 +81,16 @@ class Api {
 
     try {
       http.Response response = await http.post(Uri.parse(uri),
-          body: jsonEncode(body), headers: headers); //myheaders
+          body: body, headers: headers); //myheaders
 
       if (response.statusCode == 200 || response.statusCode == 201) {
-        Map data = jsonDecode(response.body);
-
-        return data;
+        if (response.headers['content-type'] == 'application/pdf') {
+        // If content type is PDF, return the response body directly
+        return response.body;
+      } else {
+        // If content type is JSON, parse and return JSON data
+        return jsonDecode(response.body);
+      }
       } else {
         throw Exception(
             "there id problem with status code ${response.statusCode} with body ${jsonDecode(response.body)}");
@@ -95,7 +99,7 @@ class Api {
       print(e);
     }
   }
-
+  
   Future<dynamic> postFile(
       {required String uri, required Map body, required File file}) async {
     var request = http.MultipartRequest("POST", Uri.parse(uri));

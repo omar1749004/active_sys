@@ -1,4 +1,5 @@
 import 'package:active_system/core/class/statuscode.dart';
+import 'package:active_system/core/functions/global_alert.dart';
 import 'package:active_system/data/models/expenses_model.dart';
 import 'package:active_system/data/service/remote/expenses_data.dart';
 import 'package:flutter/cupertino.dart';
@@ -116,6 +117,7 @@ class ExpensesControllerImp extends ExpensesController {
         },
       );
       if (res["status"] == "failure") {
+        globalAlert("يرجى إعادة المحاولة في وقت لاحق",title: "!خطأ");
         statusRequs = StatusRequst.failure;
       } else if (res["status"] == "success") {
         handlTable(isdateSearch);
@@ -160,7 +162,9 @@ class ExpensesControllerImp extends ExpensesController {
   void assignModel(ExpensesModel privetModel) {
     reason.text = privetModel.expensesReason ?? "" ;
     amount.text = privetModel.expensesValue.toString() ;
+    expensesModel = privetModel ;
   }
+  
 }
 
 // import 'package:active_system/data/service/remote/expenses_data.dart';

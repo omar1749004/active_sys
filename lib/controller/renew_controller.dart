@@ -1,7 +1,6 @@
-import 'dart:io';
-
 import 'package:active_system/core/class/statuscode.dart';
 import 'package:active_system/core/constant/app_route.dart';
+import 'package:active_system/core/functions/global_alert.dart';
 import 'package:active_system/data/models/renew_model.dart';
 import 'package:active_system/data/models/sub_mode.dart';
 import 'package:active_system/data/models/user_model.dart';
@@ -24,6 +23,7 @@ abstract class RenewController extends GetxController {
   void gotoFrezze(RenewModel privteModel);
   void dateSearch(DateTime startD, DateTime endD);
   void handlTable(bool isdate);
+  void deleteRenew();
 }
 
 class RenewControllerImp extends RenewController {
@@ -257,6 +257,7 @@ class RenewControllerImp extends RenewController {
       "renewal_adminId": "1",
     });
     if (res["status"] == "failure") {
+      globalAlert("يرجى إعادة المحاولة في وقت لاحق",title: "!خطأ");
       statusRequs = StatusRequst.failure;
     } else if (res["status"] == "success") {
       statusRequs = StatusRequst.sucsess;
@@ -374,82 +375,31 @@ class RenewControllerImp extends RenewController {
         "RenewModel"  : privteModel
     });
     }else{
-        Get.defaultDialog(
-          title: "تحذير",
-          middleText: "اللاعب اشتراكه منتهي",
-          actions: [
-            ElevatedButton(
-                onPressed: () {
-                  Get.back();
-                },
-                child: const Text("ok")),
-          ]);
+      globalAlert("اللاعب اشتراكه منتهي",title: "!خطأ");
     }
   }
+
+@override
+  void deleteRenew()async{
+     var res = await RenewData().delete(
+      {
+        "id" : renewUser.renewalId.toString(),
+      }
+     );
+     
+     if(res["status"] =="failure")
+     {
+      globalAlert("يرجى إعادة المحاولة في وقت لاحق",title: "!خطأ");
+      statusRequs = StatusRequst.failure;
+     }else if(res["status"] =="success"){
+      
+      renewList.removeWhere((element) => element.renewalId ==renewUser.renewalId) ;
+      statusRequs =StatusRequst.sucsess;
+     }
+     else{
+      statusRequs =StatusRequst.failure;
+     }
+     update();
+  }
+
 }
-
-
-
-
-// var res = await RenewData().add(
-//   {
-//     "userid": text,
-//     "name": type,
-//     "captinId": ,
-//     "barcodeId": note,
-//     "subscriptionsId": powers,
-//     "note": text,
-//     "start": type,
-//     "end": sha1(password.text),
-//     "offer": note,
-//     "amount": powers,
-//     "amount_owed": sha1(password.text),
-//     "renewal_adminId": note,
-//   },
-// );
-// var res = await RenewData().edit(
-//   {
-//     "id": text,
-//     "userid": text,
-//     "name": type,
-//     "captinId": ,
-//     "barcodeId": note,
-//     "subscriptionsId": powers,
-//     "note": text,
-//     "start": type,
-//     "end": sha1(password.text),
-//     "offer": note,
-//     "amount": powers,
-//     "amount_owed": sha1(password.text),
-//     "renewal_adminId": note,
-//   },
-// );
-
-
-// var res = await RenewData().dateSearch(
-//   {
-//     "start_date": text,
-//     "end_date": text,
-//   }
-
-// );
-// var res = await RenewData().delete(
-//   {
-//    "id": id,
-//   }
-  
-// );
-// //barcode and name
-// var res = await RenewData().search(
-//   {
-//     "search": text,
-//   }
-  
-// );
-// // just barcode 
-// var res = await RenewData().usersSearch(
-//   {
-//     "search": text,
-//   }
-  
-// );

@@ -1,4 +1,5 @@
 import 'package:active_system/core/class/statuscode.dart';
+import 'package:active_system/core/functions/global_alert.dart';
 import 'package:active_system/data/models/admin_mode.dart';
 import 'package:active_system/data/models/adminpowers_model.dart';
 import 'package:active_system/data/service/remote/admin_data.dart';
@@ -16,6 +17,8 @@ abstract class AdminController extends GetxController {
   void changecheckvalue(int index, bool value);
   void assignSelectAdminPowers(List<int> selectpower);
   void addAdmin();
+  void deleteAdmin();
+  void assignModel(AdminSys privetModel);
 }
 
 class AdminControllerImp extends AdminController {
@@ -23,6 +26,7 @@ class AdminControllerImp extends AdminController {
   late TextEditingController search;
   List<AdminPower> adminPoewrList = [];
   List<AdminSys> adminmodelList = [];
+  late AdminSys adminmModel ;
   late TextEditingController name;
   late TextEditingController pass;
   late TextEditingController repass;
@@ -120,6 +124,15 @@ class AdminControllerImp extends AdminController {
     update();
   }
 
+ @override
+  void assignModel(AdminSys privetModel) {
+    name.text = privetModel.adminSysName ;
+    pass.text = privetModel.adminSysPassword.toString() ;
+    note.text = privetModel.adminSysNote.toString() ;
+    adminmModel = privetModel ;
+    
+  }
+  
   @override
   void addAdmin() async {
      if (formAdminKey.currentState!.validate()) {
@@ -146,6 +159,7 @@ class AdminControllerImp extends AdminController {
         },
       );
       if (res["status"] == "failure") {
+        globalAlert("يرجى إعادة المحاولة في وقت لاحق",title: "!خطأ");
         statusRequs = StatusRequst.failure;
       } else if (res["status"] == "success") {
         statusRequs = StatusRequst.sucsess;
@@ -156,6 +170,30 @@ class AdminControllerImp extends AdminController {
       }
     update();
   }
+
+  @override
+  void deleteAdmin()async{
+     var res = await AdminData().delete(
+      {
+        "id" : adminmModel.adminSysId.toString(),
+      }
+     );
+     
+     if(res["status"] =="failure")
+     {
+      globalAlert("يرجى إعادة المحاولة في وقت لاحق",title: "!خطأ");
+      statusRequs = StatusRequst.failure;
+     }else if(res["status"] =="success"){
+      
+      adminmodelList.removeWhere((element) => element.adminSysId ==adminmModel.adminSysId) ;
+      statusRequs =StatusRequst.sucsess;
+     }
+     else{
+      statusRequs =StatusRequst.failure;
+     }
+     update();
+  }
+  
 }
 
 // var res = await AdminData().add(

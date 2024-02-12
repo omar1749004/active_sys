@@ -51,8 +51,6 @@ class AttendControllerImp extends AttendController{
     }
     update();
   }
-   
-   
 
   void checkSearch(String val)
   {
