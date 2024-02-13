@@ -4,7 +4,6 @@ import 'package:active_system/core/functions/validate_input.dart';
 import 'package:active_system/core/shared/custom_Botton1.dart';
 import 'package:active_system/core/shared/custom_dropdown_menu.dart';
 import 'package:active_system/core/shared/custome_textform_auth.dart';
-import 'package:active_system/core/shared/global_variable.dart';
 import 'package:active_system/features/home/data/service/static/sup_type.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

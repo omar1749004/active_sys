@@ -12,6 +12,7 @@ abstract class AttendController extends GetxController {
 
 class AttendControllerImp extends AttendController {
   StatusRequst statusRequs = StatusRequst.non;
+  StatusRequst firstState = StatusRequst.non;
 
   late TextEditingController searchVal;
   bool isSearch = false;
@@ -22,10 +23,14 @@ class AttendControllerImp extends AttendController {
   List<AttendModel> attendList = [];
   List<List<String>> dataInTable = [];
   @override
-  void onInit() {
+  void onInit() async{
     searchVal = TextEditingController();
+        firstState = StatusRequst.loading;
+    await  Future.delayed(const Duration(milliseconds: 100));
+    firstState = StatusRequst.failure;
+    
     dateSearch(startSearch, endSearch);
-
+    
     super.onInit();
   }
 

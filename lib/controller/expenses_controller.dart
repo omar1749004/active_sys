@@ -18,6 +18,8 @@ abstract class ExpensesController extends GetxController {
 
 class ExpensesControllerImp extends ExpensesController {
   StatusRequst statusRequs = StatusRequst.non;
+  StatusRequst firstState = StatusRequst.non;
+
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
   DateTime startSearch = DateTime.now();
   DateTime endSearch = DateTime.now();
@@ -33,14 +35,19 @@ class ExpensesControllerImp extends ExpensesController {
   late TextEditingController search;
 
   @override
-  void onInit() {
+  void onInit() async{
     reason = TextEditingController();
     amount = TextEditingController();
     note = TextEditingController();
     search = TextEditingController();
     amount.text = "0";
+    firstState = StatusRequst.loading;
+    await  Future.delayed(const Duration(milliseconds: 100));
+    firstState = StatusRequst.failure;
     dateSearch(startSearch, endSearch);
-    viewAll();
+    statusRequs = StatusRequst.loading;
+    await  Future.delayed(const Duration(milliseconds: 300));
+    statusRequs = StatusRequst.failure;
     super.onInit();
   }
 

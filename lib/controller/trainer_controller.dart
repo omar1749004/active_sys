@@ -17,6 +17,7 @@ abstract class TrainersController extends GetxController {
 
 class TrainersControllerImp extends TrainersController {
   StatusRequst statusRequs = StatusRequst.non;
+  StatusRequst firstState = StatusRequst.non;
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   List<UserModel> usersList = [];
@@ -37,7 +38,7 @@ class TrainersControllerImp extends TrainersController {
   late TextEditingController search;
 
   @override
-  void onInit() {
+  void onInit() async{
     name = TextEditingController();
     phone = TextEditingController();
     phone1 = TextEditingController();
@@ -45,6 +46,9 @@ class TrainersControllerImp extends TrainersController {
     address = TextEditingController();
     note = TextEditingController();
     search = TextEditingController();
+    firstState = StatusRequst.loading;
+    await  Future.delayed(const Duration(milliseconds: 100));
+    firstState = StatusRequst.failure;
     viewAll();
     super.onInit();
   }
@@ -69,6 +73,7 @@ class TrainersControllerImp extends TrainersController {
     } else {
       statusRequs = StatusRequst.failure;
     }
+    await  Future.delayed(const Duration(milliseconds: 300));
     update();
   }
 

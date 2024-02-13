@@ -22,7 +22,7 @@ class UsersView extends StatelessWidget {
     Get.put(AdminControllerImp());
     return Scaffold(
       body: GetBuilder<AdminControllerImp>(builder: (controller) {
-        if (controller.statusRequs == StatusRequst.loading) {
+        if (controller.firstState == StatusRequst.loading) {
           return const CustomLoadingIndecator();
         } else {
           return Column(children: [
@@ -46,8 +46,10 @@ class UsersView extends StatelessWidget {
                                 header: "اداره المستخدمين"),
                             Expanded(
                                 flex: 6,
-                                child: Container(
-                                  color: Color.fromARGB(255, 218, 218, 218),
+                                child:
+                                controller.statusRequs == StatusRequst.loading? const CustomLoadingIndecator():
+                                 Container(
+                                  color:const Color.fromARGB(255, 218, 218, 218),
                                   child: CustomModernTable(
                                     data: controller.dataInTable,
                                     widths: const [

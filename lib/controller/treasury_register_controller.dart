@@ -12,6 +12,7 @@ abstract class TreasuryRegisterController extends GetxController {
 
 class TreasuryRegisterControllerImp extends TreasuryRegisterController {
   StatusRequst statusRequs = StatusRequst.non;
+  StatusRequst firstState = StatusRequst.non;
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   DateTime startSearch = DateTime.now();
@@ -27,9 +28,12 @@ class TreasuryRegisterControllerImp extends TreasuryRegisterController {
   double toralOutcoming = 0;
 
   @override
-  void onInit() {
+  void onInit()async {
     reason = TextEditingController();
-
+   firstState = StatusRequst.loading;
+    await  Future.delayed(const Duration(milliseconds: 100));
+    firstState = StatusRequst.failure;
+   dateSearch(startSearch,endSearch);
     super.onInit();
   }
 
@@ -59,6 +63,7 @@ class TreasuryRegisterControllerImp extends TreasuryRegisterController {
     } else {
       statusRequs = StatusRequst.failure;
     }
+    await  Future.delayed(const Duration(milliseconds: 300));
     update();
   }
 

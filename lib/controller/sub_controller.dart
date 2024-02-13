@@ -160,6 +160,7 @@ class MangeSubControllerImp extends MangeSubController {
     } else {
       statusRequs = StatusRequst.failure;
     }
+    await  Future.delayed(const Duration(milliseconds: 300));
     update();
   }
 

@@ -1,4 +1,5 @@
 import 'package:active_system/controller/home_controller.dart';
+import 'package:active_system/core/class/statuscode.dart';
 import 'package:active_system/core/constant/styles.dart';
 import 'package:active_system/core/functions/customDialogForHomepage.dart';
 import 'package:active_system/core/shared/ModernTable/custom_modern_table.dart';
@@ -19,8 +20,7 @@ class HomePage extends StatelessWidget {
     Get.put(HomeControllerImp());
     return Scaffold(
       body: GetBuilder<HomeControllerImp>(builder: (controller) {
-        //if (controller.statusRequs == StatusRequst.loading) {
-        if (false) {
+        if (controller.firstState == StatusRequst.loading) {
           return const CustomLoadingIndecator();
         } else {
           return Column(
@@ -53,7 +53,9 @@ class HomePage extends StatelessWidget {
                                       header: "سجل الحضور اليومي"),
                                   Expanded(
                                     flex: 6,
-                                    child: Container(
+                                    child:
+                                    controller.statusRequs == StatusRequst.loading ?const CustomLoadingIndecator():
+                                     Container(
                                       color: const Color.fromARGB(
                                           255, 218, 218, 218),
                                       child: CustomModernTable(
