@@ -11,6 +11,8 @@ class CustomModernTable extends StatefulWidget {
     required this.header,
     required this.nameOfGlobalID,
     required this.onRowTap,
+    this.thisPageIsHomePage = false,
+    required this.showDialog,
   });
 
   final List<List<String>> data;
@@ -18,6 +20,8 @@ class CustomModernTable extends StatefulWidget {
   final List<String> header;
   final String nameOfGlobalID;
   final void Function() onRowTap;
+  final void Function() showDialog;
+  final bool thisPageIsHomePage;
   @override
   State<CustomModernTable> createState() => _CustomModernTableState();
 }
@@ -51,11 +55,12 @@ class _CustomModernTableState extends State<CustomModernTable> {
                   CustomRowTable(
                     dataCell: widget.header,
                     widths: widget.widths,
-                    isPressed: false,
+                    isClickable: false,
                     align: Alignment.center,
                     nameOfVar: "",
                     ind: -1,
                     OnTap: () {},
+                    showDialog: () {},
                   ),
                   Column(
                     children: List.generate(
@@ -66,6 +71,8 @@ class _CustomModernTableState extends State<CustomModernTable> {
                         ind: index,
                         nameOfVar: widget.nameOfGlobalID,
                         OnTap: widget.onRowTap,
+                        thisPageIsHomePage: widget.thisPageIsHomePage,
+                        showDialog: widget.showDialog,
                       ),
                     ),
                   ),

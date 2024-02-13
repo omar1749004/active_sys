@@ -160,6 +160,7 @@ class _ManageCostViewState extends State<ManageCostView> {
                                     ],
                                     nameOfGlobalID: 'manageCost',
                                     onRowTap: () {},
+                                    showDialog: () {},
                                   ),
                                 ),
                               ),
@@ -255,12 +256,11 @@ class _ManageCostViewState extends State<ManageCostView> {
                         ),
                       ),
                     ),
-                    child:  MangeCostForm(
+                    child: MangeCostForm(
                       many: controller.totalExpenses.toString(),
                     ),
                   ),
                 )
-
               ],
             );
           }

@@ -1,6 +1,6 @@
 import 'package:active_system/controller/home_controller.dart';
-import 'package:active_system/core/class/statuscode.dart';
 import 'package:active_system/core/constant/styles.dart';
+import 'package:active_system/core/functions/customDialogForHomepage.dart';
 import 'package:active_system/core/shared/ModernTable/custom_modern_table.dart';
 import 'package:active_system/core/shared/custom_app_bar.dart';
 import 'package:active_system/core/shared/custom_table_header.dart';
@@ -54,66 +54,10 @@ class HomePage extends StatelessWidget {
                                   Expanded(
                                     flex: 6,
                                     child: Container(
-                                      color: Color.fromARGB(255, 218, 218, 218),
+                                      color: const Color.fromARGB(
+                                          255, 218, 218, 218),
                                       child: CustomModernTable(
-                                        data: [
-                                          [
-                                            "aaaaa",
-                                            "bbbbbb",
-                                            "cccccccc",
-                                            "qqqqqqqqqqqqq",
-                                            "eeeeeee",
-                                            "mmmmmmm"
-                                          ],
-                                          [
-                                            "aaaaa",
-                                            "bbbbbb",
-                                            "cccccccc",
-                                            "qqqqqqqqqqqqq",
-                                            "eeeeeee",
-                                            "mmmmmmm"
-                                          ],
-                                          [
-                                            "aaaaa",
-                                            "bbbbbb",
-                                            "cccccccc",
-                                            "qqqqqqqqqqqqq",
-                                            "eeeeeee",
-                                            "mmmmmmm"
-                                          ],
-                                          [
-                                            "aaaaa",
-                                            "bbbbbb",
-                                            "cccccccc",
-                                            "qqqqqqqqqqqqq",
-                                            "eeeeeee",
-                                            "mmmmmmm"
-                                          ],
-                                          [
-                                            "aaaaa",
-                                            "bbbbbb",
-                                            "cccccccc",
-                                            "qqqqqqqqqqqqq",
-                                            "eeeeeee",
-                                            "mmmmmmm"
-                                          ],
-                                          [
-                                            "aaaaa",
-                                            "bbbbbb",
-                                            "cccccccc",
-                                            "qqqqqqqqqqqqq",
-                                            "eeeeeee",
-                                            "mmmmmmm"
-                                          ],
-                                          [
-                                            "dddddddd",
-                                            "fffffffff",
-                                            "vvvvvvvvv",
-                                            "pppppp",
-                                            "ooooooooo",
-                                            "xxxxxxx"
-                                          ]
-                                        ],
+                                        data: controller.dataInTable,
                                         widths: const [
                                           250,
                                           250,
@@ -128,10 +72,16 @@ class HomePage extends StatelessWidget {
                                           "الرقم المسلسل",
                                           "الكود",
                                           "الكود",
-                                          "الكود"
+                                          "الكود",
                                         ],
                                         nameOfGlobalID: 'home',
                                         onRowTap: () {},
+                                        //spicial for Homepage only
+                                        thisPageIsHomePage: true,
+                                        showDialog: () {
+                                          //pass to function model that will get when pressed on user in the table
+                                          customDialog(controller.attendmodel);
+                                        },
                                       ),
                                     ),
                                   ),
@@ -142,7 +92,7 @@ class HomePage extends StatelessWidget {
                                       //     CrossAxisAlignment.start,
                                       children: [
                                         ...List.generate(
-                                          3,
+                                          4,
                                           (index) => Row(
                                             children: [
                                               Container(

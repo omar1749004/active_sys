@@ -193,7 +193,7 @@ class _PlayersProfileViewState extends State<PlayersProfileView> {
                                   "الكود"
                                 ],
                                 nameOfGlobalID: 'PlayersProfile',
-                                onRowTap: () {},
+                                onRowTap: () {}, showDialog: () {  },
                               )),
                         ),
                         //
@@ -301,7 +301,7 @@ class _PlayersProfileViewState extends State<PlayersProfileView> {
                                               "الكود"
                                             ],
                                             nameOfGlobalID: 'PlayersProfile',
-                                            onRowTap: () {},
+                                            onRowTap: () {}, showDialog: () {  },
                                           )),
                                     ),
                                   ],

@@ -39,8 +39,8 @@ class AttendModel {
     this.subscriptionsSessionsNumber,
     required this.renewAmountOwed,
     required this.renewalSessionAttend,
-    this.isOwed,
-    this.isClose,
+    this.isOwed, //owes money
+    this.isClose, //close to renew
   });
 
   factory AttendModel.fromJson(Map<String, dynamic> json) {
@@ -50,7 +50,7 @@ class AttendModel {
       attendanceStart: json['attendance_start'],
       attendanceEnd: json['attendance_end'],
       attendanceBarcodeId: json['attendance_barcodeId'],
-      attendanceRenewalid:json["attendance_renewalid"],
+      attendanceRenewalid: json["attendance_renewalid"],
       barcode: json['barcode'],
       attendanceType: json['attendance_type'],
       usersName: json['users_name'],

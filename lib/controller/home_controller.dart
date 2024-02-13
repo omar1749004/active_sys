@@ -64,196 +64,180 @@ class HomeControllerImp extends HomeController {
 
   void selectSupType(int i) {
     if (i != supType) {
-     supType = i;
-     update();
-     if(supType == 0 || supType == 1)
-     {
-       ////////////////////////////////////////////////
+      supType = i;
+      update();
+      if (supType == 0 || supType == 1) {
+        ////////////////////////////////////////////////
         handleSubType();
-     }
-
+      }
     }
   }
 
-void handleSubType()
-{
-   if(supType == 0)
-   {
-     subNameList= [];
-     for(int i = 0;i <_subList.length;i++)
-      {
-        if(_subList[i].subscriptionsType == 0)
-        {
+  void handleSubType() {
+    if (supType == 0) {
+      subNameList = [];
+      for (int i = 0; i < _subList.length; i++) {
+        if (_subList[i].subscriptionsType == 0) {
           subNameList.add(_subList[i].subscriptionsName);
         }
       }
       subValue = subNameList[0];
-   }
-   else{
-    
-      for(int i = 0;i <_subList.length;i++)
-      {
-        if(_subList[i].subscriptionsType == 1)
-        {
+    } else {
+      for (int i = 0; i < _subList.length; i++) {
+        if (_subList[i].subscriptionsType == 1) {
           subNameList.add(_subList[i].subscriptionsName);
         }
       }
       subValue = subNameList[0];
-   }
-   update();
-}
- 
- void  selectActive(bool i) {
+    }
+    update();
+  }
+
+  void selectActive(bool i) {
     isactive = i;
     update();
   }
 
   @override
-
-  void addInvition() async{
-     statusRequs = StatusRequst.loading;
-      update();
-      var res = await AttendData().addInvitation({
-        "barcode": barcode.text,
-        "adminID": "1",
-      });
-      if (res["msg"] == "subscription expired") {
-        globalAlert("اشتراك اللاعب منتهي");
-        statusRequs = StatusRequst.failure;
-        print("no");
-      } else if (res["status"] == "success") {
-        print("fukk");
-        attendmodel =  AttendModel.fromJson(res["data"]);
-          for (int i = 0; i < subNameList.length; i++) {
-            if (attendmodel.subscriptionsName == subNameList[i]) {
-              subValue = subNameList[i];
-            }
-          }
-        statusRequs = StatusRequst.sucsess;
-      } else if(res["msg"] == "invitition expired"){
-        globalAlert("الاعب تخطى عدد الدعوات");
-        statusRequs = StatusRequst.failure;
-    }
+  void addInvition() async {
+    statusRequs = StatusRequst.loading;
     update();
-  }
-
-  @override
-
-  void addService()async {
-      statusRequs = StatusRequst.loading;
-      update();
-      var res = await AttendData().addInvitation({
-        "barcode": barcode.text,
-        "adminID": "1",
-      });
-      if (res["msg"] == "subscription expired") {
-        globalAlert("اشتراك اللاعب منتهي");
-        statusRequs = StatusRequst.failure;
-        print("no");
-      } else if (res["status"] == "success") {
-        print("fukk");
-        attendmodel =  AttendModel.fromJson(res["data"]);
-          for (int i = 0; i < subNameList.length; i++) {
-            if (attendmodel.subscriptionsName == subNameList[i]) {
-              subValue = subNameList[i];
-            }
-          }
-        statusRequs = StatusRequst.sucsess;
-      } else if(res["msg"] == "service expired"){
-        globalAlert("الاعب تخطى عدد الخدمات");
-        statusRequs = StatusRequst.failure;
-
-    }
-    update();
-  }
-
-  @override
-
-  void addSession() async{
-       statusRequs = StatusRequst.loading;
-      update();
-      String price = "0" ;
-      for(int i = 0; i< subNameList.length;i++)
-      {
-        if(subValue == _subList[i].subscriptionsName)
-        {
-          price = _subList[i].subscriptionsPrice.toString();
+    var res = await AttendData().addInvitation({
+      "barcode": barcode.text,
+      "adminID": "1",
+    });
+    if (res["msg"] == "subscription expired") {
+      globalAlert("اشتراك اللاعب منتهي");
+      statusRequs = StatusRequst.failure;
+      print("no");
+    } else if (res["status"] == "success") {
+      print("fukk");
+      attendmodel = AttendModel.fromJson(res["data"]);
+      for (int i = 0; i < subNameList.length; i++) {
+        if (attendmodel.subscriptionsName == subNameList[i]) {
+          subValue = subNameList[i];
         }
       }
-      Map? res  ;
-      if(barcode.text.isEmpty){
-       if(formKey.currentState!.validate()){
+      statusRequs = StatusRequst.sucsess;
+    } else if (res["msg"] == "invitition expired") {
+      globalAlert("الاعب تخطى عدد الدعوات");
+      statusRequs = StatusRequst.failure;
+    }
+    update();
+  }
+
+  @override
+  void addService() async {
+    statusRequs = StatusRequst.loading;
+    update();
+    var res = await AttendData().addInvitation({
+      "barcode": barcode.text,
+      "adminID": "1",
+    });
+    if (res["msg"] == "subscription expired") {
+      globalAlert("اشتراك اللاعب منتهي");
+      statusRequs = StatusRequst.failure;
+      print("no");
+    } else if (res["status"] == "success") {
+      print("fukk");
+      attendmodel = AttendModel.fromJson(res["data"]);
+      for (int i = 0; i < subNameList.length; i++) {
+        if (attendmodel.subscriptionsName == subNameList[i]) {
+          subValue = subNameList[i];
+        }
+      }
+      statusRequs = StatusRequst.sucsess;
+    } else if (res["msg"] == "service expired") {
+      globalAlert("الاعب تخطى عدد الخدمات");
+      statusRequs = StatusRequst.failure;
+    }
+    update();
+  }
+
+  @override
+  void addSession() async {
+    statusRequs = StatusRequst.loading;
+    update();
+    String price = "0";
+    for (int i = 0; i < subNameList.length; i++) {
+      if (subValue == _subList[i].subscriptionsName) {
+        price = _subList[i].subscriptionsPrice.toString();
+      }
+    }
+    Map? res;
+    if (barcode.text.isEmpty) {
+      if (formKey.currentState!.validate()) {
         res = await AttendData().addSessions({
+          "barcode": barcode.text,
+          "phone": phone.text,
+          "name": username.text,
+          "price": price,
+          "adminID": "1",
+        });
+        if (res!["status"] == "failure") {
+          globalAlert("يرجى إعادة المحاولة في وقت لاحق", title: "!خطأ");
+          statusRequs = StatusRequst.failure;
+        } else if (res["status"] == "success") {
+          globalAlert("يرجى إعادة المحاولة في وقت لاحق", title: "yessssss");
+          statusRequs = StatusRequst.sucsess;
+        }
+      }
+    } else {
+      res = await AttendData().addSessions({
         "barcode": barcode.text,
-        "phone" :phone.text,
-        "name" :username.text,
-        "price":price,
+        "phone": phone.text,
+        "name": username.text,
         "adminID": "1",
       });
-                if (res!["status"] == "failure") {
-        globalAlert("يرجى إعادة المحاولة في وقت لاحق",title: "!خطأ");
+      if (res!["status"] == "failure") {
+        globalAlert("يرجى إعادة المحاولة في وقت لاحق", title: "!خطأ");
         statusRequs = StatusRequst.failure;
       } else if (res["status"] == "success") {
-        globalAlert("يرجى إعادة المحاولة في وقت لاحق",title: "yessssss");
+        globalAlert("يرجى إعادة المحاولة في وقت لاحق", title: "yessssss");
         statusRequs = StatusRequst.sucsess;
       }
-       }
-      }else{
-       res = await AttendData().addSessions({
-        "barcode": barcode.text,
-        "phone" :phone.text,
-        "name" :username.text,
-        "adminID": "1",
-      });
-       if (res!["status"] == "failure") {
-        globalAlert("يرجى إعادة المحاولة في وقت لاحق",title: "!خطأ");
-        statusRequs = StatusRequst.failure;
-      } else if (res["status"] == "success") {
-        globalAlert("يرجى إعادة المحاولة في وقت لاحق",title: "yessssss");
-        statusRequs = StatusRequst.sucsess;
-      }
-      }
-     update();
+    }
+    update();
   }
 
   @override
   void addSub() async {
-      statusRequs = StatusRequst.loading;
-      update();
-      var res = await AttendData().addSub({
-        "barcode": barcode.text,
-        "adminID": "1",
-      });
-      if (res["msg"] == "renew") {
-        globalAlert("هناك مشكلة في تجديد اللاعب");
-        statusRequs = StatusRequst.failure;
-        print("no");
-      } else if (res["status"] == "success") {
-        print("fukk");
-        attendmodel =  AttendModel.fromJson(res["data"]);
-          for (int i = 0; i < subNameList.length; i++) {
-            if (attendmodel.subscriptionsName == subNameList[i]) {
-              subValue = subNameList[i];
-            }
-          }
-        
-        statusRequs = StatusRequst.sucsess;
-      } else if(res["msg"] == "subscription expired"){
-        globalAlert("اشتراك اللاعب منتهي");
-        statusRequs = StatusRequst.failure;
+    statusRequs = StatusRequst.loading;
+    update();
+    var res = await AttendData().addSub({
+      "barcode": barcode.text,
+      "adminID": "1",
+    });
+    if (res["msg"] == "renew") {
+      globalAlert("هناك مشكلة في تجديد اللاعب");
+      statusRequs = StatusRequst.failure;
+      print("no");
+    } else if (res["status"] == "success") {
+      print("fukk");
+      attendmodel = AttendModel.fromJson(res["data"]);
+      for (int i = 0; i < subNameList.length; i++) {
+        if (attendmodel.subscriptionsName == subNameList[i]) {
+          subValue = subNameList[i];
+        }
+      }
+
+      statusRequs = StatusRequst.sucsess;
+    } else if (res["msg"] == "subscription expired") {
+      globalAlert("اشتراك اللاعب منتهي");
+      statusRequs = StatusRequst.failure;
     }
     update();
   }
 
   @override
   void assignModel(AttendModel privetModel) {
-         username.text = privetModel.usersName!;
-        phone.text = privetModel.usersPhone!;
-        barcode.text = privetModel.barcode.toString() ;
-        deadline.text = privetModel.renewalEnd.toString().substring(0,11) ;
-        note.text = privetModel.usersNote! ;
-        subValue = privetModel.subscriptionsName!;
-        attendmodel = privetModel ;
+    username.text = privetModel.usersName!;
+    phone.text = privetModel.usersPhone!;
+    barcode.text = privetModel.barcode.toString();
+    deadline.text = privetModel.renewalEnd.toString().substring(0, 11);
+    note.text = privetModel.usersNote!;
+    subValue = privetModel.subscriptionsName!;
+    attendmodel = privetModel;
   }
 
   @override
@@ -267,10 +251,8 @@ void handleSubType()
       List data = res["data"];
       subNameList = [];
       _subList.addAll(data.map((e) => SubscriptionModel.fromJson(e)));
-      for(int i = 0;i <_subList.length;i++)
-      {
-        if(_subList[i].subscriptionsType == 0)
-        {
+      for (int i = 0; i < _subList.length; i++) {
+        if (_subList[i].subscriptionsType == 0) {
           subNameList.add(_subList[i].subscriptionsName);
         }
       }
@@ -289,7 +271,7 @@ void handleSubType()
     update();
 
     var res = await AttendData().dailyView({
-      "day": "2024-02-10",
+      "day": DateTime.now().toString().substring(0, 11),
     });
     if (res["status"] == "failure") {
       print("object");
@@ -298,7 +280,7 @@ void handleSubType()
       List data = res["data"];
       attendList = [];
       attendList.addAll(data.map((e) => AttendModel.fromJson(e)));
-
+      assignDataInsideTable();
       statusRequs = StatusRequst.sucsess;
     } else {
       statusRequs = StatusRequst.failure;
@@ -316,11 +298,10 @@ void handleSubType()
 
   @override
   void handleFunctionsAdd() {
-    if(supType == 0){
-
-    }else if(supType == 1){
-     addSession();
-    }else if(supType == 2){
+    if (supType == 0) {
+    } else if (supType == 1) {
+      addSession();
+    } else if (supType == 2) {
     } else {}
   }
 
@@ -374,6 +355,7 @@ void handleSubType()
       List data = res["data"];
       attendList = [];
       attendList.addAll(data.map((e) => AttendModel.fromJson(e)));
+      assignDataInsideTable();
       statusRequs = StatusRequst.sucsess;
     } else {
       statusRequs = StatusRequst.failure;
@@ -386,38 +368,36 @@ void handleSubType()
     dataInTable = [];
     for (var i = 0; i < attendList.length; i++) {
       dataInTable.add([
-        attendList[i].adminSysName.toString(),
+        attendList[i].attendanceId.toString(),
         attendList[i].attendanceBarcodeId.toString(),
         attendList[i].barcode.toString(),
         attendList[i].usersName.toString(),
         attendList[i].attendanceStart.toString(),
         attendList[i].barcode.toString(),
+        attendList[i].isOwed.toString(),
+        attendList[i].isClose.toString(),
       ]);
     }
   }
 
- @override
-  void deleteTransAction()async{
-     var res = await AttendData().delete(
-      {
-        "id" : attendmodel.attendanceId.toString(),
-        "renewid" : attendmodel.attendanceRenewalid.toString(),
-      }
-     );
-     
-     if(res["status"] =="failure")
-     {
-      globalAlert("يرجى إعادة المحاولة في وقت لاحق",title: "!خطأ");
+  @override
+  void deleteTransAction() async {
+    var res = await AttendData().delete({
+      "id": attendmodel.attendanceId.toString(),
+      "renewid": attendmodel.attendanceRenewalid.toString(),
+    });
+
+    if (res["status"] == "failure") {
+      globalAlert("يرجى إعادة المحاولة في وقت لاحق", title: "!خطأ");
       statusRequs = StatusRequst.failure;
-     }else if(res["status"] =="success"){
-      attendList.removeWhere((element) => element.attendanceId ==attendmodel.attendanceId) ;
-      statusRequs =StatusRequst.sucsess;
-     }
-     else if(res["msg"] =="expire"){
-      globalAlert("لايمكن حذف هذا اللاعب",title: "!خطأ");
-      statusRequs =StatusRequst.failure;
-     }
-     update();
+    } else if (res["status"] == "success") {
+      attendList.removeWhere(
+          (element) => element.attendanceId == attendmodel.attendanceId);
+      statusRequs = StatusRequst.sucsess;
+    } else if (res["msg"] == "expire") {
+      globalAlert("لايمكن حذف هذا اللاعب", title: "!خطأ");
+      statusRequs = StatusRequst.failure;
+    }
+    update();
   }
-  
 }

@@ -25,6 +25,7 @@ class AttendControllerImp extends AttendController {
   void onInit() {
     searchVal = TextEditingController();
     dateSearch(startSearch, endSearch);
+
     super.onInit();
   }
 
@@ -45,7 +46,7 @@ class AttendControllerImp extends AttendController {
         totalPlayer = res["moreInfo"][0]["totalPlayers"] ?? 0;
         attendList = [];
         attendList.addAll(data.map((e) => AttendModel.fromJson(e)));
-
+        assignDataInsideTable();
         statusRequs = StatusRequst.sucsess;
       } else {
         statusRequs = StatusRequst.failure;
@@ -91,7 +92,7 @@ class AttendControllerImp extends AttendController {
     update();
   }
 
-//function to assign data inside List 
+//function to assign data inside List
   void assignDataInsideTable() {
     dataInTable = [];
     for (var i = 0; i < attendList.length; i++) {

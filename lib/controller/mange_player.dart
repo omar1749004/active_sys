@@ -45,6 +45,7 @@ class MangeUsersControllerImp extends MangeUsersController {
   List<String> subNameList = ["عام"];
   final List<UserModel> _trainerList = [];
   late List<UserModel> usersList = [];
+  List<List<String>> dataInTable = [];
   List<String> trainerNameList = ["عام"];
 
   late SubscriptionModel subscriptionModel;
@@ -188,12 +189,12 @@ class MangeUsersControllerImp extends MangeUsersController {
         }, file!);
         print(res["status"]);
         if (res["msg"] == "renewal") {
-         globalAlert("مشكلة في التجديد");
+          globalAlert("مشكلة في التجديد");
           statusRequs = StatusRequst.failure;
         } else if (res["status"] == "success") {
           statusRequs = StatusRequst.sucsess;
         } else if (res["msg"] == "barcode is used") {
-            globalAlert("هذا الكود مستخدم بالفعل");
+          globalAlert("هذا الكود مستخدم بالفعل");
           statusRequs = StatusRequst.failure;
         }
       } else {
@@ -234,6 +235,7 @@ class MangeUsersControllerImp extends MangeUsersController {
       totalPlayers = res["totalPlayer"];
       usersList = [];
       usersList.addAll(data.map((e) => UserModel.fromJson(e)));
+      assignDataInsideTable();
       statusRequs = StatusRequst.sucsess;
     } else {
       statusRequs = StatusRequst.failure;
@@ -306,27 +308,38 @@ class MangeUsersControllerImp extends MangeUsersController {
     }
   }
 
- @override
-  void deletePlayers()async{
-     var res = await UsersData().delete(
-      {
-        "id" : userModel.usersId.toString(),
-        "imageName" : userModel.usersImage,
-      }
-     );
-     
-     if(res["status"] =="failure")
-     {
-      globalAlert("يرجى إعادة المحاولة في وقت لاحق",title: "!خطأ");
+  @override
+  void deletePlayers() async {
+    var res = await UsersData().delete({
+      "id": userModel.usersId.toString(),
+      "imageName": userModel.usersImage,
+    });
+
+    if (res["status"] == "failure") {
+      globalAlert("يرجى إعادة المحاولة في وقت لاحق", title: "!خطأ");
       statusRequs = StatusRequst.failure;
-     }else if(res["status"] =="success"){
-      
-      usersList.removeWhere((element) => element.usersId ==userModel.usersId) ;
-      statusRequs =StatusRequst.sucsess;
-     }
-     else{
-      statusRequs =StatusRequst.failure;
-     }
-     update();
+    } else if (res["status"] == "success") {
+      usersList.removeWhere((element) => element.usersId == userModel.usersId);
+      assignDataInsideTable();
+      statusRequs = StatusRequst.sucsess;
+    } else {
+      statusRequs = StatusRequst.failure;
+    }
+    update();
+  }
+
+  //function to assign data inside List
+  void assignDataInsideTable() {
+    dataInTable = [];
+    for (var i = 0; i < usersList.length; i++) {
+      dataInTable.add([
+        usersList[i].usersAddress.toString(),
+        usersList[i].usersCreate.toString(),
+        usersList[i].usersBranch.toString(),
+        usersList[i].usersName.toString(),
+        usersList[i].usersId.toString(),
+        usersList[i].usersName.toString(),
+      ]);
+    }
   }
 }

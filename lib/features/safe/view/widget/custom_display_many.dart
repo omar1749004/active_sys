@@ -9,7 +9,7 @@ class CustomDisplyMany extends StatelessWidget {
       this.flexOfLabel = 1,
       this.flexOfMany = 1});
   final Color textColor;
-  final String many;
+  final String? many;
   final String text;
   final int flexOfLabel;
   final int flexOfMany;
