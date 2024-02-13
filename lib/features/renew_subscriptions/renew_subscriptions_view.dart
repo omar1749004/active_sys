@@ -124,7 +124,7 @@ class RenewSybscriptionsView extends StatelessWidget {
                       Expanded(
                         flex: 6,
                         child: Container(
-                          color: Color.fromARGB(255, 218, 218, 218),
+                          color:const Color.fromARGB(255, 218, 218, 218),
                           child: CustomModernTable(
                             data: controller.dataInTable,
                             widths: const [100, 250, 150, 250, 100, 250],
@@ -173,14 +173,19 @@ class RenewSybscriptionsView extends StatelessWidget {
                               ontap: () {
                                 controller.addRenew();
                               },
-                            )
+                            ),
                           ],
                         ),
                       ),
                       //
                       //form input right screen
                       //
-                      Expanded(
+                      
+                    ],
+                  ),
+                ),
+              ),
+            Expanded(
                         flex: 1,
                         child: Container(
                           height: MediaQuery.of(context).size.height,
@@ -204,10 +209,6 @@ class RenewSybscriptionsView extends StatelessWidget {
                           child: const RenewSubscriptionForm(),
                         ),
                       ),
-                    ],
-                  ),
-                ),
-              ),
             ],),),
           ]);
         }

@@ -106,7 +106,7 @@ class SearchTools extends StatelessWidget {
                         text: "اشتراكات ساريه",
                           onTap: () {
 
-                           controller.changeActiveSearch(controller.isDateSearch);
+                           controller.changeActiveSearch(controller.isactiveSearch);
                           },
                       ),
                     )

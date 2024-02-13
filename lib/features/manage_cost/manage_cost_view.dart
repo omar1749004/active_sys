@@ -230,37 +230,6 @@ class _ManageCostViewState extends State<ManageCostView> {
                     ],
                   ),
                 ),
-
-                //
-                //form input right screen
-                //
-                Expanded(
-                  flex: 1,
-                  child: Container(
-                    height: MediaQuery.of(context).size.height,
-                    padding: const EdgeInsets.only(left: 8, right: 8),
-                    decoration: const BoxDecoration(
-                      border: Border(
-                        top: BorderSide(
-                          width: 1,
-                          color: Color.fromRGBO(0, 0, 0, 0.186),
-                        ),
-                        left: BorderSide(
-                          width: 1,
-                          color: Color.fromRGBO(0, 0, 0, 0.186),
-                        ),
-                        bottom: BorderSide(
-                          width: 1,
-                          color: Color.fromRGBO(0, 0, 0, 0.186),
-                        ),
-                      ),
-                    ),
-                    child:  MangeCostForm(
-                      many: controller.totalExpenses.toString(),
-                    ),
-                  ),
-                )
-
               ],
             );
           }

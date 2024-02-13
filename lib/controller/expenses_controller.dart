@@ -13,6 +13,7 @@ abstract class ExpensesController extends GetxController {
   void handleprice();
   void addTrandsAction();
   void assignModel(ExpensesModel privetModel);
+  void editTransAction();
 }
 
 class ExpensesControllerImp extends ExpensesController {
@@ -121,11 +122,13 @@ class ExpensesControllerImp extends ExpensesController {
         },
       );
       if (res["status"] == "failure") {
-        globalAlert("يرجى إعادة المحاولة في وقت لاحق",title: "!خطأ");
+        globalAlert("يرجى إعادة المحاولة في وقت لاحق", title: "!خطأ");
         statusRequs = StatusRequst.failure;
       } else if (res["status"] == "success") {
         handlTable(isdateSearch);
         statusRequs = StatusRequst.sucsess;
+        reason.clear();
+        note.clear();
       } else {
         statusRequs = StatusRequst.failure;
       }
@@ -167,9 +170,9 @@ class ExpensesControllerImp extends ExpensesController {
 
   @override
   void assignModel(ExpensesModel privetModel) {
-    reason.text = privetModel.expensesReason ?? "" ;
-    amount.text = privetModel.expensesValue.toString() ;
-    expensesModel = privetModel ;
+    reason.text = privetModel.expensesReason ?? "";
+    amount.text = privetModel.expensesValue.toString();
+    expensesModel = privetModel;
   }
 
 //function to assign data inside List
@@ -184,7 +187,37 @@ class ExpensesControllerImp extends ExpensesController {
       ]);
     }
   }
-  
+
+  @override
+  editTransAction() async {
+    if (formKey.currentState!.validate()) {
+      statusRequs = StatusRequst.loading;
+      update();
+
+      var res = await ExpensesData().edit(
+        {
+          "id": expensesModel.expensesId.toString(),
+          "reason": reason.text,
+          "value": amount.text,
+          "adminId": "1",
+        },
+      );
+
+      if (res["status"] == "failure") {
+        globalAlert("لم يتم تعديل البيانات لأنها لم تتغير", title: "عذرًا");
+        statusRequs = StatusRequst.failure;
+      } else if (res["status"] == "success") {
+        globalAlert("تم تعديل البانات بنجاح", title: "");
+        statusRequs = StatusRequst.sucsess;
+        reason.clear();
+        note.clear();
+
+      } else {
+        statusRequs = StatusRequst.failure;
+      }
+      update();
+    }
+  }
 }
 
 // import 'package:active_system/data/service/remote/expenses_data.dart';
@@ -197,14 +230,7 @@ class ExpensesControllerImp extends ExpensesController {
 //   },
 // );
 
-// var res = await ExpensesData().edit(
-//   {
-//     "id": ,
-//     "reason": text,
-//     "value":  text,
-//     "adminId": ,
-//   },
-// );
+
 // var res = await ExpensesData().delete(
 //   {
 //    "id": id
