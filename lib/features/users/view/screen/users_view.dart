@@ -49,64 +49,7 @@ class UsersView extends StatelessWidget {
                                 child: Container(
                                   color: Color.fromARGB(255, 218, 218, 218),
                                   child: CustomModernTable(
-                                    data: [
-                                      [
-                                        "aaaaa",
-                                        "bbbbbb",
-                                        "cccccccc",
-                                        "qqqqqqqqqqqqq",
-                                        "eeeeeee",
-                                        "mmmmmmm"
-                                      ],
-                                      [
-                                        "aaaaa",
-                                        "bbbbbb",
-                                        "cccccccc",
-                                        "qqqqqqqqqqqqq",
-                                        "eeeeeee",
-                                        "mmmmmmm"
-                                      ],
-                                      [
-                                        "aaaaa",
-                                        "bbbbbb",
-                                        "cccccccc",
-                                        "qqqqqqqqqqqqq",
-                                        "eeeeeee",
-                                        "mmmmmmm"
-                                      ],
-                                      [
-                                        "aaaaa",
-                                        "bbbbbb",
-                                        "cccccccc",
-                                        "qqqqqqqqqqqqq",
-                                        "eeeeeee",
-                                        "mmmmmmm"
-                                      ],
-                                      [
-                                        "aaaaa",
-                                        "bbbbbb",
-                                        "cccccccc",
-                                        "qqqqqqqqqqqqq",
-                                        "eeeeeee",
-                                        "mmmmmmm"
-                                      ],
-                                      [
-                                        "aaaaa",
-                                        "bbbbbb",
-                                        "cccccccc",
-                                        "qqqqqqqqqqqqq",
-                                        "eeeeeee",
-                                        "mmmmmmm"
-                                      ],
-                                      [
-                                        "dddddddd",
-                                        "fffffffff",
-                                        "vvvvvvvvv",
-                                        "pppppp",
-                                        "ooooooooo",
-                                        "xxxxxxx"
-                                      ]
-                                    ],
+                                    data: controller.dataInTable,
                                     widths: const [
                                       250,
                                       250,
@@ -125,6 +68,7 @@ class UsersView extends StatelessWidget {
                                     ],
                                     nameOfGlobalID: 'users',
                                     onRowTap: () {},
+                                    showDialog: () {},
                                   ),
                                 )),
                             //buttons
@@ -164,7 +108,6 @@ class UsersView extends StatelessWidget {
                         ),
                       ),
                     ),
-
                     const VerticalDivider(),
                     Expanded(
                       flex: 1,
@@ -213,20 +156,19 @@ class UsersView extends StatelessWidget {
                                 ),
                               ),
                               CustomeTextFormAuth(
-
-                                hintText: "",
-                                isShowIcone: true,
-                                myController: controller.pass,
-                                ontap:() {
-                                  controller.showPassword();
-                                  controller.changeIcone();
+                                  hintText: "",
+                                  isShowIcone: true,
+                                  myController: controller.pass,
+                                  ontap: () {
+                                    controller.showPassword();
+                                    controller.changeIcone();
                                   },
-                                lableText: "كلمة السر",
-                                icone: controller.icone,
-                                obscureText: controller.isHidepass,
-                                validator: (val) {
-                                  return validInput(val!, 4, 50, "");
-                                }),
+                                  lableText: "كلمة السر",
+                                  icone: controller.icone,
+                                  obscureText: controller.isHidepass,
+                                  validator: (val) {
+                                    return validInput(val!, 4, 50, "");
+                                  }),
                               Padding(
                                 padding:
                                     const EdgeInsets.symmetric(vertical: 12),

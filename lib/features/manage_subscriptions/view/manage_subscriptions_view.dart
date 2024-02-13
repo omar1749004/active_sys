@@ -81,7 +81,7 @@ class ManageSubscriptionsView extends StatelessWidget {
                                     "عدد الايام",
                                   ],
                                   nameOfGlobalID: 'manageSubscription',
-                                  onRowTap: () {},
+                                  onRowTap: () {}, showDialog: () {  },
                                 ),
                               ),
                             ),

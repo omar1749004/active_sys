@@ -26,13 +26,14 @@ class AdminControllerImp extends AdminController {
   late TextEditingController search;
   List<AdminPower> adminPoewrList = [];
   List<AdminSys> adminmodelList = [];
-  late AdminSys adminmModel ;
+  List<List<String>> dataInTable = [];
+  late AdminSys adminmModel;
   late TextEditingController name;
   late TextEditingController pass;
   late TextEditingController repass;
   late TextEditingController note;
   bool isHidepass = true;
-  
+
   IconData icone = CupertinoIcons.eye_slash;
   List<int> selectpowerList = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14];
   Map<int, List<int>> powersMap = {};
@@ -124,45 +125,28 @@ class AdminControllerImp extends AdminController {
     update();
   }
 
- @override
+  @override
   void assignModel(AdminSys privetModel) {
-    name.text = privetModel.adminSysName ;
-    pass.text = privetModel.adminSysPassword.toString() ;
-    note.text = privetModel.adminSysNote.toString() ;
-    adminmModel = privetModel ;
-    
+    name.text = privetModel.adminSysName;
+    pass.text = privetModel.adminSysPassword.toString();
+    note.text = privetModel.adminSysNote.toString();
+    adminmModel = privetModel;
   }
-  
+
   @override
   void addAdmin() async {
-     if (formAdminKey.currentState!.validate()) {
-      if(pass.text!=repass.text)
-      {
-       Get.defaultDialog(
-       title :"Waring",
-        middleText: "Password Not Match",actions: [
-      ElevatedButton(onPressed: (){
-        Get.back();
-      }, child:const Text("Ok")) ]
-       );
-      }else{
-      statusRequs = StatusRequst.loading;
-      update();
-      
-      var res = await AdminData().add(
-        {
-          "name": name.text,
-          "type": "0",
-          "password": pass.text,
-          "note": note.text,
-          "powers": selectpowerList.toString(),
-        },
-      );
-      if (res["status"] == "failure") {
-        globalAlert("يرجى إعادة المحاولة في وقت لاحق",title: "!خطأ");
-        statusRequs = StatusRequst.failure;
-      } else if (res["status"] == "success") {
-        statusRequs = StatusRequst.sucsess;
+    if (formAdminKey.currentState!.validate()) {
+      if (pass.text != repass.text) {
+        Get.defaultDialog(
+            title: "Waring",
+            middleText: "Password Not Match",
+            actions: [
+              ElevatedButton(
+                  onPressed: () {
+                    Get.back();
+                  },
+                  child: const Text("Ok"))
+            ]);
       } else {
         statusRequs = StatusRequst.loading;
         update();
@@ -177,41 +161,69 @@ class AdminControllerImp extends AdminController {
           },
         );
         if (res["status"] == "failure") {
+          globalAlert("يرجى إعادة المحاولة في وقت لاحق", title: "!خطأ");
           statusRequs = StatusRequst.failure;
         } else if (res["status"] == "success") {
           statusRequs = StatusRequst.sucsess;
         } else {
-          statusRequs = StatusRequst.failure;
+          statusRequs = StatusRequst.loading;
+          update();
+
+          var res = await AdminData().add(
+            {
+              "name": name.text,
+              "type": "0",
+              "password": pass.text,
+              "note": note.text,
+              "powers": selectpowerList.toString(),
+            },
+          );
+          if (res["status"] == "failure") {
+            statusRequs = StatusRequst.failure;
+          } else if (res["status"] == "success") {
+            statusRequs = StatusRequst.sucsess;
+          } else {
+            statusRequs = StatusRequst.failure;
+          }
         }
       }
+      update();
+    }
+  }
+
+  @override
+  void deleteAdmin() async {
+    var res = await AdminData().delete({
+      "id": adminmModel.adminSysId.toString(),
+    });
+
+    if (res["status"] == "failure") {
+      globalAlert("يرجى إعادة المحاولة في وقت لاحق", title: "!خطأ");
+      statusRequs = StatusRequst.failure;
+    } else if (res["status"] == "success") {
+      adminmodelList.removeWhere(
+          (element) => element.adminSysId == adminmModel.adminSysId);
+      statusRequs = StatusRequst.sucsess;
+    } else {
+      statusRequs = StatusRequst.failure;
     }
     update();
   }
+
+  //function to assign data inside List
+  void assignDataInsideTable() {
+    dataInTable = [];
+    for (var i = 0; i < adminmodelList.length; i++) {
+      dataInTable.add([
+        adminmodelList[i].adminSysId.toString(),
+        adminmodelList[i].adminSysName.toString(),
+        adminmodelList[i].adminSysNote.toString(),
+        adminmodelList[i].adminSysPassword.toString(),
+        adminmodelList[i].adminSysNote.toString(),
+        adminmodelList[i].adminSysType.toString(),
+      ]);
+    }
   }
-  
-  @override
-  void deleteAdmin()async{
-     var res = await AdminData().delete(
-      {
-        "id" : adminmModel.adminSysId.toString(),
-      }
-     );
-     
-     if(res["status"] =="failure")
-     {
-      globalAlert("يرجى إعادة المحاولة في وقت لاحق",title: "!خطأ");
-      statusRequs = StatusRequst.failure;
-     }else if(res["status"] =="success"){
-      
-      adminmodelList.removeWhere((element) => element.adminSysId ==adminmModel.adminSysId) ;
-      statusRequs =StatusRequst.sucsess;
-     }
-     else{
-      statusRequs =StatusRequst.failure;
-     }
-     update();
-  }
-  
 }
 
 // var res = await AdminData().add(

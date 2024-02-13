@@ -84,6 +84,7 @@ class SafeView extends StatelessWidget {
                                   ],
                                   nameOfGlobalID: 'safe',
                                   onRowTap: () {},
+                                  showDialog: () {},
                                 ),
                               ),
                             ),

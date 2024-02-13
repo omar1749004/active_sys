@@ -148,7 +148,7 @@ class AttendanceView extends StatelessWidget {
                                     "الكود"
                                   ],
                                   nameOfGlobalID: 'attendance',
-                                  onRowTap: () {},
+                                  onRowTap: () {}, showDialog: () {  },
                                 ),
                               ),
                             ),
