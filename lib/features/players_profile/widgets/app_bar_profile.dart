@@ -34,7 +34,7 @@ class AppBarProfilePage extends StatelessWidget {
                   style: const ButtonStyle(
                       padding: MaterialStatePropertyAll(EdgeInsets.all(0))),
                   onPressed: () {
-                    Get.back();
+                    Get.toNamed('/');
                   },
                   child: const Icon(
                     Icons.close,

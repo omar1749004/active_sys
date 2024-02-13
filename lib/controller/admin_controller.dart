@@ -27,6 +27,7 @@ class AdminControllerImp extends AdminController {
   late TextEditingController search;
   List<AdminPower> adminPoewrList = [];
   List<AdminSys> adminmodelList = [];
+  List<List<String>> dataInTable = [];
   late AdminSys adminmModel;
   late TextEditingController name;
   late TextEditingController pass;
@@ -138,6 +139,7 @@ class AdminControllerImp extends AdminController {
     if (formAdminKey.currentState!.validate()) {
       if (pass.text != repass.text) {
         globalAlert("كلمة المرور التي أدخلتها غير ", title: "عذرًا");
+
       } else {
         statusRequs = StatusRequst.loading;
         update();
@@ -163,13 +165,31 @@ class AdminControllerImp extends AdminController {
           getPowers();
           statusRequs = StatusRequst.sucsess;
         } else {
-          statusRequs = StatusRequst.failure;
+          statusRequs = StatusRequst.loading;
+          update();
+
+          var res = await AdminData().add(
+            {
+              "name": name.text,
+              "type": "0",
+              "password": pass.text,
+              "note": note.text,
+              "powers": selectpowerList.toString(),
+            },
+          );
+          if (res["status"] == "failure") {
+            statusRequs = StatusRequst.failure;
+          } else if (res["status"] == "success") {
+            statusRequs = StatusRequst.sucsess;
+          } else {
+            statusRequs = StatusRequst.failure;
+          }
         }
       }
       update();
     }
   }
-
+  
   @override
   void deleteAdmin() async {
     var res = await AdminData().delete({
@@ -219,8 +239,23 @@ class AdminControllerImp extends AdminController {
         statusRequs = StatusRequst.failure;
       }
       update();
+  }
+
+  //function to assign data inside List
+  void assignDataInsideTable() {
+    dataInTable = [];
+    for (var i = 0; i < adminmodelList.length; i++) {
+      dataInTable.add([
+        adminmodelList[i].adminSysId.toString(),
+        adminmodelList[i].adminSysName.toString(),
+        adminmodelList[i].adminSysNote.toString(),
+        adminmodelList[i].adminSysPassword.toString(),
+        adminmodelList[i].adminSysNote.toString(),
+        adminmodelList[i].adminSysType.toString(),
+      ]);
     }
   }
+    
 }
 
 // var res = await AdminData().add(

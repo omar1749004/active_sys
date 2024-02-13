@@ -160,6 +160,7 @@ class _ManageCostViewState extends State<ManageCostView> {
                                     ],
                                     nameOfGlobalID: 'manageCost',
                                     onRowTap: () {},
+                                    showDialog: () {},
                                   ),
                                 ),
                               ),
@@ -230,6 +231,7 @@ class _ManageCostViewState extends State<ManageCostView> {
                     ],
                   ),
                 ),
+
               ],
             );
           }

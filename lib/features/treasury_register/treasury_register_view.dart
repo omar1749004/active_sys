@@ -59,66 +59,9 @@ class TreasuryRegisterView extends StatelessWidget {
                             Expanded(
                               flex: 11,
                               child: Container(
-                                color: Color.fromARGB(255, 218, 218, 218),
+                                color: const Color.fromARGB(255, 218, 218, 218),
                                 child: CustomModernTable(
-                                  data: [
-                                    [
-                                      "aaaaa",
-                                      "bbbbbb",
-                                      "cccccccc",
-                                      "qqqqqqqqqqqqq",
-                                      "eeeeeee",
-                                      "mmmmmmm"
-                                    ],
-                                    [
-                                      "aaaaa",
-                                      "bbbbbb",
-                                      "cccccccc",
-                                      "qqqqqqqqqqqqq",
-                                      "eeeeeee",
-                                      "mmmmmmm"
-                                    ],
-                                    [
-                                      "aaaaa",
-                                      "bbbbbb",
-                                      "cccccccc",
-                                      "qqqqqqqqqqqqq",
-                                      "eeeeeee",
-                                      "mmmmmmm"
-                                    ],
-                                    [
-                                      "aaaaa",
-                                      "bbbbbb",
-                                      "cccccccc",
-                                      "qqqqqqqqqqqqq",
-                                      "eeeeeee",
-                                      "mmmmmmm"
-                                    ],
-                                    [
-                                      "aaaaa",
-                                      "bbbbbb",
-                                      "cccccccc",
-                                      "qqqqqqqqqqqqq",
-                                      "eeeeeee",
-                                      "mmmmmmm"
-                                    ],
-                                    [
-                                      "aaaaa",
-                                      "bbbbbb",
-                                      "cccccccc",
-                                      "qqqqqqqqqqqqq",
-                                      "eeeeeee",
-                                      "mmmmmmm"
-                                    ],
-                                    [
-                                      "dddddddd",
-                                      "fffffffff",
-                                      "vvvvvvvvv",
-                                      "pppppp",
-                                      "ooooooooo",
-                                      "xxxxxxx"
-                                    ]
-                                  ],
+                                  data: controller.dataInTable,
                                   widths: const [250, 250, 200, 200, 200, 100],
                                   header: const [
                                     "ألاسم",
@@ -129,7 +72,7 @@ class TreasuryRegisterView extends StatelessWidget {
                                     "الكود"
                                   ],
                                   nameOfGlobalID: 'treasuryRegister',
-                                  onRowTap: () {},
+                                  onRowTap: () {}, showDialog: () {  },
                                 ),
                               ),
                             ),

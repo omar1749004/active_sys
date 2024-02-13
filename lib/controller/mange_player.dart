@@ -46,6 +46,7 @@ class MangeUsersControllerImp extends MangeUsersController {
   List<String> subNameList = ["عام"];
   final List<UserModel> _trainerList = [];
   late List<UserModel> usersList = [];
+  List<List<String>> dataInTable = [];
   List<String> trainerNameList = ["عام"];
 
   late SubscriptionModel subscriptionModel;
@@ -238,6 +239,7 @@ class MangeUsersControllerImp extends MangeUsersController {
       totalPlayers = res["totalPlayer"];
       usersList = [];
       usersList.addAll(data.map((e) => UserModel.fromJson(e)));
+      assignDataInsideTable();
       statusRequs = StatusRequst.sucsess;
     } else {
       statusRequs = StatusRequst.failure;
@@ -322,12 +324,14 @@ class MangeUsersControllerImp extends MangeUsersController {
       statusRequs = StatusRequst.failure;
     } else if (res["status"] == "success") {
       usersList.removeWhere((element) => element.usersId == userModel.usersId);
+      assignDataInsideTable();
       statusRequs = StatusRequst.sucsess;
     } else {
       statusRequs = StatusRequst.failure;
     }
     update();
   }
+
 
   @override
   editPlayers() async {
@@ -362,8 +366,23 @@ class MangeUsersControllerImp extends MangeUsersController {
       } else {
         statusRequs = StatusRequst.failure;
       }
-
+  
       update();
+    }
+}
+
+  //function to assign data inside List
+  void assignDataInsideTable() {
+    dataInTable = [];
+    for (var i = 0; i < usersList.length; i++) {
+      dataInTable.add([
+        usersList[i].usersAddress.toString(),
+        usersList[i].usersCreate.toString(),
+        usersList[i].usersBranch.toString(),
+        usersList[i].usersName.toString(),
+        usersList[i].usersId.toString(),
+        usersList[i].usersName.toString(),
+      ]);
     }
   }
 }
