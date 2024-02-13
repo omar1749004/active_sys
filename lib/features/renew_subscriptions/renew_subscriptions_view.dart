@@ -180,7 +180,7 @@ class RenewSybscriptionsView extends StatelessWidget {
                                 )
                               ],
                             ),
-                          ),
+
                           //
                           //form input right screen
                           //
@@ -210,11 +210,13 @@ class RenewSybscriptionsView extends StatelessWidget {
                           ),
                         ],
                       ),
+
                     ),
                   ),
                 ],
               ),
             ),
+
           ]);
         }
       }),

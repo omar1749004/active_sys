@@ -25,6 +25,7 @@ abstract class MangeUsersController extends GetxController {
   void handleBarcode();
   void changeActiveSub(bool x);
   void deletePlayers();
+  void editPlayers();
 }
 
 class MangeUsersControllerImp extends MangeUsersController {
@@ -180,18 +181,21 @@ class MangeUsersControllerImp extends MangeUsersController {
           "note": note.text,
           "gender": gender,
           "date": brithdate.toString().substring(0, 11),
-          "image": "gfnf",
           "captinId": trainerModel.usersCaptiantId.toString(),
           "subscriptionsId": subscriptionModel.subscriptionsId.toString(),
           "adminId": "1",
           "active": active,
           "barcodeNum": barcodeNum.text,
         }, file!);
-        print(res["status"]);
         if (res["msg"] == "renewal") {
           globalAlert("مشكلة في التجديد");
           statusRequs = StatusRequst.failure;
         } else if (res["status"] == "success") {
+          barcodeNum.clear() ;
+          userName.clear() ;
+          phone.clear() ;
+          note.clear() ;
+          age.clear() ;
           statusRequs = StatusRequst.sucsess;
         } else if (res["msg"] == "barcode is used") {
           globalAlert("هذا الكود مستخدم بالفعل");
@@ -327,6 +331,45 @@ class MangeUsersControllerImp extends MangeUsersController {
     }
     update();
   }
+
+
+  @override
+  editPlayers() async {
+    if (formKey.currentState!.validate()) {
+      statusRequs = StatusRequst.loading;
+      update();
+      var res = await UsersData().edit({
+        "id": userModel.usersId.toString(),
+        "name": userName.text,
+        "phone": phone.text,
+        "note": note.text,
+        "gender": gender,
+        "date": brithdate.toString().substring(0, 11),
+        "captinId": trainerModel.usersCaptiantId.toString(),
+        "subscriptionsId": subscriptionModel.subscriptionsId.toString(),
+        "adminId": "1",
+        "active": active,
+        "oldimagename": userModel.usersImage,
+        "barcodeNum": barcodeNum.text,
+      }, file: file!);
+      if (res["status"] == "failure") {
+        globalAlert("لم يتم تعديل البيانات لأنها لم تتغير", title: "عذرًا");
+        statusRequs = StatusRequst.failure;
+      } else if (res["status"] == "success") {
+        globalAlert("تم تعديل البانات بنجاح", title: "");
+          barcodeNum.clear() ;
+          userName.clear() ;
+          phone.clear() ;
+          note.clear() ;
+          age.clear() ;
+        statusRequs = StatusRequst.sucsess;
+      } else {
+        statusRequs = StatusRequst.failure;
+      }
+  
+      update();
+    }
+}
 
   //function to assign data inside List
   void assignDataInsideTable() {

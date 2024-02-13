@@ -21,10 +21,12 @@ abstract class MangeSubController extends GetxController {
   void viewAll();
   void assignModel(SubscriptionModel privetModel);
   void deleteSub();
+  void editSub();
 }
 
 class MangeSubControllerImp extends MangeSubController {
   StatusRequst statusRequs = StatusRequst.non;
+  StatusRequst firstState = StatusRequst.non;
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   List<SubscriptionModel> subList = [];
@@ -48,7 +50,7 @@ class MangeSubControllerImp extends MangeSubController {
   late TextEditingController search;
 
   @override
-  void onInit() {
+  void onInit() async{
     name = TextEditingController();
     specialization = TextEditingController();
     price = TextEditingController();
@@ -78,7 +80,12 @@ class MangeSubControllerImp extends MangeSubController {
     maxService.text = "0";
     allowedNumber.text = "0";
     notes.text = "0";
+    firstState = StatusRequst.loading;
+    await  Future.delayed(const Duration(milliseconds: 100));
+    firstState = StatusRequst.failure;
+    update();
     viewAll();
+    
     super.onInit();
   }
 
@@ -107,7 +114,7 @@ class MangeSubControllerImp extends MangeSubController {
         },
       );
       if (res["status"] == "failure") {
-        globalAlert("يرجى إعادة المحاولة في وقت لاحق",title: "!خطأ");
+        globalAlert("يرجى إعادة المحاولة في وقت لاحق", title: "!خطأ");
         statusRequs = StatusRequst.failure;
       } else if (res["status"] == "success") {
         statusRequs = StatusRequst.sucsess;
@@ -117,7 +124,6 @@ class MangeSubControllerImp extends MangeSubController {
     }
     update();
   }
-
 
   @override
   void assignModel(SubscriptionModel privetModel) {
@@ -135,9 +141,8 @@ class MangeSubControllerImp extends MangeSubController {
     maxService.text = privetModel.subscriptionsMaxService.toString();
     allowedNumber.text = privetModel.subscriptionsAllowedNumber.toString();
     notes.text = privetModel.subscriptionsNotes.toString();
-    submodel = privetModel ;
- }
-
+    submodel = privetModel;
+  }
 
   @override
   void viewAll() async {
@@ -246,30 +251,24 @@ class MangeSubControllerImp extends MangeSubController {
     }
   }
 
+  @override
+  void deleteSub() async {
+    var res = await SubData().delete({
+      "id": submodel.subscriptionsId.toString(),
+    });
 
-@override
-  void deleteSub()async{
-     var res = await SubData().delete(
-      {
-        "id" : submodel.subscriptionsId.toString(),
-      }
-     );
-     
-     if(res["status"] =="failure")
-     {
-      globalAlert("يرجى إعادة المحاولة في وقت لاحق",title: "!خطأ");
+    if (res["status"] == "failure") {
+      globalAlert("يرجى إعادة المحاولة في وقت لاحق", title: "!خطأ");
       statusRequs = StatusRequst.failure;
-     }else if(res["status"] =="success"){
-      
-      subList.removeWhere((element) => element.subscriptionsId ==submodel.subscriptionsId) ;
-      statusRequs =StatusRequst.sucsess;
-     }
-     else{
-      statusRequs =StatusRequst.failure;
-     }
-     update();
+    } else if (res["status"] == "success") {
+      subList.removeWhere(
+          (element) => element.subscriptionsId == submodel.subscriptionsId);
+      statusRequs = StatusRequst.sucsess;
+    } else {
+      statusRequs = StatusRequst.failure;
+    }
+    update();
   }
-
 
 //function to assign data inside List
   void assignDataInsideTable() {
@@ -282,6 +281,57 @@ class MangeSubControllerImp extends MangeSubController {
         subList[i].subscriptionsType.toString(),
         subList[i].subscriptionsDay.toString(),
       ]);
+    }
+  }
+
+  @override
+ void editSub() async {
+    statusRequs = StatusRequst.loading;
+    update();
+    if (formKey.currentState!.validate()) {
+      var res = await SubData().edit({
+        "id": submodel.subscriptionsId.toString(),
+        "name": name.text,
+        "type": type,
+        "specialization": "0",
+        "price": price.text,
+        "day": day.text,
+        "sessions_number": sessionsNumber.text,
+        "frezz_day": frezzDay.text,
+        "frezz_number": frezzNumber.text,
+        "max_frezz_day": maxFrezzDay.text,
+        "invitations_number": invitationsNumber.text,
+        "max_invitation": maxInvitation.text,
+        "service_number": serviceNumber.text,
+        "max_service": maxService.text,
+        "allowed_number": allowedNumber.text,
+        "notes": notes.text,
+      });
+      if (res["status"] == "failure") {
+        globalAlert("لم يتم تعديل البيانات لأنها لم تتغير", title: "عذرًا");
+        statusRequs = StatusRequst.failure;
+      } else if (res["status"] == "success") {
+        globalAlert("تم تعديل البانات بنجاح", title: "");
+        name.clear();
+        specialization.text = "عام";
+        price.text = "0";
+        day.text = "0";
+        sessionsNumber.text = "0";
+        frezzDay.text = "0";
+        frezzNumber.text = "0";
+        maxFrezzDay.text = "0";
+        invitationsNumber.text = "0";
+        maxInvitation.text = "0";
+        serviceNumber.text = "0";
+        maxService.text = "0";
+        allowedNumber.text = "0";
+        notes.text = "0";
+        statusRequs = StatusRequst.sucsess;
+      } else {
+        statusRequs = StatusRequst.failure;
+      }
+
+      update();
     }
   }
 }

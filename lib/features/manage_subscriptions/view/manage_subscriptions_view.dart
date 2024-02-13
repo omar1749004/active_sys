@@ -19,7 +19,7 @@ class ManageSubscriptionsView extends StatelessWidget {
 
     return Scaffold(
       body: GetBuilder<MangeSubControllerImp>(builder: (controller) {
-        if (controller.statusRequs == StatusRequst.loading) {
+        if (controller.firstState == StatusRequst.loading) {
           return const CustomLoadingIndecator();
         } else {
           return Column(
@@ -66,10 +66,12 @@ class ManageSubscriptionsView extends StatelessWidget {
                             //
                             //table that contains data
                             //
-                            Expanded(
+                             Expanded(
                               flex: 6,
-                              child: Container(
-                                color: Color.fromARGB(255, 218, 218, 218),
+                              child:
+                              controller.statusRequs == StatusRequst.loading? const CustomLoadingIndecator() :
+                               Container(
+                                color:const Color.fromARGB(255, 218, 218, 218),
                                 child: CustomModernTable(
                                   data: controller.dataInTable,
                                   widths: const [100, 250, 150, 250, 100],
@@ -85,6 +87,7 @@ class ManageSubscriptionsView extends StatelessWidget {
                                 ),
                               ),
                             ),
+                                 
                             //
                             //buttons
                             //

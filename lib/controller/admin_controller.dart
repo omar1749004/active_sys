@@ -19,6 +19,7 @@ abstract class AdminController extends GetxController {
   void addAdmin();
   void deleteAdmin();
   void assignModel(AdminSys privetModel);
+  void editAdmin();
 }
 
 class AdminControllerImp extends AdminController {
@@ -137,16 +138,8 @@ class AdminControllerImp extends AdminController {
   void addAdmin() async {
     if (formAdminKey.currentState!.validate()) {
       if (pass.text != repass.text) {
-        Get.defaultDialog(
-            title: "Waring",
-            middleText: "Password Not Match",
-            actions: [
-              ElevatedButton(
-                  onPressed: () {
-                    Get.back();
-                  },
-                  child: const Text("Ok"))
-            ]);
+        globalAlert("كلمة المرور التي أدخلتها غير ", title: "عذرًا");
+
       } else {
         statusRequs = StatusRequst.loading;
         update();
@@ -164,6 +157,12 @@ class AdminControllerImp extends AdminController {
           globalAlert("يرجى إعادة المحاولة في وقت لاحق", title: "!خطأ");
           statusRequs = StatusRequst.failure;
         } else if (res["status"] == "success") {
+          search.clear() ;
+          name.clear() ;
+          note.clear() ;
+          pass.clear() ;
+          repass.clear() ;
+          getPowers();
           statusRequs = StatusRequst.sucsess;
         } else {
           statusRequs = StatusRequst.loading;
@@ -190,7 +189,7 @@ class AdminControllerImp extends AdminController {
       update();
     }
   }
-
+  
   @override
   void deleteAdmin() async {
     var res = await AdminData().delete({
@@ -210,6 +209,38 @@ class AdminControllerImp extends AdminController {
     update();
   }
 
+  @override
+  editAdmin() async {
+    if (formAdminKey.currentState!.validate()) {
+      statusRequs = StatusRequst.loading;
+      update();
+
+      var res = await AdminData().edit({
+        "id": adminmModel.adminSysId.toString(),
+        "name": name.text,
+        "type": "0",
+        "password": pass.text,
+        "note": note.text,
+        "powers": selectpowerList.toString(),
+      });
+
+      if (res["status"] == "failure") {
+        globalAlert("لم يتم تعديل البيانات لأنها لم تتغير", title: "عذرًا");
+        statusRequs = StatusRequst.failure;
+      } else if (res["status"] == "success") {
+        globalAlert("تم تعديل البانات بنجاح", title: "");
+        statusRequs = StatusRequst.sucsess;
+          name.clear() ;
+          note.clear() ;
+          pass.clear() ;
+          repass.clear() ;
+          getPowers();
+      } else {
+        statusRequs = StatusRequst.failure;
+      }
+      update();
+  }
+
   //function to assign data inside List
   void assignDataInsideTable() {
     dataInTable = [];
@@ -224,6 +255,7 @@ class AdminControllerImp extends AdminController {
       ]);
     }
   }
+    
 }
 
 // var res = await AdminData().add(

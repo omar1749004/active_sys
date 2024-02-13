@@ -1,3 +1,4 @@
+
 import 'package:active_system/core/class/statuscode.dart';
 import 'package:active_system/core/constant/app_route.dart';
 import 'package:active_system/core/functions/global_alert.dart';
@@ -24,10 +25,12 @@ abstract class RenewController extends GetxController {
   void dateSearch(DateTime startD, DateTime endD);
   void handlTable(bool isdate);
   void deleteRenew();
+  void editPRenew();
 }
 
 class RenewControllerImp extends RenewController {
   StatusRequst statusRequs = StatusRequst.non;
+  GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   late TextEditingController barcodeNum;
   late TextEditingController userName;
@@ -86,7 +89,7 @@ class RenewControllerImp extends RenewController {
     note = TextEditingController();
     end = TextEditingController();
     searchVal = TextEditingController();
-    preNote.text = " ";
+    preNote.text = "";
     descound.text = "0";
     amount.text = "0";
     remining.text = "0";
@@ -245,31 +248,39 @@ class RenewControllerImp extends RenewController {
   void addRenew() async {
     statusRequs = StatusRequst.loading;
     update();
-    String offe = _getDesc();
-    String ow = _getowed();
-    var res = await RenewData().add({
-      "userid": renewUser.usersId.toString(),
-      "name": renewUser.usersName,
-      "captinId": renewUser.usersCaptiantid.toString(),
-      "barcodeId": renewUser.barcodeId.toString(),
-      "subscriptionsId": renewUser.subscriptionsId.toString(),
-      "note": note.text,
-      "start": start.toString(),
-      "end": end.text,
-      "offer": offe,
-      "amount": amount.text,
-      "amount_owed": ow,
-      "renewal_adminId": "1",
-    });
-    if (res["status"] == "failure") {
-      globalAlert("يرجى إعادة المحاولة في وقت لاحق",title: "!خطأ");
-      statusRequs = StatusRequst.failure;
-    } else if (res["status"] == "success") {
-      statusRequs = StatusRequst.sucsess;
-    } else {
-      statusRequs = StatusRequst.failure;
+    if (formKey.currentState!.validate()) {
+      String offe = _getDesc();
+      String ow = _getowed();
+      var res = await RenewData().add({
+        "userid": renewUser.usersId.toString(),
+        "name": renewUser.usersName,
+        "captinId": renewUser.usersCaptiantid.toString(),
+        "barcodeId": renewUser.barcodeId.toString(),
+        "subscriptionsId": renewUser.subscriptionsId.toString(),
+        "note": note.text,
+        "start": start.toString(),
+        "end": end.text,
+        "offer": offe,
+        "amount": amount.text,
+        "amount_owed": ow,
+        "renewal_adminId": "1",
+      });
+      if (res["status"] == "failure") {
+        globalAlert("يرجى إعادة المحاولة في وقت لاحق", title: "!خطأ");
+        statusRequs = StatusRequst.failure;
+      } else if (res["status"] == "success") {
+        barcodeNum.clear();
+        userName.clear();
+        phone.clear();
+        note.clear();
+        remining.text = "0";
+        descound.text = "0";
+        statusRequs = StatusRequst.sucsess;
+      } else {
+        statusRequs = StatusRequst.failure;
+      }
+      update();
     }
-    update();
   }
 
   String _getDesc() {
@@ -375,7 +386,6 @@ class RenewControllerImp extends RenewController {
     }
   }
 
-
   //function to assign data inside List
   void assignDataInsideTable() {
     dataInTable = [];
@@ -390,42 +400,75 @@ class RenewControllerImp extends RenewController {
       ]);
     }
   }
- 
+
   @override
   void gotoFrezze(RenewModel privteModel) {
-    
     if (privteModel.renewalEnd?.isAfter(DateTime.now()) ?? false) {
-     Get.toNamed(AppRoute.freezescreenid,arguments: {
-        "RenewModel"  : privteModel
-    });
-    }else{
-
-      globalAlert("اللاعب اشتراكه منتهي",title: "!خطأ");
-
+      Get.toNamed(AppRoute.freezescreenid,
+          arguments: {"RenewModel": privteModel});
+    } else {
+      globalAlert("اللاعب اشتراكه منتهي", title: "!خطأ");
     }
   }
 
-@override
-  void deleteRenew()async{
-     var res = await RenewData().delete(
-      {
-        "id" : renewUser.renewalId.toString(),
-      }
-     );
-     
-     if(res["status"] =="failure")
-     {
-      globalAlert("يرجى إعادة المحاولة في وقت لاحق",title: "!خطأ");
+  @override
+  void deleteRenew() async {
+    var res = await RenewData().delete({
+      "id": renewUser.renewalId.toString(),
+    });
+
+    if (res["status"] == "failure") {
+      globalAlert("يرجى إعادة المحاولة في وقت لاحق", title: "!خطأ");
       statusRequs = StatusRequst.failure;
-     }else if(res["status"] =="success"){
-      
-      renewList.removeWhere((element) => element.renewalId ==renewUser.renewalId) ;
-      statusRequs =StatusRequst.sucsess;
-     }
-     else{
-      statusRequs =StatusRequst.failure;
-     }
-     update();
+    } else if (res["status"] == "success") {
+      renewList
+          .removeWhere((element) => element.renewalId == renewUser.renewalId);
+      statusRequs = StatusRequst.sucsess;
+    } else {
+      statusRequs = StatusRequst.failure;
+    }
+    update();
   }
 
+  @override
+  editPRenew() async {
+    statusRequs = StatusRequst.loading;
+    update();
+    if (formKey.currentState!.validate()) {
+      String offe = _getDesc();
+      String ow = _getowed();
+      var res = await RenewData().edit({
+        "id": renewUser.usersId.toString(),
+        "userid": renewUser.usersId.toString(),
+        "name": renewUser.usersName,
+        "captinId": renewUser.usersCaptiantid.toString(),
+        "barcodeId": renewUser.barcodeId.toString(),
+        "subscriptionsId": renewUser.subscriptionsId.toString(),
+        "note": note.text,
+        "start": start.toString(),
+        "end": end.text,
+        "offer": offe,
+        "amount": amount.text,
+        "amount_owed": ow,
+        "renewal_adminId": "1",
+      });
+      if (res["status"] == "failure") {
+        globalAlert("لم يتم تعديل البيانات لأنها لم تتغير", title: "عذرًا");
+        statusRequs = StatusRequst.failure;
+      } else if (res["status"] == "success") {
+        globalAlert("تم تعديل البانات بنجاح", title: "");
+        barcodeNum.clear();
+        userName.clear();
+        phone.clear();
+        note.clear();
+        remining.text = "0";
+        descound.text = "0";
+        statusRequs = StatusRequst.sucsess;
+      } else {
+        statusRequs = StatusRequst.failure;
+      }
+
+      update();
+    }
+  }
 }

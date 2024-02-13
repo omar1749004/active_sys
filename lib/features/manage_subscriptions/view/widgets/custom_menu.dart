@@ -15,7 +15,7 @@ class CustomMenu extends StatelessWidget {
       width: 250,
       child: ListView.builder(
         scrollDirection: Axis.vertical,
-        shrinkWrap: true,
+        shrinkWrap: true, 
         itemCount: serviceName.length,
         itemBuilder: (context, index) {
           return CustomMenuButton(

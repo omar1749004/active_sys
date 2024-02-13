@@ -12,6 +12,7 @@ abstract class TrainersController extends GetxController {
   void assignModel(UserModel privetModel);
   void organizePhone();
   void deleteTrainer();
+  void editTrainer();
 }
 
 class TrainersControllerImp extends TrainersController {
@@ -98,6 +99,12 @@ class TrainersControllerImp extends TrainersController {
         globalAlert("يرجى إعادة المحاولة في وقت لاحق", title: "!خطأ");
         statusRequs = StatusRequst.failure;
       } else if (res["status"] == "success") {
+                name.clear();
+        phone.clear();
+        phone1.clear();
+        phone2.clear();
+        address.clear();
+        note.clear();
         statusRequs = StatusRequst.sucsess;
       } else {
         statusRequs = StatusRequst.failure;
@@ -138,18 +145,20 @@ class TrainersControllerImp extends TrainersController {
   @override
   void assignModel(UserModel privetModel) {
     address.text = privetModel.usersAddress ?? "";
-    name.text = privetModel.usersName ?? "";
-    note.text = privetModel.usersNote ?? "";
-    List<String> mid = phoneMap[privetModel.usersId]!;
-    if (mid.length == 3) {
-      phone.text = mid[0];
-      phone1.text = mid[1];
-      phone2.text = mid[2];
-    } else if (mid.length == 2) {
-      phone.text = mid[0];
-      phone1.text = mid[1];
-    } else {
-      phone.text = mid[0];
+
+    name.text = privetModel.usersName ?? "" ;
+    note.text = privetModel.usersNote?? "" ;
+    userModel = privetModel ;
+    List<String>  mid =  phoneMap[privetModel.usersId]! ;
+    if(mid.length == 3){
+    phone.text = mid[0]  ;
+    phone1.text =  mid[1] ;
+    phone2.text =  mid[2] ;
+    }else if(mid.length == 2){
+     phone.text = mid[0]  ;
+    phone1.text =  mid[1] ;
+    }else{
+      phone.text = mid[0]  ;
     }
   }
 
@@ -184,6 +193,43 @@ class TrainersControllerImp extends TrainersController {
         usersList[i].usersId.toString(),
         usersList[i].usersGender.toString(),
       ]);
+    }
+  }
+
+@override
+ void editTrainer() async {
+    statusRequs = StatusRequst.loading;
+    update();
+    if (formKey.currentState!.validate()) {
+
+      var res = await TrainerData().add(
+        {
+          "id" : userModel.usersId.toString(),
+          "name": name.text,
+         "phone": phone.text,
+         "adress": address.text,
+          "note": note.text,
+          "phone1": phone1.text,
+          "phone2": phone2.text,
+        },
+      );
+      if (res["status"] == "failure") {
+        globalAlert("لم يتم تعديل البيانات لأنها لم تتغير", title: "عذرًا");
+        statusRequs = StatusRequst.failure;
+      } else if (res["status"] == "success") {
+        globalAlert("تم تعديل البانات بنجاح", title: "");
+        name.clear();
+        phone.clear();
+        phone1.clear();
+        phone2.clear();
+        address.clear();
+        note.clear();
+        statusRequs = StatusRequst.sucsess;
+      } else {
+        statusRequs = StatusRequst.failure;
+      }
+
+      update();
     }
   }
 }
