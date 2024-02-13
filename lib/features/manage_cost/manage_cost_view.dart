@@ -27,7 +27,7 @@ class _ManageCostViewState extends State<ManageCostView> {
     return Scaffold(
       body: GetBuilder<ExpensesControllerImp>(
         builder: (controller) {
-          if (controller.statusRequs == StatusRequst.loading) {
+          if (controller.firstState == StatusRequst.loading) {
             return const CustomLoadingIndecator();
           } else {
             return Column(
@@ -141,7 +141,9 @@ class _ManageCostViewState extends State<ManageCostView> {
                               //
                               Expanded(
                                 flex: 6,
-                                child: Container(
+                                child:
+                                controller.statusRequs == StatusRequst.loading ?const CustomLoadingIndecator():
+                                 Container(
                                   color:
                                       const Color.fromARGB(255, 218, 218, 218),
                                   child: CustomModernTable(

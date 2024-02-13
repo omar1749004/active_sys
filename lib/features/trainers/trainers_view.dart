@@ -18,7 +18,7 @@ class TrainersView extends StatelessWidget {
     Get.put(TrainersControllerImp());
     return Scaffold(
         body: GetBuilder<TrainersControllerImp>(builder: (controller) {
-      if (controller.statusRequs == StatusRequst.loading) {
+      if (controller.firstState == StatusRequst.loading) {
         return const CustomLoadingIndecator();
       } else {
         return Column(
@@ -65,7 +65,9 @@ class TrainersView extends StatelessWidget {
                             //
                             Expanded(
                               flex: 6,
-                              child: Container(
+                              child:
+                              controller.statusRequs == StatusRequst.loading ? const CustomLoadingIndecator():
+                               Container(
                                 color: const Color.fromARGB(255, 218, 218, 218),
                                 child: CustomModernTable(
                                   data: controller.dataInTable,

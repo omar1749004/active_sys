@@ -25,7 +25,7 @@ abstract class HomeController extends GetxController {
 
 class HomeControllerImp extends HomeController {
   StatusRequst statusRequs = StatusRequst.non;
-
+  StatusRequst firstState = StatusRequst.non;
   late TextEditingController barcode;
   late TextEditingController username;
   late TextEditingController age;
@@ -47,7 +47,7 @@ class HomeControllerImp extends HomeController {
   String subValue = "عام";
 
   @override
-  void onInit() {
+  void onInit() async{
     barcode = TextEditingController();
     username = TextEditingController();
     age = TextEditingController();
@@ -56,6 +56,9 @@ class HomeControllerImp extends HomeController {
     phone = TextEditingController();
     note = TextEditingController();
     search = TextEditingController();
+    firstState = StatusRequst.loading;
+    await  Future.delayed(const Duration(milliseconds: 100));
+    firstState = StatusRequst.failure;
     viewAll();
     getSub();
 
@@ -137,7 +140,6 @@ class HomeControllerImp extends HomeController {
     if (res["msg"] == "subscription expired") {
       globalAlert("اشتراك اللاعب منتهي");
       statusRequs = StatusRequst.failure;
-      print("no");
     } else if (res["status"] == "success") {
       print("fukk");
       attendmodel = AttendModel.fromJson(res["data"]);
@@ -211,9 +213,7 @@ class HomeControllerImp extends HomeController {
     if (res["msg"] == "renew") {
       globalAlert("هناك مشكلة في تجديد اللاعب");
       statusRequs = StatusRequst.failure;
-      print("no");
     } else if (res["status"] == "success") {
-      print("fukk");
       attendmodel = AttendModel.fromJson(res["data"]);
       for (int i = 0; i < subNameList.length; i++) {
         if (attendmodel.subscriptionsName == subNameList[i]) {
@@ -285,6 +285,7 @@ class HomeControllerImp extends HomeController {
     } else {
       statusRequs = StatusRequst.failure;
     }
+    await  Future.delayed(const Duration(milliseconds: 300));
     update();
   }
 

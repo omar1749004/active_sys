@@ -21,7 +21,7 @@ class RenewSybscriptionsView extends StatelessWidget {
     Get.put(RenewControllerImp());
     return Scaffold(
       body: GetBuilder<RenewControllerImp>(builder: (controller) {
-        if (controller.statusRequs == StatusRequst.loading) {
+        if (controller.firstState == StatusRequst.loading) {
           return const CustomLoadingIndecator();
         } else {
           return Column(children: [
@@ -126,8 +126,10 @@ class RenewSybscriptionsView extends StatelessWidget {
                           //
                           Expanded(
                             flex: 6,
-                            child: Container(
-                              color: Color.fromARGB(255, 218, 218, 218),
+                            child:
+                            controller.statusRequs == StatusRequst.loading ? const CustomLoadingIndecator():
+                             Container(
+                              color:const Color.fromARGB(255, 218, 218, 218),
                               child: CustomModernTable(
                                 data: controller.dataInTable,
                                 widths: const [100, 250, 150, 250, 100, 250],
@@ -177,46 +179,44 @@ class RenewSybscriptionsView extends StatelessWidget {
                                   ontap: () {
                                     controller.addRenew();
                                   },
-                                )
-                              ],
-                            ),
-
-                          //
-                          //form input right screen
-                          //
-                          Expanded(
-                            flex: 1,
-                            child: Container(
-                              height: MediaQuery.of(context).size.height,
-                              padding: const EdgeInsets.only(left: 8, right: 8),
-                              decoration: const BoxDecoration(
-                                border: Border(
-                                  top: BorderSide(
-                                    width: 1,
-                                    color: Color.fromRGBO(0, 0, 0, 0.186),
-                                  ),
-                                  left: BorderSide(
-                                    width: 1,
-                                    color: Color.fromRGBO(0, 0, 0, 0.186),
-                                  ),
-                                  bottom: BorderSide(
-                                    width: 1,
-                                    color: Color.fromRGBO(0, 0, 0, 0.186),
-                                  ),
                                 ),
-                              ),
-                              child: const RenewSubscriptionForm(),
+                              ],
                             ),
                           ),
                         ],
                       ),
-
+                    ),
+                  ),
+                  //
+                  //form input right screen
+                  //
+                  Expanded(
+                    flex: 1,
+                    child: Container(
+                      height: MediaQuery.of(context).size.height,
+                      padding: const EdgeInsets.only(left: 8, right: 8),
+                      decoration: const BoxDecoration(
+                        border: Border(
+                          top: BorderSide(
+                            width: 1,
+                            color: Color.fromRGBO(0, 0, 0, 0.186),
+                          ),
+                          left: BorderSide(
+                            width: 1,
+                            color: Color.fromRGBO(0, 0, 0, 0.186),
+                          ),
+                          bottom: BorderSide(
+                            width: 1,
+                            color: Color.fromRGBO(0, 0, 0, 0.186),
+                          ),
+                        ),
+                      ),
+                      child: const RenewSubscriptionForm(),
                     ),
                   ),
                 ],
               ),
             ),
-
           ]);
         }
       }),

@@ -30,6 +30,7 @@ abstract class MangeUsersController extends GetxController {
 
 class MangeUsersControllerImp extends MangeUsersController {
   StatusRequst statusRequs = StatusRequst.non;
+ StatusRequst firstState = StatusRequst.non;
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
   File? file;
 
@@ -77,7 +78,7 @@ class MangeUsersControllerImp extends MangeUsersController {
   String active = "0";
 
   @override
-  void onInit() {
+  void onInit() async{
     barcodeNum = TextEditingController();
     userName = TextEditingController();
     phone = TextEditingController();
@@ -86,6 +87,9 @@ class MangeUsersControllerImp extends MangeUsersController {
     searchVal = TextEditingController();
     age = TextEditingController();
     age.text = "0";
+    firstState = StatusRequst.loading;
+    await  Future.delayed(const Duration(milliseconds: 100));
+    firstState = StatusRequst.failure;
     getSub();
     getTrainer();
     view();
@@ -244,6 +248,7 @@ class MangeUsersControllerImp extends MangeUsersController {
     } else {
       statusRequs = StatusRequst.failure;
     }
+    await  Future.delayed(const Duration(milliseconds: 300));
     update();
   }
 

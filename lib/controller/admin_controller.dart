@@ -5,7 +5,6 @@ import 'package:active_system/data/models/adminpowers_model.dart';
 import 'package:active_system/data/service/remote/admin_data.dart';
 import 'package:active_system/features/users/data/service/static/powers_list.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 abstract class AdminController extends GetxController {
@@ -24,6 +23,7 @@ abstract class AdminController extends GetxController {
 
 class AdminControllerImp extends AdminController {
   StatusRequst statusRequs = StatusRequst.non;
+  StatusRequst firstState = StatusRequst.non;
   late TextEditingController search;
   List<AdminPower> adminPoewrList = [];
   List<AdminSys> adminmodelList = [];
@@ -40,12 +40,15 @@ class AdminControllerImp extends AdminController {
   Map<int, List<int>> powersMap = {};
   GlobalKey<FormState> formAdminKey = GlobalKey<FormState>();
   @override
-  void onInit() {
+  void onInit() async{
     search = TextEditingController();
     name = TextEditingController();
     note = TextEditingController();
     pass = TextEditingController();
     repass = TextEditingController();
+    firstState = StatusRequst.loading;
+    await  Future.delayed(const Duration(milliseconds: 100));
+    firstState = StatusRequst.failure;
     getPowers();
     super.onInit();
   }
@@ -79,7 +82,7 @@ class AdminControllerImp extends AdminController {
     } else {
       statusRequs = StatusRequst.failure;
     }
-
+    await  Future.delayed(const Duration(milliseconds: 300));
     update();
   }
 
@@ -239,6 +242,7 @@ class AdminControllerImp extends AdminController {
         statusRequs = StatusRequst.failure;
       }
       update();
+  }
   }
 
   //function to assign data inside List

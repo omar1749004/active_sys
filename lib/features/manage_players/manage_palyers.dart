@@ -21,7 +21,7 @@ class ManagePlayers extends StatelessWidget {
     Get.put(MangeUsersControllerImp());
     return Scaffold(
         body: GetBuilder<MangeUsersControllerImp>(builder: (controller) {
-      if (controller.statusRequs == StatusRequst.loading) {
+      if (controller.firstState == StatusRequst.loading) {
         return const CustomLoadingIndecator();
       } else {
         return Column(
@@ -79,7 +79,9 @@ class ManagePlayers extends StatelessWidget {
 
                             Expanded(
                               flex: 8,
-                              child: Container(
+                              child:
+                              controller.statusRequs == StatusRequst.loading ?const CustomLoadingIndecator():
+                               Container(
                                 color: const Color.fromARGB(255, 218, 218, 218),
                                 child: CustomModernTable(
                                   data: controller.dataInTable,

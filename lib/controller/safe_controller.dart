@@ -20,6 +20,8 @@ abstract class SafeController extends GetxController {
 
 class SafeControllerImp extends SafeController {
   StatusRequst statusRequs = StatusRequst.non;
+  StatusRequst firstState = StatusRequst.non;
+
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
   DateTime startSearch = DateTime.now();
   DateTime endSearch = DateTime.now();
@@ -38,12 +40,19 @@ class SafeControllerImp extends SafeController {
   double outgoing = 0;
 
   @override
-  void onInit() {
+  void onInit() async{
     reason = TextEditingController();
     amount = TextEditingController();
     adminName = TextEditingController();
     adminName.text = "omar";
+    firstState = StatusRequst.loading;
+    await  Future.delayed(const Duration(milliseconds: 100));
+    firstState = StatusRequst.failure;
     dateSearch(startSearch, endSearch);
+    
+    statusRequs = StatusRequst.loading;
+    await  Future.delayed(const Duration(milliseconds: 300));
+    statusRequs = StatusRequst.failure;
     super.onInit();
   }
 
@@ -61,6 +70,8 @@ class SafeControllerImp extends SafeController {
         toralIncoming = 0;
         toralOutcoming = 0;
         toralSafe = 0;
+        safeList = [];
+        assignDataInsideTable();
       } else if (res["status"] == "success") {
         List data = res["data"];
         toralIncoming = double.parse(res["moreInfo"][0]["totalincoming"]);
@@ -71,6 +82,7 @@ class SafeControllerImp extends SafeController {
         assignDataInsideTable();
         statusRequs = StatusRequst.sucsess;
       } else {
+        
         statusRequs = StatusRequst.failure;
       }
     }
@@ -162,7 +174,7 @@ class SafeControllerImp extends SafeController {
         },
       );
       if (res["status"] == "failure") {
-        globalAlert("يرجى إعادة المحاولة في وقت لاحق",title: "!خطأ");
+        globalAlert("يرجى إعادة المحاولة في وقت لاحق", title: "!خطأ");
         statusRequs = StatusRequst.failure;
       } else if (res["status"] == "success") {
         statusRequs = StatusRequst.sucsess;
@@ -173,21 +185,17 @@ class SafeControllerImp extends SafeController {
     update();
   }
 
- @override
+  @override
   void getpdf() async {
     statusRequs = StatusRequst.loading;
     update();
-    var res = await SafeData().getpdf(
-      {
-        "start_date": startSearch.toString().substring(0,11),
-        "end_date": endSearch.toString().substring(0,11),
-      }
-    );
-
-      Get.offAllNamed(AppRoute.pdfId,arguments: {
-        "pdf"  : res["data"]
+    var res = await SafeData().getpdf({
+      "start_date": startSearch.toString().substring(0, 11),
+      "end_date": endSearch.toString().substring(0, 11),
     });
-   
+
+    Get.offAllNamed(AppRoute.pdfId, arguments: {"pdf": res["data"]});
+
     update();
   }
 
