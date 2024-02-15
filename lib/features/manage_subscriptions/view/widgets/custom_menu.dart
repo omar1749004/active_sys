@@ -22,7 +22,7 @@ class CustomMenu extends StatelessWidget {
                 : Colors.white,
             text: serviceName[index],
             ontap: () {
-              Get.offAndToNamed(serviceId[index]);
+              Get.offAndToNamed(serviceRoutes[index]);
             },
           );
         },

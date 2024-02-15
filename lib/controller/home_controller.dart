@@ -112,15 +112,15 @@ class HomeControllerImp extends HomeController {
     if (res["msg"] == "subscription expired") {
       globalAlert("اشتراك اللاعب منتهي");
       statusRequs = StatusRequst.failure;
-      print("no");
     } else if (res["status"] == "success") {
-      print("fukk");
       attendmodel = AttendModel.fromJson(res["data"]);
       for (int i = 0; i < subNameList.length; i++) {
         if (attendmodel.subscriptionsName == subNameList[i]) {
           subValue = subNameList[i];
         }
       }
+      attendList.add(attendmodel);
+      assignDataInsideTable();
       statusRequs = StatusRequst.sucsess;
     } else if (res["msg"] == "invitition expired") {
       globalAlert("الاعب تخطى عدد الدعوات");
@@ -141,13 +141,14 @@ class HomeControllerImp extends HomeController {
       globalAlert("اشتراك اللاعب منتهي");
       statusRequs = StatusRequst.failure;
     } else if (res["status"] == "success") {
-      print("fukk");
       attendmodel = AttendModel.fromJson(res["data"]);
       for (int i = 0; i < subNameList.length; i++) {
         if (attendmodel.subscriptionsName == subNameList[i]) {
           subValue = subNameList[i];
         }
       }
+      attendList.add(attendmodel);
+      assignDataInsideTable();
       statusRequs = StatusRequst.sucsess;
     } else if (res["msg"] == "service expired") {
       globalAlert("الاعب تخطى عدد الخدمات");
@@ -215,12 +216,14 @@ class HomeControllerImp extends HomeController {
       statusRequs = StatusRequst.failure;
     } else if (res["status"] == "success") {
       attendmodel = AttendModel.fromJson(res["data"]);
+
       for (int i = 0; i < subNameList.length; i++) {
         if (attendmodel.subscriptionsName == subNameList[i]) {
           subValue = subNameList[i];
         }
       }
-
+      attendList.add(attendmodel);
+      assignDataInsideTable();
       statusRequs = StatusRequst.sucsess;
     } else if (res["msg"] == "subscription expired") {
       globalAlert("اشتراك اللاعب منتهي");
@@ -274,7 +277,8 @@ class HomeControllerImp extends HomeController {
       "day": DateTime.now().toString().substring(0, 11),
     });
     if (res["status"] == "failure") {
-      print("object");
+      attendList = [];
+      assignDataInsideTable();
       statusRequs = StatusRequst.failure;
     } else if (res["status"] == "success") {
       List data = res["data"];
@@ -300,10 +304,14 @@ class HomeControllerImp extends HomeController {
   @override
   void handleFunctionsAdd() {
     if (supType == 0) {
+      addSub();
     } else if (supType == 1) {
       addSession();
     } else if (supType == 2) {
-    } else {}
+      addInvition();
+    } else {
+      addService();
+    }
   }
 
   @override
@@ -315,6 +323,7 @@ class HomeControllerImp extends HomeController {
         (username.text.isEmpty && barcode.text.isNotEmpty)) {
       search = barcode.text;
     } else if (username.text.isEmpty && barcode.text.isEmpty) {
+
     } else {
       search = username.text;
     }
@@ -322,9 +331,7 @@ class HomeControllerImp extends HomeController {
       "search": search,
     });
     if (res["status"] == "success") {
-      print("fukk");
       attendmodel = AttendModel.fromJson(res["data"]);
-      print(attendmodel.attendanceBarcodeId);
       for (int i = 0; i < subNameList.length; i++) {
         if (attendmodel.subscriptionsName == subNameList[i]) {
           subValue = subNameList[i];
@@ -349,8 +356,14 @@ class HomeControllerImp extends HomeController {
   void searchFun() async {
     statusRequs = StatusRequst.loading;
     update();
-    var res = await AttendData().search({"search": search.text});
+    var res = await AttendData().search({
+      "search": search.text,
+      "start_date":DateTime.now().toString().substring(0,11),
+      "end_date":DateTime.now().toString().substring(0,11),
+      });
     if (res["status"] == "failure") {
+      attendList = [];
+      assignDataInsideTable();
       statusRequs = StatusRequst.failure;
     } else if (res["status"] == "success") {
       List data = res["data"];

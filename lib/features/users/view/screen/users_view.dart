@@ -22,9 +22,9 @@ class UsersView extends StatelessWidget {
     Get.put(AdminControllerImp());
     return Scaffold(
       body: GetBuilder<AdminControllerImp>(builder: (controller) {
-        if (controller.firstState == StatusRequst.loading) {
-          return const CustomLoadingIndecator();
-        } else {
+        // if (controller.firstState == StatusRequst.loading) {
+        //   return const CustomLoadingIndecator();
+        // } else {
           return Column(children: [
             const CustomAppBar(),
             Expanded(
@@ -115,7 +115,9 @@ class UsersView extends StatelessWidget {
                       flex: 1,
                       child: Padding(
                         padding: const EdgeInsets.all(15),
-                        child: Form(
+                        child: 
+                        controller.firstState == StatusRequst.loading ?const CustomLoadingIndecator():
+                        Form(
                           key: controller.formAdminKey,
                           child: ListView(
                             children: [
@@ -209,7 +211,7 @@ class UsersView extends StatelessWidget {
               ),
             ),
           ]);
-        }
+        // }
       }),
     );
   }

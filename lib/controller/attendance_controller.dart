@@ -5,9 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 
 abstract class AttendController extends GetxController {
-  // void viewAll();
+  void viewAll();
   void dateSearch(DateTime startD, DateTime endD);
-  // void handlTable(bool isdate);
+  void handlTable(bool isdate);
 }
 
 class AttendControllerImp extends AttendController {
@@ -19,6 +19,8 @@ class AttendControllerImp extends AttendController {
   bool isdateSearch = true;
   DateTime startSearch = DateTime.now();
   DateTime endSearch = DateTime.now();
+  String? s ;
+  String? e;
   int totalPlayer = 0;
   List<AttendModel> attendList = [];
   List<List<String>> dataInTable = [];
@@ -37,12 +39,13 @@ class AttendControllerImp extends AttendController {
   @override
   void dateSearch(DateTime startD, DateTime endD) async {
     statusRequs = StatusRequst.loading;
-
+   s = startD.toString().substring(0,11) ;
+    e = endD.toString().substring(0,11) ;
     update();
     if (isdateSearch) {
       var res = await AttendData().dateSearch({
-        "start_date": startD.toString(),
-        "end_date": endD.toString(),
+        "start_date": startD.toString().substring(0,11),
+        "end_date":endD.toString().substring(0,11),
       });
       if (res["status"] == "failure") {
         statusRequs = StatusRequst.failure;
@@ -51,7 +54,7 @@ class AttendControllerImp extends AttendController {
         totalPlayer = res["moreInfo"][0]["totalPlayers"] ?? 0;
         attendList = [];
         attendList.addAll(data.map((e) => AttendModel.fromJson(e)));
-        assignDataInsideTable();
+        // /assignDataInsideTable();
         statusRequs = StatusRequst.sucsess;
       } else {
         statusRequs = StatusRequst.failure;
@@ -63,6 +66,7 @@ class AttendControllerImp extends AttendController {
   void checkSearch(String val) {
     if (val.isEmpty) {
       statusRequs = StatusRequst.non;
+      handlTable(isdateSearch) ;
       isSearch = false;
     } else {
       isSearch = true;
@@ -77,18 +81,18 @@ class AttendControllerImp extends AttendController {
 
     var res = await AttendData().search({
       "search": searchVal.text,
-    });
+      "start_date":s,
+      "end_date":e,
+      });
     if (res["status"] == "failure") {
       statusRequs = StatusRequst.failure;
     } else if (res["status"] == "success") {
       List data = res["data"];
-      totalPlayer = res["moreInfo"][0]["totalPlayers"] ?? 0;
-
       attendList = [];
       attendList.addAll(data.map((e) => AttendModel.fromJson(e)));
 
       //assign data inside table
-      assignDataInsideTable();
+      //assignDataInsideTable();
 
       statusRequs = StatusRequst.sucsess;
     } else {
@@ -112,15 +116,39 @@ class AttendControllerImp extends AttendController {
       ]);
     }
   }
-  //  @override
-  // void handlTable(bool isdate) {
-  // isdateSearch =  isdate ;
+   @override
+  void handlTable(bool isdate) {
+  isdateSearch =  isdate ;
 
-  // if(isdateSearch){
-  //  dateSearch(startSearch ,endSearch) ;
-  // }else{
-  //   viewAll();
-  // }
+  if(isdateSearch){
 
-  // }
+   dateSearch(startSearch ,endSearch) ;
+  }else{
+    s = "" ;
+    e = "" ;
+    viewAll();
+  }
+
+  }
+
+  @override
+  void viewAll() async {
+     statusRequs = StatusRequst.loading;
+    update();
+      var res = await AttendData().viwe();
+      if (res["status"] == "failure") {
+        statusRequs = StatusRequst.failure;
+      } else if (res["status"] == "success") {
+        List data = res["data"];
+        totalPlayer = res["moreInfo"][0]["totalPlayers"] ?? 0;
+        attendList = [];
+        attendList.addAll(data.map((e) => AttendModel.fromJson(e)));
+        // assignDataInsideTable();
+        statusRequs = StatusRequst.sucsess;
+      } else {
+        statusRequs = StatusRequst.failure;
+      }
+    update();
+  }
+
 }

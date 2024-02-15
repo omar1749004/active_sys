@@ -71,18 +71,22 @@ class AdminControllerImp extends AdminController {
     update();
     var res = await AdminData().view();
     if (res["status"] == "failure") {
+      adminmodelList = [];
+      assignDataInsideTable();
       statusRequs = StatusRequst.failure;
     } else if (res["status"] == "success") {
       List data = res["data"];
+      adminmodelList = [];
       adminmodelList.addAll(data.map((e) => AdminSys.fromJson(e)));
       data = res["powers"];
       adminPoewrList.addAll(data.map((e) => AdminPower.fromJson(e)));
       organizePowers();
+      assignDataInsideTable();
       statusRequs = StatusRequst.sucsess;
     } else {
       statusRequs = StatusRequst.failure;
     }
-    await  Future.delayed(const Duration(milliseconds: 300));
+     await  Future.delayed(const Duration(milliseconds: 100));
     update();
   }
 

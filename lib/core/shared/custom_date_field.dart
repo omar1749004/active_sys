@@ -17,7 +17,7 @@ class CustomDateField extends StatelessWidget {
       this.isaccess = true,
       this.label = "",
       DateFormat? format, 
-      this.borderRadius = 0}): format = format ?? DateFormat("yyyy-MM-dd");
+      this.borderRadius = 0, this.myController}): format = format ?? DateFormat("yyyy-MM-dd");
   final double width;
   final double height;
   final IconData icon;
@@ -30,6 +30,7 @@ class CustomDateField extends StatelessWidget {
   final  bool isaccess;
   final DateFormat format ;
   final DateTime? currentValue;
+  final TextEditingController? myController;
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -40,6 +41,7 @@ class CustomDateField extends StatelessWidget {
         onChanged: onChanged,
         resetIcon: null,
         enabled: isaccess,
+        controller: myController,
         decoration: InputDecoration(
             icon: Icon(
               icon,

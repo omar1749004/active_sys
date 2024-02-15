@@ -59,6 +59,9 @@ class TrainersControllerImp extends TrainersController {
     update();
     var res = await TrainerData().view();
     if (res["status"] == "failure") {
+      usersList = [];
+      phonesList = [];
+      assignDataInsideTable();
       statusRequs = StatusRequst.failure;
     } else if (res["status"] == "success") {
       List data = res["data"];
@@ -121,7 +124,7 @@ class TrainersControllerImp extends TrainersController {
   @override
   void checkSearch(String val) {
     if (val.isEmpty) {
-      statusRequs = StatusRequst.non;
+      viewAll();
     } else {
       _search();
     }

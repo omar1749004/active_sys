@@ -24,9 +24,9 @@ class SafeView extends StatelessWidget {
     Get.put(SafeControllerImp());
     return Scaffold(
       body: GetBuilder<SafeControllerImp>(builder: (controller) {
-        if (controller.firstState == StatusRequst.loading) {
-          return const CustomLoadingIndecator();
-        } else {
+        // if (controller.firstState == StatusRequst.loading) {
+        //   return const CustomLoadingIndecator();
+        // } else {
           return Column(children: [
             const CustomAppBar(),
             Expanded(
@@ -116,7 +116,9 @@ class SafeView extends StatelessWidget {
                                     ),
                                     CustomButton(
                                       text: "حذف",
-                                      ontap: () {},
+                                      ontap: () {
+                                        controller.getpdf();
+                                      },
                                     ),
                                   ],
                                 ),
@@ -129,10 +131,12 @@ class SafeView extends StatelessWidget {
                     const VerticalDivider(),
 
                               Expanded(
-
+             
                                   child: Padding(
                                     padding: const EdgeInsets.all(15),
-                                    child: Form(
+                                    child:
+                                    controller.firstState == StatusRequst.loading ?const CustomLoadingIndecator():
+                                     Form(
                                       key: controller.formKey,
                                       child: 
                                       Column(children:
@@ -317,7 +321,7 @@ class SafeView extends StatelessWidget {
               ),
             ),
           ]);
-        }
+        // }
       }),
     );
   }

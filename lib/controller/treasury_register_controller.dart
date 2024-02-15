@@ -51,6 +51,8 @@ class TreasuryRegisterControllerImp extends TreasuryRegisterController {
       toralIncoming = 0;
       toralOutcoming = 0;
       toralSafe = 0;
+      safeList = [];
+      assignDataInsideTable();
     } else if (res["status"] == "success") {
       List data = res["data"];
       toralIncoming = double.parse(res["moreInfo"][0]["totalincoming"]);
@@ -71,7 +73,7 @@ class TreasuryRegisterControllerImp extends TreasuryRegisterController {
   void search(DateTime startD, DateTime endD, String desc) async {
     statusRequs = StatusRequst.loading;
     update();
-    var res = await SafeData().dateSearch({
+    var res = await SafeData().search({
       "search": desc,
       "start_date": startD.toString().substring(0, 11),
       "end_date": endD.toString().substring(0, 11),
@@ -82,7 +84,10 @@ class TreasuryRegisterControllerImp extends TreasuryRegisterController {
       toralIncoming = 0;
       toralOutcoming = 0;
       toralSafe = 0;
+      safeList = [];
+      assignDataInsideTable();
     } else if (res["status"] == "success") {
+      
       List data = res["data"];
       toralIncoming = double.parse(res["moreInfo"][0]["totalincoming"]);
       toralOutcoming = double.parse(res["moreInfo"][0]["totalOutgioing"]);

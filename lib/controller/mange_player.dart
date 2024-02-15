@@ -237,6 +237,8 @@ class MangeUsersControllerImp extends MangeUsersController {
       "search": searchVal.text
     });
     if (res["status"] == "failure") {
+      usersList = [];
+      assignDataInsideTable();
       statusRequs = StatusRequst.failure;
     } else if (res["status"] == "success") {
       List data = res["data"];

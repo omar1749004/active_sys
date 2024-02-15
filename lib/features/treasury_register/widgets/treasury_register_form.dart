@@ -1,7 +1,6 @@
 import 'package:active_system/controller/treasury_register_controller.dart';
 import 'package:active_system/core/constant/color.dart';
 import 'package:active_system/core/constant/styles.dart';
-import 'package:active_system/core/functions/validate_input.dart';
 import 'package:active_system/core/shared/custom_date_field.dart';
 import 'package:active_system/core/shared/custom_dropdown_menu.dart';
 import 'package:active_system/core/shared/custome_textform_auth.dart';
@@ -33,6 +32,7 @@ class TreasuryRegisterForm extends GetView<TreasuryRegisterControllerImp> {
                       iconSize: 18,
                       onChanged: (p0) {
                         controller.startSearch =p0! ;
+                        controller.dateSearch(controller.startSearch, controller.endSearch);
                       },
                       fontSize: 15),
                 ),
@@ -76,6 +76,7 @@ class TreasuryRegisterForm extends GetView<TreasuryRegisterControllerImp> {
                       iconSize: 18,
                       onChanged: (p0) {
                         controller.endSearch = p0! ;
+                         controller.dateSearch(controller.startSearch, controller.endSearch);
                       },
                       fontSize: 15),
                 ),
@@ -127,10 +128,10 @@ class TreasuryRegisterForm extends GetView<TreasuryRegisterControllerImp> {
             CustomeTextFormAuth(
                 hintText: "",
                 myController: controller.reason,
-                lableText: "بحث (الوصف)",
-                validator: (val) {
-                  return validInput(val!, 5, 50, "username");
-                }),
+                onChanged: (p0) {
+                  controller.makeSearch();
+                },
+                lableText: "بحث (الوصف)",),
             const SizedBox(
               height: 10,
             ),

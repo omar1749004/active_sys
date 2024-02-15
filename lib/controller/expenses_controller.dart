@@ -62,6 +62,8 @@ class ExpensesControllerImp extends ExpensesController {
       });
       if (res["status"] == "failure") {
         totalExpenses = 0;
+        expensesList = [];
+        assignDataInsideTable();
         statusRequs = StatusRequst.failure;
       } else if (res["status"] == "success") {
         List data = res["data"];
@@ -83,6 +85,8 @@ class ExpensesControllerImp extends ExpensesController {
     update();
     var res = await ExpensesData().view();
     if (res["status"] == "failure") {
+      expensesList = [];
+      assignDataInsideTable();
       statusRequs = StatusRequst.failure;
     } else if (res["status"] == "success") {
       List data = res["data"];
@@ -158,11 +162,11 @@ class ExpensesControllerImp extends ExpensesController {
     update();
     var res = await ExpensesData().search({"search": search.text});
     if (res["status"] == "failure") {
-      print("no");
+      expensesList = [];
+      assignDataInsideTable();
       statusRequs = StatusRequst.failure;
     } else if (res["status"] == "success") {
       List data = res["data"];
-      print(data);
       expensesList = [];
       expensesList.addAll(data.map((e) => ExpensesModel.fromJson(e)));
 

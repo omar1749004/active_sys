@@ -63,7 +63,7 @@ class RenewControllerImp extends RenewController {
   List<List<String>> dataInTable = [];
 
   bool isSearch = false;
-  bool isdateSearch = true;
+  bool isdateSearch = false;
   DateTime startSearch = DateTime.now();
   DateTime endSearch = DateTime.now();
 
@@ -254,7 +254,9 @@ class RenewControllerImp extends RenewController {
   void addRenew() async {
     statusRequs = StatusRequst.loading;
     update();
+    
     if (formKey.currentState!.validate()) {
+      
       String offe = _getDesc();
       String ow = _getowed();
       var res = await RenewData().add({
@@ -272,6 +274,7 @@ class RenewControllerImp extends RenewController {
         "renewal_adminId": "1",
       });
       if (res["status"] == "failure") {
+        print("hi");
         globalAlert("يرجى إعادة المحاولة في وقت لاحق", title: "!خطأ");
         statusRequs = StatusRequst.failure;
       } else if (res["status"] == "success") {
@@ -285,8 +288,11 @@ class RenewControllerImp extends RenewController {
       } else {
         statusRequs = StatusRequst.failure;
       }
-      update();
     }
+    else{
+     statusRequs = StatusRequst.failure;
+    }
+    update();
   }
 
   String _getDesc() {
@@ -317,10 +323,16 @@ class RenewControllerImp extends RenewController {
         "end_date": endD.toString().substring(0, 11),
       });
       if (res["status"] == "failure") {
+         renewList = [];
+      assignDataInsideTable();
         statusRequs = StatusRequst.failure;
       } else if (res["status"] == "success") {
         List data = res["data"];
+        renewList = [];
         renewList.addAll(data.map((e) => RenewModel.fromJson(e)));
+        renewUser = renewList[0];
+        print(startSearch);
+        update();
         assignDataInsideTable();
         statusRequs = StatusRequst.sucsess;
       } else {
@@ -332,7 +344,7 @@ class RenewControllerImp extends RenewController {
 
   void checkSearch(String val) {
     if (val.isEmpty) {
-      statusRequs = StatusRequst.non;
+      handlTable(isdateSearch);
       isSearch = false;
     } else {
       isSearch = true;
@@ -367,6 +379,8 @@ class RenewControllerImp extends RenewController {
     update();
     var res = await RenewData().view();
     if (res["status"] == "failure") {
+      renewList = [];
+      assignDataInsideTable();
       statusRequs = StatusRequst.failure;
     } else if (res["status"] == "success") {
       List data = res["data"];
@@ -384,7 +398,6 @@ class RenewControllerImp extends RenewController {
   @override
   void handlTable(bool isdate) {
     isdateSearch = isdate;
-
     if (isdateSearch) {
       dateSearch(startSearch, endSearch);
     } else {

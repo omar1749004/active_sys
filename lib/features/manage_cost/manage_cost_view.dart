@@ -27,9 +27,9 @@ class _ManageCostViewState extends State<ManageCostView> {
     return Scaffold(
       body: GetBuilder<ExpensesControllerImp>(
         builder: (controller) {
-          if (controller.firstState == StatusRequst.loading) {
-            return const CustomLoadingIndecator();
-          } else {
+          // if (controller.firstState == StatusRequst.loading) {
+          //   return const CustomLoadingIndecator();
+          // } else {
             return Column(
               children: [
                 //
@@ -206,7 +206,9 @@ class _ManageCostViewState extends State<ManageCostView> {
                       //
                       Expanded(
                         flex: 1,
-                        child: Container(
+                        child:
+                        controller.firstState == StatusRequst.loading ?const CustomLoadingIndecator():
+                         Container(
                           height: MediaQuery.of(context).size.height,
                           padding: const EdgeInsets.only(left: 8, right: 8),
                           decoration: const BoxDecoration(
@@ -236,7 +238,7 @@ class _ManageCostViewState extends State<ManageCostView> {
 
               ],
             );
-          }
+          // }
         },
       ),
     );

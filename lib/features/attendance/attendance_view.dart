@@ -22,9 +22,9 @@ class AttendanceView extends StatelessWidget {
     Get.put(AttendControllerImp());
     return Scaffold(
       body: GetBuilder<AttendControllerImp>(builder: (controller) {
-        if (controller.statusRequs == StatusRequst.loading) {
-          return const CustomLoadingIndecator();
-        } else {
+        // if (controller.firstState == StatusRequst.loading) {
+        //   return const CustomLoadingIndecator();
+        // } else {
           return Column(children: [
             const CustomAppBar(),
             Expanded(
@@ -49,6 +49,7 @@ class AttendanceView extends StatelessWidget {
                             //
                             CustomTableHeader(
                               onChanged: (val) {
+                                
                                 controller.checkSearch(val);
                               },
                               searchController: controller.searchVal,
@@ -117,8 +118,11 @@ class AttendanceView extends StatelessWidget {
                                   SizedBox(
                                     child: CustomBotton1(
                                       text: "بحث",
-                                      ontap: () {},
-                                      color: ColorApp.onfoucosColor,
+                                      ontap: () {
+                                        controller.isdateSearch = !controller.isdateSearch ;
+                                        controller.handlTable(controller.isdateSearch);
+                                      },
+                                      color:controller.isdateSearch? ColorApp.onfoucosColor:ColorApp.kPrimaryColor,
                                       marginBottom: 0,
                                       marginLeft: 0,
                                       marginRight: 0,
@@ -134,8 +138,10 @@ class AttendanceView extends StatelessWidget {
                             //
                             Expanded(
                               flex: 5,
-                              child: Container(
-                                color: Color.fromARGB(255, 218, 218, 218),
+                              child: 
+                              controller.statusRequs == StatusRequst.loading ?const CustomLoadingIndecator():
+                              Container(
+                                color:const Color.fromARGB(255, 218, 218, 218),
                                 child: CustomModernTable(
                                   data: controller.dataInTable,
                                   widths: const [250, 250, 300, 300, 300, 100],
@@ -217,7 +223,7 @@ class AttendanceView extends StatelessWidget {
               ),
             ),
           ]);
-        }
+        // }
       }),
     );
   }

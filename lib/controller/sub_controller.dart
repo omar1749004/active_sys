@@ -150,6 +150,8 @@ class MangeSubControllerImp extends MangeSubController {
     update();
     var res = await SubData().view();
     if (res["status"] == "failure") {
+      subList = [];
+      assignDataInsideTable();
       statusRequs = StatusRequst.failure;
     } else if (res["status"] == "success") {
       List data = res["data"];

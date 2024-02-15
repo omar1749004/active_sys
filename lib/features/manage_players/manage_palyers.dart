@@ -21,9 +21,9 @@ class ManagePlayers extends StatelessWidget {
     Get.put(MangeUsersControllerImp());
     return Scaffold(
         body: GetBuilder<MangeUsersControllerImp>(builder: (controller) {
-      if (controller.firstState == StatusRequst.loading) {
-        return const CustomLoadingIndecator();
-      } else {
+      // if (controller.firstState == StatusRequst.loading) {
+      //   return const CustomLoadingIndecator();
+      // } else {
         return Column(
           children: [
             //
@@ -147,7 +147,9 @@ class ManagePlayers extends StatelessWidget {
                     //
                     Expanded(
                       flex: 1,
-                      child: Container(
+                      child:
+                      controller.firstState == StatusRequst.loading ?const CustomLoadingIndecator():
+                       Container(
                         height: MediaQuery.of(context).size.height,
                         padding: const EdgeInsets.only(left: 8, right: 8),
                         decoration: const BoxDecoration(
@@ -175,7 +177,7 @@ class ManagePlayers extends StatelessWidget {
             ),
           ],
         );
-      }
+      // }
     }));
   }
 }

@@ -20,14 +20,15 @@ class HomePage extends StatelessWidget {
     Get.put(HomeControllerImp());
     return Scaffold(
       body: GetBuilder<HomeControllerImp>(builder: (controller) {
-        if (controller.firstState == StatusRequst.loading) {
-          return const CustomLoadingIndecator();
-        } else {
+        // if (controller.firstState == StatusRequst.loading) {
+        //   return const CustomLoadingIndecator();
+        // } else {
           return Column(
             children: [
               const CustomAppBar(),
               Expanded(
-                child: SizedBox(
+                child: 
+                SizedBox(
                   width: MediaQuery.of(context).size.width,
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -47,7 +48,11 @@ class HomePage extends StatelessWidget {
                                 children: [
                                   CustomTableHeader(
                                       onChanged: (p0) {
-                                        controller.searchFun();
+                                        if(p0.isEmpty){
+                                          controller.viewAll();
+                                        }else{
+                                           controller.searchFun();
+                                        }
                                       },
                                       searchController: controller.search,
                                       header: "سجل الحضور اليومي"),
@@ -121,9 +126,11 @@ class HomePage extends StatelessWidget {
                             ),
                           )),
                       const VerticalDivider(),
-                      const Expanded(
+                       Expanded(
                         flex: 1,
-                        child: ClinetInfo(),
+                        child:
+                        controller.firstState == StatusRequst.loading ?const CustomLoadingIndecator():
+                        const ClinetInfo(),
                       ),
                     ],
                   ),
@@ -131,7 +138,7 @@ class HomePage extends StatelessWidget {
               ),
             ],
           );
-        }
+        // }
       }),
     );
   }

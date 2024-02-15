@@ -2,7 +2,6 @@ import 'package:active_system/controller/sub_controller.dart';
 import 'package:active_system/core/class/statuscode.dart';
 import 'package:active_system/core/shared/ModernTable/custom_modern_table.dart';
 import 'package:active_system/core/shared/custom_app_bar.dart';
-import 'package:active_system/core/shared/custom_table_header.dart';
 import 'package:active_system/core/shared/loading_indecator.dart';
 import 'package:active_system/features/manage_subscriptions/view/widgets/custom_button.dart';
 import 'package:active_system/features/manage_subscriptions/view/widgets/custom_input_form.dart';
@@ -19,9 +18,9 @@ class ManageSubscriptionsView extends StatelessWidget {
 
     return Scaffold(
       body: GetBuilder<MangeSubControllerImp>(builder: (controller) {
-        if (controller.firstState == StatusRequst.loading) {
-          return const CustomLoadingIndecator();
-        } else {
+        // if (controller.firstState == StatusRequst.loading) {
+        //   return const CustomLoadingIndecator();
+        // } else {
           return Column(
             children: [
               //
@@ -56,13 +55,13 @@ class ManageSubscriptionsView extends StatelessWidget {
                             //
                             //search bar
                             //
-                            SizedBox(
-                              width: MediaQuery.of(context).size.width * 0.5,
-                              child: CustomTableHeader(
-                                searchController: controller.search,
-                                header: "",
-                              ),
-                            ),
+                            // SizedBox(
+                            //   width: MediaQuery.of(context).size.width * 0.5,
+                            //   child: CustomTableHeader(
+                            //     searchController: controller.search,
+                            //     header: "",
+                            //   ),
+                            // ),
                             //
                             //table that contains data
                             //
@@ -128,7 +127,9 @@ class ManageSubscriptionsView extends StatelessWidget {
                     //
                     Expanded(
                       flex: 1,
-                      child: Container(
+                      child:
+                      controller.firstState == StatusRequst.loading ?const CustomLoadingIndecator():
+                       Container(
                         height: MediaQuery.of(context).size.height,
                         padding: const EdgeInsets.only(left: 8, right: 8),
                         decoration: const BoxDecoration(
@@ -155,7 +156,7 @@ class ManageSubscriptionsView extends StatelessWidget {
               )),
             ],
           );
-        }
+        // }
       }),
     );
   }
