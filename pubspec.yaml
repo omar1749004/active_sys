@@ -44,6 +44,7 @@ dependencies:
   lottie: ^3.0.0
   loading_indicator: ^3.1.1
   syncfusion_flutter_pdfviewer: ^24.2.4
+  qrcode_barcode_scanner: ^2.0.1
   
 dev_dependencies:
   flutter_test:

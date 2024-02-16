@@ -141,30 +141,33 @@ class _ManageCostViewState extends State<ManageCostView> {
                               //
                               Expanded(
                                 flex: 6,
-                                child:
-                                controller.statusRequs == StatusRequst.loading ?const CustomLoadingIndecator():
-                                 Container(
-                                  color:
-                                      const Color.fromARGB(255, 218, 218, 218),
-                                  child: CustomModernTable(
-                                    data: controller.dataInTable,
-                                    widths: const [
-                                      100,
-                                      150,
-                                      250,
-                                      250,
-                                    ],
-                                    header: const [
-                                      "رقم التسلسل",
-                                      "قيمة المصروف",
-                                      "سبب الصرف",
-                                      "تاريخ الصرف",
-                                    ],
-                                    nameOfGlobalID: 'manageCost',
-                                    onRowTap: () {},
-                                    showDialog: () {},
-                                  ),
-                                ),
+                                child: controller.statusRequs ==
+                                        StatusRequst.loading
+                                    ? const CustomLoadingIndecator()
+                                    : Container(
+                                        color: const Color.fromARGB(
+                                            255, 218, 218, 218),
+                                        child: CustomModernTable(
+                                          data: controller.dataInTable,
+                                          widths: const [
+                                            150,
+                                            150,
+                                            250,
+                                            200,
+                                            150
+                                          ],
+                                          header: const [
+                                            "التسلسل",
+                                            "قيمة المصروف",
+                                            "سبب الصرف",
+                                            "تاريخ الصرف",
+                                            "الشريك",
+                                          ],
+                                          nameOfGlobalID: 'manageCost',
+                                          onRowTap: () {},
+                                          showDialog: () {},
+                                        ),
+                                      ),
                               ),
                               //
                               //buttons
@@ -233,7 +236,6 @@ class _ManageCostViewState extends State<ManageCostView> {
                     ],
                   ),
                 ),
-
               ],
             );
           }

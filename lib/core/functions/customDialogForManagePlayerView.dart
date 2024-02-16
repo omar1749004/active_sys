@@ -1,12 +1,13 @@
 import 'package:active_system/core/constant/color.dart';
 import 'package:active_system/data/models/attend_model.dart';
+import 'package:active_system/data/models/user_model.dart';
 import 'package:active_system/features/safe/view/widget/custom_display_many.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 
-Future<dynamic> customHomePageDialog(AttendModel attendModel) {
+Future<dynamic> customManagePlayerDialog(UserModel userModel) {
   return Get.defaultDialog(
       title: "ملف الشخصى للاعب",
       content: Expanded(
@@ -16,7 +17,7 @@ Future<dynamic> customHomePageDialog(AttendModel attendModel) {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               const CircleAvatar(
-                  backgroundImage: AssetImage("assets/image/animals.jpg"),
+                  backgroundImage: AssetImage('assets/image/animals.jpg'),
                   backgroundColor: ColorApp.gray,
                   radius: 80),
               const SizedBox(
@@ -26,16 +27,16 @@ Future<dynamic> customHomePageDialog(AttendModel attendModel) {
                 width: 500,
                 child: CustomDisplyMany(
                     textColor: ColorApp.thirdColor,
-                    many: attendModel.usersName,
-                    text: "الاسم",
+                    many: userModel.usersName,
+                    text: "ألاسم",
                     flexOfMany: 2),
               ),
               SizedBox(
                 width: 500,
                 child: CustomDisplyMany(
                   textColor: ColorApp.thirdColor,
-                  many: attendModel.usersPhone,
-                  text: "التلفون",
+                  many: userModel.usersGender.toString(),
+                  text: "الجنس",
                   flexOfMany: 2,
                 ),
               ),
@@ -43,8 +44,8 @@ Future<dynamic> customHomePageDialog(AttendModel attendModel) {
                 width: 500,
                 child: CustomDisplyMany(
                   textColor: ColorApp.thirdColor,
-                  many: attendModel.attendanceStart,
-                  text: "وقت الحضور ",
+                  many: userModel.usersPhone,
+                  text: "تلفون",
                   flexOfMany: 2,
                 ),
               ),
@@ -52,8 +53,8 @@ Future<dynamic> customHomePageDialog(AttendModel attendModel) {
                 width: 500,
                 child: CustomDisplyMany(
                   textColor: ColorApp.thirdColor,
-                  many: attendModel.attendanceEnd,
-                  text: "وقت الانصراف",
+                  many: userModel.usersEmail,
+                  text: "البريد الاكترونى",
                   flexOfMany: 2,
                 ),
               ),
@@ -61,8 +62,8 @@ Future<dynamic> customHomePageDialog(AttendModel attendModel) {
                 width: 500,
                 child: CustomDisplyMany(
                   textColor: ColorApp.thirdColor,
-                  many: attendModel.subscriptionsName,
-                  text: "أسم الاشتراك",
+                  many: userModel.usersAddress,
+                  text: "العنوان",
                   flexOfMany: 2,
                 ),
               ),
@@ -70,8 +71,8 @@ Future<dynamic> customHomePageDialog(AttendModel attendModel) {
                 width: 500,
                 child: CustomDisplyMany(
                   textColor: ColorApp.thirdColor,
-                  many: attendModel.subscriptionsSessionsNumber.toString(),
-                  text: "رقم الجلسه",
+                  many: userModel.usersBranch.toString(),
+                  text: "الفرع",
                   flexOfMany: 2,
                 ),
               ),
@@ -79,8 +80,8 @@ Future<dynamic> customHomePageDialog(AttendModel attendModel) {
                 width: 500,
                 child: CustomDisplyMany(
                   textColor: ColorApp.thirdColor,
-                  many: attendModel.renewalEnd.toString(),
-                  text: "تاريخ انتهاء الاشتراك",
+                  many: userModel.usersCreate.toString(),
+                  text: "تاريخ الانشاء",
                   flexOfMany: 2,
                 ),
               ),

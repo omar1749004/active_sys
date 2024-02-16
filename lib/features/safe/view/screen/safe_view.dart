@@ -61,34 +61,38 @@ class SafeView extends StatelessWidget {
                             Expanded(
                               flex: 6,
                               child:
-                               controller.statusRequs == StatusRequst.loading ?const CustomLoadingIndecator():
-                               Container(
-                                color: const Color.fromARGB(255, 218, 218, 218),
-                                child: CustomModernTable(
-                                  data: controller.dataInTable,
-                                  widths: const [
-                                    100,
-                                    250,
-                                    200,
-                                    150,
-                                    150,
-                                    150,
-                                    200
-                                  ],
-                                  header: const [
-                                    "قم التسلسل",
-                                    "وصف",
-                                    "التاريخ",
-                                    "الوارد",
-                                    "الصادر",
-                                    "المتبقى",
-                                    "الشريك"
-                                  ],
-                                  nameOfGlobalID: 'safe',
-                                  onRowTap: () {},
-                                  showDialog: () {},
-                                ),
-                              ),
+                                  controller.statusRequs == StatusRequst.loading
+                                      ? const CustomLoadingIndecator()
+                                      : Container(
+                                          color: const Color.fromARGB(
+                                              255, 218, 218, 218),
+                                          child: CustomModernTable(
+                                            data: controller.dataInTable,
+                                            widths: const [
+                                              150,
+                                              250,
+                                              200,
+                                              150,
+                                              150,
+                                              150,
+                                              150,
+                                              200
+                                            ],
+                                            header: const [
+                                              "رقم التسلسل",
+                                              "وصف",
+                                              "التاريخ",
+                                              "الوارد",
+                                              "الصادر",
+                                              "المتبقى",
+                                              "النوع",
+                                              "المستخدم"
+                                            ],
+                                            nameOfGlobalID: 'safe',
+                                            onRowTap: () {},
+                                            showDialog: () {},
+                                          ),
+                                        ),
                             ),
                             // /
                             //buttons
@@ -128,190 +132,158 @@ class SafeView extends StatelessWidget {
                     ),
                     const VerticalDivider(),
 
-                              Expanded(
-
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(15),
-                                    child: Form(
-                                      key: controller.formKey,
-                                      child: 
-                                      Column(children:
-                                       [
-                                        Text(
-                                          "بيانات الخزنة",
-                                          style: Styles.style23,
-                                        ),
-                                        CustomDisplyMany(
-                                            textColor: ColorApp.secondColor,
-                                            many:
-                                                controller.toralSafe.toString(),
-                                            text: "المجود بالخزنة الان"),
-                                        CustomDisplyMany(
-                                            textColor: ColorApp.gray,
-                                            many: controller.toralOutcoming
-                                                .toString(),
-                                            text: "اجمالي المشتريات"),
-                                        CustomDisplyMany(
-                                            textColor: ColorApp.gray,
-                                            many: controller.toralIncoming
-                                                .toString(),
-                                            text: "   اجمالي المبيعات"),
-                                        const Divider(),
-                                        Padding(
-                                          padding:
-                                              const EdgeInsets.only(bottom: 5),
-                                          child: Text(
-                                            "إضافة عملية",
-                                            style: Styles.style23,
-                                          ),
-                                        ),
-                                            Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              children: [
-                                                Expanded(
-                                                  child: CustomCheckBox(
-                                                    ischeck:
-                                                        controller.typeOfSafe ==
-                                                                4
-                                                            ? true
-                                                            : false,
-                                                    text: "إيداع",
-                                                    onTap: () {
-                                                      controller
-                                                          .changeSfarType(4);
-                                                    },
-                                                  ),
-                                                ),
-                                                const SizedBox(
-                                                  width: 10,
-                                                ),
-                                                Expanded(
-                                                  child: CustomCheckBox(
-                                                    ischeck:
-                                                        controller.typeOfSafe ==
-                                                                3
-                                                            ? true
-                                                            : false,
-                                                    text: "سحب",
-                                                    onTap: () {
-                                                      controller
-                                                          .changeSfarType(3);
-                                                    },
-                                                  ),
-                                                ),
-                                                const SizedBox(
-                                                  width: 10,
-                                                ),
-                                                const Text(
-                                                  "نوع العملية",
-                                                  style: Styles.style15B,
-                                                ),
-                                              ],
-                                            ),
-                                            Padding(
-                                              padding:
-                                                  const EdgeInsets.symmetric(
-                                                      vertical: 15),
-                                              child: CustomeTextFormAuth(
-                                                  hintText: "",
-                                                  myController:
-                                                      controller.reason,
-                                                  lableText:
-                                                      controller.changeReson(),
-                                                  validator: (val) {
-                                                    return validInput(
-                                                        val!, 4, 50, "");
-                                                  }),
-                                            ),
-                                            CustomeTextFormAuth(
-                                                hintText: "",
-                                                lableText: "المبلغ",
-                                                myController: controller.amount,
-                                                onChanged: (p0) {
-                                                  controller.validatenum(p0);
-                                                },
-                                                validator: (val) {
-                                                  return validInput(
-                                                      val!, 1, 50, "num");
-                                                }),
-                                            Padding(
-                                              padding:
-                                                  const EdgeInsets.symmetric(
-                                                      vertical: 15),
-                                              child: Row(
-                                                children: [
-                                                  Expanded(
-                                                    child: CustomeTextFormAuth(
-                                                      hintText: "",
-                                                      lableText: "الشريك",
-                                                      myController:
-                                                          controller.adminName,
-                                                      isreadonly: true,
-                                                    ),
-                                                  ),
-                                                  const SizedBox(
-                                                    width: 10,
-                                                  ),
-                                                  Directionality(
-                                                    textDirection:
-                                                        TextDirection.rtl,
-                                                    child: CustomDateField(
-                                                      label: controller
-                                                          .changeDate(),
-                                                      borderRadius: 15,
-                                                      fontSize: 15,
-                                                      currentValue:
-                                                          DateTime.now(),
-                                                      width: 210,
-                                                      height: 50,
-                                                      iconSize: 20,
-                                                      isaccess: false,
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                            Row(
-                                              children: [
-                                                Expanded(
-                                                  child: CustomButton(
-                                                    text: "إالغاء",
-                                                    ontap: () {
-                                                      controller.reason.text =
-                                                          "";
-                                                      controller.amount.text =
-                                                          "";
-                                                    },
-                                                  ),
-                                                ),
-                                                const SizedBox(
-                                                  width: 10,
-                                                ),
-                                                Expanded(
-                                                  child: CustomButton(
-                                                    text: "تنفيذ",
-                                                    ontap: () {
-                                                      controller
-                                                          .addTrandsAction();
-                                                    },
-                                                  ),
-                                                ),
-                                              ],
-                                            )
-                                          ],
-                                        ),
-                                      
-                                   
+                    Expanded(
+                        child: Padding(
+                      padding: const EdgeInsets.all(15),
+                      child: Form(
+                        key: controller.formKey,
+                        child: Column(
+                          children: [
+                            Text(
+                              "بيانات الخزنة",
+                              style: Styles.style23,
+                            ),
+                            CustomDisplyMany(
+                                textColor: ColorApp.secondColor,
+                                many: controller.toralSafe.toString(),
+                                text: "المجود بالخزنة الان"),
+                            CustomDisplyMany(
+                                textColor: ColorApp.gray,
+                                many: controller.toralOutcoming.toString(),
+                                text: "اجمالي المشتريات"),
+                            CustomDisplyMany(
+                                textColor: ColorApp.gray,
+                                many: controller.toralIncoming.toString(),
+                                text: "   اجمالي المبيعات"),
+                            const Divider(),
+                            Padding(
+                              padding: const EdgeInsets.only(bottom: 5),
+                              child: Text(
+                                "إضافة عملية",
+                                style: Styles.style23,
+                              ),
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Expanded(
+                                  child: CustomCheckBox(
+                                    ischeck: controller.typeOfSafe == 4
+                                        ? true
+                                        : false,
+                                    text: "إيداع",
+                                    onTap: () {
+                                      controller.changeSfarType(4);
+                                    },
+                                  ),
+                                ),
+                                const SizedBox(
+                                  width: 10,
+                                ),
+                                Expanded(
+                                  child: CustomCheckBox(
+                                    ischeck: controller.typeOfSafe == 3
+                                        ? true
+                                        : false,
+                                    text: "سحب",
+                                    onTap: () {
+                                      controller.changeSfarType(3);
+                                    },
+                                  ),
+                                ),
+                                const SizedBox(
+                                  width: 10,
+                                ),
+                                const Text(
+                                  "نوع العملية",
+                                  style: Styles.style15B,
+                                ),
+                              ],
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 15),
+                              child: CustomeTextFormAuth(
+                                  hintText: "",
+                                  myController: controller.reason,
+                                  lableText: controller.changeReson(),
+                                  validator: (val) {
+                                    return validInput(val!, 4, 50, "");
+                                  }),
+                            ),
+                            CustomeTextFormAuth(
+                                hintText: "",
+                                lableText: "المبلغ",
+                                myController: controller.amount,
+                                onChanged: (p0) {
+                                  controller.validatenum(p0);
+                                },
+                                validator: (val) {
+                                  return validInput(val!, 1, 50, "num");
+                                }),
+                            Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 15),
+                              child: Row(
+                                children: [
+                                  Expanded(
+                                    child: CustomeTextFormAuth(
+                                      hintText: "",
+                                      lableText: "الشريك",
+                                      myController: controller.adminName,
+                                      isreadonly: true,
                                     ),
-                                  ))
+                                  ),
+                                  const SizedBox(
+                                    width: 10,
+                                  ),
+                                  Directionality(
+                                    textDirection: TextDirection.rtl,
+                                    child: CustomDateField(
+                                      label: controller.changeDate(),
+                                      borderRadius: 15,
+                                      fontSize: 15,
+                                      currentValue: DateTime.now(),
+                                      width: 210,
+                                      height: 50,
+                                      iconSize: 20,
+                                      isaccess: false,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: CustomButton(
+                                    text: "إالغاء",
+                                    ontap: () {
+                                      controller.reason.text = "";
+                                      controller.amount.text = "";
+                                    },
+                                  ),
+                                ),
+                                const SizedBox(
+                                  width: 10,
+                                ),
+                                Expanded(
+                                  child: CustomButton(
+                                    text: "تنفيذ",
+                                    ontap: () {
+                                      controller.addTrandsAction();
+                                    },
+                                  ),
+                                ),
+                              ],
+                            )
+                          ],
+                        ),
+                      ),
+                    ))
                     //         ],
                     //       ),
                     //     ),
                     //   ),
                     // )
-                 
                   ],
                 ),
               ),

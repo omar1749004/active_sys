@@ -10,9 +10,9 @@ class CustomeTextFormAuth extends StatelessWidget {
       required this.hintText,
       required this.lableText,
       this.myController,
-       this.validator,
+      this.validator,
       this.onChanged,
-      this.isShowIcone =false,
+      this.isShowIcone = false,
       this.icone = Icons.power_off_rounded,
       this.isPhoneNumber = false,
       this.obscureText = false,
@@ -23,7 +23,8 @@ class CustomeTextFormAuth extends StatelessWidget {
       this.cursorColor = ColorApp.kPrimaryColor,
       this.hintColor = Colors.black,
       this.mainTextColor = Colors.black,
-      this.isreadonly = false});
+      this.isreadonly = false,
+      this.onTapOnTextField});
 
   final String hintText;
   final String lableText;
@@ -32,7 +33,7 @@ class CustomeTextFormAuth extends StatelessWidget {
   final String? Function(String?)? validator;
   final bool isPhoneNumber;
   final bool obscureText;
-  final bool isShowIcone ;
+  final bool isShowIcone;
   final TextStyle? lableStyle;
   final double fontSize;
   final Color onfocuseColor;
@@ -41,6 +42,7 @@ class CustomeTextFormAuth extends StatelessWidget {
   final Color mainTextColor;
   final bool isreadonly;
   final void Function()? ontap;
+  final void Function()? onTapOnTextField;
   final void Function(String)? onChanged;
   @override
   Widget build(BuildContext context) {
@@ -49,22 +51,24 @@ class CustomeTextFormAuth extends StatelessWidget {
     return Directionality(
       textDirection: TextDirection.rtl,
       child: TextFormField(
+        onTap: onTapOnTextField,
         onChanged: onChanged,
         obscureText: obscureText,
         keyboardType: isPhoneNumber ? TextInputType.number : TextInputType.text,
         validator: validator,
         controller: myController,
         cursorColor: cursorColor,
-        readOnly: isreadonly  ,
+        readOnly: isreadonly,
         style: TextStyle(
-            fontSize: fontSize, color: mainTextColor, fontFamily: "NotoSansArabic"),
+            fontSize: fontSize,
+            color: mainTextColor,
+            fontFamily: "NotoSansArabic"),
         decoration: InputDecoration(
           hintText: hintText,
           hintStyle: TextStyle(color: hintColor, fontFamily: "NotoSansArabic"),
           //hintStyle: TextStyle(fontSize: 14,
           //color: check? ColorApp.KPrimaryColor: color
           // ),
-
 
           label: Padding(
             padding: const EdgeInsets.all(20.0),
@@ -74,7 +78,6 @@ class CustomeTextFormAuth extends StatelessWidget {
               softWrap: false,
               overflow: TextOverflow.visible,
             ),
-
           ),
           //labelStyle: TextStyle(
           //color: check? ColorApp.KPrimaryColor:color

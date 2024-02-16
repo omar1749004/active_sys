@@ -30,7 +30,7 @@ abstract class MangeUsersController extends GetxController {
 
 class MangeUsersControllerImp extends MangeUsersController {
   StatusRequst statusRequs = StatusRequst.non;
- StatusRequst firstState = StatusRequst.non;
+  StatusRequst firstState = StatusRequst.non;
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
   File? file;
 
@@ -78,7 +78,7 @@ class MangeUsersControllerImp extends MangeUsersController {
   String active = "0";
 
   @override
-  void onInit() async{
+  void onInit() async {
     barcodeNum = TextEditingController();
     userName = TextEditingController();
     phone = TextEditingController();
@@ -88,7 +88,7 @@ class MangeUsersControllerImp extends MangeUsersController {
     age = TextEditingController();
     age.text = "0";
     firstState = StatusRequst.loading;
-    await  Future.delayed(const Duration(milliseconds: 100));
+    await Future.delayed(const Duration(milliseconds: 100));
     firstState = StatusRequst.failure;
     getSub();
     getTrainer();
@@ -195,11 +195,11 @@ class MangeUsersControllerImp extends MangeUsersController {
           globalAlert("مشكلة في التجديد");
           statusRequs = StatusRequst.failure;
         } else if (res["status"] == "success") {
-          barcodeNum.clear() ;
-          userName.clear() ;
-          phone.clear() ;
-          note.clear() ;
-          age.clear() ;
+          barcodeNum.clear();
+          userName.clear();
+          phone.clear();
+          note.clear();
+          age.clear();
           statusRequs = StatusRequst.sucsess;
         } else if (res["msg"] == "barcode is used") {
           globalAlert("هذا الكود مستخدم بالفعل");
@@ -248,7 +248,7 @@ class MangeUsersControllerImp extends MangeUsersController {
     } else {
       statusRequs = StatusRequst.failure;
     }
-    await  Future.delayed(const Duration(milliseconds: 300));
+    await Future.delayed(const Duration(milliseconds: 300));
     update();
   }
 
@@ -337,7 +337,6 @@ class MangeUsersControllerImp extends MangeUsersController {
     update();
   }
 
-
   @override
   editPlayers() async {
     if (formKey.currentState!.validate()) {
@@ -362,31 +361,31 @@ class MangeUsersControllerImp extends MangeUsersController {
         statusRequs = StatusRequst.failure;
       } else if (res["status"] == "success") {
         globalAlert("تم تعديل البانات بنجاح", title: "");
-          barcodeNum.clear() ;
-          userName.clear() ;
-          phone.clear() ;
-          note.clear() ;
-          age.clear() ;
+        barcodeNum.clear();
+        userName.clear();
+        phone.clear();
+        note.clear();
+        age.clear();
         statusRequs = StatusRequst.sucsess;
       } else {
         statusRequs = StatusRequst.failure;
       }
-  
+
       update();
     }
-}
+  }
 
   //function to assign data inside List
   void assignDataInsideTable() {
     dataInTable = [];
     for (var i = 0; i < usersList.length; i++) {
       dataInTable.add([
-        usersList[i].usersAddress.toString(),
-        usersList[i].usersCreate.toString(),
-        usersList[i].usersBranch.toString(),
-        usersList[i].usersName.toString(),
         usersList[i].usersId.toString(),
         usersList[i].usersName.toString(),
+        usersList[i].usersGender.toString(),
+        usersList[i].usersPhone.toString(),
+        usersList[i].usersType.toString(),
+        usersList[i].usersNote.toString(),
       ]);
     }
   }

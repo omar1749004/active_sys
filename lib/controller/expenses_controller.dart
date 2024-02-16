@@ -35,18 +35,18 @@ class ExpensesControllerImp extends ExpensesController {
   late TextEditingController search;
 
   @override
-  void onInit() async{
+  void onInit() async {
     reason = TextEditingController();
     amount = TextEditingController();
     note = TextEditingController();
     search = TextEditingController();
     amount.text = "0";
     firstState = StatusRequst.loading;
-    await  Future.delayed(const Duration(milliseconds: 100));
+    await Future.delayed(const Duration(milliseconds: 100));
     firstState = StatusRequst.failure;
     dateSearch(startSearch, endSearch);
     statusRequs = StatusRequst.loading;
-    await  Future.delayed(const Duration(milliseconds: 300));
+    await Future.delayed(const Duration(milliseconds: 300));
     statusRequs = StatusRequst.failure;
     super.onInit();
   }
@@ -190,7 +190,8 @@ class ExpensesControllerImp extends ExpensesController {
         expensesList[i].expensesId.toString(),
         expensesList[i].expensesValue.toString(),
         expensesList[i].expensesReason.toString(),
-        expensesList[i].expensesDate.toString(),
+        "${expensesList[i].expensesDate!.hour}:${expensesList[i].expensesDate!.minute}      ${expensesList[i].expensesDate!.year}/${expensesList[i].expensesDate!.month}/${expensesList[i].expensesDate!.day}",
+        expensesList[i].expensesAdminId.toString(),
       ]);
     }
   }
@@ -218,7 +219,6 @@ class ExpensesControllerImp extends ExpensesController {
         statusRequs = StatusRequst.sucsess;
         reason.clear();
         note.clear();
-
       } else {
         statusRequs = StatusRequst.failure;
       }

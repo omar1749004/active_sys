@@ -11,7 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class ManageSubscriptionsView extends StatelessWidget {
- const ManageSubscriptionsView({super.key});
+  const ManageSubscriptionsView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -66,28 +66,41 @@ class ManageSubscriptionsView extends StatelessWidget {
                             //
                             //table that contains data
                             //
-                             Expanded(
+                            Expanded(
                               flex: 6,
-                              child:
-                              controller.statusRequs == StatusRequst.loading? const CustomLoadingIndecator() :
-                               Container(
-                                color:const Color.fromARGB(255, 218, 218, 218),
-                                child: CustomModernTable(
-                                  data: controller.dataInTable,
-                                  widths: const [100, 250, 150, 250, 100],
-                                  header: const [
-                                    "رقم التسلسل",
-                                    "اسم الاشتراك",
-                                    "قيمة الاشتراك",
-                                    "نوع الاشتراك",
-                                    "عدد الايام",
-                                  ],
-                                  nameOfGlobalID: 'manageSubscription',
-                                  onRowTap: () {}, showDialog: () {  },
-                                ),
-                              ),
+                              child: controller.statusRequs ==
+                                      StatusRequst.loading
+                                  ? const CustomLoadingIndecator()
+                                  : Container(
+                                      color: const Color.fromARGB(
+                                          255, 218, 218, 218),
+                                      child: CustomModernTable(
+                                        data: controller.dataInTable,
+                                        widths: const [
+                                          150,
+                                          250,
+                                          150,
+                                          150,
+                                          150,
+                                          150,
+                                          250
+                                        ],
+                                        header: const [
+                                          "التسلسل",
+                                          "اسم الاشتراك",
+                                          "قيمة الاشتراك",
+                                          "نوع الاشتراك",
+                                          "عدد الايام",
+                                          "عدد الحصص",
+                                          "ملاحظات",
+                                        ],
+                                        nameOfGlobalID: 'manageSubscription',
+                                        onRowTap: () {},
+                                        showDialog: () {},
+                                      ),
+                                    ),
                             ),
-                                 
+
                             //
                             //buttons
                             //

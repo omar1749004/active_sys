@@ -112,8 +112,9 @@ class ClinetInfo extends StatelessWidget {
                                   hintText: "",
                                   lableText: "الكود",
                                   myController: controller.barcode,
-                                  onChanged: (p0) {
+                                  onTapOnTextField: () {
                                     controller.handlebarcode();
+                                    print("aaaaaaaa${controller.barcode.text}");
                                   },
                                 ),
                               ),
