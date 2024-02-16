@@ -23,7 +23,7 @@ validInput(String val, int min, int max, String type) {
       }
     }
     if (type == "num") {
-        int valid = int.tryParse(val)! ;
+        int? valid = int.tryParse(val)! ;
         
       if (!GetUtils.isNum(val) ||  valid < 1) {
         return "غير متاح ادخال 0";

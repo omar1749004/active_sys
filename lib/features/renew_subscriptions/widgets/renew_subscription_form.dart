@@ -195,10 +195,7 @@ class RenewSubscriptionForm extends StatelessWidget {
                          myController: controller.dayNum,
                          isreadonly: true,
                           hintText: "",
-                          lableText: "عدد الايام",
-                          validator: (val) {
-                            return validInput(val!, 5, 50, "username");
-                          }),
+                          lableText: "عدد الايام",),
                     ),
                     const SizedBox(
                       width: 20,
@@ -208,10 +205,7 @@ class RenewSubscriptionForm extends StatelessWidget {
                         myController: controller.sessionNum,
                           hintText: "",
                           isreadonly: true,
-                          lableText: "عدد الحصص",
-                          validator: (val) {
-                            return validInput(val!, 5, 50, "username");
-                          }),
+                          lableText: "عدد الحصص",),
                     ),
                   ],
                 ),
@@ -228,10 +222,7 @@ class RenewSubscriptionForm extends StatelessWidget {
                           lableText: "الخصم",
                           onChanged: (vla) {
                             controller.calAfterDesc(vla);
-                          },
-                          validator: (val) {
-                            return validInput(val!, 5, 50, "username");
-                          }),
+                          },),
                     ),
                     
                     const SizedBox(
@@ -242,10 +233,7 @@ class RenewSubscriptionForm extends StatelessWidget {
                         myController: controller.price,
                           hintText: "",
                           isreadonly: true,
-                          lableText: "قيمة الاشتراك",
-                          validator: (val) {
-                            return validInput(val!, 5, 50, "username");
-                          }),
+                          lableText: "قيمة الاشتراك",),
                     ),
                   ],
                 ),
@@ -261,10 +249,7 @@ class RenewSubscriptionForm extends StatelessWidget {
                           hintText: "",
                           lableText: "المدفوع",
                           mainTextColor: Colors.red,
-                          onChanged:(val) => controller.calPayed(val),
-                          validator: (val) {
-                            return validInput(val!, 5, 50, "username");
-                          }),
+                          onChanged:(val) => controller.calPayed(val),),
                     ),
                     
                     const SizedBox(
@@ -275,10 +260,7 @@ class RenewSubscriptionForm extends StatelessWidget {
                         myController: controller.afterDescound,
                           hintText: "",
                           lableText: "الصافى",
-                          isreadonly: true,
-                          validator: (val) {
-                            return validInput(val!, 5, 50, "username");
-                          }),
+                          isreadonly: true,),
                     ),
                   ],
                 ),
@@ -293,10 +275,7 @@ class RenewSubscriptionForm extends StatelessWidget {
                         myController: controller.remining,
                           hintText: "",
                           isreadonly: true,
-                          lableText: "المتبقى",
-                          validator: (val) {
-                            return validInput(val!, 5, 50, "username");
-                          }),
+                          lableText: "المتبقى",),
                     ),
                     const SizedBox(
                       width: 20,
@@ -305,10 +284,7 @@ class RenewSubscriptionForm extends StatelessWidget {
                       child: CustomeTextFormAuth(
                         myController: controller.notknow,
                           hintText: "",
-                          lableText: "حساب سابق",
-                          validator: (val) {
-                            return validInput(val!, 5, 50, "username");
-                          }),
+                          lableText: "حساب سابق",),
                     ),
                     
                   ],
@@ -334,9 +310,7 @@ class RenewSubscriptionForm extends StatelessWidget {
                         myController: controller.phone,
                           hintText: "",
                           lableText: "التلفون",
-                          validator: (val) {
-                            return validInput(val!, 5, 50, "username");
-                          }),
+                          isreadonly: true,),
                     ),
                   ],
                 ),
@@ -346,12 +320,12 @@ class RenewSubscriptionForm extends StatelessWidget {
                 //
                 //maybe will change because it is image
                 //
-                CustomeTextFormAuth(
-                    hintText: "",
-                    lableText: "الصوره",
-                    validator: (val) {
-                      return validInput(val!, 5, 50, "username");
-                    }),
+                // CustomeTextFormAuth(
+                //     hintText: "",
+                //     lableText: "الصوره",
+                //     validator: (val) {
+                //       return validInput(val!, 5, 50, "username");
+                //     }),
                 const SizedBox(
                   height: 10,
                 ),
@@ -369,10 +343,7 @@ class RenewSubscriptionForm extends StatelessWidget {
                 CustomeTextFormAuth(
                   myController: controller.note,
                     hintText: "",
-                    lableText: "الملاحظات",
-                    validator: (val) {
-                      return validInput(val!, 5, 50, "username");
-                    }),
+                    lableText: "الملاحظات",),
               ],
             ),
           ),

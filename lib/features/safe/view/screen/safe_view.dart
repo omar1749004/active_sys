@@ -93,37 +93,37 @@ class SafeView extends StatelessWidget {
                             // /
                             //buttons
                             //
-                            Expanded(
-                              flex: 1,
-                              child: Padding(
-                                padding: const EdgeInsets.only(bottom: 20.0),
-                                child: Row(
-                                  textDirection: TextDirection.rtl,
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceEvenly,
-                                  children: [
-                                    CustomButton(
-                                      text: "أضافه",
-                                      ontap: () {},
-                                    ),
-                                    CustomButton(
-                                      text: "حفظ",
-                                      ontap: () {},
-                                    ),
-                                    CustomButton(
-                                      text: "تعديل",
-                                      ontap: () {},
-                                    ),
-                                    CustomButton(
-                                      text: "حذف",
-                                      ontap: () {
-                                        controller.getpdf();
-                                      },
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
+                            // Expanded(
+                            //   flex: 1,
+                            //   child: Padding(
+                            //     padding: const EdgeInsets.only(bottom: 20.0),
+                            //     child: Row(
+                            //       textDirection: TextDirection.rtl,
+                            //       mainAxisAlignment:
+                            //           MainAxisAlignment.spaceEvenly,
+                            //       children: [
+                            //         CustomButton(
+                            //           text: "أضافه",
+                            //           ontap: () {},
+                            //         ),
+                            //         CustomButton(
+                            //           text: "حفظ",
+                            //           ontap: () {},
+                            //         ),
+                            //         CustomButton(
+                            //           text: "تعديل",
+                            //           ontap: () {},
+                            //         ),
+                            //         CustomButton(
+                            //           text: "حذف",
+                            //           ontap: () {
+                            //             controller.getpdf();
+                            //           },
+                            //         ),
+                            //       ],
+                            //     ),
+                            //   ),
+                            // ),
                           ],
                         ),
                       ),

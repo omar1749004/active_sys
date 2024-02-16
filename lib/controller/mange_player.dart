@@ -45,6 +45,7 @@ class MangeUsersControllerImp extends MangeUsersController {
 
   final List<SubscriptionModel> _subList = [];
   List<String> subNameList = ["عام"];
+  List<String> subNameSearchList = ["الكل"];
   final List<UserModel> _trainerList = [];
   late List<UserModel> usersList = [];
   List<List<String>> dataInTable = [];
@@ -59,7 +60,7 @@ class MangeUsersControllerImp extends MangeUsersController {
   String activeSearch = "0";
   String expire = "0";
   String subscroptionId = "0";
-
+  String crate = "0";
   bool isborrowed = false;
   bool isactiveSearch = false;
   bool isactiveSub = false;
@@ -75,6 +76,7 @@ class MangeUsersControllerImp extends MangeUsersController {
   String gender = "0";
   String trainerValue = "عام";
   String subValue = "عام";
+  String subSearchValue = "الكل";
   String active = "0";
 
   @override
@@ -109,6 +111,8 @@ class MangeUsersControllerImp extends MangeUsersController {
       subNameList = [];
       _subList.addAll(data.map((e) => SubscriptionModel.fromJson(e)));
       subNameList.addAll(_subList.map((e) => e.subscriptionsName));
+      subNameSearchList.addAll(_subList.map((e) => e.subscriptionsName));
+     
       subValue = subNameList[0];
       subscriptionModel = _subList[0];
       price.text = subscriptionModel.subscriptionsPrice.toString();
@@ -155,12 +159,14 @@ class MangeUsersControllerImp extends MangeUsersController {
   void changeSearchmodel(String subName) {
     if (subName == "الكل") {
       subscroptionId = "0";
-    }
-    for (int i = 0; i < subNameList.length; i++) {
+    }else{
+       for (int i = 0; i < subNameList.length; i++) {
       if (_subList[i].subscriptionsName == subName) {
         subscroptionId = _subList[i].subscriptionsId.toString();
       }
     }
+    }
+    view();
   }
 
   @override
@@ -229,7 +235,7 @@ class MangeUsersControllerImp extends MangeUsersController {
     statusRequs = StatusRequst.loading;
     update();
     var res = await UsersData().search({
-      "creat": startSearch.toString().substring(0, 7),
+      "creat": crate,
       "borrowed": borrowed,
       "active": activeSearch,
       "expire": expire,
@@ -288,7 +294,7 @@ class MangeUsersControllerImp extends MangeUsersController {
   void changeDate(bool x) {
     if (x == isDateSearch) {
       isDateSearch = !x;
-      expire = isDateSearch ? "1" : "0";
+      expire = isDateSearch ? startSearch.toString().substring(0, 7) : "0";
       update();
       view();
     }

@@ -21,6 +21,7 @@ abstract class HomeController extends GetxController {
   void rightSearch();
   void searchFun();
   void deleteTransAction();
+  void clearModel();
 }
 
 class HomeControllerImp extends HomeController {
@@ -45,9 +46,8 @@ class HomeControllerImp extends HomeController {
   final List<SubscriptionModel> _subList = [];
   List<String> subNameList = ["عام"];
   String subValue = "عام";
-
   @override
-  void onInit() async{
+  void onInit() async {
     barcode = TextEditingController();
     username = TextEditingController();
     age = TextEditingController();
@@ -57,7 +57,7 @@ class HomeControllerImp extends HomeController {
     note = TextEditingController();
     search = TextEditingController();
     firstState = StatusRequst.loading;
-    await  Future.delayed(const Duration(milliseconds: 100));
+    await Future.delayed(const Duration(milliseconds: 100));
     firstState = StatusRequst.failure;
     viewAll();
     getSub();
@@ -72,6 +72,7 @@ class HomeControllerImp extends HomeController {
       if (supType == 0 || supType == 1) {
         ////////////////////////////////////////////////
         handleSubType();
+        update();
       }
     }
   }
@@ -86,6 +87,7 @@ class HomeControllerImp extends HomeController {
       }
       subValue = subNameList[0];
     } else {
+      subNameList = [];
       for (int i = 0; i < _subList.length; i++) {
         if (_subList[i].subscriptionsType == 1) {
           subNameList.add(_subList[i].subscriptionsName);
@@ -133,10 +135,12 @@ class HomeControllerImp extends HomeController {
   void addService() async {
     statusRequs = StatusRequst.loading;
     update();
-    var res = await AttendData().addInvitation({
+    if(barcode.text.isNotEmpty){
+    var res = await AttendData().addService({
       "barcode": barcode.text,
       "adminID": "1",
     });
+    print(res);
     if (res["msg"] == "subscription expired") {
       globalAlert("اشتراك اللاعب منتهي");
       statusRequs = StatusRequst.failure;
@@ -147,11 +151,21 @@ class HomeControllerImp extends HomeController {
           subValue = subNameList[i];
         }
       }
+      assignModel(attendmodel);
       attendList.add(attendmodel);
       assignDataInsideTable();
       statusRequs = StatusRequst.sucsess;
+      update();
+      await Future.delayed(const Duration(seconds: 2));
+      clearModel();
     } else if (res["msg"] == "service expired") {
       globalAlert("الاعب تخطى عدد الخدمات");
+      statusRequs = StatusRequst.failure;
+    }else{
+      statusRequs = StatusRequst.failure;
+    }
+   } else{
+      globalAlert("يجب ادخال الباركود");
       statusRequs = StatusRequst.failure;
     }
     update();
@@ -159,45 +173,34 @@ class HomeControllerImp extends HomeController {
 
   @override
   void addSession() async {
-    statusRequs = StatusRequst.loading;
-    update();
-    String price = "0";
-    for (int i = 0; i < subNameList.length; i++) {
-      if (subValue == _subList[i].subscriptionsName) {
-        price = _subList[i].subscriptionsPrice.toString();
-      }
-    }
-    Map? res;
-    if (barcode.text.isEmpty) {
-      if (formKey.currentState!.validate()) {
-        res = await AttendData().addSessions({
-          "barcode": barcode.text,
-          "phone": phone.text,
-          "name": username.text,
-          "price": price,
-          "adminID": "1",
-        });
-        if (res!["status"] == "failure") {
-          globalAlert("يرجى إعادة المحاولة في وقت لاحق", title: "!خطأ");
-          statusRequs = StatusRequst.failure;
-        } else if (res["status"] == "success") {
-          globalAlert("يرجى إعادة المحاولة في وقت لاحق", title: "yessssss");
-          statusRequs = StatusRequst.sucsess;
+    if (formKey.currentState!.validate()) {
+      statusRequs = StatusRequst.loading;
+      update();
+      String price = "0";
+      for (int i = 0; i < _subList.length; i++) {
+        if (subValue == _subList[i].subscriptionsName) {
+          price = _subList[i].subscriptionsPrice.toString();
         }
       }
-    } else {
-      res = await AttendData().addSessions({
-        "barcode": barcode.text,
+      var res = await AttendData().addSessions({
         "phone": phone.text,
         "name": username.text,
-        "adminID": "1",
+        "price": price,
+        "adminId": "1",
       });
+
       if (res!["status"] == "failure") {
         globalAlert("يرجى إعادة المحاولة في وقت لاحق", title: "!خطأ");
         statusRequs = StatusRequst.failure;
       } else if (res["status"] == "success") {
-        globalAlert("يرجى إعادة المحاولة في وقت لاحق", title: "yessssss");
+        attendmodel = AttendModel.fromJson(res["data"]);
+        attendList.add(attendmodel);
+        assignDataInsideTable();
+        username.clear() ;
+        phone.clear() ;
         statusRequs = StatusRequst.sucsess;
+      } else {
+        globalAlert("يرجى إعادة المحاولة في وقت لاحق", title: "!خطأ");
       }
     }
     update();
@@ -207,7 +210,8 @@ class HomeControllerImp extends HomeController {
   void addSub() async {
     statusRequs = StatusRequst.loading;
     update();
-    var res = await AttendData().addSub({
+    if(barcode.text.isNotEmpty){
+      var res = await AttendData().addSub({
       "barcode": barcode.text,
       "adminID": "1",
     });
@@ -216,19 +220,27 @@ class HomeControllerImp extends HomeController {
       statusRequs = StatusRequst.failure;
     } else if (res["status"] == "success") {
       attendmodel = AttendModel.fromJson(res["data"]);
-
       for (int i = 0; i < subNameList.length; i++) {
         if (attendmodel.subscriptionsName == subNameList[i]) {
           subValue = subNameList[i];
         }
       }
+      assignModel(attendmodel);
       attendList.add(attendmodel);
       assignDataInsideTable();
       statusRequs = StatusRequst.sucsess;
+      update();
+      await Future.delayed(const Duration(seconds: 2));
+      clearModel();
     } else if (res["msg"] == "subscription expired") {
       globalAlert("اشتراك اللاعب منتهي");
       statusRequs = StatusRequst.failure;
     }
+    }else{
+      globalAlert("يجب ادخال الباركود");
+      statusRequs = StatusRequst.failure;
+    }
+    
     update();
   }
 
@@ -237,10 +249,18 @@ class HomeControllerImp extends HomeController {
     username.text = privetModel.usersName!;
     phone.text = privetModel.usersPhone!;
     barcode.text = privetModel.barcode.toString();
-    deadline.text = privetModel.renewalEnd.toString().substring(0, 11);
+   deadline.text = privetModel.renewalEnd.toString().substring(0, 11) ;
     note.text = privetModel.usersNote!;
     subValue = privetModel.subscriptionsName!;
     attendmodel = privetModel;
+  }
+  @override
+  void clearModel() {
+    username.clear();
+    phone.clear();
+    barcode.clear();
+   deadline.clear() ;
+    note.clear();
   }
 
   @override
@@ -289,7 +309,7 @@ class HomeControllerImp extends HomeController {
     } else {
       statusRequs = StatusRequst.failure;
     }
-    await  Future.delayed(const Duration(milliseconds: 300));
+    await Future.delayed(const Duration(milliseconds: 300));
     update();
   }
 
@@ -323,7 +343,6 @@ class HomeControllerImp extends HomeController {
         (username.text.isEmpty && barcode.text.isNotEmpty)) {
       search = barcode.text;
     } else if (username.text.isEmpty && barcode.text.isEmpty) {
-
     } else {
       search = username.text;
     }
@@ -341,7 +360,7 @@ class HomeControllerImp extends HomeController {
       username.text = attendmodel.usersName!;
       phone.text = attendmodel.usersPhone!;
       barcode.text = attendmodel.barcode.toString();
-      deadline.text = attendmodel.renewalEnd.toString().substring(0, 11);
+      //deadline.text = attendmodel.renewalEnd.toString().substring(0, 11);
       note.text = attendmodel.usersNote!;
       subValue = attendmodel.subscriptionsName!;
       statusRequs = StatusRequst.sucsess;
@@ -358,9 +377,9 @@ class HomeControllerImp extends HomeController {
     update();
     var res = await AttendData().search({
       "search": search.text,
-      "start_date":DateTime.now().toString().substring(0,11),
-      "end_date":DateTime.now().toString().substring(0,11),
-      });
+      "start_date": DateTime.now().toString().substring(0, 11),
+      "end_date": DateTime.now().toString().substring(0, 11),
+    });
     if (res["status"] == "failure") {
       attendList = [];
       assignDataInsideTable();
@@ -399,6 +418,7 @@ class HomeControllerImp extends HomeController {
     var res = await AttendData().delete({
       "id": attendmodel.attendanceId.toString(),
       "renewid": attendmodel.attendanceRenewalid.toString(),
+      "safeId": attendmodel.safeId == 0 ? "" : attendmodel.safeId.toString()
     });
 
     if (res["status"] == "failure") {

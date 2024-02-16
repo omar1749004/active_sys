@@ -6,6 +6,7 @@ import 'package:active_system/core/shared/custom_Botton1.dart';
 import 'package:active_system/core/shared/custom_app_bar.dart';
 import 'package:active_system/core/shared/custom_date_field.dart';
 import 'package:active_system/core/shared/custom_table_header.dart';
+import 'package:active_system/core/shared/global_variable.dart';
 import 'package:active_system/core/shared/loading_indecator.dart';
 import 'package:active_system/features/manage_subscriptions/view/widgets/custom_button.dart';
 import 'package:active_system/features/manage_subscriptions/view/widgets/custom_menu.dart';
@@ -142,7 +143,9 @@ class RenewSybscriptionsView extends StatelessWidget {
                                   "تاريخ التجديد"
                                 ],
                                 nameOfGlobalID: 'renewSubscription',
-                                onRowTap: () {},
+                                onRowTap: () {
+                                  controller.assignModel(controller.renewList[GlobalVariable.renewSubscription!]);
+                                },
                                 showDialog: () {},
                               ),
                             ),
@@ -154,30 +157,97 @@ class RenewSybscriptionsView extends StatelessWidget {
                           Expanded(
                             flex: 1,
                             child: Row(
+                              textDirection: TextDirection.rtl,
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
-                                CustomButton(
-                                  text: "تجميد",
+                                
+                                                                CustomButton(
+                                  text: "أضافه",
+                                  color: controller.canAdd
+                                      ? const Color.fromARGB(217, 255, 255, 255)
+                                      : const Color.fromARGB(
+                                          217, 202, 193, 193),
                                   ontap: () {
-                                    controller.gotoFrezze(controller.renewUser);
+                                    if (controller.canAdd) {
+                                      controller.addRenew();
+                                    }
                                   },
                                 ),
                                 CustomButton(
-                                  text: "طباعة",
-                                  ontap: () {},
+                                  text: "تعديل",
+                                  color: !controller.canAdd
+                                      ? const Color.fromARGB(217, 255, 255, 255)
+                                      : const Color.fromARGB(
+                                          217, 202, 193, 193),
+                                  ontap: () {
+                                    if (!controller.canAdd) {
+                                      Get.defaultDialog(
+                                          title: "تحذير ",
+                                          middleText:
+                                              "هل أنت متأكد أنك تريد تعديل الاشتراك",
+                                          actions: [
+                                            ElevatedButton(
+                                                onPressed: () {
+                                                  Get.back();
+                                                  controller.editPRenew();
+
+                                                },
+                                                child: const Text("نعم")),
+                                            ElevatedButton(
+                                                onPressed: () {
+                                                  Get.back();
+                                                },
+                                                child: const Text("لا")),
+                                          ]);
+                                    }
+                                  },
                                 ),
                                 CustomButton(
                                   text: "حذف",
-                                  ontap: () {},
-                                ),
-                                CustomButton(
-                                  text: "تعديل",
-                                  ontap: () {},
-                                ),
-                                CustomButton(
-                                  text: "تجديد",
+                                  color: !controller.canAdd
+                                      ? const Color.fromARGB(217, 255, 255, 255)
+                                      : const Color.fromARGB(
+                                          217, 202, 193, 193),
                                   ontap: () {
-                                    controller.addRenew();
+                                      if (!controller.canAdd) {
+                                      Get.defaultDialog(
+                                          title: "تحذير ",
+                                          middleText:
+                                              "هل أنت متأكد أنك تريد حذف الاشتراك",
+                                          actions: [
+                                            ElevatedButton(
+                                                onPressed: () {
+                                                  Get.back();
+                                                  controller.deleteRenew();
+                                                },
+                                                child: const Text("نعم")),
+                                            ElevatedButton(
+                                                onPressed: () {
+                                                  Get.back();
+                                                },
+                                                child: const Text("لا")),
+                                          ]);
+                                    }
+                                  },
+                                ),
+                                CustomButton(
+                                  text: "إلغاء",
+                                  ontap: () {
+                                    if(!controller.canAdd){
+                                       controller.cleaModel();
+                                    }
+                                  },
+                                ),
+                                CustomButton(
+                                  text: "تجميد",
+                                  color: !controller.canAdd
+                                      ? const Color.fromARGB(217, 255, 255, 255)
+                                      : const Color.fromARGB(
+                                          217, 202, 193, 193),
+                                  ontap: () {
+                                    if(!controller.canAdd){
+                                      controller.gotoFrezze(controller.renewUser);
+                                    }
                                   },
                                 ),
                               ],

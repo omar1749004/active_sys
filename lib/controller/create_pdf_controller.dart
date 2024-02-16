@@ -10,6 +10,7 @@ String? pdf  ;
   void onInit() {
     try{
      pdf = Get.arguments["pdf"];
+     print(pdf);
     }
     catch(e){
       Get.back();
@@ -18,3 +19,5 @@ String? pdf  ;
     super.onInit();
   }
 }
+
+

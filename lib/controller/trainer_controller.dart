@@ -13,6 +13,7 @@ abstract class TrainersController extends GetxController {
   void organizePhone();
   void deleteTrainer();
   void editTrainer();
+  void cleaModel();
 }
 
 class TrainersControllerImp extends TrainersController {
@@ -36,7 +37,7 @@ class TrainersControllerImp extends TrainersController {
   late TextEditingController note;
 
   late TextEditingController search;
-
+  bool canAdd = true ;
   @override
   void onInit() async{
     name = TextEditingController();
@@ -168,6 +169,8 @@ class TrainersControllerImp extends TrainersController {
     }else{
       phone.text = mid[0]  ;
     }
+    canAdd = false ;
+    update();
   }
 
   @override
@@ -239,6 +242,18 @@ class TrainersControllerImp extends TrainersController {
 
       update();
     }
+  }
+
+@override
+  cleaModel() {
+    name.clear();
+    phone.clear();
+    phone1.clear();
+    phone2.clear();
+    address.clear();
+    note.clear();
+    canAdd = true ;
+    update();
   }
 }
 

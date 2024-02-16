@@ -14,6 +14,7 @@ abstract class ExpensesController extends GetxController {
   void addTrandsAction();
   void assignModel(ExpensesModel privetModel);
   void editTransAction();
+  void clearModel();
 }
 
 class ExpensesControllerImp extends ExpensesController {
@@ -25,7 +26,7 @@ class ExpensesControllerImp extends ExpensesController {
   DateTime endSearch = DateTime.now();
   bool isdateSearch = true;
   double? totalExpenses = 0;
-
+  bool canAdd = true ;
   List<ExpensesModel> expensesList = [];
   List<List<String>> dataInTable = [];
   late ExpensesModel expensesModel;
@@ -129,6 +130,7 @@ class ExpensesControllerImp extends ExpensesController {
         {
           "reason": reason.text,
           "value": amount.text,
+          "note":note.text,
           "adminId": "1",
         },
       );
@@ -183,7 +185,10 @@ class ExpensesControllerImp extends ExpensesController {
   void assignModel(ExpensesModel privetModel) {
     reason.text = privetModel.expensesReason ?? "";
     amount.text = privetModel.expensesValue.toString();
+    note.text = privetModel.note.toString();
     expensesModel = privetModel;
+    canAdd =  false;
+    update();
   }
 
 //function to assign data inside List
@@ -210,6 +215,7 @@ class ExpensesControllerImp extends ExpensesController {
           "id": expensesModel.expensesId.toString(),
           "reason": reason.text,
           "value": amount.text,
+          "note":note.text,
           "adminId": "1",
         },
       );
@@ -222,13 +228,23 @@ class ExpensesControllerImp extends ExpensesController {
         statusRequs = StatusRequst.sucsess;
         reason.clear();
         note.clear();
-
-      } else {
+         handlTable(isdateSearch);
+          } else {
         statusRequs = StatusRequst.failure;
       }
       update();
     }
   }
+
+@override
+  clearModel() {
+    reason.clear();
+    note.clear();
+    amount.clear();
+    canAdd = true ;
+    update();
+  }
+
 }
 
 // import 'package:active_system/data/service/remote/expenses_data.dart';

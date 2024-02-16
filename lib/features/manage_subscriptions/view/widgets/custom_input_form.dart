@@ -39,10 +39,9 @@ class SubscriptionForm extends GetView<MangeSubControllerImp> {
                     redius: 30,
                         items:const ["اشتراك","حصة"],
                         label: "اشتراك",
-                        intialValue: "اشتراك",
+                        intialValue: controller.type ,
                         onChanged: (val) {
-                          controller.type = val! == "اشتراك"? "0" :"1" ;
-                          print(controller.type);
+                          controller.type = val!  ;
                         },
                       ),
               const SizedBox(

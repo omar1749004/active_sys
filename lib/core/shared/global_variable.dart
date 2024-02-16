@@ -1,13 +1,13 @@
 class GlobalVariable {
-  static String safe = '';
-  static String attendance = '';
-  static String home = '';
-  static String manageCost = '';
-  static String managePlayers = '';
-  static String manageSubscription = '';
-  static String playersProfile = '';
-  static String renewSubscription = '';
-  static String trainers = '';
-  static String treasuryRegister = '';
-  static String users = '';
+  static int? safe  ;
+  static int? attendance ;
+  static int? home ;
+  static int ?manageCost ;
+  static int ?managePlayers ;
+  static int? manageSubscription ;
+  static int? playersProfile ;
+  static int? renewSubscription ;
+  static int? trainers ;
+  static int? treasuryRegister ;
+  static int? users ;
 }

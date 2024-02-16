@@ -28,4 +28,8 @@ AdminData() ;
     var res =await Api().post(uri: linkAdminDelete, body: data);
     return res;
   }
+  search(Map data)async{
+    var res =await Api().post(uri: linkAdminSaech, body: data);
+    return res;
+  }
 }

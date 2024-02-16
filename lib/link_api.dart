@@ -10,11 +10,13 @@ const String linkAdmiLogin = "$linkServerName/adminSys/login.php";
 const String linkAdminEdit = "$linkServerName/adminSys/edit.php";
 const String linkAdminDelete = "$linkServerName/adminSys/delete.php";
 const String linkAdminView = "$linkServerName/adminSys/view.php";
+const String linkAdminSaech = "$linkServerName/adminSys/search.php";
 //subscriptions
 
 const String linkSubAdd = "$linkServerName/subscriptions/add.php";
 const String linkSubEdit = "$linkServerName/subscriptions/edit.php";
 const String linkSubDelete = "$linkServerName/subscriptions/delete.php";
+const String linkSubSearch = "$linkServerName/subscriptions/search.php";
 //const String linkSubView ="https://d579-156-210-185-111.ngrok-free.app/activegym_app/system/subscriptions/view.php";
 const String linkSubView = "$linkServerName/subscriptions/view.php";
 //users

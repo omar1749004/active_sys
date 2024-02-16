@@ -129,18 +129,15 @@ class TreasuryRegisterView extends StatelessWidget {
                                 textDirection: TextDirection.rtl,
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  CustomButton(
-                                    text: "تنفيذ",
-                                    ontap: () {
-                                      controller.makeSearch();
-                                    },
-                                  ),
+                                  
                                   const SizedBox(
                                     width: 15,
                                   ),
                                   CustomButton(
-                                    text: "تنفيذ وطباعه",
-                                    ontap: () {},
+                                    text: "طباعة",
+                                    ontap: () {
+                                      controller.getpdf();
+                                    },
                                   ),
                                 ],
                               ),

@@ -53,11 +53,11 @@ class SearchTools extends StatelessWidget {
                         flex: 5,
                         child: CustomDropDownMenu(
                             label: "نوع الاشتراك",
-                            items: controller.subNameList,
+                            items: controller.subNameSearchList,
                             onChanged: (p0) {
                               controller.changeSearchmodel(p0!);
                             },
-                            intialValue: controller.subValue),
+                            intialValue: controller.subSearchValue),
                       ),
                     ],
                   ),

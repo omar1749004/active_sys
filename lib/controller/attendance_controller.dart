@@ -54,7 +54,7 @@ class AttendControllerImp extends AttendController {
         totalPlayer = res["moreInfo"][0]["totalPlayers"] ?? 0;
         attendList = [];
         attendList.addAll(data.map((e) => AttendModel.fromJson(e)));
-        // /assignDataInsideTable();
+        assignDataInsideTable();
         statusRequs = StatusRequst.sucsess;
       } else {
         statusRequs = StatusRequst.failure;
@@ -92,7 +92,7 @@ class AttendControllerImp extends AttendController {
       attendList.addAll(data.map((e) => AttendModel.fromJson(e)));
 
       //assign data inside table
-      //assignDataInsideTable();
+      assignDataInsideTable();
 
       statusRequs = StatusRequst.sucsess;
     } else {
@@ -143,7 +143,7 @@ class AttendControllerImp extends AttendController {
         totalPlayer = res["moreInfo"][0]["totalPlayers"] ?? 0;
         attendList = [];
         attendList.addAll(data.map((e) => AttendModel.fromJson(e)));
-        // assignDataInsideTable();
+         assignDataInsideTable();
         statusRequs = StatusRequst.sucsess;
       } else {
         statusRequs = StatusRequst.failure;

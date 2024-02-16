@@ -3,6 +3,7 @@ import 'package:active_system/core/class/statuscode.dart';
 import 'package:active_system/core/shared/ModernTable/custom_modern_table.dart';
 import 'package:active_system/core/shared/custom_app_bar.dart';
 import 'package:active_system/core/shared/custom_table_header.dart';
+import 'package:active_system/core/shared/global_variable.dart';
 import 'package:active_system/core/shared/loading_indecator.dart';
 import 'package:active_system/features/manage_subscriptions/view/widgets/custom_button.dart';
 import 'package:active_system/features/manage_subscriptions/view/widgets/custom_menu.dart';
@@ -81,7 +82,9 @@ class TrainersView extends StatelessWidget {
                                     "الكود"
                                   ],
                                   nameOfGlobalID: 'trainers',
-                                  onRowTap: () {}, showDialog: () {  },
+                                  onRowTap: () {
+                                    controller.assignModel(controller.usersList[GlobalVariable.trainers!]);
+                                  }, showDialog: () {  },
                                 ),
                               ),
                             ),
@@ -97,21 +100,78 @@ class TrainersView extends StatelessWidget {
                                 children: [
                                   CustomButton(
                                     text: "أضافه",
+                                  color: controller.canAdd
+                                      ? const Color.fromARGB(217, 255, 255, 255)
+                                      : const Color.fromARGB(
+                                          217, 202, 193, 193),
                                     ontap: () {
+                                      if (controller.canAdd) {
                                       controller.addTrainer();
+                                      }
                                     },
                                   ),
                                   CustomButton(
                                     text: "تعديل",
-                                    ontap: () {},
+                                  color: !controller.canAdd
+                                      ? const Color.fromARGB(217, 255, 255, 255)
+                                      : const Color.fromARGB(
+                                          217, 202, 193, 193),
+                                    ontap: () {
+                                  if (!controller.canAdd) {
+                                      Get.defaultDialog(
+                                          title: "تحذير ",
+                                          middleText:
+                                              "هل أنت متأكد أنك تريد تعديل الاشتراك",
+                                          actions: [
+                                            ElevatedButton(
+                                                onPressed: () {
+                                                  Get.back();
+                                                  controller.editTrainer();
+
+                                                },
+                                                child: const Text("نعم")),
+                                            ElevatedButton(
+                                                onPressed: () {
+                                                  Get.back();
+                                                },
+                                                child: const Text("لا")),
+                                          ]);
+                                    }
+                                    },
                                   ),
                                   CustomButton(
                                     text: "حذف",
-                                    ontap: () {},
+                                  color: !controller.canAdd
+                                      ? const Color.fromARGB(217, 255, 255, 255)
+                                      : const Color.fromARGB(
+                                          217, 202, 193, 193),
+                                    ontap: () {
+                                    if (!controller.canAdd) {
+                                      Get.defaultDialog(
+                                          title: "تحذير ",
+                                          middleText:
+                                              "هل أنت متأكد أنك تريد حذف الاشتراك",
+                                          actions: [
+                                            ElevatedButton(
+                                                onPressed: () {
+                                                  Get.back();
+                                                  controller.deleteTrainer();
+                                                },
+                                                child: const Text("نعم")),
+                                            ElevatedButton(
+                                                onPressed: () {
+                                                  Get.back();
+                                                },
+                                                child: const Text("لا")),
+                                          ]);
+                                    }
+                                    },
                                   ),
                                   CustomButton(
-                                    text: "طباعة",
-                                    ontap: () {},
+                                    text: "إلغاء",
+                                    ontap: () {
+                                      controller.cleaModel();
+                                    },
                                   ),
                                 ],
                               ),

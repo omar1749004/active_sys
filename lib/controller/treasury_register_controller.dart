@@ -1,4 +1,5 @@
 import 'package:active_system/core/class/statuscode.dart';
+import 'package:active_system/core/constant/app_route.dart';
 import 'package:active_system/data/models/safe_model.dart';
 import 'package:active_system/data/service/remote/safe_data.dart';
 import 'package:flutter/cupertino.dart';
@@ -8,6 +9,7 @@ abstract class TreasuryRegisterController extends GetxController {
   void dateSearch(DateTime startD, DateTime endD);
   void search(DateTime startD, DateTime endD, String desc);
   void makeSearch();
+  void getpdf();
 }
 
 class TreasuryRegisterControllerImp extends TreasuryRegisterController {
@@ -130,5 +132,19 @@ class TreasuryRegisterControllerImp extends TreasuryRegisterController {
         safeList[i].totalIncoming.toString(),
       ]);
     }
+  }
+
+    @override
+  void getpdf() async {
+    statusRequs = StatusRequst.loading;
+    update();
+    var res = await SafeData().getpdf({
+      "start_date": startSearch.toString().substring(0, 11),
+      "end_date": endSearch.toString().substring(0, 11),
+    });
+
+    Get.offAllNamed(AppRoute.pdfId, arguments: {"pdf": res["data"]});
+
+    update();
   }
 }

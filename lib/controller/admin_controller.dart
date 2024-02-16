@@ -17,8 +17,10 @@ abstract class AdminController extends GetxController {
   void assignSelectAdminPowers(List<int> selectpower);
   void addAdmin();
   void deleteAdmin();
-  void assignModel(AdminSys privetModel);
+  void assignModel(AdminSys privetModel , int index);
   void editAdmin();
+  void checkSearch(String val);
+  void cleaModel();
 }
 
 class AdminControllerImp extends AdminController {
@@ -34,20 +36,20 @@ class AdminControllerImp extends AdminController {
   late TextEditingController repass;
   late TextEditingController note;
   bool isHidepass = true;
-
+  bool canAdd = true;
   IconData icone = CupertinoIcons.eye_slash;
   List<int> selectpowerList = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14];
-  Map<int, List<int>> powersMap = {};
+  List<Map<int, List<int>>> powersMap = [];
   GlobalKey<FormState> formAdminKey = GlobalKey<FormState>();
   @override
-  void onInit() async{
+  void onInit() async {
     search = TextEditingController();
     name = TextEditingController();
     note = TextEditingController();
     pass = TextEditingController();
     repass = TextEditingController();
     firstState = StatusRequst.loading;
-    await  Future.delayed(const Duration(milliseconds: 100));
+    await Future.delayed(const Duration(milliseconds: 100));
     firstState = StatusRequst.failure;
     getPowers();
     super.onInit();
@@ -86,17 +88,23 @@ class AdminControllerImp extends AdminController {
     } else {
       statusRequs = StatusRequst.failure;
     }
-     await  Future.delayed(const Duration(milliseconds: 100));
+    await Future.delayed(const Duration(milliseconds: 100));
     update();
   }
 
   //handle power in map
   @override
   void organizePowers() {
-    for (var adminPower in adminPoewrList) {
-      powersMap[adminPower.adminId] ??= [];
-      powersMap[adminPower.adminId]!.add(adminPower.powerId);
+   for (int i = 0; i < adminmodelList.length; i++) {
+    powersMap.add({});
+
+    for (int j = 0; j < adminPoewrList.length; j++) {
+ if (adminPoewrList[j].adminId == adminmodelList[i].adminSysId) {
+        powersMap[i][adminPoewrList[j].adminId] ??= [];
+        powersMap[i][adminPoewrList[j].adminId]!.add(adminPoewrList[j].powerId);
+      }
     }
+  }
   }
 
 // handle power list
@@ -134,11 +142,16 @@ class AdminControllerImp extends AdminController {
   }
 
   @override
-  void assignModel(AdminSys privetModel) {
+  void assignModel(AdminSys privetModel, int index) {
     name.text = privetModel.adminSysName;
     pass.text = privetModel.adminSysPassword.toString();
     note.text = privetModel.adminSysNote.toString();
     adminmModel = privetModel;
+    canAdd = true;
+    adminmModel = privetModel;
+
+      assignSelectAdminPowers(powersMap[index][adminmModel.adminSysId]!);
+    update();
   }
 
   @override
@@ -146,7 +159,6 @@ class AdminControllerImp extends AdminController {
     if (formAdminKey.currentState!.validate()) {
       if (pass.text != repass.text) {
         globalAlert("كلمة المرور التي أدخلتها غير ", title: "عذرًا");
-
       } else {
         statusRequs = StatusRequst.loading;
         update();
@@ -164,11 +176,11 @@ class AdminControllerImp extends AdminController {
           globalAlert("يرجى إعادة المحاولة في وقت لاحق", title: "!خطأ");
           statusRequs = StatusRequst.failure;
         } else if (res["status"] == "success") {
-          search.clear() ;
-          name.clear() ;
-          note.clear() ;
-          pass.clear() ;
-          repass.clear() ;
+          search.clear();
+          name.clear();
+          note.clear();
+          pass.clear();
+          repass.clear();
           getPowers();
           statusRequs = StatusRequst.sucsess;
         } else {
@@ -196,7 +208,7 @@ class AdminControllerImp extends AdminController {
       update();
     }
   }
-  
+
   @override
   void deleteAdmin() async {
     var res = await AdminData().delete({
@@ -237,16 +249,16 @@ class AdminControllerImp extends AdminController {
       } else if (res["status"] == "success") {
         globalAlert("تم تعديل البانات بنجاح", title: "");
         statusRequs = StatusRequst.sucsess;
-          name.clear() ;
-          note.clear() ;
-          pass.clear() ;
-          repass.clear() ;
-          getPowers();
+        name.clear();
+        note.clear();
+        pass.clear();
+        repass.clear();
+        getPowers();
       } else {
         statusRequs = StatusRequst.failure;
       }
       update();
-  }
+    }
   }
 
   //function to assign data inside List
@@ -263,7 +275,47 @@ class AdminControllerImp extends AdminController {
       ]);
     }
   }
-    
+
+  @override
+  void checkSearch(String val) {
+    if (val.isEmpty) {
+      getPowers();
+    } else {
+      _search();
+    }
+    update();
+  }
+
+  void _search() async {
+    statusRequs = StatusRequst.loading;
+    update();
+    var res = await AdminData().search({"search": search.text});
+    if (res["status"] == "failure") {
+      adminmodelList = [];
+      assignDataInsideTable();
+      statusRequs = StatusRequst.failure;
+    } else if (res["status"] == "success") {
+      List data = res["data"];
+      adminmodelList = [];
+      adminmodelList.addAll(data.map((e) => AdminSys.fromJson(e)));
+      assignDataInsideTable();
+      statusRequs = StatusRequst.sucsess;
+    } else {
+      statusRequs = StatusRequst.failure;
+    }
+    update();
+  }
+
+  @override
+  void cleaModel() {
+    name.clear();
+    pass.clear();
+    repass.clear();
+    note.clear();
+    canAdd = true;
+
+    update();
+  }
 }
 
 // var res = await AdminData().add(

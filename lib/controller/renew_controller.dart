@@ -26,6 +26,7 @@ abstract class RenewController extends GetxController {
   void handlTable(bool isdate);
   void deleteRenew();
   void editPRenew();
+  void assignModel(RenewModel privetModel);
 }
 
 class RenewControllerImp extends RenewController {
@@ -63,7 +64,8 @@ class RenewControllerImp extends RenewController {
   List<List<String>> dataInTable = [];
 
   bool isSearch = false;
-  bool isdateSearch = false;
+  bool isdateSearch = true;
+  bool canAdd =true ;
   DateTime startSearch = DateTime.now();
   DateTime endSearch = DateTime.now();
 
@@ -264,7 +266,7 @@ class RenewControllerImp extends RenewController {
         "name": renewUser.usersName,
         "captinId": renewUser.usersCaptiantid.toString(),
         "barcodeId": renewUser.barcodeId.toString(),
-        "subscriptionsId": renewUser.subscriptionsId.toString(),
+        "subscriptionsId": subscriptionModel.subscriptionsId.toString(),
         "note": note.text,
         "start": start.toString(),
         "end": end.text,
@@ -424,7 +426,7 @@ class RenewControllerImp extends RenewController {
   void gotoFrezze(RenewModel privteModel) {
     if (privteModel.renewalEnd?.isAfter(DateTime.now()) ?? false) {
       Get.toNamed(AppRoute.freezescreenid,
-          arguments: {"RenewModel": privteModel});
+          arguments: {"RenewModel": privteModel ,"subModel" : subscriptionModel});
     } else {
       globalAlert("اللاعب اشتراكه منتهي", title: "!خطأ");
     }
@@ -451,18 +453,17 @@ class RenewControllerImp extends RenewController {
 
   @override
   editPRenew() async {
-    statusRequs = StatusRequst.loading;
-    update();
+    
     if (formKey.currentState!.validate()) {
+      statusRequs = StatusRequst.loading;
+      update();
       String offe = _getDesc();
       String ow = _getowed();
       var res = await RenewData().edit({
-        "id": renewUser.usersId.toString(),
-        "userid": renewUser.usersId.toString(),
+        "id": renewUser.renewalId.toString(),
         "name": renewUser.usersName,
-        "captinId": renewUser.usersCaptiantid.toString(),
-        "barcodeId": renewUser.barcodeId.toString(),
-        "subscriptionsId": renewUser.subscriptionsId.toString(),
+        "captineId": renewUser.usersCaptiantid.toString(),
+        "subscriptionsId": subscriptionModel.subscriptionsId.toString(),
         "note": note.text,
         "start": start.toString(),
         "end": end.text,
@@ -476,18 +477,53 @@ class RenewControllerImp extends RenewController {
         statusRequs = StatusRequst.failure;
       } else if (res["status"] == "success") {
         globalAlert("تم تعديل البانات بنجاح", title: "");
-        barcodeNum.clear();
-        userName.clear();
-        phone.clear();
-        note.clear();
-        remining.text = "0";
-        descound.text = "0";
+        cleaModel();
+        handlTable(isdateSearch);
         statusRequs = StatusRequst.sucsess;
       } else {
         statusRequs = StatusRequst.failure;
       }
-
-      update();
     }
+    update();
   }
+
+@override
+  void assignModel(RenewModel privetModel) {
+    renewUser = privetModel ;
+    barcodeNum.text = privetModel.barcode.toString();
+    userName.text = privetModel.usersName.toString();
+    phone.text = privetModel.usersPhone! ;
+    trainerValue = privetModel.captainNamme! ;
+    start = privetModel.renewalStart! ;
+    end.text = privetModel.renewalEnd.toString() ; /////////////////////////////////////////////
+    subValue = privetModel.subscriptionsName! ;
+    changemodel(subValue) ;
+    caluserPayd();
+    preNote.text =privetModel.renewalNote! ;
+    amount.text =privetModel.renewalAmount.toString() ;
+    remining.text =privetModel.renewAmountOwed.toString() ;
+    canAdd =false ;
+    update();
+  }
+ 
+  void caluserPayd(){
+    double disc =  (renewUser.renewalAmount! + renewUser.renewAmountOwed!) - subscriptionModel.subscriptionsPrice ;
+    descound.text = disc.toString();
+    afterDescound.text =price.text ;
+  }
+
+void cleaModel(){
+  changemodel(subValue);
+    barcodeNum.clear();
+    userName.clear();
+    phone.clear();
+    preNote.clear();
+    start = DateTime.now() ;
+    remining.clear();
+    setEndDate(start) ;
+    canAdd =false ;
+    update();
+}
+
+
 }
