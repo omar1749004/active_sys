@@ -333,7 +333,6 @@ class RenewControllerImp extends RenewController {
         renewList = [];
         renewList.addAll(data.map((e) => RenewModel.fromJson(e)));
         renewUser = renewList[0];
-        print(startSearch);
         update();
         assignDataInsideTable();
         statusRequs = StatusRequst.sucsess;
@@ -453,7 +452,6 @@ class RenewControllerImp extends RenewController {
 
   @override
   editPRenew() async {
-    
     if (formKey.currentState!.validate()) {
       statusRequs = StatusRequst.loading;
       update();
@@ -521,7 +519,7 @@ void cleaModel(){
     start = DateTime.now() ;
     remining.clear();
     setEndDate(start) ;
-    canAdd =false ;
+    canAdd =true ;
     update();
 }
 

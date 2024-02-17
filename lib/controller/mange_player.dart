@@ -1,3 +1,4 @@
+
 import 'dart:io';
 
 import 'package:active_system/core/class/statuscode.dart';
@@ -26,6 +27,7 @@ abstract class MangeUsersController extends GetxController {
   void changeActiveSub(bool x);
   void deletePlayers();
   void editPlayers();
+  void assignModel(UserModel privetModel);
 }
 
 class MangeUsersControllerImp extends MangeUsersController {
@@ -56,6 +58,7 @@ class MangeUsersControllerImp extends MangeUsersController {
   late UserModel trainerModel;
 
   DateTime startSearch = DateTime.now();
+  bool canAdd = true ;
   String borrowed = "0";
   String activeSearch = "0";
   String expire = "0";
@@ -163,9 +166,11 @@ class MangeUsersControllerImp extends MangeUsersController {
        for (int i = 0; i < subNameList.length; i++) {
       if (_subList[i].subscriptionsName == subName) {
         subscroptionId = _subList[i].subscriptionsId.toString();
+        break;
       }
     }
     }
+
     view();
   }
 
@@ -177,6 +182,7 @@ class MangeUsersControllerImp extends MangeUsersController {
       }
     }
   }
+
 
   @override
   void addUsers() async {
@@ -191,7 +197,7 @@ class MangeUsersControllerImp extends MangeUsersController {
           "note": note.text,
           "gender": gender,
           "date": brithdate.toString().substring(0, 11),
-          "captinId": trainerModel.usersCaptiantId.toString(),
+          "captinId": trainerModel.usersId.toString(),
           "subscriptionsId": subscriptionModel.subscriptionsId.toString(),
           "adminId": "1",
           "active": active,
@@ -201,11 +207,7 @@ class MangeUsersControllerImp extends MangeUsersController {
           globalAlert("مشكلة في التجديد");
           statusRequs = StatusRequst.failure;
         } else if (res["status"] == "success") {
-          barcodeNum.clear() ;
-          userName.clear() ;
-          phone.clear() ;
-          note.clear() ;
-          age.clear() ;
+          cleaModel();
           statusRequs = StatusRequst.sucsess;
         } else if (res["msg"] == "barcode is used") {
           globalAlert("هذا الكود مستخدم بالفعل");
@@ -256,7 +258,7 @@ class MangeUsersControllerImp extends MangeUsersController {
     } else {
       statusRequs = StatusRequst.failure;
     }
-    await  Future.delayed(const Duration(milliseconds: 300));
+    
     update();
   }
 
@@ -294,7 +296,7 @@ class MangeUsersControllerImp extends MangeUsersController {
   void changeDate(bool x) {
     if (x == isDateSearch) {
       isDateSearch = !x;
-      expire = isDateSearch ? startSearch.toString().substring(0, 7) : "0";
+      crate = isDateSearch ? startSearch.toString().substring(0, 7) : "0";
       update();
       view();
     }
@@ -358,26 +360,25 @@ class MangeUsersControllerImp extends MangeUsersController {
         "note": note.text,
         "gender": gender,
         "date": brithdate.toString().substring(0, 11),
-        "captinId": trainerModel.usersCaptiantId.toString(),
+        "captinId": trainerModel.usersId.toString(),
         "subscriptionsId": subscriptionModel.subscriptionsId.toString(),
         "adminId": "1",
         "active": active,
-        "oldimagename": userModel.usersImage,
+        "oldimagename": userModel.usersImage ,
         "barcodeNum": barcodeNum.text,
-      }, file: file!);
+      }, file: file);
       if (res["status"] == "failure") {
         globalAlert("لم يتم تعديل البيانات لأنها لم تتغير", title: "عذرًا");
         statusRequs = StatusRequst.failure;
       } else if (res["status"] == "success") {
         globalAlert("تم تعديل البانات بنجاح", title: "");
-          barcodeNum.clear() ;
-          userName.clear() ;
-          phone.clear() ;
-          note.clear() ;
-          age.clear() ;
+          cleaModel();
         statusRequs = StatusRequst.sucsess;
-      } else {
+      } else if (res["msg"] == "barcode is used") {
+       globalAlert("هذا الكود مستخدم بالفعل");
         statusRequs = StatusRequst.failure;
+      }else if (res["msg"] == "barcode not change"){
+         globalAlert("يرجى إعادة المحاولة في وقت لاحق", title: "!خطأ");
       }
   
       update();
@@ -391,11 +392,35 @@ class MangeUsersControllerImp extends MangeUsersController {
       dataInTable.add([
         usersList[i].usersAddress.toString(),
         usersList[i].usersCreate.toString(),
-        usersList[i].usersBranch.toString(),
         usersList[i].usersName.toString(),
         usersList[i].usersId.toString(),
         usersList[i].usersName.toString(),
       ]);
     }
   }
+
+@override
+  void assignModel(UserModel privetModel) {
+    userModel = privetModel ;
+    barcodeNum.text = privetModel.barcode.toString();
+    userName.text = privetModel.usersName.toString();
+    phone.text = privetModel.usersPhone! ;
+    trainerValue = privetModel.captainName! ;
+    note.text = privetModel.usersNote! ;
+    subValue = privetModel.subscriptionsName! ;
+    changemodel(subValue) ;
+    canAdd =false ;
+    update();
+  }
+
+void cleaModel(){
+          barcodeNum.clear() ;
+          userName.clear() ;
+          phone.clear() ;
+          note.clear() ;
+          age.clear() ;
+    canAdd =true ;
+    update();
+}
+
 }

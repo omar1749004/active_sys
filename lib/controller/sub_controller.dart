@@ -71,19 +71,7 @@ class MangeSubControllerImp extends MangeSubController {
     notes = TextEditingController();
     search = TextEditingController();
 
-    specialization.text = "عام";
-    price.text = "0";
-    day.text = "0";
-    sessionsNumber.text = "0";
-    frezzDay.text = "0";
-    frezzNumber.text = "0";
-    maxFrezzDay.text = "0";
-    invitationsNumber.text = "0";
-    maxInvitation.text = "0";
-    serviceNumber.text = "0";
-    maxService.text = "0";
-    allowedNumber.text = "0";
-    notes.text = "0";
+    cleaModel();
     firstState = StatusRequst.loading;
     await Future.delayed(const Duration(milliseconds: 100));
     firstState = StatusRequst.failure;
@@ -332,7 +320,7 @@ class MangeSubControllerImp extends MangeSubController {
     }
   }
   @override
-  cleaModel() {
+  void cleaModel() {
     name.clear();
     specialization.text = "عام";
     price.text = "0";
@@ -346,7 +334,6 @@ class MangeSubControllerImp extends MangeSubController {
     serviceNumber.text = "0";
     maxService.text = "0";
     allowedNumber.text = "0";
-    notes.text = "0";
     canAdd = true ;
     update();
   }

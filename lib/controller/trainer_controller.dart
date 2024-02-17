@@ -202,7 +202,6 @@ class TrainersControllerImp extends TrainersController {
         usersList[i].usersId.toString(),
         usersList[i].usersName.toString(),
         usersList[i].usersId.toString(),
-        usersList[i].usersGender.toString(),
       ]);
     }
   }

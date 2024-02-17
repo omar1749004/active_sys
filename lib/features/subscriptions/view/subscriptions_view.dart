@@ -136,7 +136,7 @@ class SubscriptionsView extends StatelessWidget {
                         ),
                       ),
                     ),
-                    child: const SubscriptionForm(),
+                   // child: const SubscriptionForm(),
                   )
                 ],
               ),

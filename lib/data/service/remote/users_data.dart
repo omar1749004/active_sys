@@ -12,12 +12,12 @@ class UsersData{
     return res;
   }
    edit(Map data ,{File? file})async{
-    Future<dynamic>? res  ;
-    if(file ==null){
-       res =await Api().post(uri: linkUsersEdit, body: data);
+    var res  ;
+    if(file == null){
+     res = await Api().post(uri: linkUsersEdit, body: data);
     return res;
     }else{
-     res  =await Api().postFile(uri: linkUsersEdit, body: data, file: file);
+    // res  =await Api().postFile(uri: linkUsersEdit, body: data, file: file);
       return res;
     }
   }

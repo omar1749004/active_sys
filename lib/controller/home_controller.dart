@@ -40,6 +40,7 @@ class HomeControllerImp extends HomeController {
 
   late AttendModel attendmodel;
   int supType = 0;
+  int selcetRenew = 0 ;
   bool isactive = false;
   List<AttendModel> attendList = [];
   List<List<String>> dataInTable = [];
@@ -214,7 +215,9 @@ class HomeControllerImp extends HomeController {
       var res = await AttendData().addSub({
       "barcode": barcode.text,
       "adminID": "1",
+      "renewa_id": selcetRenew.toString()
     });
+    selcetRenew = 0 ;
     if (res["msg"] == "renew") {
       globalAlert("هناك مشكلة في تجديد اللاعب");
       statusRequs = StatusRequst.failure;
@@ -235,6 +238,12 @@ class HomeControllerImp extends HomeController {
     } else if (res["msg"] == "subscription expired") {
       globalAlert("اشتراك اللاعب منتهي");
       statusRequs = StatusRequst.failure;
+    } else if(res["status"] == "many"){
+    statusRequs = StatusRequst.sucsess;
+    update();
+     selecRenew(res["data"]);
+    }else{
+      print("object");
     }
     }else{
       globalAlert("يجب ادخال الباركود");
@@ -243,7 +252,38 @@ class HomeControllerImp extends HomeController {
     
     update();
   }
+  
+  void selecRenew(List<dynamic> subscriptions){
+      List<Widget> buttons = [];
 
+  for (int i = 0; i < subscriptions.length ; i++) {
+    buttons.add(
+      Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: ElevatedButton(
+          
+          onPressed: () {
+            selcetRenew =  subscriptions[i]["renewal_id"];
+            Get.back();
+             addSub();
+          },
+          child: Text(subscriptions[i]["subscriptions_name"]),
+        ),
+      ),
+    );
+  }
+
+
+  Get.defaultDialog(
+    title: "",
+    middleText: "يرجى اختيار اشتراك اللاعب",
+    actions: [
+      Column(
+        children: buttons,
+      ),
+    ],
+  );
+  }
   @override
   void assignModel(AttendModel privetModel) {
     username.text = privetModel.usersName!;

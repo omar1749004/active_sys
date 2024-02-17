@@ -7,7 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class SubscriptionForm extends GetView<MangeSubControllerImp> {
-  const SubscriptionForm({super.key});
+  const SubscriptionForm({ required this.type, super.key});
+  final String type ;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -39,7 +40,7 @@ class SubscriptionForm extends GetView<MangeSubControllerImp> {
                     redius: 30,
                         items:const ["اشتراك","حصة"],
                         label: "اشتراك",
-                        intialValue: controller.type ,
+                        intialValue: type ,
                         onChanged: (val) {
                           controller.type = val!  ;
                         },

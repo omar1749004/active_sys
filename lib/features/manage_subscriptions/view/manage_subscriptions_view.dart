@@ -216,7 +216,7 @@ class ManageSubscriptionsView extends StatelessWidget {
                                 ),
                               ),
                             ),
-                            child: const SubscriptionForm(),
+                            child:  SubscriptionForm(type: controller.type,),
                           ),
                   )
                 ],
