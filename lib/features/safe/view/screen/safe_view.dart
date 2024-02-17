@@ -24,9 +24,9 @@ class SafeView extends StatelessWidget {
     Get.put(SafeControllerImp());
     return Scaffold(
       body: GetBuilder<SafeControllerImp>(builder: (controller) {
-        if (controller.firstState == StatusRequst.loading) {
-          return const CustomLoadingIndecator();
-        } else {
+        // if (controller.firstState == StatusRequst.loading) {
+        //   return const CustomLoadingIndecator();
+        // } else {
           return Column(children: [
             const CustomAppBar(),
             Expanded(
@@ -97,41 +97,42 @@ class SafeView extends StatelessWidget {
                             // /
                             //buttons
                             //
-                            Expanded(
-                              flex: 1,
-                              child: Padding(
-                                padding: const EdgeInsets.only(bottom: 20.0),
-                                child: Row(
-                                  textDirection: TextDirection.rtl,
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceEvenly,
-                                  children: [
-                                    CustomButton(
-                                      text: "أضافه",
-                                      ontap: () {},
-                                    ),
-                                    CustomButton(
-                                      text: "حفظ",
-                                      ontap: () {},
-                                    ),
-                                    CustomButton(
-                                      text: "تعديل",
-                                      ontap: () {},
-                                    ),
-                                    CustomButton(
-                                      text: "حذف",
-                                      ontap: () {},
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
+                            // Expanded(
+                            //   flex: 1,
+                            //   child: Padding(
+                            //     padding: const EdgeInsets.only(bottom: 20.0),
+                            //     child: Row(
+                            //       textDirection: TextDirection.rtl,
+                            //       mainAxisAlignment:
+                            //           MainAxisAlignment.spaceEvenly,
+                            //       children: [
+                            //         CustomButton(
+                            //           text: "أضافه",
+                            //           ontap: () {},
+                            //         ),
+                            //         CustomButton(
+                            //           text: "حفظ",
+                            //           ontap: () {},
+                            //         ),
+                            //         CustomButton(
+                            //           text: "تعديل",
+                            //           ontap: () {},
+                            //         ),
+                            //         CustomButton(
+                            //           text: "حذف",
+                            //           ontap: () {
+                            //             controller.getpdf();
+                            //           },
+                            //         ),
+                            //       ],
+                            //     ),
+                            //   ),
+                            // ),
                           ],
                         ),
                       ),
                     ),
                     const VerticalDivider(),
-
                     Expanded(
                         child: Padding(
                       padding: const EdgeInsets.all(15),
@@ -289,7 +290,7 @@ class SafeView extends StatelessWidget {
               ),
             ),
           ]);
-        }
+        // }
       }),
     );
   }

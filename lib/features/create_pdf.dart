@@ -18,9 +18,9 @@ class CreatePdf extends StatelessWidget {
          child: SizedBox(
           height: 1000,
           width: 1000,
-            child: SfPdfViewer.network(
-                "$linkPDFs/${controller.pdf}"),),
-       ): Container(child: Text("srkjfgbsjgbsj"),),),
+              child: SfPdfViewer.network(
+                  "$linkPDFs/${controller.pdf}"),),
+       ): const Text(""),),
               );
   }
 }

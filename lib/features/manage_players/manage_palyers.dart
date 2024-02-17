@@ -5,6 +5,7 @@ import 'package:active_system/core/functions/customDialogForManagePlayerView.dar
 import 'package:active_system/core/shared/ModernTable/custom_modern_table.dart';
 import 'package:active_system/core/shared/custom_app_bar.dart';
 import 'package:active_system/core/shared/custom_table_header.dart';
+import 'package:active_system/core/shared/global_variable.dart';
 import 'package:active_system/core/shared/loading_indecator.dart';
 import 'package:active_system/features/manage_players/widgets/manage_players_form.dart';
 import 'package:active_system/features/manage_players/widgets/search_tools.dart';
@@ -22,9 +23,9 @@ class ManagePlayers extends StatelessWidget {
     Get.put(MangeUsersControllerImp());
     return Scaffold(
         body: GetBuilder<MangeUsersControllerImp>(builder: (controller) {
-      if (controller.firstState == StatusRequst.loading) {
-        return const CustomLoadingIndecator();
-      } else {
+      // if (controller.firstState == StatusRequst.loading) {
+      //   return const CustomLoadingIndecator();
+      // } else {
         return Column(
           children: [
             //
@@ -105,7 +106,10 @@ class ManagePlayers extends StatelessWidget {
                                               "ملاحظات"
                                             ],
                                             nameOfGlobalID: 'managePlayers',
-                                            onRowTap: () {},
+                                            onRowTap: () {
+                                    controller.assignModel(controller.usersList[GlobalVariable.managePlayers!]);
+
+                                            },
                                             showDialog: () {
                                               customManagePlayerDialog(
                                                   controller.userModel);
@@ -140,24 +144,81 @@ class ManagePlayers extends StatelessWidget {
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceEvenly,
                                         children: [
-                                          CustomButton(
-                                            text: "أضافه",
-                                            ontap: () {
-                                              controller.addUsers();
-                                            },
-                                          ),
-                                          CustomButton(
-                                            text: "حفظ",
-                                            ontap: () {},
-                                          ),
-                                          CustomButton(
-                                            text: "تعديل",
-                                            ontap: () {},
-                                          ),
-                                          CustomButton(
-                                            text: "حذف",
-                                            ontap: () {},
-                                          ),
+                                                                               CustomButton(
+                                  text: "أضافه",
+                                  color: controller.canAdd
+                                      ? const Color.fromARGB(217, 255, 255, 255)
+                                      : const Color.fromARGB(
+                                          217, 202, 193, 193),
+                                  ontap: () {
+                                    if (controller.canAdd) {
+                                      controller.addUsers();
+                                    }
+                                  },
+                                ),
+                                CustomButton(
+                                  text: "تعديل",
+                                  color: !controller.canAdd
+                                      ? const Color.fromARGB(217, 255, 255, 255)
+                                      : const Color.fromARGB(
+                                          217, 202, 193, 193),
+                                  ontap: () {
+                                    if (!controller.canAdd) {
+                                      Get.defaultDialog(
+                                          title: "تحذير ",
+                                          middleText:
+                                              "هل أنت متأكد أنك تريد تعديل الاشتراك",
+                                          actions: [
+                                            ElevatedButton(
+                                                onPressed: () {
+                                                  Get.back();
+                                                  controller.editPlayers();
+
+                                                },
+                                                child: const Text("نعم")),
+                                            ElevatedButton(
+                                                onPressed: () {
+                                                  Get.back();
+                                                },
+                                                child: const Text("لا")),
+                                          ]);
+                                    }
+                                  },
+                                ),
+                                CustomButton(
+                                  text: "حذف",
+                                  color: !controller.canAdd
+                                      ? const Color.fromARGB(217, 255, 255, 255)
+                                      : const Color.fromARGB(
+                                          217, 202, 193, 193),
+                                  ontap: () {
+                                      if (!controller.canAdd) {
+                                      Get.defaultDialog(
+                                          title: "تحذير ",
+                                          middleText:
+                                              "هل أنت متأكد أنك تريد حذف الاشتراك",
+                                          actions: [
+                                            ElevatedButton(
+                                                onPressed: () {
+                                                  Get.back();
+                                                  controller.deletePlayers();
+                                                },
+                                                child: const Text("نعم")),
+                                            ElevatedButton(
+                                                onPressed: () {
+                                                  Get.back();
+                                                },
+                                                child: const Text("لا")),
+                                          ]);
+                                    }
+                                  },
+                                ),
+                                CustomButton(
+                                  text: "إلغاء",
+                                  ontap: () {
+                                    controller.cleaModel();
+                                  },
+                                ),
                                         ],
                                       ),
                                     ),
@@ -174,7 +235,9 @@ class ManagePlayers extends StatelessWidget {
                     //
                     Expanded(
                       flex: 1,
-                      child: Container(
+                      child:
+                      controller.firstState == StatusRequst.loading ?const CustomLoadingIndecator():
+                       Container(
                         height: MediaQuery.of(context).size.height,
                         padding: const EdgeInsets.only(left: 8, right: 8),
                         decoration: const BoxDecoration(
@@ -202,7 +265,7 @@ class ManagePlayers extends StatelessWidget {
             ),
           ],
         );
-      }
+      // }
     }));
   }
 }

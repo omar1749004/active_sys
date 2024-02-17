@@ -22,5 +22,9 @@ class SubData {
     var res =await Api().post(uri: linkSubDelete, body: data);
     return res;
   }
+  search(Map data)async{
+    var res =await Api().post(uri: linkSubSearch, body: data);
+    return res;
+  }
   
 }

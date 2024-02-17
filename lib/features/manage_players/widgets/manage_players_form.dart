@@ -110,6 +110,7 @@ class ManagePlayersForm extends GetView<MangeUsersControllerImp> {
                CustomDropDownMenu(
                   label: "الإشتراك",
                   items: controller.subNameList,
+                  
                   onChanged: (p0) {
                     controller.changemodel(p0!);
                     
@@ -127,7 +128,9 @@ class ManagePlayersForm extends GetView<MangeUsersControllerImp> {
                     child:
                         CustomCheckBox(ischeck: controller.isactiveSub, text: "تفعيل الاشتراك",
                         onTap: () {
-                          controller.changeActiveSub(controller.isactiveSub) ;
+                          if(controller.canAdd){
+                             controller.changeActiveSub(controller.isactiveSub) ;
+                          }
                         },
                         color: Colors.red,
                         ),

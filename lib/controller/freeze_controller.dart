@@ -2,6 +2,7 @@ import 'package:active_system/core/class/statuscode.dart';
 import 'package:active_system/core/functions/global_alert.dart';
 import 'package:active_system/data/models/freeze_mode.dart';
 import 'package:active_system/data/models/renew_model.dart';
+import 'package:active_system/data/models/sub_mode.dart';
 import 'package:active_system/data/service/remote/freeze_data.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -23,7 +24,7 @@ class FreezeControllerImp extends FreezeController {
   List<FreezeModel> freezeList = [];
   late FreezeModel freezeModel;
   late RenewModel renewUser;
-
+  late SubscriptionModel subModel;
   late TextEditingController day;
   late TextEditingController note;
   DateTime startSearch = DateTime.now();
@@ -51,13 +52,14 @@ class FreezeControllerImp extends FreezeController {
   @override
   void initialData() {
     renewUser = Get.arguments["RenewModel"];
+    subModel = Get.arguments["subModel"];
     getFreeze();
     name = renewUser.usersName;
     barcode = renewUser.barcode.toString();
     startrenew = renewUser.renewalStart.toString();
     endrenew = renewUser.renewalEnd.toString();
     subName = renewUser.subscriptionsName;
-    days = renewUser.subscriptionsDay.toString();
+    days = subModel.subscriptionsDay.toString();
   }
 
   @override
@@ -66,7 +68,7 @@ class FreezeControllerImp extends FreezeController {
     update();
     var res = await FrezzeData().view({
       "renewal_id": renewUser.renewalId.toString(),
-      "subscriptions_id": renewUser.subscriptionsId.toString(),
+      "subscriptions_id": subModel.subscriptionsId.toString(),
     });
 
     if (res["status"] == "failure") {

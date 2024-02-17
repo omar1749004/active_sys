@@ -1,86 +1,69 @@
 class RenewModel {
-String? usersName;
-int? usersId;
-String? usersPhone;
-int? usersCaptiantid;
-DateTime? usersCreate;
-int? renewalId;
-String? renewalNote;
-int? barcodeId;
-int? barcode;
-DateTime? renewalCreate;
-int? renewalAdminId;
-DateTime? renewalStart;
-DateTime? renewalEnd;
-int? renewalSessionAttend;
-int? subscriptionsId;
-String? subscriptionsName;
-double? subscriptionsPrice;
-int? subscriptionsDay;
-int? sessionsNumber;
-int? subscriptionsSpecialization;
-int? subscriptionsInvitationsNumber;
-int? subscriptionsMaxInvitation;
-int? subscriptionsServiceNumber;
-int? subscriptionsMaxService;
+  String? usersName;
+  String? captainNamme;
+  int? usersId;
+  String? usersPhone;
+  int? usersCaptiantid;
+  DateTime? usersCreate;
+  int? renewalId;
+  String? renewalNote;
+  int? barcodeId;
+  int? barcode;
+  DateTime? renewalCreate;
+  int? renewalAdminId;
+  DateTime? renewalStart;
+  DateTime? renewalEnd;
+  int? renewalSessionAttend;
+  double? renewAmountOwed; 
+  double? renewalAmount;
+  String? subscriptionsName ;
 int? totalPlayer;
 
 
   RenewModel({
     required this.usersName,
+    required this.captainNamme,
     required this.usersId,
     required this.usersPhone,
+    required this.usersCaptiantid,
     required this.usersCreate,
     required this.renewalId,
     required this.renewalNote,
     required this.barcodeId,
-    required this.usersCaptiantid,
     required this.barcode,
     required this.renewalCreate,
+    this.subscriptionsName,
     required this.renewalAdminId,
     required this.renewalStart,
     required this.renewalEnd,
     required this.renewalSessionAttend,
-    required this.subscriptionsId,
-    required this.subscriptionsName,
-    required this.subscriptionsPrice,
-    required this.subscriptionsDay,
-    required this.sessionsNumber,
-    required this.subscriptionsSpecialization,
-    required this.subscriptionsInvitationsNumber,
-    required this.subscriptionsMaxInvitation,
-    required this.subscriptionsServiceNumber,
-    required this.subscriptionsMaxService,
+    required this.renewAmountOwed,
+    required this.renewalAmount,
     required this.totalPlayer,
   });
 
   factory RenewModel.fromJson(Map<String, dynamic> json) {
     return RenewModel(
-      usersName: json['users_name'],
+      usersName: json['user_name'],
+      captainNamme: json['captain_name'],
       usersId: json['users_id'],
-      usersCaptiantid: json['users_captiantid'],
       usersPhone: json['users_phone'],
+      usersCaptiantid: json['users_captiantid'],
       usersCreate: DateTime.parse(json['users_create']),
       renewalId: json['renewal_id'],
       renewalNote: json['renewal_note'],
       barcodeId: json['barcode_id'],
       barcode: json['barcode'],
+      subscriptionsName: json["subscriptions_name"],
       renewalCreate: DateTime.parse(json['renewal_create']),
       renewalAdminId: json['renewal_adminId'],
       renewalStart: DateTime.parse(json['renewal_start']),
       renewalEnd: DateTime.parse(json['renewal_end']),
       renewalSessionAttend: json['renewal_session_attend'],
-      subscriptionsId: json['subscriptions_id'],
-      subscriptionsName: json['subscriptions_name'],
-      subscriptionsPrice: json['subscriptions_price'].toDouble(),
-      subscriptionsDay: json['subscriptions_day'],
-      sessionsNumber: json['sessions_number'],
-      subscriptionsSpecialization: json['subscriptions_specialization'],
-      subscriptionsInvitationsNumber: json['subscriptions_invitations_number'],
-      subscriptionsMaxInvitation: json['subscriptions_max_invitation'],
-      subscriptionsServiceNumber: json['subscriptions_service_number'],
-      subscriptionsMaxService: json['subscriptions_max_service'],
+      renewAmountOwed: double.parse(json['renew_amount_owed']), 
+      renewalAmount: double.parse(json['renewal_amount']),
       totalPlayer: json['totalPlayer'],
+
     );
   }
 }

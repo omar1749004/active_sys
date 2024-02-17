@@ -5,6 +5,7 @@ import 'package:active_system/core/functions/customDialogForHomepage.dart';
 import 'package:active_system/core/shared/ModernTable/custom_modern_table.dart';
 import 'package:active_system/core/shared/custom_app_bar.dart';
 import 'package:active_system/core/shared/custom_table_header.dart';
+import 'package:active_system/core/shared/global_variable.dart';
 import 'package:active_system/core/shared/loading_indecator.dart';
 import 'package:active_system/features/home/data/service/static/note_knoladge.dart';
 import 'package:active_system/features/home/view/widget/client_info.dart';
@@ -20,14 +21,15 @@ class HomePage extends StatelessWidget {
     Get.put(HomeControllerImp());
     return Scaffold(
       body: GetBuilder<HomeControllerImp>(builder: (controller) {
-        if (controller.firstState == StatusRequst.loading) {
-          return const CustomLoadingIndecator();
-        } else {
+        // if (controller.firstState == StatusRequst.loading) {
+        //   return const CustomLoadingIndecator();
+        // } else {
           return Column(
             children: [
               const CustomAppBar(),
               Expanded(
-                child: SizedBox(
+                child: 
+                SizedBox(
                   width: MediaQuery.of(context).size.width,
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -47,7 +49,11 @@ class HomePage extends StatelessWidget {
                                 children: [
                                   CustomTableHeader(
                                       onChanged: (p0) {
-                                        controller.searchFun();
+                                        if(p0.isEmpty){
+                                          controller.viewAll();
+                                        }else{
+                                           controller.searchFun();
+                                        }
                                       },
                                       searchController: controller.search,
                                       header: "سجل الحضور اليومي"),
@@ -81,6 +87,7 @@ class HomePage extends StatelessWidget {
                                               thisPageIsHomePage: true,
                                               showDialog: () {
                                                 //pass to function model that will get when pressed on user in the table
+                                               controller.attendmodel = controller.attendList[GlobalVariable.home!];
                                                 customHomePageDialog(
                                                     controller.attendmodel);
                                               },
@@ -121,9 +128,11 @@ class HomePage extends StatelessWidget {
                             ),
                           )),
                       const VerticalDivider(),
-                      const Expanded(
+                       Expanded(
                         flex: 1,
-                        child: ClinetInfo(),
+                        child:
+                        controller.firstState == StatusRequst.loading ?const CustomLoadingIndecator():
+                        const ClinetInfo(),
                       ),
                     ],
                   ),
@@ -131,7 +140,7 @@ class HomePage extends StatelessWidget {
               ),
             ],
           );
-        }
+        // }
       }),
     );
   }

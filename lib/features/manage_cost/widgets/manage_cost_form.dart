@@ -100,9 +100,8 @@ class MangeCostForm extends GetView<ExpensesControllerImp> {
               CustomeTextFormAuth(
                   hintText: "",
                   lableText: "ملاحظات",
-                  validator: (val) {
-                    return validInput(val!, 0, 50, "");
-                  }),
+                  myController: controller.note,
+                 ),
             ],
           ),
         ),

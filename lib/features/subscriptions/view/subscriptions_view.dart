@@ -47,7 +47,7 @@ class SubscriptionsView extends StatelessWidget {
                          Expanded(
                           flex: 6,
                           child: Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 15),
+                            padding:const EdgeInsets.symmetric(horizontal: 15),
                             child: CustomTable(columnsHeader:const [
                               Text("1"),
                               Text("2"),
@@ -136,7 +136,7 @@ class SubscriptionsView extends StatelessWidget {
                         ),
                       ),
                     ),
-                    child: const SubscriptionForm(),
+                   // child: const SubscriptionForm(),
                   )
                 ],
               ),

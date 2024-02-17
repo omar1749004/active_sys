@@ -3,37 +3,37 @@ import 'package:active_system/core/shared/global_variable.dart';
 void setValueInGlobalVariable(String nameOfVar,int ind) {
      switch (nameOfVar) {
       case "attendance":
-        GlobalVariable.attendance = ind.toString();
+        GlobalVariable.attendance = ind;
         break;
       case "home":
-        GlobalVariable.home = ind.toString();
+        GlobalVariable.home = ind;
         break;
       case "manageCost":
-        GlobalVariable.manageCost = ind.toString();
+        GlobalVariable.manageCost = ind;
         break;
       case "managePlayers":
-        GlobalVariable.managePlayers = ind.toString();
+        GlobalVariable.managePlayers = ind;
         break;
       case "manageSubscription":
-        GlobalVariable.manageSubscription = ind.toString();
+        GlobalVariable.manageSubscription = ind;
         break;
       case "playersProfile":
-        GlobalVariable.playersProfile = ind.toString();
+        GlobalVariable.playersProfile = ind;
         break;
       case "renewSubscription":
-        GlobalVariable.renewSubscription = ind.toString();
+        GlobalVariable.renewSubscription = ind;
         break;
       case "safe":
-        GlobalVariable.safe = ind.toString();
+        GlobalVariable.safe = ind;
         break;
       case "trainers":
-        GlobalVariable.trainers = ind.toString();
+        GlobalVariable.trainers = ind;
         break;
       case "treasuryRegister":
-        GlobalVariable.treasuryRegister = ind.toString();
+        GlobalVariable.treasuryRegister = ind;
         break;
       case "users":
-        GlobalVariable.users = ind.toString();
+        GlobalVariable.users = ind;
         break;
       default:
     }

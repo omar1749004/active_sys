@@ -1,8 +1,8 @@
 class AttendModel {
-  int attendanceId;
-  DateTime attendanceDay;
-  String attendanceStart;
-  String attendanceEnd;
+  int? attendanceId;
+  DateTime? attendanceDay;
+  String? attendanceStart;
+  String? attendanceEnd;
   int? attendanceBarcodeId;
   int? attendanceRenewalid;
   int? barcode;
@@ -11,7 +11,7 @@ class AttendModel {
   String? usersPhone;
   String? usersNote;
   String? usersImage;
-  DateTime? renewalEnd;
+   DateTime? renewalEnd;
   String? adminSysName;
   String? subscriptionsName;
   int? subscriptionsSessionsNumber;
@@ -31,16 +31,16 @@ class AttendModel {
     required this.attendanceType,
     this.attendanceRenewalid,
     this.usersName,
-    this.renewalEnd,
+      this.renewalEnd,
     this.usersPhone,
     this.usersNote,
     this.usersImage,
     this.adminSysName,
     this.subscriptionsName,
     this.subscriptionsSessionsNumber,
-    this.renewAmountOwed,
-    this.safeId,
-    this.renewalSessionAttend,
+     this.renewAmountOwed,
+     this.safeId,
+     this.renewalSessionAttend,
     this.isOwed, //owes money
     this.isClose, //close to renew
   });
@@ -57,7 +57,7 @@ class AttendModel {
       attendanceType: json['attendance_type'],
       usersName: json['users_name'],
       usersPhone: json['users_phone'],
-      renewalEnd: DateTime.tryParse(json['renewal_end'] ?? ''),
+       renewalEnd: DateTime.tryParse(json['renewal_end'] ?? ''),
       usersNote: json['users_note'],
       usersImage: json['users_image'],
       adminSysName: json['adminSys_name'],

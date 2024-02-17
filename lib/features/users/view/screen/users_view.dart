@@ -7,6 +7,7 @@ import 'package:active_system/core/shared/custom_app_bar.dart';
 import 'package:active_system/core/shared/custom_dropdown_menu.dart';
 import 'package:active_system/core/shared/custom_table_header.dart';
 import 'package:active_system/core/shared/custome_textform_auth.dart';
+import 'package:active_system/core/shared/global_variable.dart';
 import 'package:active_system/core/shared/loading_indecator.dart';
 import 'package:active_system/features/manage_subscriptions/view/widgets/custom_button.dart';
 import 'package:active_system/features/manage_subscriptions/view/widgets/custom_menu.dart';
@@ -22,9 +23,9 @@ class UsersView extends StatelessWidget {
     Get.put(AdminControllerImp());
     return Scaffold(
       body: GetBuilder<AdminControllerImp>(builder: (controller) {
-        if (controller.firstState == StatusRequst.loading) {
-          return const CustomLoadingIndecator();
-        } else {
+        // if (controller.firstState == StatusRequst.loading) {
+        //   return const CustomLoadingIndecator();
+        // } else {
           return Column(children: [
             const CustomAppBar(),
             Expanded(
@@ -43,6 +44,9 @@ class UsersView extends StatelessWidget {
                           children: [
                             CustomTableHeader(
                                 searchController: controller.search,
+                              onChanged: (p0) {
+                                controller.checkSearch(p0);
+                              },
                                 header: "اداره المستخدمين"),
                             Expanded(
                                 flex: 6,
@@ -67,11 +71,16 @@ class UsersView extends StatelessWidget {
                                             "ملاحظات",
                                           ],
                                           nameOfGlobalID: 'users',
-                                          onRowTap: () {},
+                                          onRowTap: () {
+                                      controller.assignModel(controller.adminmodelList[GlobalVariable.users!], GlobalVariable.users!) ;
+
+                                          },
                                           showDialog: () {},
                                         ),
                                       )),
                             //buttons
+                           
+                           
                             Expanded(
                               flex: 1,
                               child: Padding(
@@ -83,27 +92,85 @@ class UsersView extends StatelessWidget {
                                   children: [
                                     CustomButton(
                                       text: "أضافه",
+                                  color: controller.canAdd
+                                      ? const Color.fromARGB(217, 255, 255, 255)
+                                      : const Color.fromARGB(
+                                          217, 202, 193, 193),
                                       ontap: () {
-                                        controller.addAdmin();
-                                        // controller.assignSelectAdminPowers(controller.powersMap[1]!);
+                                         if(controller.canAdd){
+                                             controller.addAdmin();
+                                         }
+                                        
                                       },
                                     ),
                                     CustomButton(
-                                      text: "حفظ",
-                                      ontap: () {},
-                                    ),
-                                    CustomButton(
                                       text: "تعديل",
-                                      ontap: () {},
+                                  color: !controller.canAdd
+                                      ? const Color.fromARGB(217, 255, 255, 255)
+                                      : const Color.fromARGB(
+                                          217, 202, 193, 193),
+                                      ontap: () {
+                                        if (!controller.canAdd) {
+                                      Get.defaultDialog(
+                                          title: "تحذير ",
+                                          middleText:
+                                              "هل أنت متأكد أنك تريد تعديل الاشتراك",
+                                          actions: [
+                                            ElevatedButton(
+                                                onPressed: () {
+                                                  Get.back();
+                                                  controller.editAdmin();
+
+                                                },
+                                                child: const Text("نعم")),
+                                            ElevatedButton(
+                                                onPressed: () {
+                                                  Get.back();
+                                                },
+                                                child: const Text("لا")),
+                                          ]);
+                                    }
+                                      },
                                     ),
                                     CustomButton(
+                                  color: !controller.canAdd
+                                      ? const Color.fromARGB(217, 255, 255, 255)
+                                      : const Color.fromARGB(
+                                          217, 202, 193, 193),
                                       text: "حذف",
-                                      ontap: () {},
+                                      ontap: () {
+                                                                            if (!controller.canAdd) {
+                                      Get.defaultDialog(
+                                          title: "تحذير ",
+                                          middleText:
+                                              "هل أنت متأكد أنك تريد حذف الاشتراك",
+                                          actions: [
+                                            ElevatedButton(
+                                                onPressed: () {
+                                                  Get.back();
+                                                  controller.deleteAdmin();
+                                                },
+                                                child: const Text("نعم")),
+                                            ElevatedButton(
+                                                onPressed: () {
+                                                  Get.back();
+                                                },
+                                                child: const Text("لا")),
+                                          ]);
+                                    }
+                                      },
+                                    ),
+                                    CustomButton(
+                                      text: "إلغاء",
+                                      ontap: () {
+                                        controller.cleaModel();
+                                      },
                                     ),
                                   ],
                                 ),
                               ),
                             ),
+                        
                           ],
                         ),
                       ),
@@ -113,7 +180,9 @@ class UsersView extends StatelessWidget {
                       flex: 1,
                       child: Padding(
                         padding: const EdgeInsets.all(15),
-                        child: Form(
+                        child: 
+                        controller.firstState == StatusRequst.loading ?const CustomLoadingIndecator():
+                        Form(
                           key: controller.formAdminKey,
                           child: ListView(
                             children: [
@@ -124,6 +193,7 @@ class UsersView extends StatelessWidget {
                               ),
                               CustomeTextFormAuth(
                                   hintText: "",
+                                  myController: controller.name,
                                   lableText: "الاسم",
                                   validator: (val) {
                                     return validInput(val!, 2, 20, "");
@@ -181,9 +251,10 @@ class UsersView extends StatelessWidget {
                                       return validInput(val!, 5, 50, "");
                                     }),
                               ),
-                              const CustomeTextFormAuth(
+                               CustomeTextFormAuth(
                                 hintText: "",
                                 lableText: "ملاحظات",
+                                myController: controller.note,
                                 obscureText: true,
                               ),
                               const Align(
@@ -207,7 +278,7 @@ class UsersView extends StatelessWidget {
               ),
             ),
           ]);
-        }
+        // }
       }),
     );
   }

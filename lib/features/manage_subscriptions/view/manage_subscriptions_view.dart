@@ -3,6 +3,7 @@ import 'package:active_system/core/class/statuscode.dart';
 import 'package:active_system/core/shared/ModernTable/custom_modern_table.dart';
 import 'package:active_system/core/shared/custom_app_bar.dart';
 import 'package:active_system/core/shared/custom_table_header.dart';
+import 'package:active_system/core/shared/global_variable.dart';
 import 'package:active_system/core/shared/loading_indecator.dart';
 import 'package:active_system/features/manage_subscriptions/view/widgets/custom_button.dart';
 import 'package:active_system/features/manage_subscriptions/view/widgets/custom_input_form.dart';
@@ -19,54 +20,57 @@ class ManageSubscriptionsView extends StatelessWidget {
 
     return Scaffold(
       body: GetBuilder<MangeSubControllerImp>(builder: (controller) {
-        if (controller.firstState == StatusRequst.loading) {
-          return const CustomLoadingIndecator();
-        } else {
-          return Column(
-            children: [
-              //
-              //AppBar
-              //
-              const CustomAppBar(),
-              //
-              //content in the middle
-              //
-              Expanded(
-                  child: SizedBox(
-                width: MediaQuery.of(context).size.width,
-                child: Row(
-                  children: [
-                    //
-                    //left menu
-                    //
-                    const CustomMenu(
-                      pageName: 'ادارة الاشتراكات',
-                    ),
-                    //
-                    //the content in the middle
-                    //
-                    Expanded(
-                      flex: 2,
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 15, vertical: 10),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            //
-                            //search bar
-                            //
-                            SizedBox(
-                              width: MediaQuery.of(context).size.width * 0.5,
-                              child: CustomTableHeader(
-                                searchController: controller.search,
-                                header: "",
-                              ),
+        // if (controller.firstState == StatusRequst.loading) {
+        //   return const CustomLoadingIndecator();
+        // } else {
+        return Column(
+          children: [
+            //
+            //AppBar
+            //
+            const CustomAppBar(),
+            //
+            //content in the middle
+            //
+            Expanded(
+                child: SizedBox(
+              width: MediaQuery.of(context).size.width,
+              child: Row(
+                children: [
+                  //
+                  //left menu
+                  //
+                  const CustomMenu(
+                    pageName: 'ادارة الاشتراكات',
+                  ),
+                  //
+                  //the content in the middle
+                  //
+                  Expanded(
+                    flex: 2,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 15, vertical: 10),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          //
+                          //search bar
+                          //
+                          SizedBox(
+                            width: MediaQuery.of(context).size.width * 0.5,
+                            child: CustomTableHeader(
+                              searchController: controller.search,
+                              onChanged: (p0) {
+                                controller.checkSearch(p0);
+                              },
+                              header: "",
                             ),
-                            //
-                            //table that contains data
-                            //
-                            Expanded(
+                          ),
+
+                          //table that contains data
+                          //
+                          Expanded(
                               flex: 6,
                               child: controller.statusRequs ==
                                       StatusRequst.loading
@@ -95,80 +99,142 @@ class ManageSubscriptionsView extends StatelessWidget {
                                           "ملاحظات",
                                         ],
                                         nameOfGlobalID: 'manageSubscription',
-                                        onRowTap: () {},
-                                        showDialog: () {},
-                                      ),
+                                      onRowTap: () {
+                                        controller.assignModel(
+                                            controller.subList[GlobalVariable
+                                                .manageSubscription!]);
+                                      },
+                                      showDialog: () {},
                                     ),
-                            ),
+                                  ),
+                          ),
 
-                            //
-                            //buttons
-                            //
-                            Expanded(
-                              flex: 1,
-                              child: Row(
-                                textDirection: TextDirection.rtl,
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                children: [
-                                  CustomButton(
-                                    text: "أضافه",
-                                    ontap: () {
+                          //
+                          //buttons
+                          //
+                          Expanded(
+                            flex: 1,
+                            child: Row(
+                              textDirection: TextDirection.rtl,
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                CustomButton(
+                                  text: "أضافه",
+                                  color: controller.canAdd
+                                      ? const Color.fromARGB(217, 255, 255, 255)
+                                      : const Color.fromARGB(
+                                          217, 202, 193, 193),
+                                  ontap: () {
+                                    if (controller.canAdd) {
                                       controller.addSub();
-                                    },
-                                  ),
-                                  CustomButton(
-                                    text: "تعديل",
-                                    ontap: () {},
-                                  ),
-                                  CustomButton(
-                                    text: "حذف",
-                                    ontap: () {},
-                                  ),
-                                  CustomButton(
-                                    text: "طباعة",
-                                    ontap: () {},
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
+                                    }
+                                  },
+                                ),
+                                CustomButton(
+                                  text: "تعديل",
+                                  color: !controller.canAdd
+                                      ? const Color.fromARGB(217, 255, 255, 255)
+                                      : const Color.fromARGB(
+                                          217, 202, 193, 193),
+                                  ontap: () {
+                                    if (!controller.canAdd) {
+                                      Get.defaultDialog(
+                                          title: "تحذير ",
+                                          middleText:
+                                              "هل أنت متأكد أنك تريد تعديل الاشتراك",
+                                          actions: [
+                                            ElevatedButton(
+                                                onPressed: () {
+                                                  Get.back();
+                                                  controller.editSub();
 
-                    //form input right screen
-                    //
-                    Expanded(
-                      flex: 1,
-                      child: Container(
-                        height: MediaQuery.of(context).size.height,
-                        padding: const EdgeInsets.only(left: 8, right: 8),
-                        decoration: const BoxDecoration(
-                          border: Border(
-                            top: BorderSide(
-                              width: 1,
-                              color: Color.fromRGBO(0, 0, 0, 0.186),
-                            ),
-                            left: BorderSide(
-                              width: 1,
-                              color: Color.fromRGBO(0, 0, 0, 0.186),
-                            ),
-                            bottom: BorderSide(
-                              width: 1,
-                              color: Color.fromRGBO(0, 0, 0, 0.186),
+                                                },
+                                                child: const Text("نعم")),
+                                            ElevatedButton(
+                                                onPressed: () {
+                                                  Get.back();
+                                                },
+                                                child: const Text("لا")),
+                                          ]);
+                                    }
+                                  },
+                                ),
+                                CustomButton(
+                                  text: "حذف",
+                                  color: !controller.canAdd
+                                      ? const Color.fromARGB(217, 255, 255, 255)
+                                      : const Color.fromARGB(
+                                          217, 202, 193, 193),
+                                  ontap: () {
+                                      if (!controller.canAdd) {
+                                      Get.defaultDialog(
+                                          title: "تحذير ",
+                                          middleText:
+                                              "هل أنت متأكد أنك تريد حذف الاشتراك",
+                                          actions: [
+                                            ElevatedButton(
+                                                onPressed: () {
+                                                  Get.back();
+                                                  controller.deleteSub();
+                                                },
+                                                child: const Text("نعم")),
+                                            ElevatedButton(
+                                                onPressed: () {
+                                                  Get.back();
+                                                },
+                                                child: const Text("لا")),
+                                          ]);
+                                    }
+                                  },
+                                ),
+                                CustomButton(
+                                  text: "إلغاء",
+                                  ontap: () {
+                                    controller.cleaModel();
+                                  },
+                                ),
+                              ],
                             ),
                           ),
-                        ),
-                        child: const SubscriptionForm(),
+                        ],
                       ),
-                    )
-                  ],
-                ),
-              )),
-            ],
-          );
-        }
+                    ),
+                  ),
+
+                  //form input right screen
+                  //
+                  Expanded(
+                    flex: 1,
+                    child: controller.firstState == StatusRequst.loading
+                        ? const CustomLoadingIndecator()
+                        : Container(
+                            height: MediaQuery.of(context).size.height,
+                            padding: const EdgeInsets.only(left: 8, right: 8),
+                            decoration: const BoxDecoration(
+                              border: Border(
+                                top: BorderSide(
+                                  width: 1,
+                                  color: Color.fromRGBO(0, 0, 0, 0.186),
+                                ),
+                                left: BorderSide(
+                                  width: 1,
+                                  color: Color.fromRGBO(0, 0, 0, 0.186),
+                                ),
+                                bottom: BorderSide(
+                                  width: 1,
+                                  color: Color.fromRGBO(0, 0, 0, 0.186),
+                                ),
+                              ),
+                            ),
+                            child:  SubscriptionForm(type: controller.type,),                        
+                          ),
+                  )
+                ],
+              ),
+            )),
+          ],
+        );
+        // }
       }),
     );
   }

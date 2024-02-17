@@ -2,6 +2,7 @@ class ExpensesModel {
   int ?expensesId;
   DateTime? expensesDate;
   String ?expensesReason;
+  String ?note;
   double ?expensesValue;
   int ?expensesAdminId;
 
@@ -9,6 +10,7 @@ class ExpensesModel {
     required this.expensesId,
     required this.expensesDate,
     required this.expensesReason,
+    required this.note,
     required this.expensesValue,
     required this.expensesAdminId,
   });
@@ -20,6 +22,7 @@ class ExpensesModel {
       expensesReason: json['expenses_reason'],
       expensesValue: json['expenses_value'].toDouble(),
       expensesAdminId: json['expenses_admin_id'],
+      note: json["expenses_note"]
     );
   }
 }

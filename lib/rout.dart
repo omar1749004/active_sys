@@ -1,4 +1,3 @@
-import 'package:active_system/core/shared/loading_indecator.dart';
 import 'package:active_system/features/attendance/attendance_view.dart';
 import 'package:active_system/features/auth/view/screen/auth_view.dart';
 import 'package:active_system/core/constant/app_route.dart';
@@ -24,7 +23,7 @@ List<GetPage<dynamic>> route = [
       middlewares: [MyMiddleWare()]),
   GetPage(
     name: AppRoute.Managesubscriptionid,
-    page: () => ManageSubscriptionsView(),
+    page: () =>const ManageSubscriptionsView(),
   ),
   GetPage(
     name: AppRoute.trainerid,

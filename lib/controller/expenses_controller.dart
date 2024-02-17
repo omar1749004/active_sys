@@ -14,6 +14,7 @@ abstract class ExpensesController extends GetxController {
   void addTrandsAction();
   void assignModel(ExpensesModel privetModel);
   void editTransAction();
+  void clearModel();
 }
 
 class ExpensesControllerImp extends ExpensesController {
@@ -25,7 +26,7 @@ class ExpensesControllerImp extends ExpensesController {
   DateTime endSearch = DateTime.now();
   bool isdateSearch = true;
   double? totalExpenses = 0;
-
+  bool canAdd = true;
   List<ExpensesModel> expensesList = [];
   List<List<String>> dataInTable = [];
   late ExpensesModel expensesModel;
@@ -62,6 +63,8 @@ class ExpensesControllerImp extends ExpensesController {
       });
       if (res["status"] == "failure") {
         totalExpenses = 0;
+        expensesList = [];
+        assignDataInsideTable();
         statusRequs = StatusRequst.failure;
       } else if (res["status"] == "success") {
         List data = res["data"];
@@ -83,6 +86,8 @@ class ExpensesControllerImp extends ExpensesController {
     update();
     var res = await ExpensesData().view();
     if (res["status"] == "failure") {
+      expensesList = [];
+      assignDataInsideTable();
       statusRequs = StatusRequst.failure;
     } else if (res["status"] == "success") {
       List data = res["data"];
@@ -125,6 +130,7 @@ class ExpensesControllerImp extends ExpensesController {
         {
           "reason": reason.text,
           "value": amount.text,
+          "note": note.text,
           "adminId": "1",
         },
       );
@@ -158,11 +164,11 @@ class ExpensesControllerImp extends ExpensesController {
     update();
     var res = await ExpensesData().search({"search": search.text});
     if (res["status"] == "failure") {
-      print("no");
+      expensesList = [];
+      assignDataInsideTable();
       statusRequs = StatusRequst.failure;
     } else if (res["status"] == "success") {
       List data = res["data"];
-      print(data);
       expensesList = [];
       expensesList.addAll(data.map((e) => ExpensesModel.fromJson(e)));
 
@@ -179,7 +185,10 @@ class ExpensesControllerImp extends ExpensesController {
   void assignModel(ExpensesModel privetModel) {
     reason.text = privetModel.expensesReason ?? "";
     amount.text = privetModel.expensesValue.toString();
+    note.text = privetModel.note.toString();
     expensesModel = privetModel;
+    canAdd = false;
+    update();
   }
 
 //function to assign data inside List
@@ -207,6 +216,7 @@ class ExpensesControllerImp extends ExpensesController {
           "id": expensesModel.expensesId.toString(),
           "reason": reason.text,
           "value": amount.text,
+          "note": note.text,
           "adminId": "1",
         },
       );
@@ -217,13 +227,22 @@ class ExpensesControllerImp extends ExpensesController {
       } else if (res["status"] == "success") {
         globalAlert("تم تعديل البانات بنجاح", title: "");
         statusRequs = StatusRequst.sucsess;
-        reason.clear();
-        note.clear();
+        clearModel();
+        handlTable(isdateSearch);
       } else {
         statusRequs = StatusRequst.failure;
       }
       update();
     }
+  }
+
+  @override
+  clearModel() {
+    reason.clear();
+    note.clear();
+    amount.clear();
+    canAdd = true;
+    update();
   }
 }
 

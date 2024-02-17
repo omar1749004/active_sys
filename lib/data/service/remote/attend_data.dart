@@ -46,4 +46,9 @@ class AttendData{
     var res =await Api().post(uri: linkAttendanceUsersSearch, body: data);
     return res;
   }
+  viwe()async{
+    var res =await Api().post(uri: linkAttendanceView, body: {});
+    return res;
+  }
+
 }

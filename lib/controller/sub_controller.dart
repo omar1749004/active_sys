@@ -21,7 +21,9 @@ abstract class MangeSubController extends GetxController {
   void viewAll();
   void assignModel(SubscriptionModel privetModel);
   void deleteSub();
+  void checkSearch(String val);
   void editSub();
+  void cleaModel();
 }
 
 class MangeSubControllerImp extends MangeSubController {
@@ -32,7 +34,9 @@ class MangeSubControllerImp extends MangeSubController {
   List<SubscriptionModel> subList = [];
   List<List<String>> dataInTable = [];
   late SubscriptionModel submodel;
-  String type = "0";
+  String type = "اشتراك";
+  bool canAdd =true ;
+
   late TextEditingController name;
   late TextEditingController specialization;
   late TextEditingController price;
@@ -67,19 +71,7 @@ class MangeSubControllerImp extends MangeSubController {
     notes = TextEditingController();
     search = TextEditingController();
 
-    specialization.text = "عام";
-    price.text = "0";
-    day.text = "0";
-    sessionsNumber.text = "0";
-    frezzDay.text = "0";
-    frezzNumber.text = "0";
-    maxFrezzDay.text = "0";
-    invitationsNumber.text = "0";
-    maxInvitation.text = "0";
-    serviceNumber.text = "0";
-    maxService.text = "0";
-    allowedNumber.text = "0";
-    notes.text = "0";
+    cleaModel();
     firstState = StatusRequst.loading;
     await Future.delayed(const Duration(milliseconds: 100));
     firstState = StatusRequst.failure;
@@ -88,7 +80,6 @@ class MangeSubControllerImp extends MangeSubController {
 
     super.onInit();
   }
-
   @override
   void addSub() async {
     if (formKey.currentState!.validate()) {
@@ -97,7 +88,7 @@ class MangeSubControllerImp extends MangeSubController {
       var res = await SubData().add(
         {
           "name": name.text,
-          "type": type,
+          "type": type == "حصة" ? "1":"0",
           "specialization": "0",
           "price": price.text,
           "day": day.text,
@@ -142,6 +133,9 @@ class MangeSubControllerImp extends MangeSubController {
     allowedNumber.text = privetModel.subscriptionsAllowedNumber.toString();
     notes.text = privetModel.subscriptionsNotes.toString();
     submodel = privetModel;
+    type = privetModel.subscriptionsType.toString() == "0" ? "اشتراك" :"حصة";
+    canAdd =false ;
+    update();
   }
 
   @override
@@ -150,6 +144,8 @@ class MangeSubControllerImp extends MangeSubController {
     update();
     var res = await SubData().view();
     if (res["status"] == "failure") {
+      subList = [];
+      assignDataInsideTable();
       statusRequs = StatusRequst.failure;
     } else if (res["status"] == "success") {
       List data = res["data"];
@@ -264,6 +260,7 @@ class MangeSubControllerImp extends MangeSubController {
     } else if (res["status"] == "success") {
       subList.removeWhere(
           (element) => element.subscriptionsId == submodel.subscriptionsId);
+          assignDataInsideTable();
       statusRequs = StatusRequst.sucsess;
     } else {
       statusRequs = StatusRequst.failure;
@@ -315,20 +312,7 @@ class MangeSubControllerImp extends MangeSubController {
         statusRequs = StatusRequst.failure;
       } else if (res["status"] == "success") {
         globalAlert("تم تعديل البانات بنجاح", title: "");
-        name.clear();
-        specialization.text = "عام";
-        price.text = "0";
-        day.text = "0";
-        sessionsNumber.text = "0";
-        frezzDay.text = "0";
-        frezzNumber.text = "0";
-        maxFrezzDay.text = "0";
-        invitationsNumber.text = "0";
-        maxInvitation.text = "0";
-        serviceNumber.text = "0";
-        maxService.text = "0";
-        allowedNumber.text = "0";
-        notes.text = "0";
+        cleaModel();
         statusRequs = StatusRequst.sucsess;
       } else {
         statusRequs = StatusRequst.failure;
@@ -337,6 +321,56 @@ class MangeSubControllerImp extends MangeSubController {
       update();
     }
   }
+  @override
+  void cleaModel() {
+    name.clear();
+    specialization.text = "عام";
+    price.text = "0";
+    day.text = "0";
+    sessionsNumber.text = "0";
+    frezzDay.text = "0";
+    frezzNumber.text = "0";
+    maxFrezzDay.text = "0";
+    invitationsNumber.text = "0";
+    maxInvitation.text = "0";
+    serviceNumber.text = "0";
+    maxService.text = "0";
+    allowedNumber.text = "0";
+    canAdd = true ;
+    update();
+  }
+
+  @override
+  void checkSearch(String val) {
+    if (val.isEmpty) {
+      viewAll();
+    } else {
+      _search();
+    }
+    update();
+  }
+
+  void _search() async {
+    statusRequs = StatusRequst.loading;
+    update();
+    var res = await SubData().search({"search": search.text});
+
+    if (res["status"] == "failure") {
+      subList = [];
+      assignDataInsideTable();
+      statusRequs = StatusRequst.failure;
+    } else if (res["status"] == "success") {
+      List data = res["data"];
+      subList = [];
+      subList.addAll(data.map((e) => SubscriptionModel.fromJson(e)));
+      assignDataInsideTable();
+      statusRequs = StatusRequst.sucsess;
+    } else {
+      statusRequs = StatusRequst.failure;
+    }
+    update();
+  }
+
 }
 // void a() async {
 //   var res = await SubData().view();

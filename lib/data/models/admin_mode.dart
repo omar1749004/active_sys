@@ -3,7 +3,7 @@ class AdminSys {
   String adminSysName;
   int adminSysType;
   String adminSysPassword;
-  String adminSysNote;
+  String? adminSysNote;
 
   AdminSys({
     required this.adminSysId,

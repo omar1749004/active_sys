@@ -3,7 +3,6 @@ import 'package:active_system/core/constant/styles.dart';
 import 'package:active_system/core/shared/ModernTable/custom_modern_table.dart';
 import 'package:active_system/core/shared/custom_Botton1.dart';
 import 'package:active_system/core/shared/custom_date_field.dart';
-import 'package:active_system/core/shared/custom_table.dart';
 import 'package:active_system/features/players_profile/widgets/app_bar_profile.dart';
 import 'package:active_system/features/players_profile/widgets/card_info.dart';
 import 'package:flutter/material.dart';

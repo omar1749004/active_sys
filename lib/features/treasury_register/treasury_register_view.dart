@@ -19,9 +19,9 @@ class TreasuryRegisterView extends StatelessWidget {
     Get.put(TreasuryRegisterControllerImp());
     return Scaffold(
         body: GetBuilder<TreasuryRegisterControllerImp>(builder: (controller) {
-      if (controller.firstState == StatusRequst.loading) {
-        return const CustomLoadingIndecator();
-      } else {
+      // if (controller.firstState == StatusRequst.loading) {
+      //   return const CustomLoadingIndecator();
+      // } else {
         return Column(
           children: [
             //
@@ -151,18 +151,15 @@ class TreasuryRegisterView extends StatelessWidget {
                                 textDirection: TextDirection.rtl,
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  CustomButton(
-                                    text: "تنفيذ",
-                                    ontap: () {
-                                      controller.makeSearch();
-                                    },
-                                  ),
+                                  
                                   const SizedBox(
                                     width: 15,
                                   ),
                                   CustomButton(
-                                    text: "تنفيذ وطباعه",
-                                    ontap: () {},
+                                    text: "طباعة",
+                                    ontap: () {
+                                      controller.getpdf();
+                                    },
                                   ),
                                 ],
                               ),
@@ -176,7 +173,9 @@ class TreasuryRegisterView extends StatelessWidget {
                     //
                     Expanded(
                       flex: 1,
-                      child: Container(
+                      child:
+                      controller.firstState == StatusRequst.loading ?const CustomLoadingIndecator():
+                       Container(
                         width: 300,
                         height: MediaQuery.of(context).size.height,
                         padding: const EdgeInsets.only(left: 8, right: 8),
@@ -205,7 +204,7 @@ class TreasuryRegisterView extends StatelessWidget {
             ),
           ],
         );
-      }
+      // }
     }));
   }
 }

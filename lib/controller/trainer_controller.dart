@@ -13,6 +13,7 @@ abstract class TrainersController extends GetxController {
   void organizePhone();
   void deleteTrainer();
   void editTrainer();
+  void cleaModel();
 }
 
 class TrainersControllerImp extends TrainersController {
@@ -36,7 +37,7 @@ class TrainersControllerImp extends TrainersController {
   late TextEditingController note;
 
   late TextEditingController search;
-
+  bool canAdd = true ;
   @override
   void onInit() async {
     name = TextEditingController();
@@ -59,6 +60,9 @@ class TrainersControllerImp extends TrainersController {
     update();
     var res = await TrainerData().view();
     if (res["status"] == "failure") {
+      usersList = [];
+      phonesList = [];
+      assignDataInsideTable();
       statusRequs = StatusRequst.failure;
     } else if (res["status"] == "success") {
       List data = res["data"];
@@ -121,7 +125,7 @@ class TrainersControllerImp extends TrainersController {
   @override
   void checkSearch(String val) {
     if (val.isEmpty) {
-      statusRequs = StatusRequst.non;
+      viewAll();
     } else {
       _search();
     }
@@ -165,6 +169,8 @@ class TrainersControllerImp extends TrainersController {
     } else {
       phone.text = mid[0];
     }
+    canAdd = false ;
+    update();
   }
 
   @override
@@ -191,7 +197,7 @@ class TrainersControllerImp extends TrainersController {
     dataInTable = [];
     for (var i = 0; i < usersList.length; i++) {
       dataInTable.add([
-        usersList[i].usersCaptiantId.toString(),
+        usersList[i].usersId.toString(),
         usersList[i].usersName.toString(),
         usersList[i].usersPhone.toString(),
         usersList[i].usersAddress.toString(),
@@ -234,6 +240,18 @@ class TrainersControllerImp extends TrainersController {
 
       update();
     }
+  }
+
+@override
+  cleaModel() {
+    name.clear();
+    phone.clear();
+    phone1.clear();
+    phone2.clear();
+    address.clear();
+    note.clear();
+    canAdd = true ;
+    update();
   }
 }
 

@@ -6,6 +6,7 @@ import 'package:active_system/core/shared/custom_Botton1.dart';
 import 'package:active_system/core/shared/custom_app_bar.dart';
 import 'package:active_system/core/shared/custom_date_field.dart';
 import 'package:active_system/core/shared/custom_table_header.dart';
+import 'package:active_system/core/shared/global_variable.dart';
 import 'package:active_system/core/shared/loading_indecator.dart';
 import 'package:active_system/features/manage_cost/widgets/manage_cost_form.dart';
 import 'package:active_system/features/manage_subscriptions/view/widgets/custom_button.dart';
@@ -27,9 +28,9 @@ class _ManageCostViewState extends State<ManageCostView> {
     return Scaffold(
       body: GetBuilder<ExpensesControllerImp>(
         builder: (controller) {
-          if (controller.firstState == StatusRequst.loading) {
-            return const CustomLoadingIndecator();
-          } else {
+          // if (controller.firstState == StatusRequst.loading) {
+          //   return const CustomLoadingIndecator();
+          // } else {
             return Column(
               children: [
                 //
@@ -164,7 +165,9 @@ class _ManageCostViewState extends State<ManageCostView> {
                                             "الشريك",
                                           ],
                                           nameOfGlobalID: 'manageCost',
-                                          onRowTap: () {},
+                                          onRowTap: () {
+                                            controller.assignModel(controller.expensesList[GlobalVariable.manageCost!]);
+                                          },
                                           showDialog: () {},
                                         ),
                                       ),
@@ -181,21 +184,80 @@ class _ManageCostViewState extends State<ManageCostView> {
                                   children: [
                                     CustomButton(
                                       text: "أضافه",
+                                    color: controller.canAdd
+                                      ? const Color.fromARGB(217, 255, 255, 255)
+                                      : const Color.fromARGB(
+                                          217, 202, 193, 193),
                                       ontap: () {
-                                        controller.addTrandsAction();
+                                        if(controller.canAdd){
+                                         controller.addTrandsAction();
+                                        }
+                                        
                                       },
                                     ),
                                     CustomButton(
                                       text: "تعديل",
-                                      ontap: () {},
+                                  color: !controller.canAdd
+                                      ? const Color.fromARGB(217, 255, 255, 255)
+                                      : const Color.fromARGB(
+                                          217, 202, 193, 193),
+                                      ontap: () {
+                                        if (!controller.canAdd) {
+                                      Get.defaultDialog(
+                                          title: "تحذير ",
+                                          middleText:
+                                              "هل أنت متأكد أنك تريد تعديل المصروف",
+                                          actions: [
+                                            ElevatedButton(
+                                                onPressed: () {
+                                                  Get.back();
+                                                  controller.editTransAction();
+
+                                                },
+                                                child: const Text("نعم")),
+                                            ElevatedButton(
+                                                onPressed: () {
+                                                  Get.back();
+                                                },
+                                                child: const Text("لا")),
+                                          ]);
+                                    }
+                                      },
                                     ),
+                                  //   CustomButton(
+                                  //     text: "حذف",
+                                  // color: !controller.canAdd
+                                  //     ? const Color.fromARGB(217, 255, 255, 255)
+                                  //     : const Color.fromARGB(
+                                  //         217, 202, 193, 193),
+                                  //     ontap: () {
+                                  //       if (!controller.canAdd) {
+                                  //     Get.defaultDialog(
+                                  //         title: "تحذير ",
+                                  //         middleText:
+                                  //             "هل أنت متأكد أنك تريد تعديل الاشتراك",
+                                  //         actions: [
+                                  //           ElevatedButton(
+                                  //               onPressed: () {
+                                  //                 Get.back();
+                                  //                 controller.dee();
+
+                                  //               },
+                                  //               child: const Text("نعم")),
+                                  //           ElevatedButton(
+                                  //               onPressed: () {
+                                  //                 Get.back();
+                                  //               },
+                                  //               child: const Text("لا")),
+                                  //         ]);
+                                  //   }
+                                  //     },
+                                  //   ),
                                     CustomButton(
-                                      text: "حذف",
-                                      ontap: () {},
-                                    ),
-                                    CustomButton(
-                                      text: "طباعة",
-                                      ontap: () {},
+                                      text: "إالغاء",
+                                      ontap: () {
+                                        controller.clearModel();
+                                      },
                                     ),
                                   ],
                                 ),
@@ -209,7 +271,9 @@ class _ManageCostViewState extends State<ManageCostView> {
                       //
                       Expanded(
                         flex: 1,
-                        child: Container(
+                        child:
+                        controller.firstState == StatusRequst.loading ?const CustomLoadingIndecator():
+                         Container(
                           height: MediaQuery.of(context).size.height,
                           padding: const EdgeInsets.only(left: 8, right: 8),
                           decoration: const BoxDecoration(
@@ -238,7 +302,7 @@ class _ManageCostViewState extends State<ManageCostView> {
                 ),
               ],
             );
-          }
+          // }
         },
       ),
     );
