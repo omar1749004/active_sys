@@ -79,6 +79,8 @@ class UsersView extends StatelessWidget {
                                         ),
                                       )),
                             //buttons
+                           
+                           
                             Expanded(
                               flex: 1,
                               child: Padding(
@@ -168,6 +170,7 @@ class UsersView extends StatelessWidget {
                                 ),
                               ),
                             ),
+                        
                           ],
                         ),
                       ),

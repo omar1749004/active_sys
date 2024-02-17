@@ -2,10 +2,8 @@ import 'package:active_system/core/constant/color.dart';
 import 'package:active_system/data/models/attend_model.dart';
 import 'package:active_system/data/models/user_model.dart';
 import 'package:active_system/features/safe/view/widget/custom_display_many.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 
 Future<dynamic> customManagePlayerDialog(UserModel userModel) {
   return Get.defaultDialog(
@@ -49,15 +47,15 @@ Future<dynamic> customManagePlayerDialog(UserModel userModel) {
                   flexOfMany: 2,
                 ),
               ),
-              SizedBox(
-                width: 500,
-                child: CustomDisplyMany(
-                  textColor: ColorApp.thirdColor,
-                  many: userModel.usersEmail,
-                  text: "البريد الاكترونى",
-                  flexOfMany: 2,
-                ),
-              ),
+              // SizedBox(
+              //   width: 500,
+              //   child: CustomDisplyMany(
+              //     textColor: ColorApp.thirdColor,
+              //     many: userModel.usersEmail,
+              //     text: "البريد الاكترونى",
+              //     flexOfMany: 2,
+              //   ),
+              // ),
               SizedBox(
                 width: 500,
                 child: CustomDisplyMany(
@@ -67,15 +65,15 @@ Future<dynamic> customManagePlayerDialog(UserModel userModel) {
                   flexOfMany: 2,
                 ),
               ),
-              SizedBox(
-                width: 500,
-                child: CustomDisplyMany(
-                  textColor: ColorApp.thirdColor,
-                  many: userModel.usersBranch.toString(),
-                  text: "الفرع",
-                  flexOfMany: 2,
-                ),
-              ),
+              // SizedBox(
+              //   width: 500,
+              //   child: CustomDisplyMany(
+              //     textColor: ColorApp.thirdColor,
+              //     many: userModel.usersBranch.toString(),
+              //     text: "الفرع",
+              //     flexOfMany: 2,
+              //   ),
+              // ),
               SizedBox(
                 width: 500,
                 child: CustomDisplyMany(

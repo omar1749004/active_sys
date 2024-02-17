@@ -14,9 +14,11 @@ class UserModel {
   String? renewalEnd;
   String? renewalNote;
   int? renewalSessionAttend;
-  String? usersAddress; // Added usersAddress field
-  String? subscriptionsName; // Added subscriptionsName field
+  String? usersAddress; 
+  String? subscriptionsName; 
   int? renewalId;
+  int? usersGender; 
+  int? usersType;
 
   UserModel({
     this.usersName,
@@ -37,6 +39,8 @@ class UserModel {
     this.usersAddress,
     this.subscriptionsName,
     this.renewalId,
+    this.usersGender,
+    this.usersType,
   });
 
   factory UserModel.fromJson(Map<String, dynamic> json) {
@@ -56,12 +60,15 @@ class UserModel {
       renewalEnd: json['renewal_end'],
       renewalNote: json['renewal_note'],
       renewalSessionAttend: json['renewal_session_attend'],
-      usersAddress: json['users_address'], // Mapping to usersAddress field
-      subscriptionsName: json['subscriptions_name'], // Mapping to subscriptionsName field
+      usersAddress: json['users_address'], 
+      subscriptionsName: json['subscriptions_name'], 
       renewalId: json['renewal_id'],
+      usersGender: json['users_gender'], 
+      usersType: json['users_type'], 
     );
   }
 }
+
 
 
 class TrainerNumberModel {

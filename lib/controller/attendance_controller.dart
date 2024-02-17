@@ -3,7 +3,6 @@ import 'package:active_system/data/models/attend_model.dart';
 import 'package:active_system/data/service/remote/attend_data.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
-import 'package:intl/intl.dart';
 
 abstract class AttendController extends GetxController {
   void viewAll();
@@ -108,7 +107,7 @@ class AttendControllerImp extends AttendController {
     for (var i = 0; i < attendList.length; i++) {
       dataInTable.add([
         attendList[i].attendanceId.toString(),
-        " ${attendList[i].attendanceDay.year}/${attendList[i].attendanceDay.month}/${attendList[i].attendanceDay.day}",
+        " ${attendList[i].attendanceDay!.year}/${attendList[i].attendanceDay!.month}/${attendList[i].attendanceDay!.day}",
         attendList[i].usersName.toString(),
         attendList[i].attendanceStart.toString(),
         attendList[i].attendanceEnd.toString(),

@@ -8,6 +8,7 @@ import 'package:active_system/core/shared/custom_table_header.dart';
 import 'package:active_system/core/shared/global_variable.dart';
 import 'package:active_system/core/shared/loading_indecator.dart';
 import 'package:active_system/features/manage_players/widgets/manage_players_form.dart';
+import 'package:active_system/features/manage_players/widgets/search_tools.dart';
 import 'package:active_system/features/manage_subscriptions/view/widgets/custom_button.dart';
 import 'package:active_system/features/manage_subscriptions/view/widgets/custom_menu.dart';
 import 'package:active_system/features/safe/view/widget/custom_display_many.dart';
@@ -122,10 +123,28 @@ class ManagePlayers extends StatelessWidget {
                             Expanded(
                               flex: 3,
                               child: SingleChildScrollView(
-                                physics:const BouncingScrollPhysics(),
+                                physics: BouncingScrollPhysics(),
                                 child: Column(
                                   children: [
-                                      CustomButton(
+                                    //
+                                    //DropDown and checkbox for search
+                                    //
+                                    const SearchTools(),
+                                    const SizedBox(
+                                      height: 20,
+                                    ),
+                                    //
+                                    //Buttons
+                                    //
+                                    Padding(
+                                      padding:
+                                          const EdgeInsets.only(bottom: 20.0),
+                                      child: Row(
+                                        textDirection: TextDirection.rtl,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceEvenly,
+                                        children: [
+                                                                               CustomButton(
                                   text: "أضافه",
                                   color: controller.canAdd
                                       ? const Color.fromARGB(217, 255, 255, 255)
@@ -200,6 +219,9 @@ class ManagePlayers extends StatelessWidget {
                                     controller.cleaModel();
                                   },
                                 ),
+                                        ],
+                                      ),
+                                    ),
                                   ],
                                 ),
                               ),

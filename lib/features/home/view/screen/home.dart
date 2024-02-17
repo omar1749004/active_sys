@@ -5,6 +5,7 @@ import 'package:active_system/core/functions/customDialogForHomepage.dart';
 import 'package:active_system/core/shared/ModernTable/custom_modern_table.dart';
 import 'package:active_system/core/shared/custom_app_bar.dart';
 import 'package:active_system/core/shared/custom_table_header.dart';
+import 'package:active_system/core/shared/global_variable.dart';
 import 'package:active_system/core/shared/loading_indecator.dart';
 import 'package:active_system/features/home/data/service/static/note_knoladge.dart';
 import 'package:active_system/features/home/view/widget/client_info.dart';
@@ -86,6 +87,7 @@ class HomePage extends StatelessWidget {
                                               thisPageIsHomePage: true,
                                               showDialog: () {
                                                 //pass to function model that will get when pressed on user in the table
+                                               controller.attendmodel = controller.attendList[GlobalVariable.home!];
                                                 customHomePageDialog(
                                                     controller.attendmodel);
                                               },

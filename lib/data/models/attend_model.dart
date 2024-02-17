@@ -1,8 +1,8 @@
 class AttendModel {
-  int attendanceId;
-  DateTime attendanceDay;
-  String attendanceStart;
-  String attendanceEnd;
+  int? attendanceId;
+  DateTime? attendanceDay;
+  String? attendanceStart;
+  String? attendanceEnd;
   int? attendanceBarcodeId;
   int? attendanceRenewalid;
   int? barcode;

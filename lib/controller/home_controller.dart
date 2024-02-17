@@ -287,13 +287,14 @@ class HomeControllerImp extends HomeController {
   }
   @override
   void assignModel(AttendModel privetModel) {
+    attendmodel = privetModel;
     username.text = privetModel.usersName!;
     phone.text = privetModel.usersPhone!;
     barcode.text = privetModel.barcode.toString();
    deadline.text = privetModel.renewalEnd.toString().substring(0, 11) ;
     note.text = privetModel.usersNote!;
     subValue = privetModel.subscriptionsName!;
-    attendmodel = privetModel;
+    
   }
   @override
   void clearModel() {
