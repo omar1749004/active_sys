@@ -26,7 +26,7 @@ class ExpensesControllerImp extends ExpensesController {
   DateTime endSearch = DateTime.now();
   bool isdateSearch = true;
   double? totalExpenses = 0;
-  bool canAdd = true ;
+  bool canAdd = true;
   List<ExpensesModel> expensesList = [];
   List<List<String>> dataInTable = [];
   late ExpensesModel expensesModel;
@@ -36,18 +36,18 @@ class ExpensesControllerImp extends ExpensesController {
   late TextEditingController search;
 
   @override
-  void onInit() async{
+  void onInit() async {
     reason = TextEditingController();
     amount = TextEditingController();
     note = TextEditingController();
     search = TextEditingController();
     amount.text = "0";
     firstState = StatusRequst.loading;
-    await  Future.delayed(const Duration(milliseconds: 100));
+    await Future.delayed(const Duration(milliseconds: 100));
     firstState = StatusRequst.failure;
     dateSearch(startSearch, endSearch);
     statusRequs = StatusRequst.loading;
-    await  Future.delayed(const Duration(milliseconds: 300));
+    await Future.delayed(const Duration(milliseconds: 300));
     statusRequs = StatusRequst.failure;
     super.onInit();
   }
@@ -130,7 +130,7 @@ class ExpensesControllerImp extends ExpensesController {
         {
           "reason": reason.text,
           "value": amount.text,
-          "note":note.text,
+          "note": note.text,
           "adminId": "1",
         },
       );
@@ -187,7 +187,7 @@ class ExpensesControllerImp extends ExpensesController {
     amount.text = privetModel.expensesValue.toString();
     note.text = privetModel.note.toString();
     expensesModel = privetModel;
-    canAdd =  false;
+    canAdd = false;
     update();
   }
 
@@ -199,7 +199,8 @@ class ExpensesControllerImp extends ExpensesController {
         expensesList[i].expensesId.toString(),
         expensesList[i].expensesValue.toString(),
         expensesList[i].expensesReason.toString(),
-        expensesList[i].expensesDate.toString(),
+        "${expensesList[i].expensesDate!.hour}:${expensesList[i].expensesDate!.minute}      ${expensesList[i].expensesDate!.year}/${expensesList[i].expensesDate!.month}/${expensesList[i].expensesDate!.day}",
+        expensesList[i].expensesAdminId.toString(),
       ]);
     }
   }
@@ -215,7 +216,7 @@ class ExpensesControllerImp extends ExpensesController {
           "id": expensesModel.expensesId.toString(),
           "reason": reason.text,
           "value": amount.text,
-          "note":note.text,
+          "note": note.text,
           "adminId": "1",
         },
       );
@@ -226,25 +227,23 @@ class ExpensesControllerImp extends ExpensesController {
       } else if (res["status"] == "success") {
         globalAlert("تم تعديل البانات بنجاح", title: "");
         statusRequs = StatusRequst.sucsess;
-        reason.clear();
-        note.clear();
-         handlTable(isdateSearch);
-          } else {
+        clearModel();
+        handlTable(isdateSearch);
+      } else {
         statusRequs = StatusRequst.failure;
       }
       update();
     }
   }
 
-@override
+  @override
   clearModel() {
     reason.clear();
     note.clear();
     amount.clear();
-    canAdd = true ;
+    canAdd = true;
     update();
   }
-
 }
 
 // import 'package:active_system/data/service/remote/expenses_data.dart';

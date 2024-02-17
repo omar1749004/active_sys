@@ -59,29 +59,49 @@ class TreasuryRegisterView extends StatelessWidget {
                             Expanded(
                               flex: 11,
                               child:
-                              controller.statusRequs == StatusRequst.loading ?const CustomLoadingIndecator():
-                               Container(
-                                color: const Color.fromARGB(255, 218, 218, 218),
-                                child: CustomModernTable(
-                                  data: controller.dataInTable,
-                                  widths: const [250, 250, 200, 200, 200, 100],
-                                  header: const [
-                                    "ألاسم",
-                                    "ملاحظات",
-                                    "الرقم المسلسل",
-                                    "الكود",
-                                    "الكود",
-                                    "الكود"
-                                  ],
-                                  nameOfGlobalID: 'treasuryRegister',
-                                  onRowTap: () {}, showDialog: () {  },
-                                ),
-                              ),
+                                  controller.statusRequs == StatusRequst.loading
+                                      ? const CustomLoadingIndecator()
+                                      : Container(
+                                          color: const Color.fromARGB(
+                                              255, 218, 218, 218),
+                                          child: CustomModernTable(
+                                            data: controller.dataInTable,
+                                            widths: const [
+                                              150,
+                                              250,
+                                              200,
+                                              150,
+                                              150,
+                                              150,
+                                              150,
+                                              200,
+                                              150,
+                                              200,
+                                              200
+                                            ],
+                                            header: const [
+                                              "رقم التسلسل",
+                                              "وصف",
+                                              "التاريخ",
+                                              "الوارد",
+                                              "الصادر",
+                                              "المتبقى",
+                                              "النوع",
+                                              "المستخدم",
+                                              "كود المستخدم",
+                                              "مجموع الواردات",
+                                              "مجموع الصادرات",
+                                            ],
+                                            nameOfGlobalID: 'treasuryRegister',
+                                            onRowTap: () {},
+                                            showDialog: () {},
+                                          ),
+                                        ),
                             ),
                             //
                             //data of table
                             //
-                             Expanded(
+                            Expanded(
                               flex: 2,
                               child: Row(
                                 mainAxisAlignment:
@@ -89,8 +109,8 @@ class TreasuryRegisterView extends StatelessWidget {
                                 children: [
                                   Expanded(
                                     child: Padding(
-                                      padding:
-                                         const EdgeInsets.symmetric(horizontal: 5.0),
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 5.0),
                                       child: CustomDisplyMany(
                                           textColor: ColorApp.thirdColor,
                                           many: controller.toralSafe.toString(),
@@ -99,21 +119,23 @@ class TreasuryRegisterView extends StatelessWidget {
                                   ),
                                   Expanded(
                                     child: Padding(
-                                      padding:
-                                        const  EdgeInsets.symmetric(horizontal: 5.0),
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 5.0),
                                       child: CustomDisplyMany(
                                           textColor: ColorApp.thirdColor,
-                                          many: controller.toralOutcoming.toString(),
+                                          many: controller.toralOutcoming
+                                              .toString(),
                                           text: "الصادر"),
                                     ),
                                   ),
                                   Expanded(
                                     child: Padding(
-                                      padding:
-                                        const  EdgeInsets.symmetric(horizontal: 5.0),
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 5.0),
                                       child: CustomDisplyMany(
                                           textColor: ColorApp.thirdColor,
-                                          many: controller.toralIncoming.toString(),
+                                          many: controller.toralIncoming
+                                              .toString(),
                                           text: "الوارد"),
                                     ),
                                   ),

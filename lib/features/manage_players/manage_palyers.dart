@@ -1,13 +1,13 @@
 import 'package:active_system/controller/mange_player.dart';
 import 'package:active_system/core/class/statuscode.dart';
 import 'package:active_system/core/constant/color.dart';
+import 'package:active_system/core/functions/customDialogForManagePlayerView.dart';
 import 'package:active_system/core/shared/ModernTable/custom_modern_table.dart';
 import 'package:active_system/core/shared/custom_app_bar.dart';
 import 'package:active_system/core/shared/custom_table_header.dart';
 import 'package:active_system/core/shared/global_variable.dart';
 import 'package:active_system/core/shared/loading_indecator.dart';
 import 'package:active_system/features/manage_players/widgets/manage_players_form.dart';
-import 'package:active_system/features/manage_players/widgets/search_tools.dart';
 import 'package:active_system/features/manage_subscriptions/view/widgets/custom_button.dart';
 import 'package:active_system/features/manage_subscriptions/view/widgets/custom_menu.dart';
 import 'package:active_system/features/safe/view/widget/custom_display_many.dart';
@@ -81,43 +81,49 @@ class ManagePlayers extends StatelessWidget {
                             Expanded(
                               flex: 8,
                               child:
-                              controller.statusRequs == StatusRequst.loading ?const CustomLoadingIndecator():
-                               Container(
-                                color: const Color.fromARGB(255, 218, 218, 218),
-                                child: CustomModernTable(
-                                  data: controller.dataInTable,
-                                  widths: [250, 250, 200, 200, 200, 100],
-                                  header: [
-                                    "ألاسم",
-                                    "ملاحظات",
-                                    "الرقم المسلسل",
-                                    "الكود",
-                                    "الكود",
-                                    "الكود"
-                                  ],
-                                  nameOfGlobalID: 'managePlayers',
-                                  onRowTap: () {
+                                  controller.statusRequs == StatusRequst.loading
+                                      ? const CustomLoadingIndecator()
+                                      : Container(
+                                          color: const Color.fromARGB(
+                                              255, 218, 218, 218),
+                                          child: CustomModernTable(
+                                            data: controller.dataInTable,
+                                            widths: const [
+                                              150,
+                                              250,
+                                              150,
+                                              200,
+                                              150,
+                                              250
+                                            ],
+                                            header: const [
+                                              "التسلسل",
+                                              "ألاسم",
+                                              "الجنس",
+                                              "تليفون",
+                                              "النوع",
+                                              "ملاحظات"
+                                            ],
+                                            nameOfGlobalID: 'managePlayers',
+                                            onRowTap: () {
                                     controller.assignModel(controller.usersList[GlobalVariable.managePlayers!]);
-                                  },
-                                  showDialog: () {},
-                                ),
-                              ),
+
+                                            },
+                                            showDialog: () {
+                                              customManagePlayerDialog(
+                                                  controller.userModel);
+                                            },
+                                          ),
+                                        ),
                             ),
                             //
-                            //DropDown and checkbox for search
-                            //
-                            const Expanded(flex: 2, child: SearchTools()),
-                            //
-                            //table that contains data
+                            //search tools and Buttons
                             //
                             Expanded(
-                              flex: 1,
-                              child: Padding(
-                                padding: const EdgeInsets.only(bottom: 20.0),
-                                child: Row(
-                                  textDirection: TextDirection.rtl,
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceEvenly,
+                              flex: 3,
+                              child: SingleChildScrollView(
+                                physics:const BouncingScrollPhysics(),
+                                child: Column(
                                   children: [
                                       CustomButton(
                                   text: "أضافه",
@@ -202,7 +208,7 @@ class ManagePlayers extends StatelessWidget {
                         ),
                       ),
                     ),
-
+                    //
                     //form input right screen
                     //
                     Expanded(

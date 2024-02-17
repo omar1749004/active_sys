@@ -3,6 +3,7 @@ import 'package:active_system/data/models/attend_model.dart';
 import 'package:active_system/data/service/remote/attend_data.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
+import 'package:intl/intl.dart';
 
 abstract class AttendController extends GetxController {
   void viewAll();
@@ -25,14 +26,14 @@ class AttendControllerImp extends AttendController {
   List<AttendModel> attendList = [];
   List<List<String>> dataInTable = [];
   @override
-  void onInit() async{
+  void onInit() async {
     searchVal = TextEditingController();
-        firstState = StatusRequst.loading;
-    await  Future.delayed(const Duration(milliseconds: 100));
+    firstState = StatusRequst.loading;
+    await Future.delayed(const Duration(milliseconds: 100));
     firstState = StatusRequst.failure;
-    
+
     dateSearch(startSearch, endSearch);
-    
+
     super.onInit();
   }
 
@@ -106,13 +107,14 @@ class AttendControllerImp extends AttendController {
     dataInTable = [];
     for (var i = 0; i < attendList.length; i++) {
       dataInTable.add([
-        attendList[i].attendanceBarcodeId.toString(),
         attendList[i].attendanceId.toString(),
-        attendList[i].subscriptionsName.toString(),
+        " ${attendList[i].attendanceDay.year}/${attendList[i].attendanceDay.month}/${attendList[i].attendanceDay.day}",
         attendList[i].usersName.toString(),
+        attendList[i].attendanceStart.toString(),
+        attendList[i].attendanceEnd.toString(),
         attendList[i].usersPhone.toString(),
-        attendList[i].attendanceType.toString(),
-        attendList[i].barcode.toString(),
+        attendList[i].usersNote.toString(),
+        attendList[i].attendanceRenewalid.toString(),
       ]);
     }
   }

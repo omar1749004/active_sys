@@ -38,18 +38,18 @@ class SafeControllerImp extends SafeController {
   double outgoing = 0;
 
   @override
-  void onInit() async{
+  void onInit() async {
     reason = TextEditingController();
     amount = TextEditingController();
     adminName = TextEditingController();
     adminName.text = "omar";
     firstState = StatusRequst.loading;
-    await  Future.delayed(const Duration(milliseconds: 100));
+    await Future.delayed(const Duration(milliseconds: 100));
     firstState = StatusRequst.failure;
     dateSearch(startSearch, endSearch);
-    
+
     statusRequs = StatusRequst.loading;
-    await  Future.delayed(const Duration(milliseconds: 300));
+    await Future.delayed(const Duration(milliseconds: 300));
     statusRequs = StatusRequst.failure;
     super.onInit();
   }
@@ -80,7 +80,6 @@ class SafeControllerImp extends SafeController {
         assignDataInsideTable();
         statusRequs = StatusRequst.sucsess;
       } else {
-        
         statusRequs = StatusRequst.failure;
       }
     }
@@ -192,10 +191,11 @@ class SafeControllerImp extends SafeController {
       dataInTable.add([
         safeList[i].safeId.toString(),
         safeList[i].safeDesc.toString(),
-        safeList[i].safeDate.toString(),
+        "${safeList[i].safeDate!.hour}:${safeList[i].safeDate!.minute}      ${safeList[i].safeDate!.year}/${safeList[i].safeDate!.month}/${safeList[i].safeDate!.day}",
         safeList[i].safeIncoming.toString(),
         safeList[i].safeOutgoing.toString(),
         safeList[i].remaining.toString(),
+        safeList[i].safeType.toString(),
         safeList[i].adminSysName.toString(),
       ]);
     }

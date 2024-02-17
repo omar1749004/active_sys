@@ -274,10 +274,12 @@ class MangeSubControllerImp extends MangeSubController {
     for (var i = 0; i < subList.length; i++) {
       dataInTable.add([
         subList[i].subscriptionsId.toString(),
-        subList[i].subscriptionsName,
+        subList[i].subscriptionsName.toString(),
         subList[i].subscriptionsPrice.toString(),
         subList[i].subscriptionsType.toString(),
         subList[i].subscriptionsDay.toString(),
+        subList[i].subscriptionsSessionsNumber.toString(),
+        subList[i].subscriptionsNotes.toString(),
       ]);
     }
   }

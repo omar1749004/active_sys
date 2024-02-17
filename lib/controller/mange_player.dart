@@ -32,7 +32,7 @@ abstract class MangeUsersController extends GetxController {
 
 class MangeUsersControllerImp extends MangeUsersController {
   StatusRequst statusRequs = StatusRequst.non;
- StatusRequst firstState = StatusRequst.non;
+  StatusRequst firstState = StatusRequst.non;
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
   File? file;
 
@@ -83,7 +83,7 @@ class MangeUsersControllerImp extends MangeUsersController {
   String active = "0";
 
   @override
-  void onInit() async{
+  void onInit() async {
     barcodeNum = TextEditingController();
     userName = TextEditingController();
     phone = TextEditingController();
@@ -93,7 +93,7 @@ class MangeUsersControllerImp extends MangeUsersController {
     age = TextEditingController();
     age.text = "0";
     firstState = StatusRequst.loading;
-    await  Future.delayed(const Duration(milliseconds: 100));
+    await Future.delayed(const Duration(milliseconds: 100));
     firstState = StatusRequst.failure;
     getSub();
     getTrainer();
@@ -258,7 +258,7 @@ class MangeUsersControllerImp extends MangeUsersController {
     } else {
       statusRequs = StatusRequst.failure;
     }
-    
+    await Future.delayed(const Duration(milliseconds: 300));
     update();
   }
 
@@ -347,7 +347,6 @@ class MangeUsersControllerImp extends MangeUsersController {
     update();
   }
 
-
   @override
   editPlayers() async {
     if (formKey.currentState!.validate()) {
@@ -380,10 +379,10 @@ class MangeUsersControllerImp extends MangeUsersController {
       }else if (res["msg"] == "barcode not change"){
          globalAlert("يرجى إعادة المحاولة في وقت لاحق", title: "!خطأ");
       }
-  
+
       update();
     }
-}
+  }
 
   //function to assign data inside List
   void assignDataInsideTable() {
@@ -395,6 +394,10 @@ class MangeUsersControllerImp extends MangeUsersController {
         usersList[i].usersName.toString(),
         usersList[i].usersId.toString(),
         usersList[i].usersName.toString(),
+        usersList[i].usersGender.toString(),
+        usersList[i].usersPhone.toString(),
+        usersList[i].usersType.toString(),
+        usersList[i].usersNote.toString(),
       ]);
     }
   }

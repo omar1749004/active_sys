@@ -128,27 +128,42 @@ class RenewSybscriptionsView extends StatelessWidget {
                           Expanded(
                             flex: 6,
                             child:
-                            controller.statusRequs == StatusRequst.loading ? const CustomLoadingIndecator():
-                             Container(
-                              color:const Color.fromARGB(255, 218, 218, 218),
-                              child: CustomModernTable(
-                                data: controller.dataInTable,
-                                widths: const [100, 250, 150, 250, 100, 250],
-                                header: const [
-                                  "رقم الاشتراك",
-                                  "التاريخ",
-                                  "كود الاعب",
-                                  "الاسم",
-                                  "رقم تسلسل اللاعب",
-                                  "تاريخ التجديد"
-                                ],
-                                nameOfGlobalID: 'renewSubscription',
-                                onRowTap: () {
-                                  controller.assignModel(controller.renewList[GlobalVariable.renewSubscription!]);
-                                },
-                                showDialog: () {},
-                              ),
-                            ),
+                                controller.statusRequs == StatusRequst.loading
+                                    ? const CustomLoadingIndecator()
+                                    : Container(
+                                        color: const Color.fromARGB(
+                                            255, 218, 218, 218),
+                                        child: CustomModernTable(
+                                          data: controller.dataInTable,
+                                          widths: const [
+                                            150,
+                                            250,
+                                            150,
+                                            250,
+                                            200,
+                                            200,
+                                            150,
+                                            250,
+                                            150
+                                          ],
+                                          header: const [
+                                            "رقم الاشتراك",
+                                            "التاريخ",
+                                            "كود الاعب",
+                                            "الاسم",
+                                            "تاريخ البدايه",
+                                            "تاريخ النهاية",
+                                            "عدد الجلسات",
+                                            "ملاحظات",
+                                            "كود التجديد",
+                                          ],
+                                          nameOfGlobalID: 'renewSubscription',
+                                          onRowTap: () {
+                                            controller.assignModel(controller.renewList[GlobalVariable.renewSubscription!]);
+                                          },
+                                          showDialog: () {},
+                                        ),
+                                      ),
                           ),
 
                           //

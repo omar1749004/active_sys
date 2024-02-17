@@ -58,39 +58,39 @@ class HomePage extends StatelessWidget {
                                       header: "سجل الحضور اليومي"),
                                   Expanded(
                                     flex: 6,
-                                    child:
-                                    controller.statusRequs == StatusRequst.loading ?const CustomLoadingIndecator():
-                                     Container(
-                                      color: const Color.fromARGB(
-                                          255, 218, 218, 218),
-                                      child: CustomModernTable(
-                                        data: controller.dataInTable,
-                                        widths: const [
-                                          250,
-                                          250,
-                                          200,
-                                          200,
-                                          200,
-                                          100
-                                        ],
-                                        header: const [
-                                          "ألاسم",
-                                          "ملاحظات",
-                                          "الرقم المسلسل",
-                                          "الكود",
-                                          "الكود",
-                                          "الكود",
-                                        ],
-                                        nameOfGlobalID: 'home',
-                                        onRowTap: () {},
-                                        //spicial for Homepage only
-                                        thisPageIsHomePage: true,
-                                        showDialog: () {
-                                          //pass to function model that will get when pressed on user in the table
-                                          customDialog(controller.attendmodel);
-                                        },
-                                      ),
-                                    ),
+                                    child: controller.statusRequs ==
+                                            StatusRequst.loading
+                                        ? const CustomLoadingIndecator()
+                                        : Container(
+                                            color: const Color.fromARGB(
+                                                255, 218, 218, 218),
+                                            child: CustomModernTable(
+                                              data: controller.dataInTable,
+                                              widths: const [
+                                                150,
+                                                200,
+                                                200,
+                                                250,
+                                                250,
+                                              ],
+                                              header: const [
+                                                "الكود",
+                                                "وقت الحضور",
+                                                "وقت الانصراف",
+                                                "ألاسم",
+                                                "أسم الاشتراك",
+                                              ],
+                                              nameOfGlobalID: 'home',
+                                              onRowTap: () {},
+                                              //spicial for Homepage only
+                                              thisPageIsHomePage: true,
+                                              showDialog: () {
+                                                //pass to function model that will get when pressed on user in the table
+                                                customHomePageDialog(
+                                                    controller.attendmodel);
+                                              },
+                                            ),
+                                          ),
                                   ),
                                   Expanded(
                                     flex: 1,

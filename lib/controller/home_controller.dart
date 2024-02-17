@@ -7,6 +7,7 @@ import 'package:active_system/data/service/remote/sub_data.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:qrcode_barcode_scanner/qrcode_barcode_scanner.dart';
 
 abstract class HomeController extends GetxController {
   void addSession();
@@ -355,10 +356,16 @@ class HomeControllerImp extends HomeController {
 
   @override
   void handlebarcode() {
-    double? mid = double.tryParse(barcode.text);
-    if (mid == null) {
-      barcode.text = "";
-    }
+    // double? mid = double.tryParse(barcode.text);
+    // if (mid == null) {
+    //   barcode.text = "";
+    // }
+
+    QrcodeBarcodeScanner(
+      onScannedCallback: (String value) {
+        barcode.text = value;
+      },
+    );
   }
 
   @override
@@ -442,11 +449,10 @@ class HomeControllerImp extends HomeController {
     for (var i = 0; i < attendList.length; i++) {
       dataInTable.add([
         attendList[i].attendanceId.toString(),
-        attendList[i].attendanceBarcodeId.toString(),
-        attendList[i].barcode.toString(),
-        attendList[i].usersName.toString(),
         attendList[i].attendanceStart.toString(),
-        attendList[i].barcode.toString(),
+        attendList[i].attendanceEnd.toString(),
+        attendList[i].usersName.toString(),
+        attendList[i].subscriptionsName.toString(),
         attendList[i].isOwed.toString(),
         attendList[i].isClose.toString(),
       ]);

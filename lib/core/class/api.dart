@@ -9,13 +9,10 @@ String _basicAuth = 'Basic ' + base64Encode(utf8.encode('omar:omar194004'));
 Map<String, String> myheaders = {'authorization': _basicAuth};
 
 class Api {
-
-  Future<dynamic> get({required String url , String? token}) async {
-    
-     Map<String, String> headers = {};
-           if (token != null) {
-         headers.addAll(
-
+  Future<dynamic> get({required String url, String? token}) async {
+    Map<String, String> headers = {};
+    if (token != null) {
+      headers.addAll(
         {"Authorization": "Bearer $token"},
       );
     }
@@ -44,19 +41,14 @@ class Api {
       );
     }
 
-    
-     try {
-  http.Response response =
-     await http.post(Uri.parse(uri), body: body ,headers: headers);  //myheaders
-     
-     if(response.statusCode == 200 || response.statusCode == 201){
+    try {
+      http.Response response = await http.post(Uri.parse(uri),
+          body: body, headers: headers); //myheaders
 
-    Map data =jsonDecode(response.body);
-    return data;
-     }
-     else{
-      
-
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        Map data = jsonDecode(response.body);
+        return data;
+      } else {
         throw Exception(
             "there id problem with status code${response.statusCode} with body${jsonDecode(response.body)}");
       }
@@ -85,12 +77,12 @@ class Api {
 
       if (response.statusCode == 200 || response.statusCode == 201) {
         if (response.headers['content-type'] == 'application/pdf') {
-        // If content type is PDF, return the response body directly
-        return response.body;
-      } else {
-        // If content type is JSON, parse and return JSON data
-        return jsonDecode(response.body);
-      }
+          // If content type is PDF, return the response body directly
+          return response.body;
+        } else {
+          // If content type is JSON, parse and return JSON data
+          return jsonDecode(response.body);
+        }
       } else {
         throw Exception(
             "there id problem with status code ${response.statusCode} with body ${jsonDecode(response.body)}");
@@ -99,7 +91,7 @@ class Api {
       print(e);
     }
   }
-  
+
   Future<dynamic> postFile(
       {required String uri, required Map body, required File file}) async {
     var request = http.MultipartRequest("POST", Uri.parse(uri));

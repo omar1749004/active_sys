@@ -221,6 +221,7 @@ class AdminControllerImp extends AdminController {
     } else if (res["status"] == "success") {
       adminmodelList.removeWhere(
           (element) => element.adminSysId == adminmModel.adminSysId);
+      assignDataInsideTable();
       statusRequs = StatusRequst.sucsess;
     } else {
       statusRequs = StatusRequst.failure;
@@ -268,14 +269,12 @@ class AdminControllerImp extends AdminController {
       dataInTable.add([
         adminmodelList[i].adminSysId.toString(),
         adminmodelList[i].adminSysName.toString(),
-        adminmodelList[i].adminSysNote.toString(),
-        adminmodelList[i].adminSysPassword.toString(),
-        adminmodelList[i].adminSysNote.toString(),
         adminmodelList[i].adminSysType.toString(),
+        adminmodelList[i].adminSysNote.toString(),
       ]);
     }
   }
-
+  
   @override
   void checkSearch(String val) {
     if (val.isEmpty) {
@@ -316,6 +315,7 @@ class AdminControllerImp extends AdminController {
 
     update();
   }
+
 }
 
 // var res = await AdminData().add(

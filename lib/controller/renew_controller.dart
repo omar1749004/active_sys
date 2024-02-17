@@ -1,4 +1,3 @@
-
 import 'package:active_system/core/class/statuscode.dart';
 import 'package:active_system/core/constant/app_route.dart';
 import 'package:active_system/core/functions/global_alert.dart';
@@ -31,7 +30,7 @@ abstract class RenewController extends GetxController {
 
 class RenewControllerImp extends RenewController {
   StatusRequst statusRequs = StatusRequst.non;
-    StatusRequst firstState = StatusRequst.non;
+  StatusRequst firstState = StatusRequst.non;
 
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
@@ -77,7 +76,7 @@ class RenewControllerImp extends RenewController {
   DateTime start = DateTime.now();
 
   @override
-  void onInit() async{
+  void onInit() async {
     barcodeNum = TextEditingController();
     userName = TextEditingController();
     phone = TextEditingController();
@@ -99,16 +98,15 @@ class RenewControllerImp extends RenewController {
     remining.text = "0";
     notknow.text = "0";
     firstState = StatusRequst.loading;
-    await  Future.delayed(const Duration(milliseconds: 100));
+    await Future.delayed(const Duration(milliseconds: 100));
     firstState = StatusRequst.failure;
     getSub();
     getTrainer();
     handlTable(isdateSearch);
     statusRequs = StatusRequst.loading;
-    await  Future.delayed(const Duration(milliseconds: 300));
+    await Future.delayed(const Duration(milliseconds: 300));
     statusRequs = StatusRequst.failure;
     update();
-    
 
     super.onInit();
   }
@@ -412,11 +410,14 @@ class RenewControllerImp extends RenewController {
     for (var i = 0; i < renewList.length; i++) {
       dataInTable.add([
         renewList[i].renewalId.toString(),
-        renewList[i].usersCreate.toString(),
-        renewList[i].barcode.toString(),
-        renewList[i].usersName.toString(),
+        "${renewList[i].renewalCreate!.year}/${renewList[i].renewalCreate!.month}/${renewList[i].renewalCreate!.day}",
         renewList[i].usersId.toString(),
-        renewList[i].renewalCreate.toString(),
+        renewList[i].usersName.toString(),
+        "${renewList[i].renewalStart!.year}/${renewList[i].renewalStart!.month}/${renewList[i].renewalStart!.day}",
+        "${renewList[i].renewalEnd!.year}/${renewList[i].renewalEnd!.month}/${renewList[i].renewalEnd!.day}",
+        renewList[i].renewalSessionAttend.toString(),
+        renewList[i].renewalNote.toString(),
+        renewList[i].renewalId.toString(),
       ]);
     }
   }

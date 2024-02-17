@@ -50,36 +50,34 @@ class UsersView extends StatelessWidget {
                                 header: "اداره المستخدمين"),
                             Expanded(
                                 flex: 6,
-                                child:
-                                controller.statusRequs == StatusRequst.loading? const CustomLoadingIndecator():
-                                 Container(
-                                  color:const Color.fromARGB(255, 218, 218, 218),
-                                  child: CustomModernTable(
-                                    data: controller.dataInTable,
-                                    widths: const [
-                                      250,
-                                      250,
-                                      200,
-                                      200,
-                                      200,
-                                      100
-                                    ],
-                                    header: const [
-                                      "ألاسم",
-                                      "ملاحظات",
-                                      "الرقم المسلسل",
-                                      "الكود",
-                                      "الكود",
-                                      "الكود"
-                                    ],
-                                    nameOfGlobalID: 'users',
-                                    onRowTap: () {
-                                      
+                                child: controller.statusRequs ==
+                                        StatusRequst.loading
+                                    ? const CustomLoadingIndecator()
+                                    : Container(
+                                        color: const Color.fromARGB(
+                                            255, 218, 218, 218),
+                                        child: CustomModernTable(
+                                          data: controller.dataInTable,
+                                          widths: const [
+                                            150,
+                                            250,
+                                            250,
+                                            300,
+                                          ],
+                                          header: const [
+                                            "الكود",
+                                            "ألاسم",
+                                            "النوع",
+                                            "ملاحظات",
+                                          ],
+                                          nameOfGlobalID: 'users',
+                                          onRowTap: () {
                                       controller.assignModel(controller.adminmodelList[GlobalVariable.users!], GlobalVariable.users!) ;
-                                    },
-                                    showDialog: () {},
-                                  ),
-                                )),
+
+                                          },
+                                          showDialog: () {},
+                                        ),
+                                      )),
                             //buttons
                             Expanded(
                               flex: 1,
