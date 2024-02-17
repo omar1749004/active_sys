@@ -50,7 +50,7 @@ class MangeSubControllerImp extends MangeSubController {
   late TextEditingController search;
 
   @override
-  void onInit() async{
+  void onInit() async {
     name = TextEditingController();
     specialization = TextEditingController();
     price = TextEditingController();
@@ -81,11 +81,11 @@ class MangeSubControllerImp extends MangeSubController {
     allowedNumber.text = "0";
     notes.text = "0";
     firstState = StatusRequst.loading;
-    await  Future.delayed(const Duration(milliseconds: 100));
+    await Future.delayed(const Duration(milliseconds: 100));
     firstState = StatusRequst.failure;
     update();
     viewAll();
-    
+
     super.onInit();
   }
 
@@ -160,7 +160,7 @@ class MangeSubControllerImp extends MangeSubController {
     } else {
       statusRequs = StatusRequst.failure;
     }
-    await  Future.delayed(const Duration(milliseconds: 300));
+    await Future.delayed(const Duration(milliseconds: 300));
     update();
   }
 
@@ -277,16 +277,18 @@ class MangeSubControllerImp extends MangeSubController {
     for (var i = 0; i < subList.length; i++) {
       dataInTable.add([
         subList[i].subscriptionsId.toString(),
-        subList[i].subscriptionsName,
+        subList[i].subscriptionsName.toString(),
         subList[i].subscriptionsPrice.toString(),
         subList[i].subscriptionsType.toString(),
         subList[i].subscriptionsDay.toString(),
+        subList[i].subscriptionsSessionsNumber.toString(),
+        subList[i].subscriptionsNotes.toString(),
       ]);
     }
   }
 
   @override
- void editSub() async {
+  void editSub() async {
     statusRequs = StatusRequst.loading;
     update();
     if (formKey.currentState!.validate()) {

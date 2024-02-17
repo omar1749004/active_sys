@@ -1,8 +1,8 @@
 //server name
-const String linkServerName = "http://localhost/activegym_app/system";
+//const String linkServerName = "http://localhost/activegym_app/system";
 //const String linkServerName = "http://10.0.2.2/activegym_app/system";
-// const String linkServerName =
-//     "https://65ce-197-53-111-209.ngrok-free.app/activegym_app/system";
+const String linkServerName =
+    "https://f539-197-54-144-40.ngrok-free.app/activegym_app/system";
 
 //admin system
 const String linkAdminAdd = "$linkServerName/adminSys/add.php";

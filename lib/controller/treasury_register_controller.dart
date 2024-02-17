@@ -28,12 +28,12 @@ class TreasuryRegisterControllerImp extends TreasuryRegisterController {
   double toralOutcoming = 0;
 
   @override
-  void onInit()async {
+  void onInit() async {
     reason = TextEditingController();
-   firstState = StatusRequst.loading;
-    await  Future.delayed(const Duration(milliseconds: 100));
+    firstState = StatusRequst.loading;
+    await Future.delayed(const Duration(milliseconds: 100));
     firstState = StatusRequst.failure;
-   dateSearch(startSearch,endSearch);
+    dateSearch(startSearch, endSearch);
     super.onInit();
   }
 
@@ -63,7 +63,7 @@ class TreasuryRegisterControllerImp extends TreasuryRegisterController {
     } else {
       statusRequs = StatusRequst.failure;
     }
-    await  Future.delayed(const Duration(milliseconds: 300));
+    await Future.delayed(const Duration(milliseconds: 300));
     update();
   }
 
@@ -117,12 +117,17 @@ class TreasuryRegisterControllerImp extends TreasuryRegisterController {
     dataInTable = [];
     for (var i = 0; i < safeList.length; i++) {
       dataInTable.add([
-        safeList[i].remaining.toString(),
-        safeList[i].safeDate.toString(),
         safeList[i].safeId.toString(),
-        safeList[i].safeOutgoing.toString(),
+        safeList[i].safeDesc.toString(),
+        "${safeList[i].safeDate!.hour}:${safeList[i].safeDate!.minute}     ${safeList[i].safeDate!.year}/${safeList[i].safeDate!.month}/${safeList[i].safeDate!.day}",
         safeList[i].safeIncoming.toString(),
+        safeList[i].safeOutgoing.toString(),
+        safeList[i].remaining.toString(),
+        safeList[i].safeType.toString(),
+        safeList[i].adminSysName.toString(),
+        safeList[i].safeAdminId.toString(),
         safeList[i].totalIncoming.toString(),
+        safeList[i].totalOutgoing.toString(),
       ]);
     }
   }

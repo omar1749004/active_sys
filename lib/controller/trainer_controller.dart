@@ -38,7 +38,7 @@ class TrainersControllerImp extends TrainersController {
   late TextEditingController search;
 
   @override
-  void onInit() async{
+  void onInit() async {
     name = TextEditingController();
     phone = TextEditingController();
     phone1 = TextEditingController();
@@ -47,7 +47,7 @@ class TrainersControllerImp extends TrainersController {
     note = TextEditingController();
     search = TextEditingController();
     firstState = StatusRequst.loading;
-    await  Future.delayed(const Duration(milliseconds: 100));
+    await Future.delayed(const Duration(milliseconds: 100));
     firstState = StatusRequst.failure;
     viewAll();
     super.onInit();
@@ -73,7 +73,7 @@ class TrainersControllerImp extends TrainersController {
     } else {
       statusRequs = StatusRequst.failure;
     }
-    await  Future.delayed(const Duration(milliseconds: 300));
+    await Future.delayed(const Duration(milliseconds: 300));
     update();
   }
 
@@ -104,7 +104,7 @@ class TrainersControllerImp extends TrainersController {
         globalAlert("يرجى إعادة المحاولة في وقت لاحق", title: "!خطأ");
         statusRequs = StatusRequst.failure;
       } else if (res["status"] == "success") {
-                name.clear();
+        name.clear();
         phone.clear();
         phone1.clear();
         phone2.clear();
@@ -151,19 +151,19 @@ class TrainersControllerImp extends TrainersController {
   void assignModel(UserModel privetModel) {
     address.text = privetModel.usersAddress ?? "";
 
-    name.text = privetModel.usersName ?? "" ;
-    note.text = privetModel.usersNote?? "" ;
-    userModel = privetModel ;
-    List<String>  mid =  phoneMap[privetModel.usersId]! ;
-    if(mid.length == 3){
-    phone.text = mid[0]  ;
-    phone1.text =  mid[1] ;
-    phone2.text =  mid[2] ;
-    }else if(mid.length == 2){
-     phone.text = mid[0]  ;
-    phone1.text =  mid[1] ;
-    }else{
-      phone.text = mid[0]  ;
+    name.text = privetModel.usersName ?? "";
+    note.text = privetModel.usersNote ?? "";
+    userModel = privetModel;
+    List<String> mid = phoneMap[privetModel.usersId]!;
+    if (mid.length == 3) {
+      phone.text = mid[0];
+      phone1.text = mid[1];
+      phone2.text = mid[2];
+    } else if (mid.length == 2) {
+      phone.text = mid[0];
+      phone1.text = mid[1];
+    } else {
+      phone.text = mid[0];
     }
   }
 
@@ -191,28 +191,26 @@ class TrainersControllerImp extends TrainersController {
     dataInTable = [];
     for (var i = 0; i < usersList.length; i++) {
       dataInTable.add([
-        usersList[i].usersAddress.toString(),
-        usersList[i].usersCreate.toString(),
-        usersList[i].usersId.toString(),
+        usersList[i].usersCaptiantId.toString(),
         usersList[i].usersName.toString(),
-        usersList[i].usersId.toString(),
-        usersList[i].usersGender.toString(),
+        usersList[i].usersPhone.toString(),
+        usersList[i].usersAddress.toString(),
+        usersList[i].usersNote.toString(),
       ]);
     }
   }
 
-@override
- void editTrainer() async {
+  @override
+  void editTrainer() async {
     statusRequs = StatusRequst.loading;
     update();
     if (formKey.currentState!.validate()) {
-
       var res = await TrainerData().add(
         {
-          "id" : userModel.usersId.toString(),
+          "id": userModel.usersId.toString(),
           "name": name.text,
-         "phone": phone.text,
-         "adress": address.text,
+          "phone": phone.text,
+          "adress": address.text,
           "note": note.text,
           "phone1": phone1.text,
           "phone2": phone2.text,

@@ -40,14 +40,14 @@ class AdminControllerImp extends AdminController {
   Map<int, List<int>> powersMap = {};
   GlobalKey<FormState> formAdminKey = GlobalKey<FormState>();
   @override
-  void onInit() async{
+  void onInit() async {
     search = TextEditingController();
     name = TextEditingController();
     note = TextEditingController();
     pass = TextEditingController();
     repass = TextEditingController();
     firstState = StatusRequst.loading;
-    await  Future.delayed(const Duration(milliseconds: 100));
+    await Future.delayed(const Duration(milliseconds: 100));
     firstState = StatusRequst.failure;
     getPowers();
     super.onInit();
@@ -78,11 +78,13 @@ class AdminControllerImp extends AdminController {
       data = res["powers"];
       adminPoewrList.addAll(data.map((e) => AdminPower.fromJson(e)));
       organizePowers();
+
+      assignDataInsideTable();
       statusRequs = StatusRequst.sucsess;
     } else {
       statusRequs = StatusRequst.failure;
     }
-    await  Future.delayed(const Duration(milliseconds: 300));
+    await Future.delayed(const Duration(milliseconds: 300));
     update();
   }
 
@@ -142,7 +144,6 @@ class AdminControllerImp extends AdminController {
     if (formAdminKey.currentState!.validate()) {
       if (pass.text != repass.text) {
         globalAlert("كلمة المرور التي أدخلتها غير ", title: "عذرًا");
-
       } else {
         statusRequs = StatusRequst.loading;
         update();
@@ -160,11 +161,11 @@ class AdminControllerImp extends AdminController {
           globalAlert("يرجى إعادة المحاولة في وقت لاحق", title: "!خطأ");
           statusRequs = StatusRequst.failure;
         } else if (res["status"] == "success") {
-          search.clear() ;
-          name.clear() ;
-          note.clear() ;
-          pass.clear() ;
-          repass.clear() ;
+          search.clear();
+          name.clear();
+          note.clear();
+          pass.clear();
+          repass.clear();
           getPowers();
           statusRequs = StatusRequst.sucsess;
         } else {
@@ -192,7 +193,7 @@ class AdminControllerImp extends AdminController {
       update();
     }
   }
-  
+
   @override
   void deleteAdmin() async {
     var res = await AdminData().delete({
@@ -205,6 +206,7 @@ class AdminControllerImp extends AdminController {
     } else if (res["status"] == "success") {
       adminmodelList.removeWhere(
           (element) => element.adminSysId == adminmModel.adminSysId);
+      assignDataInsideTable();
       statusRequs = StatusRequst.sucsess;
     } else {
       statusRequs = StatusRequst.failure;
@@ -233,16 +235,16 @@ class AdminControllerImp extends AdminController {
       } else if (res["status"] == "success") {
         globalAlert("تم تعديل البانات بنجاح", title: "");
         statusRequs = StatusRequst.sucsess;
-          name.clear() ;
-          note.clear() ;
-          pass.clear() ;
-          repass.clear() ;
-          getPowers();
+        name.clear();
+        note.clear();
+        pass.clear();
+        repass.clear();
+        getPowers();
       } else {
         statusRequs = StatusRequst.failure;
       }
       update();
-  }
+    }
   }
 
   //function to assign data inside List
@@ -252,14 +254,11 @@ class AdminControllerImp extends AdminController {
       dataInTable.add([
         adminmodelList[i].adminSysId.toString(),
         adminmodelList[i].adminSysName.toString(),
-        adminmodelList[i].adminSysNote.toString(),
-        adminmodelList[i].adminSysPassword.toString(),
-        adminmodelList[i].adminSysNote.toString(),
         adminmodelList[i].adminSysType.toString(),
+        adminmodelList[i].adminSysNote.toString(),
       ]);
     }
   }
-    
 }
 
 // var res = await AdminData().add(
