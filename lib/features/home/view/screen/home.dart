@@ -9,6 +9,7 @@ import 'package:active_system/core/shared/global_variable.dart';
 import 'package:active_system/core/shared/loading_indecator.dart';
 import 'package:active_system/features/home/data/service/static/note_knoladge.dart';
 import 'package:active_system/features/home/view/widget/client_info.dart';
+import 'package:active_system/features/manage_subscriptions/view/widgets/custom_button.dart';
 import 'package:active_system/features/manage_subscriptions/view/widgets/custom_menu.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -117,9 +118,17 @@ class HomePage extends StatelessWidget {
                                                 keyy[index],
                                                 style: Styles.style15B,
                                               ),
+                                          
                                             ],
                                           ),
                                         ),
+                                      const  SizedBox(width: 10,),
+                                            CustomButton(
+                                      text: "حذف",
+                                      ontap: () {
+                                        controller.deleteTransAction();
+                                      },
+                                    ),
                                       ],
                                     ),
                                   ),

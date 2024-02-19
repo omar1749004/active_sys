@@ -15,6 +15,7 @@ abstract class ExpensesController extends GetxController {
   void assignModel(ExpensesModel privetModel);
   void editTransAction();
   void clearModel();
+   void deleteTransAction() ;
 }
 
 class ExpensesControllerImp extends ExpensesController {
@@ -153,6 +154,7 @@ class ExpensesControllerImp extends ExpensesController {
   void checkSearch(String val) {
     if (val.isEmpty) {
       statusRequs = StatusRequst.non;
+      handlTable(isdateSearch);
     } else {
       _search();
     }
@@ -162,16 +164,21 @@ class ExpensesControllerImp extends ExpensesController {
   void _search() async {
     statusRequs = StatusRequst.loading;
     update();
-    var res = await ExpensesData().search({"search": search.text});
+    var res = await ExpensesData().search({
+      "search": search.text,
+      "start_date": startSearch.toString().substring(0, 11),
+      "end_date": endSearch.toString().substring(0, 11),
+      });
     if (res["status"] == "failure") {
       expensesList = [];
       assignDataInsideTable();
+      totalExpenses = 0;
       statusRequs = StatusRequst.failure;
     } else if (res["status"] == "success") {
       List data = res["data"];
       expensesList = [];
       expensesList.addAll(data.map((e) => ExpensesModel.fromJson(e)));
-
+      totalExpenses = double.tryParse(res["moreInfo"][0]["totalExpenses"]);
       assignDataInsideTable();
 
       statusRequs = StatusRequst.sucsess;
@@ -242,6 +249,26 @@ class ExpensesControllerImp extends ExpensesController {
     note.clear();
     amount.clear();
     canAdd = true;
+    update();
+  }
+
+  @override
+  void deleteTransAction() async {
+    var res = await ExpensesData().delete({
+      "id": expensesModel.expensesId.toString(),
+    });
+
+    if (res["status"] == "failure") {
+      globalAlert("يرجى إعادة المحاولة في وقت لاحق", title: "!خطأ");
+      statusRequs = StatusRequst.failure;
+    } else if (res["status"] == "success") {
+      expensesList.removeWhere(
+          (element) => element.expensesId == expensesModel.expensesId);
+          assignDataInsideTable();
+      statusRequs = StatusRequst.sucsess;
+    } else {
+      statusRequs = StatusRequst.failure;
+    }
     update();
   }
 }

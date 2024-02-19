@@ -1,12 +1,10 @@
 import 'package:active_system/controller/mange_player.dart';
-import 'package:active_system/core/constant/color.dart';
 import 'package:active_system/core/constant/styles%20copy.dart';
 import 'package:active_system/core/functions/validate_input.dart';
 import 'package:active_system/core/shared/custom_date_field.dart';
 import 'package:active_system/core/shared/custom_dropdown_menu.dart';
 import 'package:active_system/core/shared/custome_textform_auth.dart';
 import 'package:active_system/features/safe/view/widget/custom_checkbox.dart';
-import 'package:active_system/features/safe/view/widget/custom_display_many.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -28,13 +26,13 @@ class ManagePlayersForm extends GetView<MangeUsersControllerImp> {
                 textAlign: TextAlign.center,
                 style: Styles.style25,
               ),
-              const SizedBox(
-                height: 10,
-              ),
-              const CustomDisplyMany(
-                  textColor: ColorApp.thirdColor,
-                  many: "1000",
-                  text: "رقم العضوية"),
+              // const SizedBox(
+              //   height: 10,
+              // ),
+              // const CustomDisplyMany(
+              //     textColor: ColorApp.thirdColor,
+              //     many: "1000",
+              //     text: "رقم العضوية"),
               const SizedBox(
                 height: 20,
               ),
@@ -128,9 +126,7 @@ class ManagePlayersForm extends GetView<MangeUsersControllerImp> {
                     child:
                         CustomCheckBox(ischeck: controller.isactiveSub, text: "تفعيل الاشتراك",
                         onTap: () {
-                          if(controller.canAdd){
                              controller.changeActiveSub(controller.isactiveSub) ;
-                          }
                         },
                         color: Colors.red,
                         ),

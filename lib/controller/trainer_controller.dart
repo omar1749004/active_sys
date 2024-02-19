@@ -84,13 +84,15 @@ class TrainersControllerImp extends TrainersController {
   @override
   void organizePhone() {
     for (var phoneUsers in phonesList) {
-      phoneMap[phoneUsers.userid] ??= [];
-      phoneMap[phoneUsers.userid]!.add(phoneUsers.phone);
+      phoneMap[phoneUsers.userid!] ??= [];
+      phoneMap[phoneUsers.userid]!.add(phoneUsers.phone!);
     }
   }
 
   @override
   void addTrainer() async {
+
+    
     if (formKey.currentState!.validate()) {
       statusRequs = StatusRequst.loading;
       update();
@@ -108,12 +110,7 @@ class TrainersControllerImp extends TrainersController {
         globalAlert("يرجى إعادة المحاولة في وقت لاحق", title: "!خطأ");
         statusRequs = StatusRequst.failure;
       } else if (res["status"] == "success") {
-        name.clear();
-        phone.clear();
-        phone1.clear();
-        phone2.clear();
-        address.clear();
-        note.clear();
+        cleaModel();
         statusRequs = StatusRequst.sucsess;
       } else {
         statusRequs = StatusRequst.failure;
@@ -158,7 +155,7 @@ class TrainersControllerImp extends TrainersController {
     name.text = privetModel.usersName ?? "";
     note.text = privetModel.usersNote ?? "";
     userModel = privetModel;
-    List<String> mid = phoneMap[privetModel.usersId]!;
+   List<String>  mid = phoneMap[privetModel.usersId]!;
     if (mid.length == 3) {
       phone.text = mid[0];
       phone1.text = mid[1];
@@ -227,12 +224,7 @@ class TrainersControllerImp extends TrainersController {
         statusRequs = StatusRequst.failure;
       } else if (res["status"] == "success") {
         globalAlert("تم تعديل البانات بنجاح", title: "");
-        name.clear();
-        phone.clear();
-        phone1.clear();
-        phone2.clear();
-        address.clear();
-        note.clear();
+        cleaModel();
         statusRequs = StatusRequst.sucsess;
       } else {
         statusRequs = StatusRequst.failure;

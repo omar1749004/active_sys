@@ -1,5 +1,4 @@
 import 'package:active_system/core/constant/color.dart';
-import 'package:active_system/data/models/attend_model.dart';
 import 'package:active_system/data/models/user_model.dart';
 import 'package:active_system/features/safe/view/widget/custom_display_many.dart';
 import 'package:flutter/material.dart';
@@ -78,7 +77,7 @@ Future<dynamic> customManagePlayerDialog(UserModel userModel) {
                 width: 500,
                 child: CustomDisplyMany(
                   textColor: ColorApp.thirdColor,
-                  many: userModel.usersCreate.toString(),
+                  many: userModel.usersCreate.toString().substring(0,11),
                   text: "تاريخ الانشاء",
                   flexOfMany: 2,
                 ),

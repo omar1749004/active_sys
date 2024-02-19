@@ -7,6 +7,7 @@ import 'package:active_system/core/shared/custome_textform_auth.dart';
 import 'package:active_system/features/home/data/service/static/sup_type.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:qrcode_barcode_scanner/qrcode_barcode_scanner.dart';
 
 class ClinetInfo extends StatelessWidget {
   const ClinetInfo({super.key});
@@ -112,9 +113,16 @@ class ClinetInfo extends StatelessWidget {
                                   hintText: "",
                                   lableText: "الكود",
                                   myController: controller.barcode,
-                                  onTapOnTextField: () {
+                                  onChanged: (p0) {
                                     controller.handlebarcode();
-                                    print("aaaaaaaa${controller.barcode.text}");
+                                  },
+                                  onTapOnTextField: () {
+                                    // QrcodeBarcodeScanner(
+                                    //   onScannedCallback: (String value) {
+                                    //     controller.barcode.text = value;
+                                    //   },
+                                    // );
+                                     print("aaaaaaaa${controller.barcode.text}");
                                   },
                                 ),
                               ),
@@ -181,7 +189,9 @@ class ClinetInfo extends StatelessWidget {
                     items: controller.subNameList,
                     label: "اشتراك",
                     intialValue: controller.subValue,
-                    onChanged: (val) {},
+                    onChanged: (val) {
+                      controller.changemodel(val!);
+                    },
                   ),
                 ],
               ),

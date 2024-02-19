@@ -72,8 +72,8 @@ class UserModel {
 
 
 class TrainerNumberModel {
-  final int userid;
-  final String phone;
+  final int ?userid;
+  final String? phone;
 
   TrainerNumberModel({required this.userid, required this.phone});
 

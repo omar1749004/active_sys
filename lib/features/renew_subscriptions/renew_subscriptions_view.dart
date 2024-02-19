@@ -159,6 +159,7 @@ class RenewSybscriptionsView extends StatelessWidget {
                                           ],
                                           nameOfGlobalID: 'renewSubscription',
                                           onRowTap: () {
+                                          
                                             controller.assignModel(controller.renewList[GlobalVariable.renewSubscription!]);
                                           },
                                           showDialog: () {},
