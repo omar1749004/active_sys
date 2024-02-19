@@ -1,4 +1,3 @@
-
 import 'dart:io';
 
 import 'package:active_system/core/class/statuscode.dart';
@@ -58,7 +57,7 @@ class MangeUsersControllerImp extends MangeUsersController {
   late UserModel trainerModel;
 
   DateTime startSearch = DateTime.now();
-  bool canAdd = true ;
+  bool canAdd = true;
   String borrowed = "0";
   String activeSearch = "0";
   String expire = "0";
@@ -115,7 +114,6 @@ class MangeUsersControllerImp extends MangeUsersController {
       _subList.addAll(data.map((e) => SubscriptionModel.fromJson(e)));
       subNameList.addAll(_subList.map((e) => e.subscriptionsName));
       subNameSearchList.addAll(_subList.map((e) => e.subscriptionsName));
-     
       subValue = subNameList[0];
       subscriptionModel = _subList[0];
       price.text = subscriptionModel.subscriptionsPrice.toString();
@@ -162,13 +160,13 @@ class MangeUsersControllerImp extends MangeUsersController {
   void changeSearchmodel(String subName) {
     if (subName == "الكل") {
       subscroptionId = "0";
-    }else{
-       for (int i = 0; i < subNameList.length; i++) {
-      if (_subList[i].subscriptionsName == subName) {
-        subscroptionId = _subList[i].subscriptionsId.toString();
-        break;
+    } else {
+      for (int i = 0; i < subNameList.length; i++) {
+        if (_subList[i].subscriptionsName == subName) {
+          subscroptionId = _subList[i].subscriptionsId.toString();
+          break;
+        }
       }
-    }
     }
 
     view();
@@ -183,14 +181,12 @@ class MangeUsersControllerImp extends MangeUsersController {
     }
   }
 
-
   @override
   void addUsers() async {
     statusRequs = StatusRequst.loading;
     update();
-
     if (formKey.currentState!.validate()) {
-      if (file != null) {
+      if (file == null) {
         var res = await UsersData().add({
           "name": userName.text,
           "phone": phone.text,
@@ -202,7 +198,7 @@ class MangeUsersControllerImp extends MangeUsersController {
           "adminId": "1",
           "active": active,
           "barcodeNum": barcodeNum.text,
-        }, file!);
+        }, file: file);
         if (res["msg"] == "renewal") {
           globalAlert("مشكلة في التجديد");
           statusRequs = StatusRequst.failure;
@@ -214,8 +210,12 @@ class MangeUsersControllerImp extends MangeUsersController {
           statusRequs = StatusRequst.failure;
         }
       } else {
+        statusRequs = StatusRequst.failure;
+
         globalAlert("يجب ادخال صورة اللاعب");
       }
+    } else {
+      statusRequs = StatusRequst.failure;
     }
 
     update();
@@ -246,6 +246,7 @@ class MangeUsersControllerImp extends MangeUsersController {
     });
     if (res["status"] == "failure") {
       usersList = [];
+      totalPlayers = 0;
       assignDataInsideTable();
       statusRequs = StatusRequst.failure;
     } else if (res["status"] == "success") {
@@ -363,7 +364,7 @@ class MangeUsersControllerImp extends MangeUsersController {
         "subscriptionsId": subscriptionModel.subscriptionsId.toString(),
         "adminId": "1",
         "active": active,
-        "oldimagename": userModel.usersImage ,
+        "oldimagename": userModel.usersImage,
         "barcodeNum": barcodeNum.text,
       }, file: file);
       if (res["status"] == "failure") {
@@ -371,13 +372,13 @@ class MangeUsersControllerImp extends MangeUsersController {
         statusRequs = StatusRequst.failure;
       } else if (res["status"] == "success") {
         globalAlert("تم تعديل البانات بنجاح", title: "");
-          cleaModel();
+        cleaModel();
         statusRequs = StatusRequst.sucsess;
       } else if (res["msg"] == "barcode is used") {
-       globalAlert("هذا الكود مستخدم بالفعل");
+        globalAlert("هذا الكود مستخدم بالفعل");
         statusRequs = StatusRequst.failure;
-      }else if (res["msg"] == "barcode not change"){
-         globalAlert("يرجى إعادة المحاولة في وقت لاحق", title: "!خطأ");
+      } else if (res["msg"] == "barcode not change") {
+        globalAlert("يرجى إعادة المحاولة في وقت لاحق", title: "!خطأ");
       }
 
       update();
@@ -389,41 +390,40 @@ class MangeUsersControllerImp extends MangeUsersController {
     dataInTable = [];
     for (var i = 0; i < usersList.length; i++) {
       dataInTable.add([
-        usersList[i].usersAddress.toString(),
-        usersList[i].usersCreate.toString(),
-        usersList[i].usersName.toString(),
         usersList[i].usersId.toString(),
         usersList[i].usersName.toString(),
         usersList[i].usersGender.toString(),
         usersList[i].usersPhone.toString(),
         usersList[i].usersType.toString(),
+        usersList[i].usersCreate.toString(),
+        usersList[i].renewalStart.toString(),
+        usersList[i].renewalEnd.toString(),
         usersList[i].usersNote.toString(),
       ]);
     }
   }
 
-@override
+  @override
   void assignModel(UserModel privetModel) {
-    userModel = privetModel ;
+    userModel = privetModel;
     barcodeNum.text = privetModel.barcode.toString();
     userName.text = privetModel.usersName.toString();
-    phone.text = privetModel.usersPhone! ;
-    trainerValue = privetModel.captainName! ;
-    note.text = privetModel.usersNote! ;
-    subValue = privetModel.subscriptionsName! ;
-    changemodel(subValue) ;
-    canAdd =false ;
+    phone.text = privetModel.usersPhone!;
+    trainerValue = privetModel.captainName!;
+    note.text = privetModel.usersNote!;
+    subValue = privetModel.subscriptionsName!;
+    changemodel(subValue);
+    canAdd = false;
     update();
   }
 
-void cleaModel(){
-          barcodeNum.clear() ;
-          userName.clear() ;
-          phone.clear() ;
-          note.clear() ;
-          age.clear() ;
-    canAdd =true ;
+  void cleaModel() {
+    barcodeNum.clear();
+    userName.clear();
+    phone.clear();
+    note.clear();
+    age.clear();
+    canAdd = true;
     update();
-}
-
+  }
 }

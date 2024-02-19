@@ -224,35 +224,35 @@ class _ManageCostViewState extends State<ManageCostView> {
                                     }
                                       },
                                     ),
-                                  //   CustomButton(
-                                  //     text: "حذف",
-                                  // color: !controller.canAdd
-                                  //     ? const Color.fromARGB(217, 255, 255, 255)
-                                  //     : const Color.fromARGB(
-                                  //         217, 202, 193, 193),
-                                  //     ontap: () {
-                                  //       if (!controller.canAdd) {
-                                  //     Get.defaultDialog(
-                                  //         title: "تحذير ",
-                                  //         middleText:
-                                  //             "هل أنت متأكد أنك تريد تعديل الاشتراك",
-                                  //         actions: [
-                                  //           ElevatedButton(
-                                  //               onPressed: () {
-                                  //                 Get.back();
-                                  //                 controller.dee();
+                                    CustomButton(
+                                      text: "حذف",
+                                  color: !controller.canAdd
+                                      ? const Color.fromARGB(217, 255, 255, 255)
+                                      : const Color.fromARGB(
+                                          217, 202, 193, 193),
+                                      ontap: () {
+                                        if (!controller.canAdd) {
+                                      Get.defaultDialog(
+                                          title: "تحذير ",
+                                          middleText:
+                                              "هل أنت متأكد أنك تريد تعديل المصروف",
+                                          actions: [
+                                            ElevatedButton(
+                                                onPressed: () {
+                                                  Get.back();
+                                                  controller.deleteTransAction();
 
-                                  //               },
-                                  //               child: const Text("نعم")),
-                                  //           ElevatedButton(
-                                  //               onPressed: () {
-                                  //                 Get.back();
-                                  //               },
-                                  //               child: const Text("لا")),
-                                  //         ]);
-                                  //   }
-                                  //     },
-                                  //   ),
+                                                },
+                                                child: const Text("نعم")),
+                                            ElevatedButton(
+                                                onPressed: () {
+                                                  Get.back();
+                                                },
+                                                child: const Text("لا")),
+                                          ]);
+                                    }
+                                      },
+                                    ),
                                     CustomButton(
                                       text: "إالغاء",
                                       ontap: () {

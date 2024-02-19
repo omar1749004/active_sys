@@ -91,6 +91,7 @@ class TrainersView extends StatelessWidget {
                                             ],
                                             nameOfGlobalID: 'trainers',
                                             onRowTap: () {
+                                              
                                     controller.assignModel(controller.usersList[GlobalVariable.trainers!]);
 
                                             },

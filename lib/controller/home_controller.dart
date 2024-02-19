@@ -4,10 +4,8 @@ import 'package:active_system/data/models/attend_model.dart';
 import 'package:active_system/data/models/sub_mode.dart';
 import 'package:active_system/data/service/remote/attend_data.dart';
 import 'package:active_system/data/service/remote/sub_data.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:qrcode_barcode_scanner/qrcode_barcode_scanner.dart';
 
 abstract class HomeController extends GetxController {
   void addSession();
@@ -23,6 +21,7 @@ abstract class HomeController extends GetxController {
   void searchFun();
   void deleteTransAction();
   void clearModel();
+  void changemodel(String subName);
 }
 
 class HomeControllerImp extends HomeController {
@@ -41,9 +40,10 @@ class HomeControllerImp extends HomeController {
 
   late AttendModel attendmodel;
   int supType = 0;
-  int selcetRenew = 0 ;
+  int selcetRenew = 0;
   bool isactive = false;
   List<AttendModel> attendList = [];
+  late SubscriptionModel subscriptionModel;
   List<List<String>> dataInTable = [];
   final List<SubscriptionModel> _subList = [];
   List<String> subNameList = ["عام"];
@@ -58,6 +58,7 @@ class HomeControllerImp extends HomeController {
     phone = TextEditingController();
     note = TextEditingController();
     search = TextEditingController();
+    barcode.text = "0";
     firstState = StatusRequst.loading;
     await Future.delayed(const Duration(milliseconds: 100));
     firstState = StatusRequst.failure;
@@ -97,6 +98,8 @@ class HomeControllerImp extends HomeController {
       }
       subValue = subNameList[0];
     }
+
+    changemodel(subValue);
     update();
   }
 
@@ -113,18 +116,24 @@ class HomeControllerImp extends HomeController {
       "barcode": barcode.text,
       "adminID": "1",
     });
-    if (res["msg"] == "subscription expired") {
-      globalAlert("اشتراك اللاعب منتهي");
-      statusRequs = StatusRequst.failure;
+     if (res["msg"] == "barcode not found") {
+        globalAlert("الباركود ليس مستخدم يرجى ادخال الباركود الصحيح",
+            title: "!خطأ");
+        statusRequs = StatusRequst.failure;
     } else if (res["status"] == "success") {
-      attendmodel = AttendModel.fromJson(res["data"]);
-      for (int i = 0; i < subNameList.length; i++) {
-        if (attendmodel.subscriptionsName == subNameList[i]) {
-          subValue = subNameList[i];
+       attendmodel = AttendModel.fromJson(res["data"]);
+        for (int i = 0; i < subNameList.length; i++) {
+          if (attendmodel.subscriptionsName == subNameList[i]) {
+            subValue = subNameList[i];
+          }
         }
-      }
-      attendList.add(attendmodel);
-      assignDataInsideTable();
+        assignModel(attendmodel);
+        attendList.add(attendmodel);
+        assignDataInsideTable();
+        statusRequs = StatusRequst.sucsess;
+        update();
+        await Future.delayed(const Duration(seconds: 2));
+        clearModel();
       statusRequs = StatusRequst.sucsess;
     } else if (res["msg"] == "invitition expired") {
       globalAlert("الاعب تخطى عدد الدعوات");
@@ -137,36 +146,36 @@ class HomeControllerImp extends HomeController {
   void addService() async {
     statusRequs = StatusRequst.loading;
     update();
-    if(barcode.text.isNotEmpty){
-    var res = await AttendData().addService({
-      "barcode": barcode.text,
-      "adminID": "1",
-    });
-    print(res);
-    if (res["msg"] == "subscription expired") {
-      globalAlert("اشتراك اللاعب منتهي");
-      statusRequs = StatusRequst.failure;
-    } else if (res["status"] == "success") {
-      attendmodel = AttendModel.fromJson(res["data"]);
-      for (int i = 0; i < subNameList.length; i++) {
-        if (attendmodel.subscriptionsName == subNameList[i]) {
-          subValue = subNameList[i];
+    if (barcode.text.isNotEmpty) {
+      var res = await AttendData().addService({
+        "barcode": barcode.text,
+        "adminID": "1",
+      });
+      if (res["msg"] == "barcode not found") {
+        globalAlert("الباركود ليس مستخدم يرجى ادخال الباركود الصحيح",
+            title: "!خطأ");
+        statusRequs = StatusRequst.failure;
+      } else if (res["status"] == "success") {
+        attendmodel = AttendModel.fromJson(res["data"]);
+        for (int i = 0; i < subNameList.length; i++) {
+          if (attendmodel.subscriptionsName == subNameList[i]) {
+            subValue = subNameList[i];
+          }
         }
+        assignModel(attendmodel);
+        attendList.add(attendmodel);
+        assignDataInsideTable();
+        statusRequs = StatusRequst.sucsess;
+        update();
+        await Future.delayed(const Duration(seconds: 2));
+        clearModel();
+      } else if (res["msg"] == "service expired") {
+        globalAlert("الاعب تخطى عدد الخدمات");
+        statusRequs = StatusRequst.failure;
+      } else {
+        statusRequs = StatusRequst.failure;
       }
-      assignModel(attendmodel);
-      attendList.add(attendmodel);
-      assignDataInsideTable();
-      statusRequs = StatusRequst.sucsess;
-      update();
-      await Future.delayed(const Duration(seconds: 2));
-      clearModel();
-    } else if (res["msg"] == "service expired") {
-      globalAlert("الاعب تخطى عدد الخدمات");
-      statusRequs = StatusRequst.failure;
-    }else{
-      statusRequs = StatusRequst.failure;
-    }
-   } else{
+    } else {
       globalAlert("يجب ادخال الباركود");
       statusRequs = StatusRequst.failure;
     }
@@ -175,35 +184,45 @@ class HomeControllerImp extends HomeController {
 
   @override
   void addSession() async {
-    if (formKey.currentState!.validate()) {
-      statusRequs = StatusRequst.loading;
-      update();
-      String price = "0";
-      for (int i = 0; i < _subList.length; i++) {
-        if (subValue == _subList[i].subscriptionsName) {
-          price = _subList[i].subscriptionsPrice.toString();
-        }
-      }
+    statusRequs = StatusRequst.loading;
+    update();
+    bool go = false;
+    if (barcode.text == "0" && (username.text.isEmpty || phone.text.isEmpty)) {
+      go = false;
+      formKey.currentState!.validate();
+    } else {
+      go = true;
+    }
+    if (go) {
       var res = await AttendData().addSessions({
         "phone": phone.text,
         "name": username.text,
-        "price": price,
+        "barcode": barcode.text,
+        "subsriptionId": subscriptionModel.subscriptionsId.toString(),
+        "price": subscriptionModel.subscriptionsPrice.toString(),
         "adminId": "1",
       });
 
-      if (res!["status"] == "failure") {
-        globalAlert("يرجى إعادة المحاولة في وقت لاحق", title: "!خطأ");
+      if (res["msg"] == "barcode not found") {
+        globalAlert("الباركود ليس مستخدم يرجى ادخال الباركود الصحيح",
+            title: "!خطأ");
+
         statusRequs = StatusRequst.failure;
       } else if (res["status"] == "success") {
         attendmodel = AttendModel.fromJson(res["data"]);
+        assignModel(attendmodel);
         attendList.add(attendmodel);
         assignDataInsideTable();
-        username.clear() ;
-        phone.clear() ;
         statusRequs = StatusRequst.sucsess;
-      } else {
+        update();
+        await Future.delayed(const Duration(seconds: 2));
+        clearModel();
+      } else if (res!["status"] == "failure") {
         globalAlert("يرجى إعادة المحاولة في وقت لاحق", title: "!خطأ");
       }
+    } else {
+      statusRequs = StatusRequst.failure;
+      update();
     }
     update();
   }
@@ -212,97 +231,115 @@ class HomeControllerImp extends HomeController {
   void addSub() async {
     statusRequs = StatusRequst.loading;
     update();
-    if(barcode.text.isNotEmpty){
+    if (barcode.text.isNotEmpty) {
       var res = await AttendData().addSub({
-      "barcode": barcode.text,
-      "adminID": "1",
-      "renewa_id": selcetRenew.toString()
-    });
-    selcetRenew = 0 ;
-    if (res["msg"] == "renew") {
-      globalAlert("هناك مشكلة في تجديد اللاعب");
-      statusRequs = StatusRequst.failure;
-    } else if (res["status"] == "success") {
-      attendmodel = AttendModel.fromJson(res["data"]);
-      for (int i = 0; i < subNameList.length; i++) {
-        if (attendmodel.subscriptionsName == subNameList[i]) {
-          subValue = subNameList[i];
+        "barcode": barcode.text,
+        "adminID": "1",
+        "renewa_id": selcetRenew.toString()
+      });
+      selcetRenew = 0;
+      if (res["msg"] == "renew") {
+        globalAlert("هناك مشكلة في تجديد اللاعب");
+        statusRequs = StatusRequst.failure;
+      } else if (res["status"] == "success") {
+        attendmodel = AttendModel.fromJson(res["data"]);
+        for (int i = 0; i < subNameList.length; i++) {
+          if (attendmodel.subscriptionsName == subNameList[i]) {
+            subValue = subNameList[i];
+          }
         }
+        assignModel(attendmodel);
+        attendList.add(attendmodel);
+        assignDataInsideTable();
+        statusRequs = StatusRequst.sucsess;
+        update();
+        await Future.delayed(const Duration(seconds: 2));
+        clearModel();
+      } else if (res["status"] == "expired") {
+        globalAlert("اشتراك اللاعب منتهي");
+        attendmodel = AttendModel.fromJson(res["data"]);
+        assignModel(attendmodel);
+        statusRequs = StatusRequst.sucsess;
+        update();
+        await Future.delayed(const Duration(seconds: 2));
+        clearModel();
+        statusRequs = StatusRequst.failure;
+      } else if (res["status"] == "many") {
+        statusRequs = StatusRequst.sucsess;
+        update();
+        selecRenew(res["data"]);
+      } else if(res["msg"] == "barcode not found"){
+        globalAlert("الباركود ليس مستخدم يرجى ادخال الباركود الصحيح",
+            title: "!خطأ");
+      }else{
+        statusRequs = StatusRequst.failure;
       }
-      assignModel(attendmodel);
-      attendList.add(attendmodel);
-      assignDataInsideTable();
-      statusRequs = StatusRequst.sucsess;
-      update();
-      await Future.delayed(const Duration(seconds: 2));
-      clearModel();
-    } else if (res["msg"] == "subscription expired") {
-      globalAlert("اشتراك اللاعب منتهي");
-      statusRequs = StatusRequst.failure;
-    } else if(res["status"] == "many"){
-    statusRequs = StatusRequst.sucsess;
-    update();
-     selecRenew(res["data"]);
-    }else{
-      print("object");
-    }
-    }else{
+    } else {
       globalAlert("يجب ادخال الباركود");
       statusRequs = StatusRequst.failure;
     }
-    
+
     update();
   }
-  
-  void selecRenew(List<dynamic> subscriptions){
-      List<Widget> buttons = [];
 
-  for (int i = 0; i < subscriptions.length ; i++) {
-    buttons.add(
-      Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: ElevatedButton(
-          
-          onPressed: () {
-            selcetRenew =  subscriptions[i]["renewal_id"];
-            Get.back();
-             addSub();
-          },
-          child: Text(subscriptions[i]["subscriptions_name"]),
+  void selecRenew(List<dynamic> subscriptions) {
+    List<Widget> buttons = [];
+
+    for (int i = 0; i < subscriptions.length; i++) {
+      buttons.add(
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: ElevatedButton(
+            onPressed: () {
+              selcetRenew = subscriptions[i]["renewal_id"];
+              Get.back();
+              addSub();
+            },
+            child: Text(subscriptions[i]["subscriptions_name"]),
+          ),
         ),
-      ),
+      );
+    }
+
+    Get.defaultDialog(
+      title: "",
+      middleText: "يرجى اختيار اشتراك اللاعب",
+      actions: [
+        Column(
+          children: buttons,
+        ),
+      ],
     );
   }
 
-
-  Get.defaultDialog(
-    title: "",
-    middleText: "يرجى اختيار اشتراك اللاعب",
-    actions: [
-      Column(
-        children: buttons,
-      ),
-    ],
-  );
-  }
   @override
   void assignModel(AttendModel privetModel) {
     attendmodel = privetModel;
     username.text = privetModel.usersName!;
     phone.text = privetModel.usersPhone!;
     barcode.text = privetModel.barcode.toString();
-   deadline.text = privetModel.renewalEnd.toString().substring(0, 11) ;
+    deadline.text = privetModel.renewalEnd.toString().substring(0, 11);
     note.text = privetModel.usersNote!;
     subValue = privetModel.subscriptionsName!;
-    
   }
+
   @override
   void clearModel() {
     username.clear();
     phone.clear();
-    barcode.clear();
-   deadline.clear() ;
+    barcode.text = "0";
+    deadline.clear();
     note.clear();
+  }
+
+  @override
+  void changemodel(String subName) {
+    for (int i = 0; i < _subList.length; i++) {
+      if (_subList[i].subscriptionsName == subName) {
+        subscriptionModel = _subList[i];
+        break;
+      }
+    }
   }
 
   @override
@@ -322,7 +359,7 @@ class HomeControllerImp extends HomeController {
         }
       }
       subValue = subNameList[0];
-
+      subscriptionModel = _subList[0];
       statusRequs = StatusRequst.sucsess;
     } else {
       statusRequs = StatusRequst.failure;
@@ -357,16 +394,10 @@ class HomeControllerImp extends HomeController {
 
   @override
   void handlebarcode() {
-    // double? mid = double.tryParse(barcode.text);
-    // if (mid == null) {
-    //   barcode.text = "";
-    // }
-
-    QrcodeBarcodeScanner(
-      onScannedCallback: (String value) {
-        barcode.text = value;
-      },
-    );
+    double? mid = double.tryParse(barcode.text);
+    if (mid == null) {
+      barcode.text = "0";
+    }
   }
 
   @override
@@ -398,22 +429,14 @@ class HomeControllerImp extends HomeController {
       "search": search,
     });
     if (res["status"] == "success") {
-      attendmodel = AttendModel.fromJson(res["data"]);
-      for (int i = 0; i < subNameList.length; i++) {
-        if (attendmodel.subscriptionsName == subNameList[i]) {
-          subValue = subNameList[i];
-        }
-      }
 
-      username.text = attendmodel.usersName!;
-      phone.text = attendmodel.usersPhone!;
-      barcode.text = attendmodel.barcode.toString();
-      //deadline.text = attendmodel.renewalEnd.toString().substring(0, 11);
-      note.text = attendmodel.usersNote!;
-      subValue = attendmodel.subscriptionsName!;
+      username.text = res["data"]["user_name"];
+      phone.text = res["data"]["users_phone"];
+      subscriptions.text = res["data"]["subscriptions_name"];
+      deadline.text = res["data"]["renewal_end"].toString().substring(0, 11);
+      subValue =res["data"]["subscriptions_name"]!;
       statusRequs = StatusRequst.sucsess;
     } else if (res["status"] == "failure") {
-      print("noooo");
       statusRequs = StatusRequst.failure;
     }
     update();

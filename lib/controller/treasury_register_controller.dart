@@ -7,7 +7,7 @@ import 'package:get/get.dart';
 
 abstract class TreasuryRegisterController extends GetxController {
   void dateSearch(DateTime startD, DateTime endD);
-  void search(DateTime startD, DateTime endD, String desc);
+  void search();
   void makeSearch();
   void getpdf();
 }
@@ -72,13 +72,13 @@ class TreasuryRegisterControllerImp extends TreasuryRegisterController {
   }
 
   @override
-  void search(DateTime startD, DateTime endD, String desc) async {
+  void search() async {
     statusRequs = StatusRequst.loading;
     update();
     var res = await SafeData().search({
-      "search": desc,
-      "start_date": startD.toString().substring(0, 11),
-      "end_date": endD.toString().substring(0, 11),
+      "search": reason.text,
+      "start_date": startSearch.toString().substring(0, 11),
+      "end_date": endSearch.toString().substring(0, 11),
     });
 
     if (res["status"] == "failure") {
@@ -115,7 +115,7 @@ class TreasuryRegisterControllerImp extends TreasuryRegisterController {
     if (reason.text.isEmpty) {
       dateSearch(startSearch, endSearch);
     } else {
-      search(startSearch, endSearch, reason.text);
+      search();
     }
   }
 

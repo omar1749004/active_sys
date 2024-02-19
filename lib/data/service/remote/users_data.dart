@@ -6,9 +6,14 @@ import 'package:active_system/link_api.dart';
 class UsersData{
  UsersData();
 
-   add(Map data,File  file)async{
-    var res =await Api().postFile(uri: linkUsersAdd, body: data,file: file
+   add(Map data,{File ? file})async{
+    var res  ;
+    if(file == null){
+     res = await Api().post(uri: linkUsersAdd, body: data);
+    }else{
+       res =await Api().postFile(uri: linkUsersAdd, body: data,file: file
     );
+    }
     return res;
   }
    edit(Map data ,{File? file})async{

@@ -70,11 +70,11 @@ class RenewControllerImp extends RenewController {
 
   String trainerValue = "عام";
   String subValue = "عام";
-
+  String payedType = "0";
+  
   late String _amountMid;
-  late TextEditingController end;
-  DateTime start = DateTime.now();
-
+  DateTime? start = DateTime.now();
+  DateTime? end = DateTime.now();
   @override
   void onInit() async {
     barcodeNum = TextEditingController();
@@ -90,7 +90,6 @@ class RenewControllerImp extends RenewController {
     notknow = TextEditingController();
     remining = TextEditingController();
     note = TextEditingController();
-    end = TextEditingController();
     searchVal = TextEditingController();
     preNote.text = "";
     descound.text = "0";
@@ -133,7 +132,7 @@ class RenewControllerImp extends RenewController {
       afterDescound.text = price.text;
       _amountMid = price.text;
       amount.text = price.text;
-      setEndDate(start);
+      setEndDate(start!);
       statusRequs = StatusRequst.sucsess;
     } else {
       statusRequs = StatusRequst.failure;
@@ -210,8 +209,7 @@ class RenewControllerImp extends RenewController {
   void setEndDate(DateTime start) {
     DateTime endMid;
     endMid = start.add(Duration(days: subscriptionModel.subscriptionsDay));
-    String time = endMid.toString();
-    end.text = time.substring(0, 11);
+   end = endMid ;
     update();
   }
 
@@ -259,6 +257,7 @@ class RenewControllerImp extends RenewController {
       
       String offe = _getDesc();
       String ow = _getowed();
+      
       var res = await RenewData().add({
         "userid": renewUser.usersId.toString(),
         "name": renewUser.usersName,
@@ -267,14 +266,14 @@ class RenewControllerImp extends RenewController {
         "subscriptionsId": subscriptionModel.subscriptionsId.toString(),
         "note": note.text,
         "start": start.toString(),
-        "end": end.text,
+        "end": start.toString(),
         "offer": offe,
+        "payed_type": payedType,
         "amount": amount.text,
         "amount_owed": ow,
         "renewal_adminId": "1",
       });
       if (res["status"] == "failure") {
-        print("hi");
         globalAlert("يرجى إعادة المحاولة في وقت لاحق", title: "!خطأ");
         statusRequs = StatusRequst.failure;
       } else if (res["status"] == "success") {
@@ -312,7 +311,22 @@ class RenewControllerImp extends RenewController {
       return "0";
     }
   }
-
+  void setTypePaed(String typeofPayed) {
+    if ("نقدى" == typeofPayed) {
+      amount.text = price.text;
+      descound.text="0";
+      payedType = "0";
+    } else if("محفظة" == typeofPayed){
+      descound.text = price.text ;
+       calAfterDesc(descound.text);
+      payedType= "2";
+    }else{
+      descound.text = price.text ;
+       calAfterDesc(descound.text);
+     payedType = "1" ;
+    }
+    update();
+  }
   @override
   void dateSearch(DateTime startD, DateTime endD) async {
     statusRequs = StatusRequst.loading;
@@ -465,7 +479,7 @@ class RenewControllerImp extends RenewController {
         "subscriptionsId": subscriptionModel.subscriptionsId.toString(),
         "note": note.text,
         "start": start.toString(),
-        "end": end.text,
+        "end": start.toString(),
         "offer": offe,
         "amount": amount.text,
         "amount_owed": ow,
@@ -491,14 +505,14 @@ class RenewControllerImp extends RenewController {
     renewUser = privetModel ;
     barcodeNum.text = privetModel.barcode.toString();
     userName.text = privetModel.usersName.toString();
-    phone.text = privetModel.usersPhone! ;
-    trainerValue = privetModel.captainNamme! ;
-    start = privetModel.renewalStart! ;
-    end.text = privetModel.renewalEnd.toString() ; /////////////////////////////////////////////
-    subValue = privetModel.subscriptionsName! ;
+    phone.text = privetModel.usersPhone?? "" ;
+    trainerValue = privetModel.captainNamme?? "";
+    start = privetModel.renewalStart;
+    end = privetModel.renewalEnd; /////////////////////////////////////////////
+     subValue = privetModel.subscriptionsName! ;
     changemodel(subValue) ;
     caluserPayd();
-    preNote.text =privetModel.renewalNote! ;
+    preNote.text =privetModel.renewalNote ?? "" ;
     amount.text =privetModel.renewalAmount.toString() ;
     remining.text =privetModel.renewAmountOwed.toString() ;
     canAdd =false ;
@@ -519,7 +533,7 @@ void cleaModel(){
     preNote.clear();
     start = DateTime.now() ;
     remining.clear();
-    setEndDate(start) ;
+    setEndDate(start!) ;
     canAdd =true ;
     update();
 }

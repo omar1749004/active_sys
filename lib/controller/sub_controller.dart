@@ -115,9 +115,20 @@ class MangeSubControllerImp extends MangeSubController {
     }
     update();
   }
+   
+   changesubAndSession(){
+     if(type == "حصة")
+     {
+       day.text = "1";
+       day.text = "1";
+     }
+     update();
+   }
 
   @override
   void assignModel(SubscriptionModel privetModel) {
+    submodel = privetModel;
+    changesubAndSession();
     name.text = privetModel.subscriptionsName;
     price.text = privetModel.subscriptionsPrice.toString();
     day.text = privetModel.subscriptionsDay.toString();
@@ -126,7 +137,7 @@ class MangeSubControllerImp extends MangeSubController {
     frezzNumber.text = privetModel.subscriptionsFrezzNumber.toString();
     maxFrezzDay.text = privetModel.subscriptionsMaxFrezzDay.toString();
     invitationsNumber.text =
-        privetModel.subscriptionsInvitationsNumber.toString();
+    privetModel.subscriptionsInvitationsNumber.toString();
     maxInvitation.text = privetModel.subscriptionsMaxInvitation.toString();
     serviceNumber.text = privetModel.subscriptionsServiceNumber.toString();
     maxService.text = privetModel.subscriptionsMaxService.toString();
