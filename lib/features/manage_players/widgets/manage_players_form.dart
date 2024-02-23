@@ -1,10 +1,12 @@
 import 'package:active_system/controller/mange_player.dart';
 import 'package:active_system/core/constant/styles%20copy.dart';
 import 'package:active_system/core/functions/validate_input.dart';
+import 'package:active_system/core/shared/camera/custom_camera.dart';
 import 'package:active_system/core/shared/custom_date_field.dart';
 import 'package:active_system/core/shared/custom_dropdown_menu.dart';
 import 'package:active_system/core/shared/custome_textform_auth.dart';
 import 'package:active_system/features/safe/view/widget/custom_checkbox.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -136,63 +138,85 @@ class ManagePlayersForm extends GetView<MangeUsersControllerImp> {
                     child:
                         CustomCheckBox(ischeck: controller.isactiveSub, text: "تفعيل الاشتراك",
                         onTap: () {
-                             controller.changeActiveSub(controller.isactiveSub) ;
+                          controller.changeActiveSub(controller.isactiveSub);
                         },
                         color: Colors.red,
-                        ),
-                  ),
-                  const SizedBox(
-                    width: 10,
-                  ),
-                  Expanded(
-                    child: CustomeTextFormAuth(
-                        hintText: "",
-                        myController: controller.price,
-                        isreadonly: true,
-                        lableText: "قيمة الاشتراك",
-                        mainTextColor: Colors.red,
-                        validator: (val) {
-                          return validInput(val!, 1, 50, "num");
-                        }),
-                  ),
-                ],
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              CustomeTextFormAuth(
-                  hintText: "",
-                  lableText: "تليفون",
-                  myController: controller.phone,
-                  validator: (val) {
-                    return validInput(val!, 4, 50, "phone");
-                  }),
-              const SizedBox(
-                height: 10,
-              ),
-               CustomeTextFormAuth(
-                hintText: "",
-                myController: controller.note,
-                lableText: "ملاحظات",
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              Container(
-                alignment: Alignment.center,
-                height: 150,
-                child: const Text(
-                  "Camera here",
-                  style: TextStyle(
-                      color: Colors.red,
-                      fontSize: 25,
-                      fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                    const SizedBox(
+                      width: 10,
+                    ),
+                    Expanded(
+                      child: CustomeTextFormAuth(
+                          hintText: "",
+                          myController: controller.price,
+                          isreadonly: true,
+                          lableText: "قيمة الاشتراك",
+                          mainTextColor: Colors.red,
+                          validator: (val) {
+                            return validInput(val!, 1, 50, "num");
+                          }),
+                    ),
+                  ],
                 ),
-              )
-            ],
+                const SizedBox(
+                  height: 10,
+                ),
+                CustomeTextFormAuth(
+                    hintText: "",
+                    lableText: "تليفون",
+                    myController: controller.phone,
+                    validator: (val) {
+                      return validInput(val!, 4, 50, "phone");
+                    }),
+                const SizedBox(
+                  height: 10,
+                ),
+                CustomeTextFormAuth(
+                  hintText: "",
+                  myController: controller.note,
+                  lableText: "ملاحظات",
+                ),
+                const SizedBox(
+                  height: 15,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    ElevatedButton(
+                        onPressed: () {
+                          Get.defaultDialog(
+                              contentPadding: const EdgeInsets.symmetric(
+                                  horizontal: 30, vertical: 15),
+                              title: "Camera",
+                              content: CustomCamera(
+                                contrller: controller,
+                              ));
+                        },
+                        child: const Text("افتح الكاميرا")),
+                    const SizedBox(
+                      width: 30,
+                    ),
+                    const Text(
+                      "التقط صوره",
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    ),
+                  ],
+                ),
+                const SizedBox(
+                  height: 15,
+                ),
+                controller.file == null
+                    ? const Text("")
+                    : kIsWeb
+                        ? Image.network(controller.file!.path)
+                        : Image.file(controller.file!),
+              ],
+            ),
           ),
         ),
-      ),),
+      ),
     );
   }
 }
