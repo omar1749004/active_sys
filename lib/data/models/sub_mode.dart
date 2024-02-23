@@ -40,7 +40,7 @@ class SubscriptionModel {
       subscriptionsId: json['subscriptions_id'],
       subscriptionsName: json['subscriptions_name'],
       subscriptionsType: json['subscriptions_type'],
-      subscriptionsPrice: json['subscriptions_price'].toDouble(),
+      subscriptionsPrice: double.parse(json['subscriptions_price']) ,
       subscriptionsDay: json['subscriptions_day'],
       subscriptionsSpecialization: json['subscriptions_specialization'],
       subscriptionsSessionsNumber: json['subscriptions_sessions_number'],
