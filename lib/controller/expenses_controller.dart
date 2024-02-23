@@ -166,8 +166,8 @@ class ExpensesControllerImp extends ExpensesController {
     update();
     var res = await ExpensesData().search({
       "search": search.text,
-      "start_date": startSearch.toString().substring(0, 11),
-      "end_date": endSearch.toString().substring(0, 11),
+      "start_date": isdateSearch== true? startSearch.toString().substring(0, 11): "0",
+      "end_date":   endSearch.toString().substring(0, 11),
       });
     if (res["status"] == "failure") {
       expensesList = [];

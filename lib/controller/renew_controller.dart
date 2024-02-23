@@ -207,9 +207,7 @@ class RenewControllerImp extends RenewController {
 
   @override
   void setEndDate(DateTime start) {
-    DateTime endMid;
-    endMid = start.add(Duration(days: subscriptionModel.subscriptionsDay));
-   end = endMid ;
+    end = start.add(Duration(days: subscriptionModel.subscriptionsDay));
     update();
   }
 
@@ -327,6 +325,7 @@ class RenewControllerImp extends RenewController {
     }
     update();
   }
+ 
   @override
   void dateSearch(DateTime startD, DateTime endD) async {
     statusRequs = StatusRequst.loading;
@@ -369,14 +368,19 @@ class RenewControllerImp extends RenewController {
   void _search() async {
     statusRequs = StatusRequst.loading;
     update();
-    var res = await RenewData().search({"search": searchVal.text});
+    var res = await RenewData().search({
+      "search": searchVal.text,
+      "start_date":  isdateSearch== true? startSearch.toString().substring(0, 11): "0",
+      "end_date":   endSearch.toString().substring(0, 11),
+      });
     if (res["status"] == "failure") {
+      renewList = [];
+      assignDataInsideTable();
       statusRequs = StatusRequst.failure;
     } else if (res["status"] == "success") {
       List data = res["data"];
       renewList = [];
       renewList.addAll(data.map((e) => RenewModel.fromJson(e)));
-
       assignDataInsideTable();
 
       statusRequs = StatusRequst.sucsess;
@@ -507,8 +511,13 @@ class RenewControllerImp extends RenewController {
     userName.text = privetModel.usersName.toString();
     phone.text = privetModel.usersPhone?? "" ;
     trainerValue = privetModel.captainNamme?? "";
-    start = privetModel.renewalStart;
-    end = privetModel.renewalEnd; /////////////////////////////////////////////
+    start = privetModel.renewalStart ?? DateTime.now();
+    if(privetModel.renewalStart == null)
+    {
+      setEndDate(start!) ;
+    }else{
+      end = privetModel.renewalEnd; /////////////////////////////////////////////
+    }
      subValue = privetModel.subscriptionsName! ;
     changemodel(subValue) ;
     caluserPayd();

@@ -98,7 +98,7 @@ class AttendanceView extends StatelessWidget {
                                           onChanged: (p0) {
                                             controller.startSearch = p0!;
                                             controller.dateSearch(
-                                                controller.startSearch,
+                                                controller.startSearch ,
                                                 controller.endSearch);
                                           },
                                           iconSize: 15,

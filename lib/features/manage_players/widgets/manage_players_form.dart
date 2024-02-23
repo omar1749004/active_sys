@@ -9,6 +9,7 @@ import 'package:active_system/features/safe/view/widget/custom_checkbox.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 class ManagePlayersForm extends GetView<MangeUsersControllerImp> {
   const ManagePlayersForm({super.key});
@@ -20,114 +21,123 @@ class ManagePlayersForm extends GetView<MangeUsersControllerImp> {
       child: SingleChildScrollView(
         child: Form(
           key: controller.formKey,
-          child: GetBuilder<MangeUsersControllerImp>(
-            builder: (controller) => Column(
-              children: [
-                const Text(
-                  "إدارة الاعبين",
-                  textAlign: TextAlign.center,
-                  style: Styles.style25,
-                ),
-                // const SizedBox(
-                //   height: 10,
-                // ),
-                // const CustomDisplyMany(
-                //     textColor: ColorApp.thirdColor,
-                //     many: "1000",
-                //     text: "رقم العضوية"),
-                const SizedBox(
-                  height: 20,
-                ),
-                CustomeTextFormAuth(
-                    hintText: "",
-                    lableText: "الكود",
-                    myController: controller.barcodeNum,
-                    onChanged: (p0) {
-                      controller.handleBarcode();
-                    },
-                    validator: (val) {
-                      return validInput(val!, 1, 50, "num");
-                    }),
-                const SizedBox(
-                  height: 10,
-                ),
-                CustomeTextFormAuth(
-                    hintText: "",
-                    lableText: "الاسم",
-                    myController: controller.userName,
-                    validator: (val) {
-                      return validInput(val!, 2, 50, "");
-                    }),
-                const SizedBox(
-                  height: 10,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Expanded(
-                        flex: 2,
-                        child: CustomDateField(
-                            borderRadius: 20,
-                            width: 0,
-                            height: 40,
-                            iconSize: 16,
-                            fontSize: 15)),
-                    const SizedBox(
-                      width: 10,
-                    ),
-                    Expanded(
-                        flex: 1,
-                        child: Text(
-                          "تاريخ الميلاد",
-                          style: Styles.style20,
-                        )),
-                  ],
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                CustomeTextFormAuth(
-                    hintText: "",
-                    lableText: "العمر",
-                    myController: controller.age,
-                    onChanged: (p0) {
-                      controller.handleAge();
-                    },
-                    validator: (val) {
-                      return validInput(val!, 1, 50, "");
-                    }),
-                const SizedBox(
-                  height: 20,
-                ),
+          child: GetBuilder<MangeUsersControllerImp>(builder:(controller) => 
+          Column(
+            children: [
+              const Text(
+                "إدارة الاعبين",
+                textAlign: TextAlign.center,
+                style: Styles.style25,
+              ),
+              // const SizedBox(
+              //   height: 10,
+              // ),
+              // const CustomDisplyMany(
+              //     textColor: ColorApp.thirdColor,
+              //     many: "1000",
+              //     text: "رقم العضوية"),
+              const SizedBox(
+                height: 20,
+              ),
+              CustomeTextFormAuth(
+                  hintText: "",
+                  lableText: "الكود",
+                  myController: controller.barcodeNum,
+                  onChanged: (p0) {
+                    controller.handleBarcode();
+                  },
+                  validator: (val) {
+                    return validInput(val!, 1, 50, "num");
+                  }),
+              const SizedBox(
+                height: 10,
+              ),
+              CustomeTextFormAuth(
+                  hintText: "",
+                  lableText: "الاسم",
+                  myController: controller.userName,
+                  validator: (val) {
+                    return validInput(val!, 2, 50, "");
+                  }),
+              const SizedBox(
+                height: 10,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Expanded(
+                      flex: 2,
+                      child: CustomDateField(
+                        borderRadius: 20,
+                         myController: TextEditingController(
+                          text: DateFormat('yyyy-MM-dd').format(controller.brithDay!) 
+                         ),
+                         onChanged: (p0) {
+                          controller.brithDay = p0 ;
+                           controller.calcAge();
+                         },
+                         
+                          width: 0, height: 40, iconSize: 16, fontSize: 15)),
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  Expanded(
+                      flex: 1,
+                      child: Text(
+                        "تاريخ الميلاد",
+                        style: Styles.style20,
+                      )),
+                ],
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              CustomeTextFormAuth(
+                  hintText: "",
+                  lableText: "العمر",
+                  myController: controller.age,
+                  onChanged: (p0) {
+                    controller.handleAge();
+                    controller.calcBrithday();
+                  },
+                  validator: (val) {
+                    return validInput(val!,1, 50, "");
+                  }),
+              const SizedBox(
+                height: 20,
+              ),
+              
+               CustomDropDownMenu(
+                  label: "المدرب",
+                  items: controller.trainerNameList,
+                  onChanged: (p0) {
+                    controller.changeTrainermodel(p0!);
+                  },
+                  intialValue:controller.trainerValue ),
+              const SizedBox(
+                height: 20,
+              ),
+               CustomDropDownMenu(
+                  label: "الإشتراك",
+                  items: controller.subNameList,
+                  
+                  onChanged: (p0) {
+                    controller.changemodel(p0!);
+                    
+                  },
+                  intialValue: controller.subValue),
+              const SizedBox(
+                height: 20,
+              ),
+              
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  
+                   Expanded(
+                    child:
+                        CustomCheckBox(ischeck: controller.isactiveSub, text: "تفعيل الاشتراك",
 
-                CustomDropDownMenu(
-                    label: "المدرب",
-                    items: controller.trainerNameList,
-                    onChanged: (p0) {
-                      controller.changeTrainermodel(p0!);
-                    },
-                    intialValue: controller.trainerValue),
-                const SizedBox(
-                  height: 20,
-                ),
-                CustomDropDownMenu(
-                    label: "الإشتراك",
-                    items: controller.subNameList,
-                    onChanged: (p0) {
-                      controller.changemodel(p0!);
-                    },
-                    intialValue: controller.subValue),
-                const SizedBox(
-                  height: 20,
-                ),
-
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Expanded(
-                      child: CustomCheckBox(
-                        ischeck: controller.isactiveSub,
-                        text: "تفعيل الاشتراك",
                         onTap: () {
                           controller.changeActiveSub(controller.isactiveSub);
                         },

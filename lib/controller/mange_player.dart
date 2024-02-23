@@ -25,6 +25,8 @@ abstract class MangeUsersController extends GetxController {
   void handleBarcode();
   void changeActiveSub(bool x);
   void deletePlayers();
+  void calcAge();
+  void calcBrithday();
   void editPlayers();
   void assignModel(UserModel privetModel);
 }
@@ -43,7 +45,7 @@ class MangeUsersControllerImp extends MangeUsersController {
   late TextEditingController price;
 
   late TextEditingController searchVal;
-
+   DateTime? brithDay = DateTime.now();
   final List<SubscriptionModel> _subList = [];
   List<String> subNameList = ["عام"];
   List<String> subNameSearchList = ["الكل"];
@@ -410,6 +412,8 @@ class MangeUsersControllerImp extends MangeUsersController {
     userName.text = privetModel.usersName.toString();
     phone.text = privetModel.usersPhone!;
     trainerValue = privetModel.captainName!;
+    brithDay = privetModel.usersDate ;
+    calcAge();
     note.text = privetModel.usersNote!;
     subValue = privetModel.subscriptionsName!;
     changemodel(subValue);
@@ -423,7 +427,21 @@ class MangeUsersControllerImp extends MangeUsersController {
     phone.clear();
     note.clear();
     age.clear();
+    brithDay = DateTime.now();
     canAdd = true;
     update();
   }
+  
+  @override
+  void calcAge() {
+    int midage = DateTime.now().year - brithDay!.year  ;
+    age.text = midage.toString() ;
+  }
+  
+  @override
+  void calcBrithday() {
+    int midBrithday = DateTime.now().year - int.parse(age.text);
+    brithDay = DateTime(midBrithday, 1, 1);
+    update();
+      }
 }
