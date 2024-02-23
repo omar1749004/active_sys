@@ -15,6 +15,7 @@ abstract class FreezeController extends GetxController {
   void calcDays();
   void deleteFreeze();
   void assignModel(FreezeModel privetModel);
+  void calcfreezeDate() ;
 }
 
 class FreezeControllerImp extends FreezeController {
@@ -130,17 +131,19 @@ class FreezeControllerImp extends FreezeController {
           statusRequs = StatusRequst.failure;
         } else if (res["status"] == "success") {
           getFreeze();
-          print("fukkk");
           statusRequs = StatusRequst.sucsess;
         }
       } else {
+        statusRequs = StatusRequst.failure;
+       update();
         globalAlert(msg);
+
       }
     }
     update();
   }
 
-  @override
+ @override
   void calcDays() {
     if (startSearch == endSearch) {
       day.text = "0";
@@ -151,6 +154,13 @@ class FreezeControllerImp extends FreezeController {
       day.text = midDay.toString();
     }
   }
+
+@override
+  void calcfreezeDate() {
+    int midDay = int.parse(day.text);
+    endSearch = startSearch.add(Duration(days: midDay)) ;
+    update();
+      }
 
   @override
   void assignModel(FreezeModel privetModel) {

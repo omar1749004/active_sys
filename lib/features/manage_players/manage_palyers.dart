@@ -133,7 +133,7 @@ class ManagePlayers extends StatelessWidget {
                           Expanded(
                             flex: 3,
                             child: SingleChildScrollView(
-                              physics: BouncingScrollPhysics(),
+                              physics:const BouncingScrollPhysics(),
                               child: Column(
                                 children: [
                                   //

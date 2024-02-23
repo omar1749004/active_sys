@@ -48,6 +48,8 @@ class AttendControllerImp extends AttendController {
         "end_date":endD.toString().substring(0,11),
       });
       if (res["status"] == "failure") {
+        attendList = [];
+        assignDataInsideTable();
         statusRequs = StatusRequst.failure;
       } else if (res["status"] == "success") {
         List data = res["data"];
@@ -85,6 +87,8 @@ class AttendControllerImp extends AttendController {
       "end_date":e,
       });
     if (res["status"] == "failure") {
+      attendList = [];
+      assignDataInsideTable();
       statusRequs = StatusRequst.failure;
     } else if (res["status"] == "success") {
       List data = res["data"];

@@ -7,6 +7,7 @@ import 'package:active_system/core/shared/custome_textform_auth.dart';
 import 'package:active_system/features/safe/view/widget/custom_checkbox.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 class ManagePlayersForm extends GetView<MangeUsersControllerImp> {
   const ManagePlayersForm({super.key});
@@ -66,6 +67,14 @@ class ManagePlayersForm extends GetView<MangeUsersControllerImp> {
                       flex: 2,
                       child: CustomDateField(
                         borderRadius: 20,
+                         myController: TextEditingController(
+                          text: DateFormat('yyyy-MM-dd').format(controller.brithDay!) 
+                         ),
+                         onChanged: (p0) {
+                          controller.brithDay = p0 ;
+                           controller.calcAge();
+                         },
+                         
                           width: 0, height: 40, iconSize: 16, fontSize: 15)),
                   const SizedBox(
                     width: 10,
@@ -87,6 +96,7 @@ class ManagePlayersForm extends GetView<MangeUsersControllerImp> {
                   myController: controller.age,
                   onChanged: (p0) {
                     controller.handleAge();
+                    controller.calcBrithday();
                   },
                   validator: (val) {
                     return validInput(val!,1, 50, "");

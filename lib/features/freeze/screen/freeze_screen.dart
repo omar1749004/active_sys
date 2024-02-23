@@ -12,6 +12,7 @@ import 'package:active_system/features/manage_subscriptions/view/widgets/custom_
 import 'package:active_system/features/freeze/widget/freeeze_screen_form.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 class FreezeScreen extends StatelessWidget {
   const FreezeScreen({super.key});
@@ -113,7 +114,9 @@ class FreezeScreen extends StatelessWidget {
                                                   hintText: "",
                                                   lableText: "عدد الايام",
                                                   myController: controller.day,
-                                                  isreadonly: true,
+                                                  onChanged :(p0) {
+                                                    controller.calcfreezeDate();
+                                                  },
                                                   validator: (val) {
                                                     return validInput(
                                                         val!, 1, 50, "num");
@@ -132,7 +135,10 @@ class FreezeScreen extends StatelessWidget {
                                                     child: CustomDateField(
                                                         width: 200,
                                                         height: 40,
-                                                        iconSize: 18,
+                                                        myController: TextEditingController(text: DateFormat('yyyy-MM-dd').format(controller.startSearch
+                                                      ),),
+                                                        iconSize: 18,  
+                                                        
                                                         onChanged: (p0) {
                                                           controller
                                                                   .startSearch =
@@ -208,6 +214,8 @@ class FreezeScreen extends StatelessWidget {
                                                       width: 150,
                                                       height: 40,
                                                       iconSize: 18,
+                                                      myController: TextEditingController(text: DateFormat('yyyy-MM-dd').format(controller.endSearch)
+                                                      ),
                                                       onChanged: (p0) {
                                                         controller.endSearch =
                                                             p0!;

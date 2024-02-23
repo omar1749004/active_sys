@@ -317,10 +317,11 @@ class HomeControllerImp extends HomeController {
     attendmodel = privetModel;
     username.text = privetModel.usersName!;
     phone.text = privetModel.usersPhone!;
-    barcode.text = privetModel.barcode.toString();
-    deadline.text = privetModel.renewalEnd.toString().substring(0, 11);
-    note.text = privetModel.usersNote!;
+    barcode.text = privetModel.barcode?.toString() ?? "0";
+    deadline.text =privetModel.renewalEnd?.toString() ?? ''  ;
+    note.text = privetModel.usersNote?? "";
     subValue = privetModel.subscriptionsName!;
+    subscriptions.text = privetModel.subscriptionsName!;
   }
 
   @override

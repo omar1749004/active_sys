@@ -4,7 +4,7 @@ class UserModel {
   int? usersId;
   String? usersNote;
   String? usersImage;
-  String? usersDate;
+  DateTime? usersDate;
   String? usersPhone;
   String? usersCreate;
   int? barcodeId;
@@ -26,7 +26,7 @@ class UserModel {
     this.usersId,
     this.usersNote,
     this.usersImage,
-    this.usersDate,
+    required this.usersDate,
     this.usersPhone,
     this.usersCreate,
     this.barcodeId,
@@ -50,7 +50,7 @@ class UserModel {
       usersId: json['users_id'],
       usersNote: json['users_note'],
       usersImage: json['users_image'],
-      usersDate: json['users_date'],
+      usersDate:  DateTime.tryParse(json['users_date'] ?? ""),
       usersPhone: json['users_phone'],
       usersCreate: json['users_create'],
       barcodeId: json['barcode_id'],
