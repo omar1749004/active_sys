@@ -45,6 +45,8 @@ dependencies:
   loading_indicator: ^3.1.1
   syncfusion_flutter_pdfviewer: ^24.2.4
   qrcode_barcode_scanner: ^2.0.1
+  camera: ^0.10.5+9
+  image_picker: ^1.0.7
   
 dev_dependencies:
   flutter_test:
