@@ -5,6 +5,8 @@ import 'package:active_system/core/shared/custom_Botton1.dart';
 import 'package:active_system/core/shared/custom_dropdown_menu.dart';
 import 'package:active_system/core/shared/custome_textform_auth.dart';
 import 'package:active_system/features/home/data/service/static/sup_type.dart';
+import 'package:active_system/link_api.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:qrcode_barcode_scanner/qrcode_barcode_scanner.dart';
@@ -59,9 +61,17 @@ class ClinetInfo extends StatelessWidget {
                       Container(
                         padding: const EdgeInsets.only(bottom: 30, left: 30),
                         child: CircleAvatar(
-                          backgroundColor: ColorApp.gray,
-                          radius: MediaQuery.of(context).size.width * 0.06,
-                        ),
+                            backgroundColor: ColorApp.gray,
+                            radius: MediaQuery.of(context).size.width * 0.06,
+                            child: ClipOval(
+                              child: SizedBox.fromSize(
+                                size: Size.fromRadius(MediaQuery.of(context).size.width * 0.06), // Image radius
+                                child: CachedNetworkImage(
+                                  fit: BoxFit.fill,
+                                  imageUrl: "$linkImageUpload/picture.png",
+                                ),
+                              ),
+                            )),
                       ),
                       Expanded(
                         child: Container(
@@ -122,7 +132,7 @@ class ClinetInfo extends StatelessWidget {
                                     //     controller.barcode.text = value;
                                     //   },
                                     // );
-                                     print("aaaaaaaa${controller.barcode.text}");
+                                    print("aaaaaaaa${controller.barcode.text}");
                                   },
                                 ),
                               ),
