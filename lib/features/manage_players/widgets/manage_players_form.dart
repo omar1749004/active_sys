@@ -137,6 +137,7 @@ class ManagePlayersForm extends GetView<MangeUsersControllerImp> {
                    Expanded(
                     child:
                         CustomCheckBox(ischeck: controller.isactiveSub, text: "تفعيل الاشتراك",
+
                         onTap: () {
                           controller.changeActiveSub(controller.isactiveSub);
                         },

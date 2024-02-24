@@ -147,7 +147,7 @@ class AdminControllerImp extends AdminController {
     pass.text = privetModel.adminSysPassword.toString();
     note.text = privetModel.adminSysNote.toString();
     adminmModel = privetModel;
-    canAdd = true;
+    canAdd = false;
     adminmModel = privetModel;
 
       assignSelectAdminPowers(powersMap[index][adminmModel.adminSysId]!);

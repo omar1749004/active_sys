@@ -71,34 +71,34 @@ class ManageSubscriptionsView extends StatelessWidget {
                           //table that contains data
                           //
                           Expanded(
-                              flex: 6,
-                              child: controller.statusRequs ==
-                                      StatusRequst.loading
-                                  ? const CustomLoadingIndecator()
-                                  : Container(
-                                      color: const Color.fromARGB(
-                                          255, 218, 218, 218),
-                                      child: CustomModernTable(
-                                        data: controller.dataInTable,
-                                        widths: const [
-                                          150,
-                                          250,
-                                          150,
-                                          150,
-                                          150,
-                                          150,
-                                          250
-                                        ],
-                                        header: const [
-                                          "التسلسل",
-                                          "اسم الاشتراك",
-                                          "قيمة الاشتراك",
-                                          "نوع الاشتراك",
-                                          "عدد الايام",
-                                          "عدد الحصص",
-                                          "ملاحظات",
-                                        ],
-                                        nameOfGlobalID: 'manageSubscription',
+                            flex: 6,
+                            child: controller.statusRequs ==
+                                    StatusRequst.loading
+                                ? const CustomLoadingIndecator()
+                                : Container(
+                                    color: const Color.fromARGB(
+                                        255, 218, 218, 218),
+                                    child: CustomModernTable(
+                                      data: controller.dataInTable,
+                                      widths: const [
+                                        150,
+                                        250,
+                                        150,
+                                        150,
+                                        150,
+                                        150,
+                                        250
+                                      ],
+                                      header: const [
+                                        "التسلسل",
+                                        "اسم الاشتراك",
+                                        "قيمة الاشتراك",
+                                        "نوع الاشتراك",
+                                        "عدد الايام",
+                                        "عدد الحصص",
+                                        "ملاحظات",
+                                      ],
+                                      nameOfGlobalID: 'manageSubscription',
                                       onRowTap: () {
                                         controller.assignModel(
                                             controller.subList[GlobalVariable
@@ -129,6 +129,7 @@ class ManageSubscriptionsView extends StatelessWidget {
                                       controller.addSub();
                                     }
                                   },
+                                  isActive: controller.canAdd ? true : false,
                                 ),
                                 CustomButton(
                                   text: "تعديل",
@@ -147,7 +148,6 @@ class ManageSubscriptionsView extends StatelessWidget {
                                                 onPressed: () {
                                                   Get.back();
                                                   controller.editSub();
-
                                                 },
                                                 child: const Text("نعم")),
                                             ElevatedButton(
@@ -158,6 +158,7 @@ class ManageSubscriptionsView extends StatelessWidget {
                                           ]);
                                     }
                                   },
+                                  isActive: !controller.canAdd ? true : false,
                                 ),
                                 CustomButton(
                                   text: "حذف",
@@ -166,7 +167,7 @@ class ManageSubscriptionsView extends StatelessWidget {
                                       : const Color.fromARGB(
                                           217, 202, 193, 193),
                                   ontap: () {
-                                      if (!controller.canAdd) {
+                                    if (!controller.canAdd) {
                                       Get.defaultDialog(
                                           title: "تحذير ",
                                           middleText:
@@ -186,6 +187,7 @@ class ManageSubscriptionsView extends StatelessWidget {
                                           ]);
                                     }
                                   },
+                                  isActive: !controller.canAdd ? true : false,
                                 ),
                                 CustomButton(
                                   text: "إلغاء",
@@ -226,7 +228,9 @@ class ManageSubscriptionsView extends StatelessWidget {
                                 ),
                               ),
                             ),
-                            child:  SubscriptionForm(type: controller.type,),                        
+                            child: SubscriptionForm(
+                              type: controller.type,
+                            ),
                           ),
                   )
                 ],

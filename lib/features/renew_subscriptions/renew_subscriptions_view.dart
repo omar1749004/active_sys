@@ -181,6 +181,7 @@ class RenewSybscriptionsView extends StatelessWidget {
                                 color: const Color.fromARGB(217, 255, 255, 255),
                                 ontap: () {
                                   controller.addRenew();
+
                                 },
                               ),
                               CustomButton(
@@ -209,6 +210,8 @@ class RenewSybscriptionsView extends StatelessWidget {
                                         ]);
                                   }
                                 },
+
+                                isActive: !controller.canAdd ? true : false,
                               ),
                               CustomButton(
                                 text: "حذف",
@@ -236,6 +239,8 @@ class RenewSybscriptionsView extends StatelessWidget {
                                         ]);
                                   }
                                 },
+
+                                isActive: !controller.canAdd ? true : false,
                               ),
                               CustomButton(
                                 text: "إلغاء",
@@ -244,6 +249,8 @@ class RenewSybscriptionsView extends StatelessWidget {
                                     controller.cleaModel();
                                   }
                                 },
+
+                                isActive: controller.canAdd ? true : false,
                               ),
                               CustomButton(
                                 text: "تجميد",
@@ -255,6 +262,7 @@ class RenewSybscriptionsView extends StatelessWidget {
                                     controller.gotoFrezze(controller.renewUser);
                                   }
                                 },
+                                isActive: !controller.canAdd ? true : false,
                               ),
                             ],
                           ),

@@ -15,7 +15,7 @@ abstract class ExpensesController extends GetxController {
   void assignModel(ExpensesModel privetModel);
   void editTransAction();
   void clearModel();
-   void deleteTransAction() ;
+  void deleteTransAction();
 }
 
 class ExpensesControllerImp extends ExpensesController {
@@ -142,6 +142,7 @@ class ExpensesControllerImp extends ExpensesController {
         handlTable(isdateSearch);
         statusRequs = StatusRequst.sucsess;
         clearModel();
+
       } else {
         statusRequs = StatusRequst.failure;
       }
@@ -165,9 +166,10 @@ class ExpensesControllerImp extends ExpensesController {
     update();
     var res = await ExpensesData().search({
       "search": search.text,
-      "start_date": isdateSearch== true? startSearch.toString().substring(0, 11): "0",
-      "end_date":   endSearch.toString().substring(0, 11),
-      });
+      "start_date":
+          isdateSearch == true ? startSearch.toString().substring(0, 11) : "0",
+      "end_date": endSearch.toString().substring(0, 11),
+    });
     if (res["status"] == "failure") {
       expensesList = [];
       assignDataInsideTable();
@@ -266,6 +268,7 @@ class ExpensesControllerImp extends ExpensesController {
           (element) => element.expensesId == expensesModel.expensesId);
           assignDataInsideTable();
           clearModel();
+
       statusRequs = StatusRequst.sucsess;
     } else {
       statusRequs = StatusRequst.failure;

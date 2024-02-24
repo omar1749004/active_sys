@@ -111,7 +111,6 @@ class ManagePlayers extends StatelessWidget {
                                         "نهايه الاشتراك",
                                         "ملاحظات"
                                       ],
-
                                       nameOfGlobalID: 'managePlayers',
                                       onRowTap: () {
                                         controller.assignModel(
@@ -119,7 +118,8 @@ class ManagePlayers extends StatelessWidget {
                                                 GlobalVariable.managePlayers!]);
                                       },
                                       showDialog: () {
-                                        controller.userModel = controller.usersList[
+                                        controller.userModel =
+                                            controller.usersList[
                                                 GlobalVariable.managePlayers!];
                                         customManagePlayerDialog(
                                             controller.userModel);
@@ -133,7 +133,7 @@ class ManagePlayers extends StatelessWidget {
                           Expanded(
                             flex: 3,
                             child: SingleChildScrollView(
-                              physics:const BouncingScrollPhysics(),
+                              physics: const BouncingScrollPhysics(),
                               child: Column(
                                 children: [
                                   //
@@ -166,6 +166,8 @@ class ManagePlayers extends StatelessWidget {
                                               controller.addUsers();
                                             }
                                           },
+                                          isActive:
+                                              controller.canAdd ? true : false,
                                         ),
                                         CustomButton(
                                           text: "تعديل",
@@ -198,6 +200,8 @@ class ManagePlayers extends StatelessWidget {
                                                   ]);
                                             }
                                           },
+                                          isActive:
+                                              !controller.canAdd ? true : false,
                                         ),
                                         CustomButton(
                                           text: "حذف",
@@ -230,6 +234,8 @@ class ManagePlayers extends StatelessWidget {
                                                   ]);
                                             }
                                           },
+                                          isActive:
+                                              !controller.canAdd ? true : false,
                                         ),
                                         CustomButton(
                                           text: "إلغاء",

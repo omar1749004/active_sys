@@ -1,7 +1,5 @@
-import 'package:active_system/core/shared/global_variable.dart';
 import 'package:active_system/core/shared/ModernTable/custom_row_table.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 class CustomModernTable extends StatefulWidget {
   const CustomModernTable({

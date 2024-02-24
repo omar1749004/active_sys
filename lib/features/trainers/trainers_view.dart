@@ -22,113 +22,112 @@ class TrainersView extends StatelessWidget {
       // if (controller.firstState == StatusRequst.loading) {
       //   return const CustomLoadingIndecator();
       // } else {
-        return Column(
-          children: [
-            //
-            //AppBar
-            //
-            const CustomAppBar(),
-            //
-            //content in the middle
-            //
-            Expanded(
-              child: SizedBox(
-                width: MediaQuery.of(context).size.width,
-                child: Row(
-                  children: [
-                    //left menu
-                    const CustomMenu(
-                      pageName: 'ادارة المتدربين',
-                    ),
-                    //the content in the middle
-                    Expanded(
-                      flex: 2,
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 10, horizontal: 15),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            //
-                            //search bar
-                            //
-                            SizedBox(
-                                width: MediaQuery.of(context).size.width * 0.5,
-                                child: CustomTableHeader(
-                                  searchController: controller.search,
-                                  onChanged: (p0) {
-                                    controller.checkSearch(p0);
-                                  },
-                                  header: "",
-                                )),
-                            //
-                            //table that contains data
-                            //
-                            Expanded(
-                              flex: 6,
-                              child:
-
-                                  controller.statusRequs == StatusRequst.loading
-                                      ? const CustomLoadingIndecator()
-                                      : Container(
-                                          color: const Color.fromARGB(
-                                              255, 218, 218, 218),
-                                          child: CustomModernTable(
-                                            data: controller.dataInTable,
-                                            widths: const [
-                                              150,
-                                              250,
-                                              200,
-                                              250,
-                                              250,
-                                            ],
-                                            header: const [
-                                              "المسلسل",
-                                              "ألاسم",
-                                              "نلفون",
-                                              "عنوان",
-                                              "ملاحظات",
-                                            ],
-                                            nameOfGlobalID: 'trainers',
-                                            onRowTap: () {
-                                              
-                                    controller.assignModel(controller.usersList[GlobalVariable.trainers!]);
-
-                                            },
-                                            showDialog: () {},
-                                          ),
+      return Column(
+        children: [
+          //
+          //AppBar
+          //
+          const CustomAppBar(),
+          //
+          //content in the middle
+          //
+          Expanded(
+            child: SizedBox(
+              width: MediaQuery.of(context).size.width,
+              child: Row(
+                children: [
+                  //left menu
+                  const CustomMenu(
+                    pageName: 'ادارة المتدربين',
+                  ),
+                  //the content in the middle
+                  Expanded(
+                    flex: 2,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 10, horizontal: 15),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          //
+                          //search bar
+                          //
+                          SizedBox(
+                              width: MediaQuery.of(context).size.width * 0.5,
+                              child: CustomTableHeader(
+                                searchController: controller.search,
+                                onChanged: (p0) {
+                                  controller.checkSearch(p0);
+                                },
+                                header: "",
+                              )),
+                          //
+                          //table that contains data
+                          //
+                          Expanded(
+                            flex: 6,
+                            child:
+                                controller.statusRequs == StatusRequst.loading
+                                    ? const CustomLoadingIndecator()
+                                    : Container(
+                                        color: const Color.fromARGB(
+                                            255, 218, 218, 218),
+                                        child: CustomModernTable(
+                                          data: controller.dataInTable,
+                                          widths: const [
+                                            150,
+                                            250,
+                                            200,
+                                            250,
+                                            250,
+                                          ],
+                                          header: const [
+                                            "المسلسل",
+                                            "ألاسم",
+                                            "نلفون",
+                                            "عنوان",
+                                            "ملاحظات",
+                                          ],
+                                          nameOfGlobalID: 'trainers',
+                                          onRowTap: () {
+                                            controller.assignModel(
+                                                controller.usersList[
+                                                    GlobalVariable.trainers!]);
+                                          },
+                                          showDialog: () {},
                                         ),
-                            ),
-                            //
-                            //buttons
-                            //
-                            Expanded(
-                              flex: 1,
-                              child: Row(
-                                textDirection: TextDirection.rtl,
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                children: [
-                                  CustomButton(
-                                    text: "أضافه",
+                                      ),
+                          ),
+                          //
+                          //buttons
+                          //
+                          Expanded(
+                            flex: 1,
+                            child: Row(
+                              textDirection: TextDirection.rtl,
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                CustomButton(
+                                  text: "أضافه",
                                   color: controller.canAdd
                                       ? const Color.fromARGB(217, 255, 255, 255)
                                       : const Color.fromARGB(
                                           217, 202, 193, 193),
-                                    ontap: () {
-                                      if (controller.canAdd) {
+                                  ontap: () {
+                                    if (controller.canAdd) {
                                       controller.addTrainer();
-                                      }
-                                    },
-                                  ),
-                                  CustomButton(
-                                    text: "تعديل",
+                                    }
+                                  },
+                                  isActive: controller.canAdd ? true : false,
+                                ),
+                                CustomButton(
+                                  text: "تعديل",
                                   color: !controller.canAdd
                                       ? const Color.fromARGB(217, 255, 255, 255)
                                       : const Color.fromARGB(
                                           217, 202, 193, 193),
-                                    ontap: () {
-                                  if (!controller.canAdd) {
+                                  ontap: () {
+                                    if (!controller.canAdd) {
                                       Get.defaultDialog(
                                           title: "تحذير ",
                                           middleText:
@@ -138,7 +137,6 @@ class TrainersView extends StatelessWidget {
                                                 onPressed: () {
                                                   Get.back();
                                                   controller.editTrainer();
-
                                                 },
                                                 child: const Text("نعم")),
                                             ElevatedButton(
@@ -148,15 +146,16 @@ class TrainersView extends StatelessWidget {
                                                 child: const Text("لا")),
                                           ]);
                                     }
-                                    },
-                                  ),
-                                  CustomButton(
-                                    text: "حذف",
+                                  },
+                                  isActive: !controller.canAdd ? true : false,
+                                ),
+                                CustomButton(
+                                  text: "حذف",
                                   color: !controller.canAdd
                                       ? const Color.fromARGB(217, 255, 255, 255)
                                       : const Color.fromARGB(
                                           217, 202, 193, 193),
-                                    ontap: () {
+                                  ontap: () {
                                     if (!controller.canAdd) {
                                       Get.defaultDialog(
                                           title: "تحذير ",
@@ -176,56 +175,57 @@ class TrainersView extends StatelessWidget {
                                                 child: const Text("لا")),
                                           ]);
                                     }
-                                    },
-                                  ),
-                                  CustomButton(
-                                    text: "إلغاء",
-                                    ontap: () {
-                                      controller.cleaModel();
-                                    },
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    //
-                    //form input right screen
-                    //
-                    Expanded(
-                      flex: 1,
-                      child:
-                      controller.firstState == StatusRequst.loading ?const CustomLoadingIndecator():
-                       Container(
-                        height: MediaQuery.of(context).size.height,
-                        padding: const EdgeInsets.only(left: 8, right: 8),
-                        decoration: const BoxDecoration(
-                          border: Border(
-                            top: BorderSide(
-                              width: 1,
-                              color: Color.fromRGBO(0, 0, 0, 0.186),
-                            ),
-                            left: BorderSide(
-                              width: 1,
-                              color: Color.fromRGBO(0, 0, 0, 0.186),
-                            ),
-                            bottom: BorderSide(
-                              width: 1,
-                              color: Color.fromRGBO(0, 0, 0, 0.186),
+                                  },
+                                  isActive: !controller.canAdd ? true : false,
+                                ),
+                                CustomButton(
+                                  text: "إلغاء",
+                                  ontap: () {
+                                    controller.cleaModel();
+                                  },
+                                ),
+                              ],
                             ),
                           ),
-                        ),
-                        child: const TrainersForm(),
+                        ],
                       ),
-                    )
-                  ],
-                ),
+                    ),
+                  ),
+                  //
+                  //form input right screen
+                  //
+                  Expanded(
+                    flex: 1,
+                    child: controller.firstState == StatusRequst.loading
+                        ? const CustomLoadingIndecator()
+                        : Container(
+                            height: MediaQuery.of(context).size.height,
+                            padding: const EdgeInsets.only(left: 8, right: 8),
+                            decoration: const BoxDecoration(
+                              border: Border(
+                                top: BorderSide(
+                                  width: 1,
+                                  color: Color.fromRGBO(0, 0, 0, 0.186),
+                                ),
+                                left: BorderSide(
+                                  width: 1,
+                                  color: Color.fromRGBO(0, 0, 0, 0.186),
+                                ),
+                                bottom: BorderSide(
+                                  width: 1,
+                                  color: Color.fromRGBO(0, 0, 0, 0.186),
+                                ),
+                              ),
+                            ),
+                            child: const TrainersForm(),
+                          ),
+                  )
+                ],
               ),
             ),
-          ],
-        );
+          ),
+        ],
+      );
       // }
     }));
   }

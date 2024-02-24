@@ -24,7 +24,7 @@ Future<dynamic> customManagePlayerDialog(UserModel userModel) {
                 width: 500,
                 child: CustomDisplyMany(
                     textColor: ColorApp.thirdColor,
-                    many: userModel.usersName,
+                    many: userModel.usersName ?? "",
                     text: "ألاسم",
                     flexOfMany: 2),
               ),
@@ -32,7 +32,9 @@ Future<dynamic> customManagePlayerDialog(UserModel userModel) {
                 width: 500,
                 child: CustomDisplyMany(
                   textColor: ColorApp.thirdColor,
-                  many: userModel.usersGender.toString(),
+                  many: userModel.usersGender == null
+                      ? ""
+                      : userModel.usersGender.toString(),
                   text: "الجنس",
                   flexOfMany: 2,
                 ),
@@ -41,7 +43,7 @@ Future<dynamic> customManagePlayerDialog(UserModel userModel) {
                 width: 500,
                 child: CustomDisplyMany(
                   textColor: ColorApp.thirdColor,
-                  many: userModel.usersPhone,
+                  many: userModel.usersPhone ?? "",
                   text: "تلفون",
                   flexOfMany: 2,
                 ),
@@ -59,7 +61,7 @@ Future<dynamic> customManagePlayerDialog(UserModel userModel) {
                 width: 500,
                 child: CustomDisplyMany(
                   textColor: ColorApp.thirdColor,
-                  many: userModel.usersAddress,
+                  many: userModel.usersAddress ?? "",
                   text: "العنوان",
                   flexOfMany: 2,
                 ),
@@ -77,7 +79,9 @@ Future<dynamic> customManagePlayerDialog(UserModel userModel) {
                 width: 500,
                 child: CustomDisplyMany(
                   textColor: ColorApp.thirdColor,
-                  many: userModel.usersCreate.toString().substring(0,11),
+                  many: userModel.usersCreate == null
+                      ? ""
+                      : userModel.usersCreate.toString().substring(0, 11),
                   text: "تاريخ الانشاء",
                   flexOfMany: 2,
                 ),
