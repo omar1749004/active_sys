@@ -26,22 +26,23 @@ class ClinetInfo extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       ...List.generate(
                         4,
-                        (index) => Expanded(
-                          child: CustomBotton1(
-                            marginTop: 10,
-                            marginBottom: 25,
-                            hieght: 50,
-                            ontap: () {
-                              controller.selectSupType(index);
-                            },
-                            text: supType[index],
-                            color: controller.supType == index
-                                ? ColorApp.onfoucosColor
-                                : ColorApp.kPrimaryColor,
-                          ),
+                        (index) => CustomBotton1(
+                          marginLeft: 0,
+                          marginRight: 0,
+                          marginTop: 10,
+                          marginBottom: 25,
+                          hieght: 50,
+                          ontap: () {
+                            controller.selectSupType(index);
+                          },
+                          text: supType[index],
+                          color: controller.supType == index
+                              ? ColorApp.onfoucosColor
+                              : ColorApp.kPrimaryColor,
                         ),
                       ),
                     ],
@@ -65,7 +66,9 @@ class ClinetInfo extends StatelessWidget {
                             radius: MediaQuery.of(context).size.width * 0.06,
                             child: ClipOval(
                               child: SizedBox.fromSize(
-                                size: Size.fromRadius(MediaQuery.of(context).size.width * 0.06), // Image radius
+                                size: Size.fromRadius(
+                                    MediaQuery.of(context).size.width *
+                                        0.06), // Image radius
                                 child: CachedNetworkImage(
                                   fit: BoxFit.fill,
                                   imageUrl: "$linkImageUpload/picture.png",
@@ -117,7 +120,7 @@ class ClinetInfo extends StatelessWidget {
                                 height: 20,
                               ),
                               SizedBox(
-                                height: 120,
+                                height: 90,
                                 child: CustomeTextFormAuth(
                                   fontSize: 30,
                                   hintText: "",
@@ -202,6 +205,9 @@ class ClinetInfo extends StatelessWidget {
                     onChanged: (val) {
                       controller.changemodel(val!);
                     },
+                  ),
+                  const SizedBox(
+                    height: 15,
                   ),
                 ],
               ),

@@ -24,7 +24,7 @@ Future<dynamic> customHomePageDialog(AttendModel attendModel) {
                 width: 500,
                 child: CustomDisplyMany(
                     textColor: ColorApp.thirdColor,
-                    many: attendModel.usersName,
+                    many: attendModel.usersName ?? "",
                     text: "الاسم",
                     flexOfMany: 2),
               ),
@@ -32,7 +32,7 @@ Future<dynamic> customHomePageDialog(AttendModel attendModel) {
                 width: 500,
                 child: CustomDisplyMany(
                   textColor: ColorApp.thirdColor,
-                  many: attendModel.usersPhone,
+                  many: attendModel.usersPhone ?? "",
                   text: "التلفون",
                   flexOfMany: 2,
                 ),
@@ -41,25 +41,7 @@ Future<dynamic> customHomePageDialog(AttendModel attendModel) {
                 width: 500,
                 child: CustomDisplyMany(
                   textColor: ColorApp.thirdColor,
-                  many: attendModel.attendanceStart,
-                  text: "وقت الحضور ",
-                  flexOfMany: 2,
-                ),
-              ),
-              SizedBox(
-                width: 500,
-                child: CustomDisplyMany(
-                  textColor: ColorApp.thirdColor,
-                  many: attendModel.attendanceEnd,
-                  text: "وقت الانصراف",
-                  flexOfMany: 2,
-                ),
-              ),
-              SizedBox(
-                width: 500,
-                child: CustomDisplyMany(
-                  textColor: ColorApp.thirdColor,
-                  many: attendModel.subscriptionsName,
+                  many: attendModel.subscriptionsName ?? "",
                   text: "أسم الاشتراك",
                   flexOfMany: 2,
                 ),
@@ -68,7 +50,9 @@ Future<dynamic> customHomePageDialog(AttendModel attendModel) {
                 width: 500,
                 child: CustomDisplyMany(
                   textColor: ColorApp.thirdColor,
-                  many: "${attendModel.subscriptionsSessionsNumber}/${attendModel.renewalSessionAttend}",
+                  many: attendModel.subscriptionsSessionsNumber == null
+                      ? ""
+                      : "${attendModel.subscriptionsSessionsNumber}/${attendModel.renewalSessionAttend}",
                   text: "رقم الجلسه",
                   flexOfMany: 2,
                 ),
@@ -77,7 +61,9 @@ Future<dynamic> customHomePageDialog(AttendModel attendModel) {
                 width: 500,
                 child: CustomDisplyMany(
                   textColor: ColorApp.thirdColor,
-                  many: attendModel.renewalEnd.toString().substring(0,11),
+                  many: attendModel.renewalEnd == null
+                      ? ""
+                      : attendModel.renewalEnd.toString().substring(0, 11),
                   text: "تاريخ انتهاء الاشتراك",
                   flexOfMany: 2,
                 ),

@@ -2,10 +2,11 @@ import 'package:active_system/controller/freeze_controller.dart';
 import 'package:active_system/core/class/statuscode.dart';
 import 'package:active_system/core/constant/color.dart';
 import 'package:active_system/core/functions/validate_input.dart';
+import 'package:active_system/core/shared/ModernTable/custom_modern_table.dart';
 import 'package:active_system/core/shared/custom_app_bar.dart';
 import 'package:active_system/core/shared/custom_date_field.dart';
-import 'package:active_system/core/shared/custom_table.dart';
 import 'package:active_system/core/shared/custome_textform_auth.dart';
+import 'package:active_system/core/shared/global_variable.dart';
 import 'package:active_system/core/shared/loading_indecator.dart';
 import 'package:active_system/features/manage_subscriptions/view/widgets/custom_button.dart';
 import 'package:active_system/features/manage_subscriptions/view/widgets/custom_menu.dart';
@@ -49,22 +50,41 @@ class FreezeScreen extends StatelessWidget {
                         //table that contains data
                         //
                         Expanded(
-                          flex: 4,
-                          child: CustomTable(columnsHeader: const [
-                            Text("1"),
-                            Text("2"),
-                            Text("3"),
-                            Text("4"),
-                            Text("1"),
-                            Text("2"),
-                            Text("3"),
-                            Text("1"),
-                            Text("2"),
-                            Text("3"),
-                            Text("4"),
-                            Text("1"),
-                            Text("2"),
-                          ], rowInfo: const []),
+                          flex: 8,
+                          child: controller.statusRequs == StatusRequst.loading
+                              ? const CustomLoadingIndecator()
+                              : Container(
+                                  color:
+                                      const Color.fromARGB(255, 218, 218, 218),
+                                  child: CustomModernTable(
+                                    data: controller.dataInTable,
+                                    widths: const [
+                                      150,
+                                      150,
+                                      200,
+                                      200,
+                                      150,
+                                      150,
+                                      250,
+                                    ],
+                                    header: const [
+                                      "كود التجميد",
+                                      "عددايام التجميد",
+                                      "بداية التجميد",
+                                      "نهاية التجميد",
+                                      "كود المستخدم",
+                                      "كود تجديد الاشتراك",
+                                      "ملاحظات",
+                                    ],
+                                    nameOfGlobalID: 'freeze',
+                                    onRowTap: () {
+                                      controller.assignModel(
+                                          controller.freezeList[
+                                              GlobalVariable.freeze!]);
+                                    },
+                                    showDialog: () {},
+                                  ),
+                                ),
                         ),
                         //
                         //box التجميد
@@ -114,7 +134,7 @@ class FreezeScreen extends StatelessWidget {
                                                   hintText: "",
                                                   lableText: "عدد الايام",
                                                   myController: controller.day,
-                                                  onChanged :(p0) {
+                                                  onChanged: (p0) {
                                                     controller.calcfreezeDate();
                                                   },
                                                   validator: (val) {
@@ -135,10 +155,14 @@ class FreezeScreen extends StatelessWidget {
                                                     child: CustomDateField(
                                                         width: 200,
                                                         height: 40,
-                                                        myController: TextEditingController(text: DateFormat('yyyy-MM-dd').format(controller.startSearch
-                                                      ),),
-                                                        iconSize: 18,  
-                                                        
+                                                        myController:
+                                                            TextEditingController(
+                                                          text: DateFormat(
+                                                                  'yyyy-MM-dd')
+                                                              .format(controller
+                                                                  .startSearch),
+                                                        ),
+                                                        iconSize: 18,
                                                         onChanged: (p0) {
                                                           controller
                                                                   .startSearch =
@@ -214,8 +238,11 @@ class FreezeScreen extends StatelessWidget {
                                                       width: 150,
                                                       height: 40,
                                                       iconSize: 18,
-                                                      myController: TextEditingController(text: DateFormat('yyyy-MM-dd').format(controller.endSearch)
-                                                      ),
+                                                      myController: TextEditingController(
+                                                          text: DateFormat(
+                                                                  'yyyy-MM-dd')
+                                                              .format(controller
+                                                                  .endSearch)),
                                                       onChanged: (p0) {
                                                         controller.endSearch =
                                                             p0!;
