@@ -181,7 +181,6 @@ class RenewSybscriptionsView extends StatelessWidget {
                                 color: const Color.fromARGB(217, 255, 255, 255),
                                 ontap: () {
                                   controller.addRenew();
-
                                 },
                               ),
                               CustomButton(

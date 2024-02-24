@@ -268,7 +268,6 @@ class ExpensesControllerImp extends ExpensesController {
           (element) => element.expensesId == expensesModel.expensesId);
           assignDataInsideTable();
           clearModel();
-
       statusRequs = StatusRequst.sucsess;
     } else {
       statusRequs = StatusRequst.failure;
