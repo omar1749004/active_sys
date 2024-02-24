@@ -25,130 +25,137 @@ class HomePage extends StatelessWidget {
         // if (controller.firstState == StatusRequst.loading) {
         //   return const CustomLoadingIndecator();
         // } else {
-          return Column(
-            children: [
-              const CustomAppBar(),
-              Expanded(
-                child: 
-                SizedBox(
-                  width: MediaQuery.of(context).size.width,
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const CustomMenu(
-                        pageName: "الصفحة الرئيسية",
-                      ),
-                      Expanded(
-                          flex: 2,
-                          child: Container(
-                            margin: const EdgeInsets.symmetric(horizontal: 2),
-                            child: Padding(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 15, vertical: 10),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.end,
-                                children: [
-                                  CustomTableHeader(
-                                      onChanged: (p0) {
-                                        if(p0.isEmpty){
-                                          controller.viewAll();
-                                        }else{
-                                           controller.searchFun();
-                                        }
-                                      },
-                                      searchController: controller.search,
-                                      header: "سجل الحضور اليومي"),
-                                  Expanded(
-                                    flex: 6,
-                                    child: controller.statusRequs ==
-                                            StatusRequst.loading
-                                        ? const CustomLoadingIndecator()
-                                        : Container(
-                                            color: const Color.fromARGB(
-                                                255, 218, 218, 218),
-                                            child: CustomModernTable(
-                                              data: controller.dataInTable,
-                                              widths: const [
-                                                150,
-                                                200,
-                                                200,
-                                                250,
-                                                250,
-                                              ],
-                                              header: const [
-                                                "الكود",
-                                                "وقت الحضور",
-                                                "وقت الانصراف",
-                                                "ألاسم",
-                                                "أسم الاشتراك",
-                                              ],
-                                              nameOfGlobalID: 'home',
-                                              onRowTap: () {},
-                                              //spicial for Homepage only
-                                              thisPageIsHomePage: true,
-                                              showDialog: () {
-                                                //pass to function model that will get when pressed on user in the table
-                                               controller.attendmodel = controller.attendList[GlobalVariable.home!];
-                                                customHomePageDialog(
-                                                    controller.attendmodel);
-                                              },
-                                            ),
-                                          ),
-                                  ),
-                                  Expanded(
-                                    flex: 1,
-                                    child: Row(
-                                      // crossAxisAlignment:
-                                      //     CrossAxisAlignment.start,
-                                      children: [
-                                        ...List.generate(
-                                          4,
-                                          (index) => Row(
-                                            children: [
-                                              Container(
-                                                margin: const EdgeInsets.only(
-                                                  right: 10,
-                                                  left: 10,
-                                                ),
-                                                width: 50,
-                                                height: 25,
-                                                color: val[index],
-                                              ),
-                                              Text(
-                                                keyy[index],
-                                                style: Styles.style15B,
-                                              ),
-                                          
+        return Column(
+          children: [
+            const CustomAppBar(),
+            Expanded(
+              child: SizedBox(
+                width: MediaQuery.of(context).size.width,
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const CustomMenu(
+                      pageName: "الصفحة الرئيسية",
+                    ),
+                    Expanded(
+                        flex: 2,
+                        child: Container(
+                          margin: const EdgeInsets.symmetric(horizontal: 2),
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 15, vertical: 10),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              children: [
+                                CustomTableHeader(
+                                    onChanged: (p0) {
+                                      if (p0.isEmpty) {
+                                        controller.viewAll();
+                                      } else {
+                                        controller.searchFun();
+                                      }
+                                    },
+                                    searchController: controller.search,
+                                    header: "سجل الحضور اليومي"),
+                                Expanded(
+                                  flex: 6,
+                                  child: controller.statusRequs ==
+                                          StatusRequst.loading
+                                      ? const CustomLoadingIndecator()
+                                      : Container(
+                                          color: const Color.fromARGB(
+                                              255, 218, 218, 218),
+                                          child: CustomModernTable(
+                                            data: controller.dataInTable,
+                                            widths: const [
+                                              150,
+                                              200,
+                                              200,
+                                              250,
+                                              250,
                                             ],
+                                            header: const [
+                                              "الكود",
+                                              "وقت الحضور",
+                                              "وقت الانصراف",
+                                              "ألاسم",
+                                              "أسم الاشتراك",
+                                            ],
+                                            nameOfGlobalID: 'home',
+                                            onRowTap: () {},
+                                            //spicial for Homepage only
+                                            thisPageIsHomePage: true,
+                                            showDialog: () {
+                                              //pass to function model that will get when pressed on user in the table
+                                              controller.attendmodel =
+                                                  controller.attendList[
+                                                      GlobalVariable.home!];
+                                              customHomePageDialog(
+                                                  controller.attendmodel);
+                                            },
                                           ),
                                         ),
-                                      const  SizedBox(width: 10,),
-                                            CustomButton(
-                                      text: "حذف",
-                                      ontap: () {
-                                        controller.deleteTransAction();
-                                      },
-                                    ),
-                                      ],
-                                    ),
+                                ),
+                                Expanded(
+                                  flex: 1,
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    // crossAxisAlignment:
+                                    //     CrossAxisAlignment.start,
+                                    children: [
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        children: [
+                                          ...List.generate(
+                                            4,
+                                            (index) => Row(
+                                              children: [
+                                                Container(
+                                                  margin: const EdgeInsets.only(
+                                                    right: 10,
+                                                    left: 10,
+                                                  ),
+                                                  width: 50,
+                                                  height: 25,
+                                                  color: val[index],
+                                                ),
+                                                Text(
+                                                  keyy[index],
+                                                  style: Styles.style15B,
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      CustomButton(
+                                        text: "حذف",
+                                        ontap: () {
+                                          controller.deleteTransAction();
+                                        },
+                                      ),
+                                    ],
                                   ),
-                                ],
-                              ),
+                                ),
+                              ],
                             ),
-                          )),
-                      const VerticalDivider(),
-                       Expanded(
-                        flex: 1,
-                        child:
-                        controller.firstState == StatusRequst.loading ?const CustomLoadingIndecator():
-                        const ClinetInfo(),
-                      ),
-                    ],
-                  ),
+                          ),
+                        )),
+                    const VerticalDivider(),
+                    Expanded(
+                      flex: 1,
+                      child: controller.firstState == StatusRequst.loading
+                          ? const CustomLoadingIndecator()
+                          : const ClinetInfo(),
+                    ),
+                  ],
                 ),
               ),
-            ],
-          );
+            ),
+          ],
+        );
         // }
       }),
     );

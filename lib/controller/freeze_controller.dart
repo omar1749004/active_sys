@@ -15,7 +15,7 @@ abstract class FreezeController extends GetxController {
   void calcDays();
   void deleteFreeze();
   void assignModel(FreezeModel privetModel);
-  void calcfreezeDate() ;
+  void calcfreezeDate();
 }
 
 class FreezeControllerImp extends FreezeController {
@@ -39,6 +39,7 @@ class FreezeControllerImp extends FreezeController {
   int? frezzeDay;
   int? freezeNum;
   int? maxFreeze;
+  List<List<String>> dataInTable = [];
 
   @override
   void onInit() {
@@ -135,15 +136,14 @@ class FreezeControllerImp extends FreezeController {
         }
       } else {
         statusRequs = StatusRequst.failure;
-       update();
+        update();
         globalAlert(msg);
-
       }
     }
     update();
   }
 
- @override
+  @override
   void calcDays() {
     if (startSearch == endSearch) {
       day.text = "0";
@@ -155,12 +155,12 @@ class FreezeControllerImp extends FreezeController {
     }
   }
 
-@override
+  @override
   void calcfreezeDate() {
     int midDay = int.parse(day.text);
-    endSearch = startSearch.add(Duration(days: midDay)) ;
+    endSearch = startSearch.add(Duration(days: midDay));
     update();
-      }
+  }
 
   @override
   void assignModel(FreezeModel privetModel) {
@@ -190,6 +190,22 @@ class FreezeControllerImp extends FreezeController {
       statusRequs = StatusRequst.failure;
     }
     update();
+  }
+
+  //function to assign data inside List
+  void assignDataInsideTable() {
+    dataInTable = [];
+    for (var i = 0; i < freezeList.length; i++) {
+      dataInTable.add([
+        freezeList[i].freezeId.toString(),
+        freezeList[i].freezeDay.toString(),
+        freezeList[i].freezeStart.toString(),
+        freezeList[i].freezeEnd.toString(),
+        freezeList[i].freezeUserId.toString(),
+        freezeList[i].freezeRenewalId.toString(),
+        freezeList[i].freezeNote.toString(),
+      ]);
+    }
   }
 }
 

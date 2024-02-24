@@ -9,13 +9,12 @@ import 'package:get/get.dart';
 
 class MangeCostForm extends GetView<ExpensesControllerImp> {
   const MangeCostForm({required this.many, super.key});
-  final String many ;
+  final String many;
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10.0),
       child: SingleChildScrollView(
-
         child: Form(
           key: controller.formKey,
           child: Column(
@@ -33,7 +32,7 @@ class MangeCostForm extends GetView<ExpensesControllerImp> {
               //
               //feild رقم المصروف
               //
-               Row(
+              Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Expanded(
@@ -68,7 +67,6 @@ class MangeCostForm extends GetView<ExpensesControllerImp> {
                     )
                   ],
                 ),
-
               ),
               const SizedBox(
                 height: 20,
@@ -98,10 +96,10 @@ class MangeCostForm extends GetView<ExpensesControllerImp> {
                 height: 15,
               ),
               CustomeTextFormAuth(
-                  hintText: "",
-                  lableText: "ملاحظات",
-                  myController: controller.note,
-                 ),
+                hintText: "",
+                lableText: "ملاحظات",
+                myController: controller.note,
+              ),
             ],
           ),
         ),
