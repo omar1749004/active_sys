@@ -110,6 +110,7 @@ class RenewSybscriptionsView extends StatelessWidget {
                                     //   controller.viewAll();
                                     // }
                                   },
+
                                   color: controller.isdateSearch
                                       ? ColorApp.onfoucosColor
                                       : ColorApp.kPrimaryColor,
@@ -178,9 +179,11 @@ class RenewSybscriptionsView extends StatelessWidget {
                             children: [
                               CustomButton(
                                 text: "أضافه",
+
                                 color: const Color.fromARGB(217, 255, 255, 255),
                                 ontap: () {
                                   controller.addRenew();
+
 
                                 },
                               ),

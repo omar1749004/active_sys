@@ -77,6 +77,7 @@ class ClinetInfo extends StatelessWidget {
                                               "$linkImageUpload/${controller.imageName}",
                                         )
                                       : const SizedBox()),
+
                             )),
                       ),
                       Expanded(

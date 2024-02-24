@@ -141,6 +141,7 @@ class ExpensesControllerImp extends ExpensesController {
       } else if (res["status"] == "success") {
         handlTable(isdateSearch);
         statusRequs = StatusRequst.sucsess;
+
         clearModel();
 
       } else {
