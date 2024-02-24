@@ -15,6 +15,7 @@ abstract class HomeController extends GetxController {
   void viewAll();
   void getSub();
   void assignModel(AttendModel privetModel);
+  void calcAge() ;
   void handlebarcode();
   void handleFunctionsAdd();
   void rightSearch();
@@ -41,6 +42,8 @@ class HomeControllerImp extends HomeController {
   late AttendModel attendmodel;
   int supType = 0;
   int selcetRenew = 0;
+  String ? imageName;
+  DateTime? brithDay ;
   bool isactive = false;
   List<AttendModel> attendList = [];
   late SubscriptionModel subscriptionModel;
@@ -122,11 +125,6 @@ class HomeControllerImp extends HomeController {
         statusRequs = StatusRequst.failure;
     } else if (res["status"] == "success") {
        attendmodel = AttendModel.fromJson(res["data"]);
-        for (int i = 0; i < subNameList.length; i++) {
-          if (attendmodel.subscriptionsName == subNameList[i]) {
-            subValue = subNameList[i];
-          }
-        }
         assignModel(attendmodel);
         attendList.add(attendmodel);
         assignDataInsideTable();
@@ -157,11 +155,6 @@ class HomeControllerImp extends HomeController {
         statusRequs = StatusRequst.failure;
       } else if (res["status"] == "success") {
         attendmodel = AttendModel.fromJson(res["data"]);
-        for (int i = 0; i < subNameList.length; i++) {
-          if (attendmodel.subscriptionsName == subNameList[i]) {
-            subValue = subNameList[i];
-          }
-        }
         assignModel(attendmodel);
         attendList.add(attendmodel);
         assignDataInsideTable();
@@ -243,11 +236,6 @@ class HomeControllerImp extends HomeController {
         statusRequs = StatusRequst.failure;
       } else if (res["status"] == "success") {
         attendmodel = AttendModel.fromJson(res["data"]);
-        for (int i = 0; i < subNameList.length; i++) {
-          if (attendmodel.subscriptionsName == subNameList[i]) {
-            subValue = subNameList[i];
-          }
-        }
         assignModel(attendmodel);
         attendList.add(attendmodel);
         assignDataInsideTable();
@@ -317,11 +305,30 @@ class HomeControllerImp extends HomeController {
     attendmodel = privetModel;
     username.text = privetModel.usersName!;
     phone.text = privetModel.usersPhone!;
+    
+    imageName = privetModel.usersImage ;
     barcode.text = privetModel.barcode?.toString() ?? "0";
-    deadline.text =privetModel.renewalEnd?.toString() ?? ''  ;
+    deadline.text =privetModel.renewalEnd?.toString().substring(0,11) ?? ''  ;
+    if(privetModel.brithDay != null)
+    {
+      brithDay = privetModel.brithDay ;
+      calcAge();
+    }
+    
     note.text = privetModel.usersNote?? "";
-    subValue = privetModel.subscriptionsName!;
+
+
+    if(privetModel.subscriptionsName != null && supType == 0)
+    {
+     subValue = privetModel.subscriptionsName!;
+    }
     subscriptions.text = privetModel.subscriptionsName!;
+    update();
+  }
+  @override
+  void calcAge() {
+    int midage = DateTime.now().year - brithDay!.year  ;
+    age.text = midage.toString() ;
   }
 
   @override
@@ -330,7 +337,11 @@ class HomeControllerImp extends HomeController {
     phone.clear();
     barcode.text = "0";
     deadline.clear();
+    brithDay = null;
+    age.clear();
+    imageName = null ;
     note.clear();
+    update();
   }
 
   @override
@@ -430,14 +441,12 @@ class HomeControllerImp extends HomeController {
       "search": search,
     });
     if (res["status"] == "success") {
-
-      username.text = res["data"]["user_name"];
-      phone.text = res["data"]["users_phone"];
-      subscriptions.text = res["data"]["subscriptions_name"];
-      deadline.text = res["data"]["renewal_end"].toString().substring(0, 11);
-      subValue =res["data"]["subscriptions_name"]!;
+       attendmodel = AttendModel.fromJson(res["data"]);
+        assignModel(attendmodel);
       statusRequs = StatusRequst.sucsess;
     } else if (res["status"] == "failure") {
+      statusRequs = StatusRequst.failure;
+    }else{
       statusRequs = StatusRequst.failure;
     }
     update();

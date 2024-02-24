@@ -64,14 +64,14 @@ class RenewControllerImp extends RenewController {
 
   bool isSearch = false;
   bool isdateSearch = true;
-  bool canAdd =true ;
+  bool canAdd = true;
   DateTime startSearch = DateTime.now();
   DateTime endSearch = DateTime.now();
 
   String trainerValue = "عام";
   String subValue = "عام";
   String payedType = "0";
-  
+
   late String _amountMid;
   DateTime? start = DateTime.now();
   DateTime? end = DateTime.now();
@@ -223,18 +223,7 @@ class RenewControllerImp extends RenewController {
         statusRequs = StatusRequst.failure;
       } else if (res["status"] == "success") {
         renewUser = RenewModel.fromJson(res["data"]);
-        userName.text = renewUser.usersName!;
-        phone.text = renewUser.usersPhone!;
-        preNote.text = renewUser.renewalNote ?? " ";
-
-        if (renewUser.subscriptionsName != null) {
-          for (int i = 0; i < subNameList.length; i++) {
-            if (renewUser.subscriptionsName == subNameList[i]) {
-              subValue = subNameList[i];
-              update();
-            }
-          }
-        } else {}
+        assignModel(renewUser);
         statusRequs = StatusRequst.sucsess;
       } else {
         statusRequs = StatusRequst.failure;
@@ -250,12 +239,11 @@ class RenewControllerImp extends RenewController {
   void addRenew() async {
     statusRequs = StatusRequst.loading;
     update();
-    
+
     if (formKey.currentState!.validate()) {
-      
       String offe = _getDesc();
       String ow = _getowed();
-      
+
       var res = await RenewData().add({
         "userid": renewUser.usersId.toString(),
         "name": renewUser.usersName,
@@ -285,9 +273,8 @@ class RenewControllerImp extends RenewController {
       } else {
         statusRequs = StatusRequst.failure;
       }
-    }
-    else{
-     statusRequs = StatusRequst.failure;
+    } else {
+      statusRequs = StatusRequst.failure;
     }
     update();
   }
@@ -309,23 +296,24 @@ class RenewControllerImp extends RenewController {
       return "0";
     }
   }
+
   void setTypePaed(String typeofPayed) {
     if ("نقدى" == typeofPayed) {
       amount.text = price.text;
-      descound.text="0";
+      descound.text = "0";
       payedType = "0";
-    } else if("محفظة" == typeofPayed){
-      descound.text = price.text ;
-       calAfterDesc(descound.text);
-      payedType= "2";
-    }else{
-      descound.text = price.text ;
-       calAfterDesc(descound.text);
-     payedType = "1" ;
+    } else if ("محفظة" == typeofPayed) {
+      descound.text = price.text;
+      calAfterDesc(descound.text);
+      payedType = "2";
+    } else {
+      descound.text = price.text;
+      calAfterDesc(descound.text);
+      payedType = "1";
     }
     update();
   }
- 
+
   @override
   void dateSearch(DateTime startD, DateTime endD) async {
     statusRequs = StatusRequst.loading;
@@ -336,8 +324,8 @@ class RenewControllerImp extends RenewController {
         "end_date": endD.toString().substring(0, 11),
       });
       if (res["status"] == "failure") {
-         renewList = [];
-      assignDataInsideTable();
+        renewList = [];
+        assignDataInsideTable();
         statusRequs = StatusRequst.failure;
       } else if (res["status"] == "success") {
         List data = res["data"];
@@ -370,9 +358,10 @@ class RenewControllerImp extends RenewController {
     update();
     var res = await RenewData().search({
       "search": searchVal.text,
-      "start_date":  isdateSearch== true? startSearch.toString().substring(0, 11): "0",
-      "end_date":   endSearch.toString().substring(0, 11),
-      });
+      "start_date":
+          isdateSearch == true ? startSearch.toString().substring(0, 11) : "0",
+      "end_date": endSearch.toString().substring(0, 11),
+    });
     if (res["status"] == "failure") {
       renewList = [];
       assignDataInsideTable();
@@ -443,8 +432,10 @@ class RenewControllerImp extends RenewController {
   @override
   void gotoFrezze(RenewModel privteModel) {
     if (privteModel.renewalEnd?.isAfter(DateTime.now()) ?? false) {
-      Get.toNamed(AppRoute.freezescreenid,
-          arguments: {"RenewModel": privteModel ,"subModel" : subscriptionModel});
+      Get.toNamed(AppRoute.freezescreenid, arguments: {
+        "RenewModel": privteModel,
+        "subModel": subscriptionModel
+      });
     } else {
       globalAlert("اللاعب اشتراكه منتهي", title: "!خطأ");
     }
@@ -504,48 +495,51 @@ class RenewControllerImp extends RenewController {
     update();
   }
 
-@override
+  @override
   void assignModel(RenewModel privetModel) {
-    renewUser = privetModel ;
+    renewUser = privetModel;
     barcodeNum.text = privetModel.barcode.toString();
     userName.text = privetModel.usersName.toString();
-    phone.text = privetModel.usersPhone?? "" ;
-    trainerValue = privetModel.captainNamme?? "";
+    phone.text = privetModel.usersPhone ?? "";
+    trainerValue = privetModel.captainNamme ?? "";
     start = privetModel.renewalStart ?? DateTime.now();
-    if(privetModel.renewalStart == null)
-    {
-      setEndDate(start!) ;
-    }else{
-      end = privetModel.renewalEnd; /////////////////////////////////////////////
+    if (privetModel.renewalStart == null) {
+      setEndDate(start!);
+    } else {
+      end =
+          privetModel.renewalEnd; /////////////////////////////////////////////
     }
-     subValue = privetModel.subscriptionsName! ;
-    changemodel(subValue) ;
-    caluserPayd();
-    preNote.text =privetModel.renewalNote ?? "" ;
-    amount.text =privetModel.renewalAmount.toString() ;
-    remining.text =privetModel.renewAmountOwed.toString() ;
-    canAdd =false ;
+    subValue = privetModel.subscriptionsName!;
+    changemodel(subValue);
+
+    preNote.text = privetModel.renewalNote ?? "";
+    if (renewUser.renewalAmount != -1) {
+      amount.text = privetModel.renewalAmount.toString();
+      caluserPayd();
+      remining.text = privetModel.renewAmountOwed.toString();
+    }
+
+    canAdd = false;
     update();
   }
- 
-  void caluserPayd(){
-    double disc =  (renewUser.renewalAmount! + renewUser.renewAmountOwed!) - subscriptionModel.subscriptionsPrice ;
+
+  void caluserPayd() {
+    double disc = (renewUser.renewalAmount! + renewUser.renewAmountOwed!) -
+        subscriptionModel.subscriptionsPrice;
     descound.text = disc.toString();
-    afterDescound.text =price.text ;
+    afterDescound.text = price.text;
   }
 
-void cleaModel(){
-  changemodel(subValue);
+  void cleaModel() {
+    changemodel(subValue);
     barcodeNum.clear();
     userName.clear();
     phone.clear();
     preNote.clear();
-    start = DateTime.now() ;
+    start = DateTime.now();
     remining.clear();
-    setEndDate(start!) ;
-    canAdd =true ;
+    setEndDate(start!);
+    canAdd = true;
     update();
-}
-
-
+  }
 }

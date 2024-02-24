@@ -178,13 +178,9 @@ class RenewSybscriptionsView extends StatelessWidget {
                             children: [
                               CustomButton(
                                 text: "أضافه",
-                                color: controller.canAdd
-                                    ? const Color.fromARGB(217, 255, 255, 255)
-                                    : const Color.fromARGB(217, 202, 193, 193),
+                                color: const Color.fromARGB(217, 255, 255, 255),
                                 ontap: () {
-                                  if (controller.canAdd) {
-                                    controller.addRenew();
-                                  }
+                                  controller.addRenew();
                                 },
                               ),
                               CustomButton(
@@ -213,6 +209,7 @@ class RenewSybscriptionsView extends StatelessWidget {
                                         ]);
                                   }
                                 },
+
                                 isActive: !controller.canAdd ? true : false,
                               ),
                               CustomButton(
@@ -241,6 +238,7 @@ class RenewSybscriptionsView extends StatelessWidget {
                                         ]);
                                   }
                                 },
+
                                 isActive: !controller.canAdd ? true : false,
                               ),
                               CustomButton(
@@ -250,6 +248,7 @@ class RenewSybscriptionsView extends StatelessWidget {
                                     controller.cleaModel();
                                   }
                                 },
+
                                 isActive: controller.canAdd ? true : false,
                               ),
                               CustomButton(

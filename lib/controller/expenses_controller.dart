@@ -141,9 +141,8 @@ class ExpensesControllerImp extends ExpensesController {
       } else if (res["status"] == "success") {
         handlTable(isdateSearch);
         statusRequs = StatusRequst.sucsess;
-        amount.clear();
-        reason.clear();
-        note.clear();
+        clearModel();
+
       } else {
         statusRequs = StatusRequst.failure;
       }
@@ -215,7 +214,7 @@ class ExpensesControllerImp extends ExpensesController {
   }
 
   @override
-  editTransAction() async {
+ void  editTransAction() async {
     if (formKey.currentState!.validate()) {
       statusRequs = StatusRequst.loading;
       update();
@@ -246,7 +245,7 @@ class ExpensesControllerImp extends ExpensesController {
   }
 
   @override
-  clearModel() {
+ void clearModel() {
     reason.clear();
     note.clear();
     amount.clear();
@@ -258,6 +257,7 @@ class ExpensesControllerImp extends ExpensesController {
   void deleteTransAction() async {
     var res = await ExpensesData().delete({
       "id": expensesModel.expensesId.toString(),
+      "adminId" :"1" ,
     });
 
     if (res["status"] == "failure") {
@@ -266,7 +266,8 @@ class ExpensesControllerImp extends ExpensesController {
     } else if (res["status"] == "success") {
       expensesList.removeWhere(
           (element) => element.expensesId == expensesModel.expensesId);
-      assignDataInsideTable();
+          assignDataInsideTable();
+          clearModel();
       statusRequs = StatusRequst.sucsess;
     } else {
       statusRequs = StatusRequst.failure;

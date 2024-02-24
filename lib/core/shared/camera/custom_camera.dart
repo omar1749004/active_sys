@@ -180,7 +180,7 @@ class _CameraViewState extends State<CameraView> {
                   // link.click();
                   //link.remove();
                 },
-          child: const Text('Take picture.'),
+          child: const Text('التقط صورة'),
         ),
       ],
     );
