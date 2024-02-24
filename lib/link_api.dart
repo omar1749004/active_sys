@@ -91,6 +91,7 @@ const String linkFreezeView = "$linkServerName/freeze/view.php";
 const String linkFreezeDelete = "$linkServerName/freeze/delet.php";
 
 //image
+
 const String linkImageUpload = "http://localhost/activegym_app/upload";
 //pdfs
 const String linkPDFs = "http://localhost/activegym_app/pdfs";

@@ -155,6 +155,7 @@ class MangeUsersControllerImp extends MangeUsersController {
       if (_subList[i].subscriptionsName == subName) {
         subscriptionModel = _subList[i];
         price.text = subscriptionModel.subscriptionsPrice.toString();
+        break ;
       }
     }
   }
@@ -176,9 +177,10 @@ class MangeUsersControllerImp extends MangeUsersController {
 
   @override
   void changeTrainermodel(String trainerName) {
-    for (int i = 0; i < subNameList.length; i++) {
-      if (_trainerList[i].usersId.toString() == trainerName) {
+    for (int i = 0; i < trainerNameList.length; i++) {
+      if (_trainerList[i].usersName == trainerName) {
         userModel = _trainerList[i];
+        break ;
       }
     }
   }
@@ -188,7 +190,6 @@ class MangeUsersControllerImp extends MangeUsersController {
     statusRequs = StatusRequst.loading;
     update();
     if (formKey.currentState!.validate()) {
-      if (file == null) {
         var res = await UsersData().add({
           "name": userName.text,
           "phone": phone.text,
@@ -211,11 +212,7 @@ class MangeUsersControllerImp extends MangeUsersController {
           globalAlert("هذا الكود مستخدم بالفعل");
           statusRequs = StatusRequst.failure;
         }
-      } else {
-        statusRequs = StatusRequst.failure;
 
-        globalAlert("يجب ادخال صورة اللاعب");
-      }
     } else {
       statusRequs = StatusRequst.failure;
     }

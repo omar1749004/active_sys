@@ -3,7 +3,6 @@ import 'dart:html';
 import 'package:active_system/controller/mange_player.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
 import 'dart:io' as f;
 
 class CustomCamera extends StatefulWidget {
@@ -182,7 +181,7 @@ class _CameraViewState extends State<CameraView> {
                   // link.click();
                   //link.remove();
                 },
-          child: const Text('Take picture.'),
+          child: const Text('التقط صورة'),
         ),
       ],
     );

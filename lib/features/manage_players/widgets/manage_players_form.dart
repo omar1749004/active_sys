@@ -208,7 +208,7 @@ class ManagePlayersForm extends GetView<MangeUsersControllerImp> {
                   height: 15,
                 ),
                 controller.file == null
-                    ? const Text("")
+                    ? const SizedBox()
                     : kIsWeb
                         ? Image.network(controller.file!.path)
                         : Image.file(controller.file!),

@@ -58,18 +58,23 @@ class ClinetInfo extends StatelessWidget {
                       //     size: MediaQuery.of(context).size.width * 0.04,
                       //   ),
                       // ),
+                     
                       Container(
                         padding: const EdgeInsets.only(bottom: 30, left: 30),
                         child: CircleAvatar(
                             backgroundColor: ColorApp.gray,
                             radius: MediaQuery.of(context).size.width * 0.06,
-                            child: ClipOval(
+                            
+                            child:
+                             ClipOval(
                               child: SizedBox.fromSize(
                                 size: Size.fromRadius(MediaQuery.of(context).size.width * 0.06), // Image radius
-                                child: CachedNetworkImage(
-                                  fit: BoxFit.fill,
-                                  imageUrl: "$linkImageUpload/picture.png",
-                                ),
+                                child:controller.imageName != null
+          ? CachedNetworkImage(
+              fit: BoxFit.fill,
+              imageUrl: "$linkImageUpload/${controller.imageName}",
+            )
+          :const SizedBox()
                               ),
                             )),
                       ),
