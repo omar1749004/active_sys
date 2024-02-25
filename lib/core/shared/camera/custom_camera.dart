@@ -4,8 +4,7 @@ import 'package:active_system/controller/mange_player.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'dart:io' as f;
-import 'package:path/path.dart';
+
 
 class CustomCamera extends StatefulWidget {
   CustomCamera({super.key, required this.contrller});

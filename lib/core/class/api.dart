@@ -5,7 +5,7 @@ import 'package:path/path.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
-String _basicAuth = 'Basic ' + base64Encode(utf8.encode('omar:omar194004'));
+String _basicAuth = 'Basic  + ${base64Encode(utf8.encode('omar:omar194004'))}';
 
 Map<String, String> myheaders = {'authorization': _basicAuth};
 
@@ -107,9 +107,10 @@ class Api {
 
     // var length = await file.length();
     //var stream = http.ByteStream(file.openRead());
-    
-    var multipartfile = http.MultipartFile("file", stream, length,
-        filename: basename(file.path));
+      // print(basename(file.path + ".png")) ;
+
+    var multipartfile = http.MultipartFile("files", stream, length,
+        filename: '${basename(file.path)}.png');
     request.headers.addAll(myheaders);
     request.files.add(multipartfile);
     body.forEach((key, value) {

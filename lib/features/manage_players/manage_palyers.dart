@@ -215,7 +215,7 @@ class ManagePlayers extends StatelessWidget {
                                               Get.defaultDialog(
                                                   title: "تحذير ",
                                                   middleText:
-                                                      "هل أنت متأكد أنك تريد حذف الاشتراك",
+                                                      "هل أنت متأكد أنك تريد حذف االلاعب",
                                                   actions: [
                                                     ElevatedButton(
                                                         onPressed: () {

@@ -174,6 +174,8 @@ class SafeControllerImp extends SafeController {
         globalAlert("يرجى إعادة المحاولة في وقت لاحق", title: "!خطأ");
         statusRequs = StatusRequst.failure;
       } else if (res["status"] == "success") {
+        reason.clear();
+        amount.clear();
         statusRequs = StatusRequst.sucsess;
       } else {
         statusRequs = StatusRequst.failure;

@@ -1,4 +1,4 @@
-import 'dart:io';
+
 
 import 'package:active_system/core/class/statuscode.dart';
 import 'package:active_system/core/functions/global_alert.dart';
@@ -74,7 +74,6 @@ class MangeUsersControllerImp extends MangeUsersController {
   bool isDateSearch = false;
   bool isSearch = false;
 
-  DateTime brithdate = DateTime.now();
 
   int totalPlayers = 0;
 
@@ -196,7 +195,7 @@ class MangeUsersControllerImp extends MangeUsersController {
           "phone": phone.text,
           "note": note.text,
           "gender": gender,
-          "date": brithdate.toString().substring(0, 11),
+          "date": brithDay.toString().substring(0, 11),
           "captinId": trainerModel.usersId.toString(),
           "subscriptionsId": subscriptionModel.subscriptionsId.toString(),
           "adminId": "1",
@@ -208,6 +207,7 @@ class MangeUsersControllerImp extends MangeUsersController {
           statusRequs = StatusRequst.failure;
         } else if (res["status"] == "success") {
           cleaModel();
+          view();
           statusRequs = StatusRequst.sucsess;
         } else if (res["msg"] == "barcode is used") {
           globalAlert("هذا الكود مستخدم بالفعل");
@@ -340,7 +340,9 @@ class MangeUsersControllerImp extends MangeUsersController {
       statusRequs = StatusRequst.failure;
     } else if (res["status"] == "success") {
       usersList.removeWhere((element) => element.usersId == userModel.usersId);
+      cleaModel();
       assignDataInsideTable();
+      
       statusRequs = StatusRequst.sucsess;
     } else {
       statusRequs = StatusRequst.failure;
@@ -359,7 +361,7 @@ class MangeUsersControllerImp extends MangeUsersController {
         "phone": phone.text,
         "note": note.text,
         "gender": gender,
-        "date": brithdate.toString().substring(0, 11),
+        "date": brithDay.toString().substring(0, 11),
         "captinId": trainerModel.usersId.toString(),
         "subscriptionsId": subscriptionModel.subscriptionsId.toString(),
         "adminId": "1",
@@ -411,6 +413,7 @@ class MangeUsersControllerImp extends MangeUsersController {
     phone.text = privetModel.usersPhone!;
     trainerValue = privetModel.captainName!;
     brithDay = privetModel.usersDate ;
+    
     calcAge();
     note.text = privetModel.usersNote!;
     subValue = privetModel.subscriptionsName!;
@@ -424,7 +427,7 @@ class MangeUsersControllerImp extends MangeUsersController {
     userName.clear();
     phone.clear();
     note.clear();
-    age.clear();
+    age.text = "0";
     brithDay = DateTime.now();
     canAdd = true;
     update();
@@ -433,7 +436,9 @@ class MangeUsersControllerImp extends MangeUsersController {
   @override
   void calcAge() {
     int midage = DateTime.now().year - brithDay!.year  ;
+    
     age.text = midage.toString() ;
+    
   }
   
   @override

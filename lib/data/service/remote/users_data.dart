@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:active_system/core/class/api.dart';
 import 'package:active_system/link_api.dart';
 import 'package:camera/camera.dart';
@@ -23,7 +21,7 @@ class UsersData{
      res = await Api().post(uri: linkUsersEdit, body: data);
     return res;
     }else{
-    // res  =await Api().postFile(uri: linkUsersEdit, body: data, file: file);
+     res  =await Api().postFile(uri: linkUsersEdit, body: data, file: file);
       return res;
     }
   }
