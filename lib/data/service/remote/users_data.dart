@@ -2,11 +2,12 @@ import 'dart:io';
 
 import 'package:active_system/core/class/api.dart';
 import 'package:active_system/link_api.dart';
+import 'package:camera/camera.dart';
 
 class UsersData{
  UsersData();
 
-   add(Map data,{File ? file})async{
+   add(Map data,{XFile ? file})async{
     var res  ;
     if(file == null){
      res = await Api().post(uri: linkUsersAdd, body: data);
@@ -16,7 +17,7 @@ class UsersData{
     }
     return res;
   }
-   edit(Map data ,{File? file})async{
+   edit(Map data ,{XFile? file})async{
     var res  ;
     if(file == null){
      res = await Api().post(uri: linkUsersEdit, body: data);

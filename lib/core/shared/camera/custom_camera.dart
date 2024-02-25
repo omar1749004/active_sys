@@ -5,6 +5,7 @@ import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io' as f;
+import 'package:path/path.dart';
 
 class CustomCamera extends StatefulWidget {
   CustomCamera({super.key, required this.contrller});
@@ -63,7 +64,7 @@ class _CustomCameraState extends State<CustomCamera> {
 
 class CameraView extends StatefulWidget {
   final List<CameraDescription> cameras;
-  MangeUsersControllerImp contrller;
+  final MangeUsersControllerImp contrller;
   CameraView({Key? key, required this.cameras, required this.contrller})
       : super(key: key);
 
@@ -170,8 +171,8 @@ class _CameraViewState extends State<CameraView> {
               : () async {
                   XFile file = await cameraController!.takePicture();
 
-                  f.File savedfile = f.File(file.path);
-                  widget.contrller.file = savedfile;
+                  //f.File savedfile = f.File(file.path);
+                  widget.contrller.file = file;
                   widget.contrller.refresh();
                   //final bytes = await file.readAsBytes();
 

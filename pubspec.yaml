@@ -48,6 +48,7 @@ dependencies:
   camera: ^0.10.5+9
   image_picker: ^1.0.7
   cached_network_image: ^3.3.1
+  path: ^1.9.0
   
 dev_dependencies:
   flutter_test:
