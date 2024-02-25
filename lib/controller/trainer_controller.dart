@@ -110,6 +110,7 @@ class TrainersControllerImp extends TrainersController {
         globalAlert("يرجى إعادة المحاولة في وقت لاحق", title: "!خطأ");
         statusRequs = StatusRequst.failure;
       } else if (res["status"] == "success") {
+        viewAll();
         cleaModel();
         statusRequs = StatusRequst.sucsess;
       } else {
