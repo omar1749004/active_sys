@@ -3,8 +3,6 @@ import 'dart:html';
 import 'package:active_system/controller/mange_player.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
-
 
 class CustomCamera extends StatefulWidget {
   CustomCamera({super.key, required this.contrller});
@@ -46,13 +44,14 @@ class _CustomCameraState extends State<CustomCamera> {
   @override
   Widget build(BuildContext context) {
     if (error != null) {
-      return Center(child: Text('Error: $error'));
+      return Center(child: Text('خطأ: $error'));
     }
     if (!cameraAccess) {
-      return const Center(child: Text('Camera access not granted yet.'));
+      return const Center(
+          child: Text('لم يتم منح إذن الوصول إلى الكاميرا بعد.'));
     }
     if (cameras == null) {
-      return const Center(child: Text('Reading cameras'));
+      return const Center(child: Text('جارٍ قراءة الكاميرات'));
     }
     return CameraView(
       cameras: cameras!,
@@ -64,11 +63,11 @@ class _CustomCameraState extends State<CustomCamera> {
 class CameraView extends StatefulWidget {
   final List<CameraDescription> cameras;
   final MangeUsersControllerImp contrller;
-  CameraView({Key? key, required this.cameras, required this.contrller})
+  const CameraView({Key? key, required this.cameras, required this.contrller})
       : super(key: key);
 
   @override
-  _CameraViewState createState() => _CameraViewState();
+   _CameraViewState createState() => _CameraViewState();
 }
 
 class _CameraViewState extends State<CameraView> {
@@ -108,14 +107,14 @@ class _CameraViewState extends State<CameraView> {
   Widget build(BuildContext context) {
     if (error != null) {
       return Center(
-        child: Text('Initializing error: $error\nCamera list:'),
+        child: Text('خطأ في التهيئة: $error\nقائمة الكاميرات:'),
       );
     }
     if (cameraController == null) {
-      return const Center(child: Text('Loading controller...'));
+      return const Center(child: Text('جاري التحميل...'));
     }
     if (!cameraController!.value.isInitialized) {
-      return const Center(child: Text('Initializing camera...'));
+      return const Center(child: Text('جاري تهيئة الكاميرا...'));
     }
 
     return Column(

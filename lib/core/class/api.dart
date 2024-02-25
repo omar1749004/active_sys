@@ -89,7 +89,7 @@ class Api {
             "there id problem with status code ${response.statusCode} with body ${jsonDecode(response.body)}");
       }
     } catch (e) {
-      print(e);
+      return {"status": "false"};
     }
   }
 

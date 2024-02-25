@@ -20,7 +20,7 @@ Future<dynamic> customHomePageDialog(AttendModel attendModel) {
                   radius: 300,
                   child: ClipOval(
                       child: SizedBox.fromSize(
-                          size: Size.fromRadius(300), // Image radius
+                          size:const Size.fromRadius(300), // Image radius
                           child: Image.asset(
                               "assets/image/animals.jpg") //controller.imageName != null
                           // ? CachedNetworkImage(

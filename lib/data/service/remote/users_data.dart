@@ -6,7 +6,7 @@ class UsersData{
  UsersData();
 
    add(Map data,{XFile ? file})async{
-    var res  ;
+    late dynamic res  ;
     if(file == null){
      res = await Api().post(uri: linkUsersAdd, body: data);
     }else{
@@ -16,7 +16,7 @@ class UsersData{
     return res;
   }
    edit(Map data ,{XFile? file})async{
-    var res  ;
+    late dynamic res  ;
     if(file == null){
      res = await Api().post(uri: linkUsersEdit, body: data);
     return res;

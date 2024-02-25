@@ -106,7 +106,6 @@ class TreasuryRegisterControllerImp extends TreasuryRegisterController {
 
   void cnangeCheack(bool val) {
     checkedValue = !checkedValue;
-    ;
     update();
   }
 

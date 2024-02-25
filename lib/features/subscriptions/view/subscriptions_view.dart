@@ -1,8 +1,7 @@
-import 'package:active_system/core/shared/customSearch.dart';
+import 'package:active_system/core/shared/custom_search.dart';
 import 'package:active_system/core/shared/custom_app_bar.dart';
 import 'package:active_system/core/shared/custom_table.dart';
 import 'package:active_system/features/manage_subscriptions/view/widgets/custom_button.dart';
-import 'package:active_system/features/manage_subscriptions/view/widgets/custom_input_form.dart';
 import 'package:active_system/features/manage_subscriptions/view/widgets/custom_menu.dart';
 import 'package:flutter/material.dart';
 
