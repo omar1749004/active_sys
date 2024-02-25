@@ -1,6 +1,6 @@
 import 'dart:convert';
-import 'dart:io';
-import 'package:active_system/core/functions/global_alert.dart';
+import 'package:camera/camera.dart';
+import 'package:flutter/foundation.dart';
 import 'package:path/path.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -54,7 +54,7 @@ class Api {
             "there id problem with status code${response.statusCode} with body${jsonDecode(response.body)}");
       }
     } catch (e) {
-      return  {"status" : "false"};
+      return {"status": "false"};
     }
   }
 
@@ -94,10 +94,19 @@ class Api {
   }
 
   Future<dynamic> postFile(
-      {required String uri, required Map body, required File file}) async {
+      {required String uri, required Map body, required XFile file}) async {
     var request = http.MultipartRequest("POST", Uri.parse(uri));
-    var length = await file.length();
-    var stream = http.ByteStream(file.openRead());
+
+    //to get bytes and convert it to Stream<List<int>>
+    final uint8List = await file.readAsBytes();
+    var stream = Stream.value(List<int>.from(uint8List));
+
+    //to get length
+    final length = await file.length();
+
+    // var length = await file.length();
+    //var stream = http.ByteStream(file.openRead());
+    
     var multipartfile = http.MultipartFile("file", stream, length,
         filename: basename(file.path));
     request.headers.addAll(myheaders);

@@ -1,3 +1,5 @@
+import 'dart:js';
+
 import 'package:active_system/core/constant/color.dart';
 import 'package:active_system/data/models/attend_model.dart';
 import 'package:active_system/features/safe/view/widget/custom_display_many.dart';
@@ -13,10 +15,25 @@ Future<dynamic> customHomePageDialog(AttendModel attendModel) {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              const CircleAvatar(
-                  backgroundImage: AssetImage("assets/image/animals.jpg"),
+              Container(
+                padding: const EdgeInsets.only(bottom: 30, left: 30),
+                child: CircleAvatar(
                   backgroundColor: ColorApp.gray,
-                  radius: 80),
+                  radius: 300,
+                  child: ClipOval(
+                      child: SizedBox.fromSize(
+                          size: Size.fromRadius(300), // Image radius
+                          child: Image.asset(
+                              "assets/image/animals.jpg") //controller.imageName != null
+                          // ? CachedNetworkImage(
+                          //     fit: BoxFit.fill,
+                          //     imageUrl:
+                          //         "$linkImageUpload/${controller.imageName}",
+                          // )
+                          //: const SizedBox()),
+                          )),
+                ),
+              ),
               const SizedBox(
                 height: 15,
               ),

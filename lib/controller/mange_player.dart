@@ -7,6 +7,7 @@ import 'package:active_system/data/models/user_model.dart';
 import 'package:active_system/data/service/remote/sub_data.dart';
 import 'package:active_system/data/service/remote/trainer_data.dart';
 import 'package:active_system/data/service/remote/users_data.dart';
+import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -35,7 +36,7 @@ class MangeUsersControllerImp extends MangeUsersController {
   StatusRequst statusRequs = StatusRequst.non;
   StatusRequst firstState = StatusRequst.non;
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
-  File? file;
+  XFile? file;
 
   late TextEditingController barcodeNum;
   late TextEditingController userName;
