@@ -1,12 +1,14 @@
 import 'dart:html';
+
 import 'package:active_system/controller/mange_player.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'dart:io' as f;
 
 class CustomCamera extends StatefulWidget {
-  const CustomCamera({super.key, required this.contrller});
-  final MangeUsersControllerImp contrller;
+  CustomCamera({super.key, required this.contrller});
+  MangeUsersControllerImp contrller;
 
   @override
   _CustomCameraState createState() => _CustomCameraState();
@@ -180,7 +182,7 @@ class _CameraViewState extends State<CameraView> {
                   // link.click();
                   //link.remove();
                 },
-          child: const Text('التقط صورة'),
+          child: const Text('Take picture.'),
         ),
       ],
     );
