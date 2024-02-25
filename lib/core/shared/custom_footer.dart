@@ -13,7 +13,7 @@ class CustomFooter extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(Icons.copyright),
+         const Icon(Icons.copyright),
           Text(
             "2024 made by Abdallah Reda & Omar Mohsen",
             style: Styles.style20,

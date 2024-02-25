@@ -1,7 +1,7 @@
 import 'package:active_system/core/constant/color.dart';
 import 'package:active_system/core/constant/styles.dart';
 import 'package:active_system/core/shared/ModernTable/custom_modern_table.dart';
-import 'package:active_system/core/shared/custom_Botton1.dart';
+import 'package:active_system/core/shared/custom_botton_copy.dart';
 import 'package:active_system/core/shared/custom_date_field.dart';
 import 'package:active_system/features/players_profile/widgets/app_bar_profile.dart';
 import 'package:active_system/features/players_profile/widgets/card_info.dart';
@@ -213,7 +213,7 @@ class _PlayersProfileViewState extends State<PlayersProfileView> {
                                       child: Container(
                                           decoration: BoxDecoration(
                                               border: Border.all(
-                                                  color: Color.fromARGB(
+                                                  color:const Color.fromARGB(
                                                       255, 218, 218, 218),
                                                   width: 10)),
                                           child: CustomModernTable(

@@ -1,5 +1,3 @@
-import 'dart:js';
-
 import 'package:active_system/core/constant/color.dart';
 import 'package:active_system/data/models/attend_model.dart';
 import 'package:active_system/features/safe/view/widget/custom_display_many.dart';
@@ -22,7 +20,7 @@ Future<dynamic> customHomePageDialog(AttendModel attendModel) {
                   radius: 300,
                   child: ClipOval(
                       child: SizedBox.fromSize(
-                          size: Size.fromRadius(300), // Image radius
+                          size:const Size.fromRadius(300), // Image radius
                           child: Image.asset(
                               "assets/image/animals.jpg") //controller.imageName != null
                           // ? CachedNetworkImage(

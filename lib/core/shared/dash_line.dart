@@ -11,7 +11,7 @@ class DashLisne extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 5),
       child: Container(
         width: 8,
-        height: 2,color: Color(0xFFB7B7B7),
+        height: 2,color:const Color(0xFFB7B7B7),
       ),
     )),
     );

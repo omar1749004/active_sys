@@ -57,7 +57,7 @@ class _CustomModernTableState extends State<CustomModernTable> {
                     align: Alignment.center,
                     nameOfVar: "",
                     ind: -1,
-                    OnTap: () {},
+                    onTap: () {},
                     showDialog: () {},
                   ),
                   Column(
@@ -68,7 +68,7 @@ class _CustomModernTableState extends State<CustomModernTable> {
                         widths: widget.widths,
                         ind: index,
                         nameOfVar: widget.nameOfGlobalID,
-                        OnTap: widget.onRowTap,
+                        onTap: widget.onRowTap,
                         thisPageIsHomePage: widget.thisPageIsHomePage,
                         showDialog: widget.showDialog,
                       ),

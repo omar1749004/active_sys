@@ -22,7 +22,7 @@ List<GetPage<dynamic>> route = [
       page: () => const HomePage(),
       middlewares: [MyMiddleWare()]),
   GetPage(
-    name: AppRoute.Managesubscriptionid,
+    name: AppRoute.managesubscriptionid,
     page: () =>const ManageSubscriptionsView(),
   ),
   GetPage(
@@ -34,7 +34,7 @@ List<GetPage<dynamic>> route = [
     page: () => const UsersView(),
   ),
   GetPage(
-    name: AppRoute.RenewSybscriptionsView,
+    name: AppRoute.renewSybscriptionsView,
     page: () =>const RenewSybscriptionsView(),
   ),
   GetPage(

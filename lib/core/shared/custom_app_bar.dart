@@ -22,7 +22,7 @@ class CustomAppBar extends StatelessWidget {
             style: Styles.style20.copyWith(color: Colors.white),
           ),
           //here will add another element in the future
-          Text("data")
+        const  Text("data")
         ],
       ),
     );
