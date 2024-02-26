@@ -2,6 +2,7 @@
 
 import 'package:active_system/core/class/statuscode.dart';
 import 'package:active_system/core/functions/global_alert.dart';
+import 'package:active_system/core/services/services.dart';
 import 'package:active_system/data/models/sub_mode.dart';
 import 'package:active_system/data/models/user_model.dart';
 import 'package:active_system/data/service/remote/sub_data.dart';
@@ -58,7 +59,7 @@ class MangeUsersControllerImp extends MangeUsersController {
   late SubscriptionModel subscriptionModel;
   late UserModel userModel;
   late UserModel trainerModel;
-
+  MyServices myServices =Get.find();
   DateTime startSearch = DateTime.now();
   bool canAdd = true;
   String borrowed = "0";
@@ -198,7 +199,7 @@ class MangeUsersControllerImp extends MangeUsersController {
           "date": brithDay.toString().substring(0, 11),
           "captinId": trainerModel.usersId.toString(),
           "subscriptionsId": subscriptionModel.subscriptionsId.toString(),
-          "adminId": "1",
+          "adminId": myServices.sharedPreferences.getString("id"),
           "active": active,
           "barcodeNum": barcodeNum.text,
         }, file: file);
@@ -259,7 +260,7 @@ class MangeUsersControllerImp extends MangeUsersController {
     } else {
       statusRequs = StatusRequst.failure;
     }
-    await Future.delayed(const Duration(milliseconds: 300));
+    await Future.delayed(const Duration(milliseconds: 200));
     update();
   }
 
@@ -364,7 +365,7 @@ class MangeUsersControllerImp extends MangeUsersController {
         "date": brithDay.toString().substring(0, 11),
         "captinId": trainerModel.usersId.toString(),
         "subscriptionsId": subscriptionModel.subscriptionsId.toString(),
-        "adminId": "1",
+        "adminId": myServices.sharedPreferences.getString("id"),
         "active": active,
         "oldimagename": userModel.usersImage,
         "barcodeNum": barcodeNum.text,

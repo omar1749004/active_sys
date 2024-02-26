@@ -6,6 +6,7 @@ class UserModel {
   String? usersImage;
   DateTime? usersDate;
   String? usersPhone;
+  
   String? usersCreate;
   int? barcodeId;
   int? barcode;
@@ -60,7 +61,7 @@ class UserModel {
       renewalEnd: json['renewal_end'],
       renewalNote: json['renewal_note'],
       renewalSessionAttend: json['renewal_session_attend'],
-      usersAddress: json['users_address'], 
+      usersAddress: json['users_adress'], 
       subscriptionsName: json['subscriptions_name'], 
       renewalId: json['renewal_id'],
       usersGender: json['users_gender'], 

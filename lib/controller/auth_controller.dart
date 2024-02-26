@@ -55,6 +55,8 @@ class AuthControllerImp extends AuthController {
        globalAlert("اسم المستخدم أو كلمة المرور غير صحيحة");
      }else if(res["status"] =="success"){
       adminModel = AdminSys.fromJson(res["data"]);
+     List data = res["powers"];
+      adminPoewrList.addAll(data.map((e) => AdminPower.fromJson(e)));
        organizePowers();
       services.sharedPreferences.setString("id",adminModel.adminSysId.toString());
       services.sharedPreferences.setString("name",adminModel.adminSysName);

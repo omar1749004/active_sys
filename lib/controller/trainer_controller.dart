@@ -37,7 +37,7 @@ class TrainersControllerImp extends TrainersController {
   late TextEditingController note;
 
   late TextEditingController search;
-  bool canAdd = true ;
+  bool canAdd = true;
   @override
   void onInit() async {
     name = TextEditingController();
@@ -91,8 +91,6 @@ class TrainersControllerImp extends TrainersController {
 
   @override
   void addTrainer() async {
-
-    
     if (formKey.currentState!.validate()) {
       statusRequs = StatusRequst.loading;
       update();
@@ -154,22 +152,25 @@ class TrainersControllerImp extends TrainersController {
   @override
   void assignModel(UserModel privetModel) {
     address.text = privetModel.usersAddress ?? "";
-
+    
     name.text = privetModel.usersName ?? "";
     note.text = privetModel.usersNote ?? "";
     userModel = privetModel;
-   List<String>  mid = phoneMap[privetModel.usersId]!;
-    if (mid.length == 3) {
+    List<String> mid = phoneMap[privetModel.usersId]!;
+    phone.clear();
+    phone1.clear();
+    phone2.clear();
+    if (mid.isNotEmpty) {
       phone.text = mid[0];
-      phone1.text = mid[1];
-      phone2.text = mid[2];
-    } else if (mid.length == 2) {
-      phone.text = mid[0];
-      phone1.text = mid[1];
-    } else {
-      phone.text = mid[0];
+      if (mid.length > 1) {
+        phone1.text = mid[1];
+        if (mid.length > 2) {
+          phone2.text = mid[2];
+        }
+      }
     }
-    canAdd = false ;
+
+    canAdd = false;
     update();
   }
 
@@ -237,7 +238,7 @@ class TrainersControllerImp extends TrainersController {
     }
   }
 
-@override
+  @override
   cleaModel() {
     name.clear();
     phone.clear();
@@ -245,36 +246,7 @@ class TrainersControllerImp extends TrainersController {
     phone2.clear();
     address.clear();
     note.clear();
-    canAdd = true ;
+    canAdd = true;
     update();
   }
 }
-
-// import 'package:active_system/data/service/remote/trainer_data.dart';
-
-// var res = await TrainerData().add(
-//   {
-//     "id": text,
-//     "name": type,
-//     "phone": sha1(password.text),
-//     "adress": note,
-//     "note": powers,
-//   },
-// );
-
-// var res = await TrainerData().edit(
-//   {
-//     "id": text,
-//     "name": type,
-//     "phone": sha1(password.text),
-//     "adress": note,
-//     "note": powers,
-//   }
-
-// );
-// var res = await TrainerData().search(
-//   {
-//     "search": id,
-//   }
-  
-// );

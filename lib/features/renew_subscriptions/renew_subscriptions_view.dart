@@ -104,11 +104,6 @@ class RenewSybscriptionsView extends StatelessWidget {
                                         !controller.isdateSearch;
                                     controller
                                         .handlTable(controller.isdateSearch);
-                                    // if(controller.isdateSearch){
-                                    //  controller.dateSearch(controller.startSearch, controller.endSearch);
-                                    // }else{
-                                    //   controller.viewAll();
-                                    // }
                                   },
                                   color: controller.isdateSearch
                                       ? ColorApp.onfoucosColor
@@ -239,7 +234,7 @@ class RenewSybscriptionsView extends StatelessWidget {
                                   }
                                 },
 
-                                isActive: !controller.canAdd ? true : false,
+                               isActive: !controller.canAdd ? true : false,
                               ),
                               CustomButton(
                                 text: "إلغاء",
@@ -249,7 +244,7 @@ class RenewSybscriptionsView extends StatelessWidget {
                                   }
                                 },
 
-                                isActive: controller.canAdd ? true : false,
+                               // isActive: controller.canAdd ? true : false,
                               ),
                               CustomButton(
                                 text: "تجميد",

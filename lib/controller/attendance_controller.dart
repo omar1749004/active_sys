@@ -24,6 +24,7 @@ class AttendControllerImp extends AttendController {
   int totalPlayer = 0;
   List<AttendModel> attendList = [];
   List<List<String>> dataInTable = [];
+  
   @override
   void onInit() async {
     searchVal = TextEditingController();
@@ -42,7 +43,6 @@ class AttendControllerImp extends AttendController {
    s = startD.toString().substring(0,11) ;
     e = endD.toString().substring(0,11) ;
     update();
-    if (isdateSearch) {
       var res = await AttendData().dateSearch({
         "start_date": startD.toString().substring(0,11),
         "end_date":endD.toString().substring(0,11),
@@ -61,7 +61,8 @@ class AttendControllerImp extends AttendController {
       } else {
         statusRequs = StatusRequst.failure;
       }
-    }
+    await Future.delayed(const Duration(milliseconds: 200));
+    
     update();
   }
 
@@ -153,6 +154,8 @@ class AttendControllerImp extends AttendController {
       } else {
         statusRequs = StatusRequst.failure;
       }
+   await Future.delayed(const Duration(milliseconds: 200));
+    
     update();
   }
 

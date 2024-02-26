@@ -19,7 +19,6 @@ final void Function()? ontap ;
         CustomDateField(
             width: 150,
             height: 30,
-            icon: Icons.close,
             onChanged: (p0) {
               controller.endSearch =p0! ;
               controller.dateSearch(controller.startSearch, controller.endSearch);
@@ -33,7 +32,6 @@ final void Function()? ontap ;
         CustomDateField(
             width: 150,
             height: 30,
-            icon: Icons.close,
             onChanged: (p0) {
               controller.startSearch =p0! ;
               controller.dateSearch(controller.startSearch, controller.endSearch);

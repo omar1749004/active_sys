@@ -86,7 +86,6 @@ class _ManageCostViewState extends State<ManageCostView> {
                                   CustomDateField(
                                       width: 150,
                                       height: 30,
-                                      icon: Icons.close,
                                       onChanged: (p0) {
                                         controller.endSearch = p0!;
                                         controller.dateSearch(
@@ -102,7 +101,6 @@ class _ManageCostViewState extends State<ManageCostView> {
                                   CustomDateField(
                                       width: 150,
                                       height: 30,
-                                      icon: Icons.close,
                                       onChanged: (p0) {
                                         controller.startSearch = p0!;
                                         controller.dateSearch(
@@ -234,7 +232,7 @@ class _ManageCostViewState extends State<ManageCostView> {
                                         Get.defaultDialog(
                                             title: "تحذير ",
                                             middleText:
-                                                "هل أنت متأكد أنك تريد تعديل المصروف",
+                                                "هل أنت متأكد أنك تريد حذف المصروف",
                                             actions: [
                                               ElevatedButton(
                                                   onPressed: () {
