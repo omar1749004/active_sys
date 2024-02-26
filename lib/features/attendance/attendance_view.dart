@@ -68,7 +68,6 @@ class AttendanceView extends StatelessWidget {
                                       CustomDateField(
                                           width: 150,
                                           height: 30,
-                                          icon: Icons.close,
                                           onChanged: (p0) {
                                             controller.endSearch = p0!;
                                             controller.dateSearch(
@@ -94,7 +93,6 @@ class AttendanceView extends StatelessWidget {
                                       CustomDateField(
                                           width: 150,
                                           height: 30,
-                                          icon: Icons.close,
                                           onChanged: (p0) {
                                             controller.startSearch = p0!;
                                             controller.dateSearch(

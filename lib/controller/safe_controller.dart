@@ -1,5 +1,6 @@
 import 'package:active_system/core/class/statuscode.dart';
 import 'package:active_system/core/functions/global_alert.dart';
+import 'package:active_system/core/services/services.dart';
 import 'package:active_system/data/models/safe_model.dart';
 import 'package:active_system/data/service/remote/safe_data.dart';
 import 'package:flutter/cupertino.dart';
@@ -28,7 +29,7 @@ class SafeControllerImp extends SafeController {
   double toralIncoming = 0;
   double toralOutcoming = 0;
   int typeOfSafe = 3;
-
+  MyServices myServices =Get.find();
   List<SafeModel> safeList = [];
   List<List<String>> dataInTable = [];
   late TextEditingController reason;
@@ -42,12 +43,11 @@ class SafeControllerImp extends SafeController {
     reason = TextEditingController();
     amount = TextEditingController();
     adminName = TextEditingController();
-    adminName.text = "omar";
+    //adminName.text = myServices.sharedPreferences.getString("name")!;
     firstState = StatusRequst.loading;
     await Future.delayed(const Duration(milliseconds: 100));
     firstState = StatusRequst.failure;
     dateSearch(startSearch, endSearch);
-
     statusRequs = StatusRequst.loading;
     await Future.delayed(const Duration(milliseconds: 300));
     statusRequs = StatusRequst.failure;
@@ -58,7 +58,7 @@ class SafeControllerImp extends SafeController {
   void dateSearch(DateTime startD, DateTime endD) async {
     statusRequs = StatusRequst.loading;
     update();
-    if (isdateSearch) {
+
       var res = await SafeData().dateSearch({
         "start_date": startD.toString().substring(0, 11),
         "end_date": endD.toString().substring(0, 11),
@@ -82,7 +82,8 @@ class SafeControllerImp extends SafeController {
       } else {
         statusRequs = StatusRequst.failure;
       }
-    }
+    await Future.delayed(const Duration(milliseconds: 200));
+    
     update();
   }
 
@@ -92,6 +93,7 @@ class SafeControllerImp extends SafeController {
     update();
     var res = await SafeData().view();
     if (res["status"] == "failure") {
+      safeList = [];
       statusRequs = StatusRequst.failure;
     } else if (res["status"] == "success") {
       List data = res["data"];
@@ -105,19 +107,20 @@ class SafeControllerImp extends SafeController {
     } else {
       statusRequs = StatusRequst.failure;
     }
+    await Future.delayed(const Duration(milliseconds: 200));
     update();
   }
 
   @override
   void handlTable(bool isdate) {
-    isdateSearch = isdate;
-
+    
+     update();
     if (isdateSearch) {
-      dateSearch(startSearch, endSearch);
+     dateSearch(startSearch, endSearch);
     } else {
       viewAll();
     }
-    update();
+    
   }
 
   @override
@@ -166,7 +169,7 @@ class SafeControllerImp extends SafeController {
           "reason": reason.text,
           "incoming": incoming.toString(),
           "outgoing": outgoing.toString(),
-          "adminId": "1",
+          "adminId": myServices.sharedPreferences.getString("id"),
           "type": typeOfSafe.toString(),
         },
       );

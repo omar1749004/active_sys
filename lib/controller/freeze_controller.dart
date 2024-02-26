@@ -1,5 +1,7 @@
 import 'package:active_system/core/class/statuscode.dart';
+import 'package:active_system/core/constant/app_route.dart';
 import 'package:active_system/core/functions/global_alert.dart';
+import 'package:active_system/core/services/services.dart';
 import 'package:active_system/data/models/freeze_mode.dart';
 import 'package:active_system/data/models/renew_model.dart';
 import 'package:active_system/data/models/sub_mode.dart';
@@ -28,6 +30,7 @@ class FreezeControllerImp extends FreezeController {
   late SubscriptionModel subModel;
   late TextEditingController day;
   late TextEditingController note;
+  bool candelete = false ;
   DateTime startSearch = DateTime.now();
   DateTime endSearch = DateTime.now();
   String? barcode;
@@ -40,28 +43,39 @@ class FreezeControllerImp extends FreezeController {
   int? freezeNum;
   int? maxFreeze;
   List<List<String>> dataInTable = [];
-
+  MyServices myServices =Get.find();
   @override
   void onInit() {
     day = TextEditingController();
     note = TextEditingController();
     day.text = "0";
-    initialData();
+     initialData();
+    
+    
 
     super.onInit();
   }
 
   @override
   void initialData() {
-    renewUser = Get.arguments["RenewModel"];
+    try{
+     renewUser = Get.arguments["RenewModel"];
     subModel = Get.arguments["subModel"];
-    getFreeze();
+     getFreeze();
     name = renewUser.usersName;
     barcode = renewUser.barcode.toString();
     startrenew = renewUser.renewalStart.toString();
     endrenew = renewUser.renewalEnd.toString();
     subName = renewUser.subscriptionsName;
     days = subModel.subscriptionsDay.toString();
+    }catch(e)
+    {
+      Future.delayed(Duration.zero, () {
+        Get.offAndToNamed(AppRoute.renewSybscriptionsView);
+      });
+    }
+    
+   
   }
 
   @override
@@ -77,12 +91,12 @@ class FreezeControllerImp extends FreezeController {
       statusRequs = StatusRequst.failure;
     } else if (res["status"] == "success") {
       List data = res["freeze"];
-      //print(data);
       frezzeDay = res["data"]["frezz_day"];
       freezeNum = res["data"]["frezz_number"];
       maxFreeze = res["data"]["max_frezz_day"];
       freezeList = [];
       freezeList.addAll(data.map((e) => FreezeModel.fromJson(e)));
+      assignDataInsideTable();
       statusRequs = StatusRequst.sucsess;
     } else if (res["status"] == "sub") {
       frezzeDay = res["data"]["frezz_day"];
@@ -123,7 +137,7 @@ class FreezeControllerImp extends FreezeController {
             "renewal_id": renewUser.renewalId.toString(),
             "note": note.text,
             "frezz_day": day.text,
-            "adminId": "1",
+            "adminId": myServices.sharedPreferences.getString("id"),
           },
         );
 
@@ -131,7 +145,14 @@ class FreezeControllerImp extends FreezeController {
           globalAlert("الاعب تخطى عدد مرات التجميد");
           statusRequs = StatusRequst.failure;
         } else if (res["status"] == "success") {
+          day.text = "0" ;
+          endrenew = 
+          renewUser.renewalEnd!
+          .add(Duration(days: int.parse(day.text)))
+          .toString();
           getFreeze();
+          note.clear();
+          day.text = "0" ;
           statusRequs = StatusRequst.sucsess;
         }
       } else {
@@ -139,6 +160,8 @@ class FreezeControllerImp extends FreezeController {
         update();
         globalAlert(msg);
       }
+    }else{
+      statusRequs = StatusRequst.failure;
     }
     update();
   }
@@ -163,28 +186,37 @@ class FreezeControllerImp extends FreezeController {
   }
 
   @override
-  void assignModel(FreezeModel privetModel) {
+  void assignModel(FreezeModel privetModel)async {
     freezeModel = privetModel;
+    candelete = true ;
+    
+    update();
   }
 
   @override
   void deleteFreeze() async {
+
     var res = await FrezzeData().delete({
       "id": freezeModel.freezeId.toString(),
-      "freeze_day": frezzeDay.toString(),
-      "renewal_end": renewUser.renewalEnd.toString(),
+      "freeze_day": freezeModel.freezeDay.toString(),
+      "renewal_end": renewUser.renewalEnd.toString().substring(0,11),
       "renewal_id": freezeModel.freezeRenewalId.toString(),
     });
-
     if (res["status"] == "failure") {
       globalAlert("يرجى إعادة المحاولة في وقت لاحق", title: "!خطأ");
       statusRequs = StatusRequst.failure;
     } else if (res["status"] == "success") {
+      
       freezeList
           .removeWhere((element) => element.freezeId == freezeModel.freezeId);
       endrenew = renewUser.renewalEnd!
           .subtract(Duration(days: freezeModel.freezeDay))
           .toString();
+          getFreeze() ;
+          assignDataInsideTable();
+          note.clear();
+          day.text = "0" ;
+          candelete = false ;
       statusRequs = StatusRequst.sucsess;
     } else {
       statusRequs = StatusRequst.failure;
@@ -199,8 +231,8 @@ class FreezeControllerImp extends FreezeController {
       dataInTable.add([
         freezeList[i].freezeId.toString(),
         freezeList[i].freezeDay.toString(),
-        freezeList[i].freezeStart.toString(),
-        freezeList[i].freezeEnd.toString(),
+        freezeList[i].freezeStart.toString().substring(0,11),
+        freezeList[i].freezeEnd.toString().substring(0,11),
         freezeList[i].freezeUserId.toString(),
         freezeList[i].freezeRenewalId.toString(),
         freezeList[i].freezeNote.toString(),
@@ -208,43 +240,3 @@ class FreezeControllerImp extends FreezeController {
     }
   }
 }
-
-// import 'package:active_system/data/service/remote/trainer_data.dart';
-
-
-// var res = await TrainerData().edit(
-//   {
-//     "id": text,
-//     "name": type,
-//     "phone": sha1(password.text),
-//     "adress": note,
-//     "note": powers,
-//   }
-
-// );
-// var res = await TrainerData().search(
-//   {
-//     "search": id,
-//   }
-  
-// );
-
-// var res = await FrezzeData().add(
-//   {
-//     "start": text,
-//     "end": type,
-//     "userId": ,
-//     "renewal_id": note,
-//     "note": powers,
-//     "frezz_day": text,
-//     "adminId": type,
-//   },
-// );
-
-// var res = await FrezzeData().view(
-//   {
-//    "renewal_id": id,
-//   }
-
-// );
-

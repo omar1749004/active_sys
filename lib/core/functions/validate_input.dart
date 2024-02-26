@@ -4,35 +4,33 @@ validInput(String val, int min, int max, String type) {
 
   if (min != 0) {
     if (val.isEmpty) {
-      return "can't be Empty";
+      return "لا يمكن أن يكون فارغًا";
     }
     if (val.length < min) {
-      return "can't be less than $min";
+      return "لا يمكن أن يكون أقل من $min";
     }
     if (val.length > max) {
-      return "can't be Larger than $max";
+      return "لا يمكن أن يكون أكبر من $max";
     }
     if (type == "username") {
       if (!GetUtils.isUsername(val)) {
-        return "not valid username";
+        return "اسم المستخدم غير صالح";
       }
     }
     if (type == "email") {
       if (!GetUtils.isEmail(val)) {
-        return "not valid email";
+        return "البريد الإلكتروني غير صالح";
       }
     }
     if (type == "num") {
-        int? valid = int.tryParse(val)! ;
-        
-      if (!GetUtils.isNum(val) ||  valid < 1) {
-        return "غير متاح ادخال 0";
+      int? valid = int.tryParse(val);
+      if (valid == null || valid < 1) {
+        return "غير متاح إدخال الرقم 0";
       }
     }
-
     if (type == "phone") {
       if (!GetUtils.isPhoneNumber(val)) {
-        return "not valid phone";
+        return "رقم الهاتف غير صالح";
       }
     }
   }

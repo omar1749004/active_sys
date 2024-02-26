@@ -1,5 +1,6 @@
 import 'package:active_system/core/class/statuscode.dart';
 import 'package:active_system/core/functions/global_alert.dart';
+import 'package:active_system/core/services/services.dart';
 import 'package:active_system/data/models/admin_mode.dart';
 import 'package:active_system/data/models/adminpowers_model.dart';
 import 'package:active_system/data/service/remote/admin_data.dart';
@@ -41,6 +42,7 @@ class AdminControllerImp extends AdminController {
   List<int> selectpowerList = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14];
   List<Map<int, List<int>>> powersMap = [];
   GlobalKey<FormState> formAdminKey = GlobalKey<FormState>();
+  MyServices myServices =Get.find();
   @override
   void onInit() async {
     search = TextEditingController();
@@ -133,9 +135,8 @@ class AdminControllerImp extends AdminController {
     List<bool> result = List.filled(14, false);
 
     for (int i = 0; i < selectpower.length; i++) {
-      if (i < selectpower.length) {
         result[selectpower[i] - 1] = true;
-      }
+      
     }
     checkValueList = List.from(result);
     update();
@@ -144,8 +145,9 @@ class AdminControllerImp extends AdminController {
   @override
   void assignModel(AdminSys privetModel, int index) {
     name.text = privetModel.adminSysName;
-    pass.text = privetModel.adminSysPassword.toString();
+    pass.text = privetModel.adminSysPassword ;
     note.text = privetModel.adminSysNote.toString();
+    repass.text = privetModel.adminSysPassword ;
     adminmModel = privetModel;
     canAdd = false;
     adminmModel = privetModel;
@@ -176,33 +178,11 @@ class AdminControllerImp extends AdminController {
           globalAlert("يرجى إعادة المحاولة في وقت لاحق", title: "!خطأ");
           statusRequs = StatusRequst.failure;
         } else if (res["status"] == "success") {
-          search.clear();
-          name.clear();
-          note.clear();
-          pass.clear();
-          repass.clear();
+          cleaModel();
           getPowers();
           statusRequs = StatusRequst.sucsess;
         } else {
-          statusRequs = StatusRequst.loading;
-          update();
-
-          var res = await AdminData().add(
-            {
-              "name": name.text,
-              "type": "0",
-              "password": pass.text,
-              "note": note.text,
-              "powers": selectpowerList.toString(),
-            },
-          );
-          if (res["status"] == "failure") {
-            statusRequs = StatusRequst.failure;
-          } else if (res["status"] == "success") {
-            statusRequs = StatusRequst.sucsess;
-          } else {
-            statusRequs = StatusRequst.failure;
-          }
+          statusRequs = StatusRequst.failure;
         }
       }
       update();
@@ -250,10 +230,7 @@ class AdminControllerImp extends AdminController {
       } else if (res["status"] == "success") {
         globalAlert("تم تعديل البانات بنجاح", title: "");
         statusRequs = StatusRequst.sucsess;
-        name.clear();
-        note.clear();
-        pass.clear();
-        repass.clear();
+        cleaModel() ;
         getPowers();
       } else {
         statusRequs = StatusRequst.failure;
@@ -311,37 +288,10 @@ class AdminControllerImp extends AdminController {
     pass.clear();
     repass.clear();
     note.clear();
+    checkValueList = List.filled(14, true);
     canAdd = true;
 
     update();
   }
 
 }
-
-// var res = await AdminData().add(
-//   {
-//     "name": text,
-//     "type": type,
-//     "password": sha1(password.text),
-//     "note": note,
-//     "powers": powers,
-//   },
-// );
-
-// var res = await AdminData().edit(
-//   {
-//    "id": id,
-//   "name": name,
-//   "type": type,
-//   "password": sha1(password.text),
-//   "note": note,
-//   "powers": powers,
-//   }
-
-// );
-// var res = await AdminData().delete(
-//   {
-//    "id": id
-//   }
-
-// );

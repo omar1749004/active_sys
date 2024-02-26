@@ -17,7 +17,7 @@ class FrezzeData {
   }
 
   delete(Map data) async {
-    var res = await Api().post(uri: linkAdminDelete, body: data);
+    var res = await Api().post(uri: linkFreezeDelete, body: data);
     return res;
   }
 }
