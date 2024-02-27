@@ -126,7 +126,7 @@ class AttendanceView extends StatelessWidget {
                                       marginRight: 0,
                                       marginTop: 0,
                                     ),
-                                  ],
+                                  
                                 ),
                                 const SizedBox(
                                   width: 50,
