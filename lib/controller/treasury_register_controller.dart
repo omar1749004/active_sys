@@ -47,7 +47,6 @@ class TreasuryRegisterControllerImp extends TreasuryRegisterController {
       "start_date": startD.toString().substring(0, 11),
       "end_date": endD.toString().substring(0, 11),
     });
-
     if (res["status"] == "failure") {
       statusRequs = StatusRequst.failure;
       toralIncoming = 0;
@@ -106,7 +105,6 @@ class TreasuryRegisterControllerImp extends TreasuryRegisterController {
 
   void cnangeCheack(bool val) {
     checkedValue = !checkedValue;
-    ;
     update();
   }
 
@@ -148,8 +146,8 @@ class TreasuryRegisterControllerImp extends TreasuryRegisterController {
       "end_date": endSearch.toString().substring(0, 11),
     });
 
-    Get.offAllNamed(AppRoute.pdfId, arguments: {"pdf": res["data"]});
-
+    Get.toNamed(AppRoute.pdfId, arguments: {"pdf": res["data"]});
+   statusRequs = StatusRequst.failure;
     update();
   }
 }

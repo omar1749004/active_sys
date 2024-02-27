@@ -2,7 +2,7 @@ import 'package:active_system/controller/renew_controller.dart';
 import 'package:active_system/core/constant/color.dart';
 import 'package:active_system/core/constant/styles.dart';
 import 'package:active_system/core/functions/validate_input.dart';
-import 'package:active_system/core/shared/custom_Botton1.dart';
+import 'package:active_system/core/shared/custom_botton_copy.dart';
 import 'package:active_system/core/shared/custom_date_field.dart';
 import 'package:active_system/core/shared/custom_dropdown_menu.dart';
 import 'package:active_system/core/shared/custome_textform_auth.dart';
@@ -147,6 +147,7 @@ class RenewSubscriptionForm extends StatelessWidget {
                           text: DateFormat('yyyy-MM-dd')
                               .format(controller.start!)),
                       onChanged: (p0) {
+                        controller.start = p0 ;
                         controller.setEndDate(p0!);
                       },
                       width: 145,
@@ -280,6 +281,7 @@ class RenewSubscriptionForm extends StatelessWidget {
                   Expanded(
                     child: CustomeTextFormAuth(
                       myController: controller.notknow,
+                      isreadonly: true,
                       hintText: "",
                       lableText: "حساب سابق",
                     ),

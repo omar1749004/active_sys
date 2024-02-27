@@ -25,7 +25,7 @@ class FreezeScreenForm extends StatelessWidget {
                 child:  Column(
                   children: [
                     CustomDisplyMany(
-                      many: controller.barcode!,
+                      many: controller.barcode?? "",
                       text: "كود الاعب",
                       textColor: ColorApp.thirdColor,
                     ),
@@ -33,7 +33,7 @@ class FreezeScreenForm extends StatelessWidget {
                       height: 10,
                     ),
                     CustomDisplyMany(
-                      many: controller.name!,
+                      many: controller.name?? "",
                       text: "اسم الاعب",
                       textColor: ColorApp.thirdColor,
                     ),
@@ -46,7 +46,7 @@ class FreezeScreenForm extends StatelessWidget {
                Column(
                 children: [
                   CustomDisplyMany(
-                    many: controller.startrenew!.substring(0,11),
+                    many: controller.startrenew?.substring(0,11) ?? "",
                     text: "بداية ألاشتراك",
                     textColor: ColorApp.thirdColor,
                   ),
@@ -54,7 +54,7 @@ class FreezeScreenForm extends StatelessWidget {
                     height: 10,
                   ),
                   CustomDisplyMany(
-                    many: controller.endrenew!.substring(0,11),
+                    many: controller.endrenew?.substring(0,11) ??"",
                     text: "نهاية ألاشتراك",
                     textColor: ColorApp.thirdColor,
                   ),
@@ -62,7 +62,7 @@ class FreezeScreenForm extends StatelessWidget {
                     height: 10,
                   ),
                   CustomDisplyMany(
-                    many: controller.subName!,
+                    many: controller.subName?? "",
                     text: "أسم ألاشتراك",
                     textColor: ColorApp.thirdColor,
                   ),
@@ -70,7 +70,7 @@ class FreezeScreenForm extends StatelessWidget {
                     height: 10,
                   ),
                   CustomDisplyMany(
-                    many: controller.days!,
+                    many: controller.days?? "",
                     text: "عدد الايام",
                     textColor: ColorApp.thirdColor,
                   ),

@@ -89,7 +89,7 @@ const String linkExpensesSearch = "$linkServerName/expenses/search.php";
 //frezze
 const String linkFreezeAdd = "$linkServerName/freeze/add.php";
 const String linkFreezeView = "$linkServerName/freeze/view.php";
-const String linkFreezeDelete = "$linkServerName/freeze/delet.php";
+const String linkFreezeDelete = "$linkServerName/freeze/delete.php";
 
 //image
 

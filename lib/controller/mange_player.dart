@@ -1,6 +1,8 @@
+
 import 'package:active_system/core/class/handle_data_in_table.dart';
 import 'package:active_system/core/class/statuscode.dart';
 import 'package:active_system/core/functions/global_alert.dart';
+import 'package:active_system/core/services/services.dart';
 import 'package:active_system/data/models/sub_mode.dart';
 import 'package:active_system/data/models/user_model.dart';
 import 'package:active_system/data/service/remote/sub_data.dart';
@@ -43,7 +45,6 @@ class MangeUsersControllerImp extends MangeUsersController {
   late TextEditingController phone;
   late TextEditingController age;
   late TextEditingController price;
-
   late TextEditingController searchVal;
   DateTime? brithDay = DateTime.now();
   final List<SubscriptionModel> _subList = [];
@@ -57,7 +58,7 @@ class MangeUsersControllerImp extends MangeUsersController {
   late SubscriptionModel subscriptionModel;
   late UserModel userModel;
   late UserModel trainerModel;
-
+  MyServices myServices =Get.find();
   DateTime startSearch = DateTime.now();
   bool canAdd = true;
   String borrowed = "0";
@@ -73,7 +74,6 @@ class MangeUsersControllerImp extends MangeUsersController {
   bool isDateSearch = false;
   bool isSearch = false;
 
-  DateTime brithdate = DateTime.now();
 
   int totalPlayers = 0;
 
@@ -190,28 +190,30 @@ class MangeUsersControllerImp extends MangeUsersController {
     statusRequs = StatusRequst.loading;
     update();
     if (formKey.currentState!.validate()) {
-      var res = await UsersData().add({
-        "name": userName.text,
-        "phone": phone.text,
-        "note": note.text,
-        "gender": gender,
-        "date": brithdate.toString().substring(0, 11),
-        "captinId": trainerModel.usersId.toString(),
-        "subscriptionsId": subscriptionModel.subscriptionsId.toString(),
-        "adminId": "1",
-        "active": active,
-        "barcodeNum": barcodeNum.text,
-      }, file: file);
-      if (res["msg"] == "renewal") {
-        globalAlert("مشكلة في التجديد");
-        statusRequs = StatusRequst.failure;
-      } else if (res["status"] == "success") {
-        cleaModel();
-        statusRequs = StatusRequst.sucsess;
-      } else if (res["msg"] == "barcode is used") {
-        globalAlert("هذا الكود مستخدم بالفعل");
-        statusRequs = StatusRequst.failure;
-      }
+
+        var res = await UsersData().add({
+          "name": userName.text,
+          "phone": phone.text,
+          "note": note.text,
+          "gender": gender,
+          "date": brithDay.toString().substring(0, 11),
+          "captinId": trainerModel.usersId.toString(),
+          "subscriptionsId": subscriptionModel.subscriptionsId.toString(),
+          "adminId": myServices.sharedPreferences.getString("id"),
+          "active": active,
+          "barcodeNum": barcodeNum.text,
+        }, file: file);
+        if (res["msg"] == "renewal") {
+          globalAlert("مشكلة في التجديد");
+          statusRequs = StatusRequst.failure;
+        } else if (res["status"] == "success") {
+          cleaModel();
+          view();
+          statusRequs = StatusRequst.sucsess;
+        } else if (res["msg"] == "barcode is used") {
+          globalAlert("هذا الكود مستخدم بالفعل");
+          statusRequs = StatusRequst.failure;
+        }
     } else {
       statusRequs = StatusRequst.failure;
     }
@@ -257,7 +259,7 @@ class MangeUsersControllerImp extends MangeUsersController {
     } else {
       statusRequs = StatusRequst.failure;
     }
-    await Future.delayed(const Duration(milliseconds: 300));
+    await Future.delayed(const Duration(milliseconds: 200));
     update();
   }
 
@@ -338,7 +340,9 @@ class MangeUsersControllerImp extends MangeUsersController {
       statusRequs = StatusRequst.failure;
     } else if (res["status"] == "success") {
       usersList.removeWhere((element) => element.usersId == userModel.usersId);
+      cleaModel();
       assignDataInsideTable();
+      
       statusRequs = StatusRequst.sucsess;
     } else {
       statusRequs = StatusRequst.failure;
@@ -357,10 +361,10 @@ class MangeUsersControllerImp extends MangeUsersController {
         "phone": phone.text,
         "note": note.text,
         "gender": gender,
-        "date": brithdate.toString().substring(0, 11),
+        "date": brithDay.toString().substring(0, 11),
         "captinId": trainerModel.usersId.toString(),
         "subscriptionsId": subscriptionModel.subscriptionsId.toString(),
-        "adminId": "1",
+        "adminId": myServices.sharedPreferences.getString("id"),
         "active": active,
         "oldimagename": userModel.usersImage,
         "barcodeNum": barcodeNum.text,
@@ -407,7 +411,7 @@ class MangeUsersControllerImp extends MangeUsersController {
     userName.text = privetModel.usersName.toString();
     phone.text = privetModel.usersPhone!;
     trainerValue = privetModel.captainName!;
-    brithDay = privetModel.usersDate;
+    brithDay = privetModel.usersDate ;
     calcAge();
     note.text = privetModel.usersNote!;
     subValue = privetModel.subscriptionsName!;
@@ -430,8 +434,9 @@ class MangeUsersControllerImp extends MangeUsersController {
 
   @override
   void calcAge() {
-    int midage = DateTime.now().year - brithDay!.year;
-    age.text = midage.toString();
+    int midage = DateTime.now().year - brithDay!.year  ;
+    age.text = midage.toString() ;
+
   }
 
   @override

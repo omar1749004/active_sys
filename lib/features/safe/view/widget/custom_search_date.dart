@@ -1,7 +1,7 @@
 
 import 'package:active_system/controller/safe_controller.dart';
 import 'package:active_system/core/constant/styles.dart';
-import 'package:active_system/core/shared/custom_Botton1.dart';
+import 'package:active_system/core/shared/custom_botton_copy.dart';
 import 'package:active_system/core/shared/custom_date_field.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -19,7 +19,6 @@ final void Function()? ontap ;
         CustomDateField(
             width: 150,
             height: 30,
-            icon: Icons.close,
             onChanged: (p0) {
               controller.endSearch =p0! ;
               controller.dateSearch(controller.startSearch, controller.endSearch);
@@ -33,7 +32,6 @@ final void Function()? ontap ;
         CustomDateField(
             width: 150,
             height: 30,
-            icon: Icons.close,
             onChanged: (p0) {
               controller.startSearch =p0! ;
               controller.dateSearch(controller.startSearch, controller.endSearch);

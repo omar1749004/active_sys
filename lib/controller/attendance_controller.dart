@@ -25,6 +25,7 @@ class AttendControllerImp extends AttendController {
   int totalPlayer = 0;
   List<AttendModel> attendList = [];
   List<List<String>> dataInTable = [];
+  
   @override
   void onInit() async {
     searchVal = TextEditingController();
@@ -43,7 +44,6 @@ class AttendControllerImp extends AttendController {
     s = startD.toString().substring(0, 11);
     e = endD.toString().substring(0, 11);
     update();
-    if (isdateSearch) {
       var res = await AttendData().dateSearch({
         "start_date": startD.toString().substring(0, 11),
         "end_date": endD.toString().substring(0, 11),
@@ -62,7 +62,8 @@ class AttendControllerImp extends AttendController {
       } else {
         statusRequs = StatusRequst.failure;
       }
-    }
+    await Future.delayed(const Duration(milliseconds: 200));
+    
     update();
   }
 
@@ -141,19 +142,22 @@ class AttendControllerImp extends AttendController {
   void viewAll() async {
     statusRequs = StatusRequst.loading;
     update();
-    var res = await AttendData().viwe();
-    if (res["status"] == "failure") {
-      statusRequs = StatusRequst.failure;
-    } else if (res["status"] == "success") {
-      List data = res["data"];
-      totalPlayer = res["moreInfo"][0]["totalPlayers"] ?? 0;
-      attendList = [];
-      attendList.addAll(data.map((e) => AttendModel.fromJson(e)));
-      assignDataInsideTable();
-      statusRequs = StatusRequst.sucsess;
-    } else {
-      statusRequs = StatusRequst.failure;
-    }
+
+      var res = await AttendData().viwe();
+      if (res["status"] == "failure") {
+        statusRequs = StatusRequst.failure;
+      } else if (res["status"] == "success") {
+        List data = res["data"];
+        totalPlayer = res["moreInfo"][0]["totalPlayers"] ?? 0;
+        attendList = [];
+        attendList.addAll(data.map((e) => AttendModel.fromJson(e)));
+         assignDataInsideTable();
+        statusRequs = StatusRequst.sucsess;
+         await Future.delayed(const Duration(milliseconds: 200));
+      } else {
+        statusRequs = StatusRequst.failure;
+      }
+  
     update();
   }
 }

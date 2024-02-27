@@ -1,6 +1,7 @@
 import 'package:active_system/core/class/handle_data_in_table.dart';
 import 'package:active_system/core/class/statuscode.dart';
 import 'package:active_system/core/functions/global_alert.dart';
+import 'package:active_system/core/services/services.dart';
 import 'package:active_system/data/models/attend_model.dart';
 import 'package:active_system/data/models/sub_mode.dart';
 import 'package:active_system/data/service/remote/attend_data.dart';
@@ -52,6 +53,7 @@ class HomeControllerImp extends HomeController {
   final List<SubscriptionModel> _subList = [];
   List<String> subNameList = ["عام"];
   String subValue = "عام";
+  MyServices myServices =Get.find();
   @override
   void onInit() async {
     barcode = TextEditingController();
@@ -75,17 +77,15 @@ class HomeControllerImp extends HomeController {
   void selectSupType(int i) {
     if (i != supType) {
       supType = i;
-      update();
-      if (supType == 0 || supType == 1) {
         ////////////////////////////////////////////////
         handleSubType();
         update();
-      }
+
     }
   }
 
   void handleSubType() {
-    if (supType == 0) {
+    if (supType != 1) {
       subNameList = [];
       for (int i = 0; i < _subList.length; i++) {
         if (_subList[i].subscriptionsType == 0) {
@@ -118,7 +118,7 @@ class HomeControllerImp extends HomeController {
     update();
     var res = await AttendData().addInvitation({
       "barcode": barcode.text,
-      "adminID": "1",
+      "adminID": myServices.sharedPreferences.getString("id"),
     });
     if (res["msg"] == "barcode not found") {
       globalAlert("الباركود ليس مستخدم يرجى ادخال الباركود الصحيح",
@@ -148,7 +148,7 @@ class HomeControllerImp extends HomeController {
     if (barcode.text.isNotEmpty) {
       var res = await AttendData().addService({
         "barcode": barcode.text,
-        "adminID": "1",
+        "adminID": myServices.sharedPreferences.getString("id"),
       });
       if (res["msg"] == "barcode not found") {
         globalAlert("الباركود ليس مستخدم يرجى ادخال الباركود الصحيح",
@@ -194,7 +194,7 @@ class HomeControllerImp extends HomeController {
         "barcode": barcode.text,
         "subsriptionId": subscriptionModel.subscriptionsId.toString(),
         "price": subscriptionModel.subscriptionsPrice.toString(),
-        "adminId": "1",
+        "adminId": myServices.sharedPreferences.getString("id"),
       });
 
       if (res["msg"] == "barcode not found") {
@@ -225,10 +225,10 @@ class HomeControllerImp extends HomeController {
   void addSub() async {
     statusRequs = StatusRequst.loading;
     update();
-    if (barcode.text.isNotEmpty) {
+    if (barcode.text != "0") {
       var res = await AttendData().addSub({
         "barcode": barcode.text,
-        "adminID": "1",
+        "adminID": myServices.sharedPreferences.getString("id"),
         "renewa_id": selcetRenew.toString()
       });
       selcetRenew = 0;
@@ -317,8 +317,9 @@ class HomeControllerImp extends HomeController {
 
     note.text = privetModel.usersNote ?? "";
 
-    if (privetModel.subscriptionsName != null && supType == 0) {
-      subValue = privetModel.subscriptionsName!;
+    if(privetModel.subscriptionsName != null && supType != 1)
+    {
+     subValue = privetModel.subscriptionsName!;
     }
     subscriptions.text = privetModel.subscriptionsName!;
     update();
@@ -338,7 +339,8 @@ class HomeControllerImp extends HomeController {
     deadline.clear();
     brithDay = null;
     age.clear();
-    imageName = null;
+    subscriptions.clear();
+    imageName = null ;
     note.clear();
     update();
   }
@@ -440,8 +442,12 @@ class HomeControllerImp extends HomeController {
       "search": search,
     });
     if (res["status"] == "success") {
-      attendmodel = AttendModel.fromJson(res["data"]);
-      assignModel(attendmodel);
+       attendmodel = AttendModel.fromJson(res["data"]);
+        assignModel(attendmodel);
+        statusRequs = StatusRequst.sucsess;
+        update();
+        await Future.delayed(const Duration(seconds: 3));
+        clearModel();
       statusRequs = StatusRequst.sucsess;
     } else if (res["status"] == "failure") {
       statusRequs = StatusRequst.failure;

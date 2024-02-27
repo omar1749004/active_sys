@@ -1,5 +1,6 @@
 import 'package:active_system/core/class/statuscode.dart';
 import 'package:active_system/core/functions/global_alert.dart';
+import 'package:active_system/core/services/services.dart';
 import 'package:active_system/data/models/expenses_model.dart';
 import 'package:active_system/data/service/remote/expenses_data.dart';
 import 'package:flutter/cupertino.dart';
@@ -35,7 +36,7 @@ class ExpensesControllerImp extends ExpensesController {
   late TextEditingController amount;
   late TextEditingController note;
   late TextEditingController search;
-
+  MyServices myServices =Get.find();
   @override
   void onInit() async {
     reason = TextEditingController();
@@ -132,7 +133,7 @@ class ExpensesControllerImp extends ExpensesController {
           "reason": reason.text,
           "value": amount.text,
           "note": note.text,
-          "adminId": "1",
+          "adminId": myServices.sharedPreferences.getString("id"),
         },
       );
       if (res["status"] == "failure") {
@@ -225,7 +226,7 @@ class ExpensesControllerImp extends ExpensesController {
           "reason": reason.text,
           "value": amount.text,
           "note": note.text,
-          "adminId": "1",
+          "adminId": myServices.sharedPreferences.getString("id"),
         },
       );
 
@@ -257,7 +258,7 @@ class ExpensesControllerImp extends ExpensesController {
   void deleteTransAction() async {
     var res = await ExpensesData().delete({
       "id": expensesModel.expensesId.toString(),
-      "adminId" :"1" ,
+      "adminId" :myServices.sharedPreferences.getString("id") ,
     });
 
     if (res["status"] == "failure") {

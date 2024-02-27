@@ -16,6 +16,7 @@ class RenewModel {
   int? renewalSessionAttend;
   double? renewAmountOwed; 
   double? renewalAmount;
+  double? renewOffer ;
   String? subscriptionsName ;
 int? totalPlayer;
 
@@ -38,6 +39,7 @@ int? totalPlayer;
     required this.renewalEnd,
     required this.renewalSessionAttend,
     required this.renewAmountOwed,
+    this.renewOffer ,
     required this.renewalAmount,
     required this.totalPlayer,
   });
@@ -61,6 +63,7 @@ int? totalPlayer;
       renewalEnd: DateTime.tryParse(json['renewal_end'] ?? ""),
       renewalSessionAttend: json['renewal_session_attend'],
       renewAmountOwed: double.parse(json['renew_amount_owed']), 
+      renewOffer: double.parse(json['renew_offer_applied']),
       renewalAmount: double.parse(json['renewal_amount']),
       totalPlayer: json['totalPlayer'],
 

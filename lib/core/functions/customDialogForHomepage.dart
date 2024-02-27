@@ -1,5 +1,3 @@
-import 'dart:js';
-
 import 'package:active_system/core/constant/color.dart';
 import 'package:active_system/data/models/attend_model.dart';
 import 'package:active_system/features/safe/view/widget/custom_display_many.dart';

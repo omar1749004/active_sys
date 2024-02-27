@@ -1,5 +1,5 @@
 import 'package:active_system/core/constant/styles.dart';
-import 'package:active_system/core/shared/customSearch.dart';
+import 'package:active_system/core/shared/custom_search.dart';
 import 'package:flutter/material.dart';
 
 class CustomTableHeader extends StatelessWidget {

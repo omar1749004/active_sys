@@ -11,7 +11,7 @@ class CustomRowTable extends StatefulWidget {
     this.align = Alignment.centerRight,
     required this.nameOfVar,
     required this.ind,
-    required this.OnTap,
+    required this.onTap,
     this.thisPageIsHomePage = false,
     required this.showDialog,
   });
@@ -22,7 +22,7 @@ class CustomRowTable extends StatefulWidget {
   final bool isClickable;
   final Alignment align;
   final String nameOfVar;
-  final void Function() OnTap;
+  final void Function() onTap;
   final void Function() showDialog;
   final bool thisPageIsHomePage;
 
@@ -52,7 +52,7 @@ class _CustomRowTableState extends State<CustomRowTable> {
                 //for dialog that have info about player in homepage oooonnnnnllllyyyyyy
 
                 //for any acion want to happen in the row when click
-                widget.OnTap();
+                widget.onTap();
                 setState(() {});
               }
             : null,

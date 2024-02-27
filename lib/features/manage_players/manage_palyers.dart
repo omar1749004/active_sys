@@ -72,7 +72,10 @@ class ManagePlayers extends StatelessWidget {
                               Expanded(
                                 flex: 2,
                                 child: CustomTableHeader(
-                                  searchController: TextEditingController(),
+                                  searchController: controller.searchVal,
+                                  onChanged: (p0) {
+                                    controller.checkSearch(p0);
+                                  },
                                   header: "",
                                 ),
                               ),
@@ -213,7 +216,7 @@ class ManagePlayers extends StatelessWidget {
                                               Get.defaultDialog(
                                                   title: "تحذير ",
                                                   middleText:
-                                                      "هل أنت متأكد أنك تريد حذف الاشتراك",
+                                                      "هل أنت متأكد أنك تريد حذف االلاعب",
                                                   actions: [
                                                     ElevatedButton(
                                                         onPressed: () {

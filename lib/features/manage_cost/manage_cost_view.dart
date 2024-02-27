@@ -2,7 +2,7 @@ import 'package:active_system/controller/expenses_controller.dart';
 import 'package:active_system/core/class/statuscode.dart';
 import 'package:active_system/core/constant/color.dart';
 import 'package:active_system/core/shared/ModernTable/custom_modern_table.dart';
-import 'package:active_system/core/shared/custom_Botton1.dart';
+import 'package:active_system/core/shared/custom_botton_copy.dart';
 import 'package:active_system/core/shared/custom_app_bar.dart';
 import 'package:active_system/core/shared/custom_date_field.dart';
 import 'package:active_system/core/shared/custom_table_header.dart';
@@ -86,7 +86,6 @@ class _ManageCostViewState extends State<ManageCostView> {
                                   CustomDateField(
                                       width: 150,
                                       height: 30,
-                                      icon: Icons.close,
                                       onChanged: (p0) {
                                         controller.endSearch = p0!;
                                         controller.dateSearch(
@@ -102,7 +101,6 @@ class _ManageCostViewState extends State<ManageCostView> {
                                   CustomDateField(
                                       width: 150,
                                       height: 30,
-                                      icon: Icons.close,
                                       onChanged: (p0) {
                                         controller.startSearch = p0!;
                                         controller.dateSearch(
@@ -234,7 +232,7 @@ class _ManageCostViewState extends State<ManageCostView> {
                                         Get.defaultDialog(
                                             title: "تحذير ",
                                             middleText:
-                                                "هل أنت متأكد أنك تريد تعديل المصروف",
+                                                "هل أنت متأكد أنك تريد حذف المصروف",
                                             actions: [
                                               ElevatedButton(
                                                   onPressed: () {

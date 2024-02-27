@@ -30,6 +30,10 @@ class CustomCheckBox extends StatelessWidget {
           InkWell(
             onTap: onTap,
             child: Container(
+              // width: MediaQuery.of(context).size.width *
+              //                                   0.009,
+              //   height: MediaQuery.of(context).size.width *
+              //                                   0.009,
                 width: 17,
                 height: 17,
                 decoration: BoxDecoration(

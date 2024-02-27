@@ -112,7 +112,7 @@ class HomePage extends StatelessWidget {
                                             MainAxisAlignment.start,
                                         children: [
                                           ...List.generate(
-                                            4,
+                                            3,
                                             (index) => Row(
                                               children: [
                                                 Container(
