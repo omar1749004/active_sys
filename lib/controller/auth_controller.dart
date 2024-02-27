@@ -60,20 +60,7 @@ class AuthControllerImp extends AuthController {
       adminModel = AdminSys.fromJson(res["data"]);
      List data = res["powers"];
       adminPoewrList.addAll(data.map((e) => AdminPower.fromJson(e)));
-       organizePowers();
-      services.sharedPreferences.setString("id",adminModel.adminSysId.toString());
-      services.sharedPreferences.setString("name",adminModel.adminSysName);
-      
-      statusRequs =StatusRequst.sucsess;
-      Get.offNamed(AppRoute.homeid);
-      
-     }else if(res["msg"] =="no powers"){
-      
-       Get.offNamed(AppRoute.homeid);
-     }
-
         organizePowers();
-
         //maybe there error here ('_')
         assignSelectAdminPowers(powersMap[adminModel.adminSysId]!);
 
@@ -83,10 +70,9 @@ class AuthControllerImp extends AuthController {
 
         statusRequs = StatusRequst.sucsess;
         Get.offNamed(AppRoute.homeid);
-      } else if (res["msg"] == "no powers") {
-        Get.offNamed(AppRoute.homeid);
-      }
     }
+    }
+
     update();
   }
 
