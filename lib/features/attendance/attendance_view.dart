@@ -131,50 +131,6 @@ class AttendanceView extends StatelessWidget {
                                 const SizedBox(
                                   width: 50,
                                 ),
-                                Row(
-                                  children: [
-                                    CustomDateField(
-                                        width: 150,
-                                        height: 30,
-                                        icon: Icons.close,
-                                        onChanged: (p0) {
-                                          controller.startSearch = p0!;
-                                          controller.dateSearch(
-                                              controller.startSearch,
-                                              controller.endSearch);
-                                        },
-                                        iconSize: 15,
-                                        fontSize: 15),
-                                    const SizedBox(
-                                      width: 50,
-                                    ),
-                                    const Text(
-                                      " من ",
-                                      style: TextStyle(fontSize: 18),
-                                    ),
-                                  ],
-                                ),
-                                const SizedBox(
-                                  width: 50,
-                                ),
-                                SizedBox(
-                                  child: CustomBotton1(
-                                    text: "بحث",
-                                    ontap: () {
-                                      controller.isdateSearch =
-                                          !controller.isdateSearch;
-                                      controller
-                                          .handlTable(controller.isdateSearch);
-                                    },
-                                    color: controller.isdateSearch
-                                        ? ColorApp.onfoucosColor
-                                        : ColorApp.kPrimaryColor,
-                                    marginBottom: 0,
-                                    marginLeft: 0,
-                                    marginRight: 0,
-                                    marginTop: 0,
-                                  ),
-                                ),
                               ],
                             ),
                           ),

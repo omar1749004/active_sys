@@ -45,21 +45,15 @@ class AuthControllerImp extends AuthController {
     if (formKey.currentState!.validate()) {
       statusRequs = StatusRequst.loading;
       update();
-     var res = await AdminData().login(
-      {
-        "name": name.text,
-        "password": password.text
-      }
-     );
-     
-     if(res["msg"] =="wrong pass")
-     {
-      statusRequs = StatusRequst.failure;
-       globalAlert("اسم المستخدم أو كلمة المرور غير صحيحة");
-     }else if(res["status"] =="success"){
-      adminModel = AdminSys.fromJson(res["data"]);
-     List data = res["powers"];
-      adminPoewrList.addAll(data.map((e) => AdminPower.fromJson(e)));
+      var res = await AdminData()
+          .login({"name": name.text, "password": password.text});
+      if (res["msg"] == "wrong pass") {
+        statusRequs = StatusRequst.failure;
+        globalAlert("اسم المستخدم أو كلمة المرور غير صحيحة");
+      } else if (res["status"] == "success") {
+        adminModel = AdminSys.fromJson(res["data"]);
+        List data = res["powers"];
+        adminPoewrList.addAll(data.map((e) => AdminPower.fromJson(e)));
         organizePowers();
         //maybe there error here ('_')
         assignSelectAdminPowers(powersMap[adminModel.adminSysId]!);
@@ -70,7 +64,7 @@ class AuthControllerImp extends AuthController {
 
         statusRequs = StatusRequst.sucsess;
         Get.offNamed(AppRoute.homeid);
-    }
+      } else if (res["msg"] == "no powers") {}
     }
 
     update();

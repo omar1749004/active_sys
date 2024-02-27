@@ -214,7 +214,9 @@ class AdminControllerImp extends AdminController {
     if (formAdminKey.currentState!.validate()) {
       statusRequs = StatusRequst.loading;
       update();
-
+       if (pass.text != repass.text) {
+        globalAlert("كلمة المرور التي أدخلتها غير ", title: "عذرًا");
+      } else {
       var res = await AdminData().edit({
         "id": adminmModel.adminSysId.toString(),
         "name": name.text,
@@ -235,8 +237,9 @@ class AdminControllerImp extends AdminController {
       } else {
         statusRequs = StatusRequst.failure;
       }
-      update();
+      }
     }
+    update();
   }
 
   //function to assign data inside List
