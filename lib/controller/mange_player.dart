@@ -45,7 +45,6 @@ class MangeUsersControllerImp extends MangeUsersController {
   late TextEditingController phone;
   late TextEditingController age;
   late TextEditingController price;
-
   late TextEditingController searchVal;
    DateTime? brithDay = DateTime.now();
   final List<SubscriptionModel> _subList = [];

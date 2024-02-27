@@ -281,6 +281,7 @@ class RenewSubscriptionForm extends StatelessWidget {
                   Expanded(
                     child: CustomeTextFormAuth(
                       myController: controller.notknow,
+                      isreadonly: true,
                       hintText: "",
                       lableText: "حساب سابق",
                     ),

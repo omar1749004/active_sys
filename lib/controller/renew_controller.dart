@@ -242,9 +242,6 @@ class RenewControllerImp extends RenewController {
     update();
 
     if (formKey.currentState!.validate()) {
-      String offe = _getDesc();
-      String ow = _getowed();
-
       var res = await RenewData().add({
         "userid": renewUser.usersId.toString(),
         "name": renewUser.usersName,
@@ -254,10 +251,10 @@ class RenewControllerImp extends RenewController {
         "note": note.text,
         "start": start.toString(),
         "end": start.toString(),
-        "offer": offe,
+        "offer": descound.text,
         "payed_type": payedType,
         "amount": amount.text,
-        "amount_owed": ow,
+        "amount_owed": remining.text,
         "renewal_adminId": myServices.sharedPreferences.getString("id"),
       });
       if (res["status"] == "failure") {
@@ -281,23 +278,7 @@ class RenewControllerImp extends RenewController {
     update();
   }
 
-  String _getDesc() {
-    double x = double.parse(descound.text);
-    if (x > 0) {
-      return "1";
-    } else {
-      return "0";
-    }
-  }
 
-  String _getowed() {
-    double x = double.parse(remining.text);
-    if (x > 0) {
-      return remining.text;
-    } else {
-      return "0";
-    }
-  }
 
   void setTypePaed(String typeofPayed) {
     if ("نقدى" == typeofPayed) {
@@ -470,8 +451,6 @@ class RenewControllerImp extends RenewController {
     if (formKey.currentState!.validate()) {
       statusRequs = StatusRequst.loading;
       update();
-      String offe = _getDesc();
-      String ow = _getowed();
       var res = await RenewData().edit({
         "id": renewUser.renewalId.toString(),
         "name": renewUser.usersName,
@@ -480,9 +459,9 @@ class RenewControllerImp extends RenewController {
         "note": note.text,
         "start": start.toString(),
         "end": end.toString(),
-        "offer": offe,
+        "offer": descound.text,
         "amount": amount.text,
-        "amount_owed": ow,
+        "amount_owed": remining.text,
         "renewal_adminId": myServices.sharedPreferences.getString("id"),
       });
       if (res["status"] == "failure") {
@@ -518,10 +497,11 @@ class RenewControllerImp extends RenewController {
     changemodel(subValue);
 
     preNote.text = privetModel.renewalNote ?? "";
-    if (renewUser.renewalAmount != -1) {
+    if (renewUser.renewalStart != null) {
       amount.text = privetModel.renewalAmount.toString();
-      caluserPayd();
-      remining.text = privetModel.renewAmountOwed.toString();
+      descound.text = privetModel.renewOffer.toString() ;    
+      notknow.text = privetModel.renewAmountOwed.toString();   
+      remining.text = notknow.text;
     }
 
     canAdd = false;

@@ -224,7 +224,7 @@ class HomeControllerImp extends HomeController {
   void addSub() async {
     statusRequs = StatusRequst.loading;
     update();
-    if (barcode.text.isNotEmpty) {
+    if (barcode.text != "0") {
       var res = await AttendData().addSub({
         "barcode": barcode.text,
         "adminID": myServices.sharedPreferences.getString("id"),
@@ -259,6 +259,7 @@ class HomeControllerImp extends HomeController {
       } else if(res["msg"] == "barcode not found"){
         globalAlert("الباركود ليس مستخدم يرجى ادخال الباركود الصحيح",
             title: "!خطأ");
+            statusRequs = StatusRequst.failure;
       }else{
         statusRequs = StatusRequst.failure;
       }
@@ -339,7 +340,7 @@ class HomeControllerImp extends HomeController {
     deadline.clear();
     brithDay = null;
     age.clear();
-    subValue = "";
+    subscriptions.clear();
     imageName = null ;
     note.clear();
     update();
@@ -444,6 +445,10 @@ class HomeControllerImp extends HomeController {
     if (res["status"] == "success") {
        attendmodel = AttendModel.fromJson(res["data"]);
         assignModel(attendmodel);
+        statusRequs = StatusRequst.sucsess;
+        update();
+        await Future.delayed(const Duration(seconds: 3));
+        clearModel();
       statusRequs = StatusRequst.sucsess;
     } else if (res["status"] == "failure") {
       statusRequs = StatusRequst.failure;

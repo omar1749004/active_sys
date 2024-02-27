@@ -72,7 +72,10 @@ class ManagePlayers extends StatelessWidget {
                               Expanded(
                                 flex: 2,
                                 child: CustomTableHeader(
-                                  searchController: TextEditingController(),
+                                  searchController: controller.searchVal,
+                                  onChanged: (p0) {
+                                    controller.checkSearch(p0);
+                                  },
                                   header: "",
                                 ),
                               ),
