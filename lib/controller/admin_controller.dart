@@ -38,7 +38,7 @@ class AdminControllerImp extends AdminController {
   bool isHidepass = true;
   bool canAdd = true;
   IconData icone = CupertinoIcons.eye_slash;
-  List<int> selectpowerList = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14];
+  List<int> selectpowerList = [1, 2, 3, 4, 5, 6, 7, 8, 9,];
   List<Map<int, List<int>>> powersMap = [];
   GlobalKey<FormState> formAdminKey = GlobalKey<FormState>();
   @override
@@ -130,7 +130,7 @@ class AdminControllerImp extends AdminController {
 
   @override
   void assignSelectAdminPowers(List<int> selectpower) {
-    List<bool> result = List.filled(14, false);
+    List<bool> result = List.filled(9, false);
 
     for (int i = 0; i < selectpower.length; i++) {
       if (i < selectpower.length) {
@@ -312,7 +312,6 @@ class AdminControllerImp extends AdminController {
     repass.clear();
     note.clear();
     canAdd = true;
-
     update();
   }
 

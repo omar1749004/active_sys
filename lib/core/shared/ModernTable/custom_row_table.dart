@@ -35,6 +35,7 @@ class _CustomRowTableState extends State<CustomRowTable> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onDoubleTap: () {
+        setValueInGlobalVariable(widget.nameOfVar, widget.ind);
         widget.showDialog();
       },
       child: ElevatedButton(

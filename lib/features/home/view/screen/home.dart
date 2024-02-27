@@ -19,6 +19,7 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    
     Get.put(HomeControllerImp());
     return Scaffold(
       body: GetBuilder<HomeControllerImp>(builder: (controller) {
@@ -71,11 +72,13 @@ class HomePage extends StatelessWidget {
                                               150,
                                               200,
                                               200,
+                                              200,
                                               250,
                                               250,
                                             ],
                                             header: const [
                                               "الكود",
+                                              "نوع الاشتراك",
                                               "وقت الحضور",
                                               "وقت الانصراف",
                                               "ألاسم",

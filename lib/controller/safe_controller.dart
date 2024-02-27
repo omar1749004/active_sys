@@ -1,3 +1,4 @@
+import 'package:active_system/core/class/handle_data_in_table.dart';
 import 'package:active_system/core/class/statuscode.dart';
 import 'package:active_system/core/functions/global_alert.dart';
 import 'package:active_system/data/models/safe_model.dart';
@@ -182,8 +183,6 @@ class SafeControllerImp extends SafeController {
     update();
   }
 
-
-
   //function to assign data inside List
   void assignDataInsideTable() {
     dataInTable = [];
@@ -195,7 +194,7 @@ class SafeControllerImp extends SafeController {
         safeList[i].safeIncoming.toString(),
         safeList[i].safeOutgoing.toString(),
         safeList[i].remaining.toString(),
-        safeList[i].safeType.toString(),
+        handleDataInTable().handleSafeType(safeList[i].safeType),
         safeList[i].adminSysName.toString(),
       ]);
     }

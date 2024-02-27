@@ -19,10 +19,10 @@ Future<dynamic> customHomePageDialog(AttendModel attendModel) {
                 padding: const EdgeInsets.only(bottom: 30, left: 30),
                 child: CircleAvatar(
                   backgroundColor: ColorApp.gray,
-                  radius: 300,
+                  radius: 100,
                   child: ClipOval(
                       child: SizedBox.fromSize(
-                          size: Size.fromRadius(300), // Image radius
+                          size: Size.fromRadius(100), // Image radius
                           child: Image.asset(
                               "assets/image/animals.jpg") //controller.imageName != null
                           // ? CachedNetworkImage(

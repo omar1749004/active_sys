@@ -95,7 +95,6 @@ class Api {
 
   Future<dynamic> postFile(
       {required String uri, required Map body, required XFile file}) async {
-
     var request = http.MultipartRequest("POST", Uri.parse(uri));
 
     //to get bytes and convert it to Stream<List<int>>
@@ -107,7 +106,7 @@ class Api {
 
     // var length = await file.length();
     //var stream = http.ByteStream(file.openRead());
-    
+
     var multipartfile = http.MultipartFile("file", stream, length,
         filename: basename(file.path));
     request.headers.addAll(myheaders);

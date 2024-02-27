@@ -18,18 +18,18 @@ class AuthView extends StatelessWidget {
         body: Center(
       child: Container(
         decoration: BoxDecoration(
-           color: ColorApp.kPrimaryColor,
-           borderRadius: BorderRadius.circular(16),
-           boxShadow: [
-            BoxShadow(
-        color: const Color.fromARGB(255, 59, 59, 59).withOpacity(0.5), // Shadow color
-        offset:const Offset(5, 5), // Offset from container
-        blurRadius: 10, // Blur intensity
-        spreadRadius: 5, // Spread of shadow
-      ),
-           ]
-        ),
-        padding:const EdgeInsets.symmetric(horizontal: 15),
+            color: ColorApp.kPrimaryColor,
+            borderRadius: BorderRadius.circular(16),
+            boxShadow: [
+              BoxShadow(
+                color: const Color.fromARGB(255, 59, 59, 59)
+                    .withOpacity(0.5), // Shadow color
+                offset: const Offset(5, 5), // Offset from container
+                blurRadius: 10, // Blur intensity
+                spreadRadius: 5, // Spread of shadow
+              ),
+            ]),
+        padding: const EdgeInsets.symmetric(horizontal: 15),
         width: 500,
         height: 600,
         child: GetBuilder<AuthControllerImp>(
@@ -71,10 +71,10 @@ class AuthView extends StatelessWidget {
                   icone: controller.icone,
                   isShowIcone: true,
                   myController: controller.password,
-                                ontap:() {
-                                  controller.showPassword();
-                                  controller.changeIcone();
-                                  },
+                  ontap: () {
+                    controller.showPassword();
+                    controller.changeIcone();
+                  },
                   lableText: "كلمة السر",
                   validator: (val) {
                     return validInput(val!, 4, 20, "");
@@ -83,19 +83,30 @@ class AuthView extends StatelessWidget {
                   lableStyle: Styles.style18,
                   hintColor: Colors.white,
                   obscureText: controller.isHidepass,
-                   mainTextColor: Colors.white,
-                   cursorColor: Colors.white,
+                  mainTextColor: Colors.white,
+                  cursorColor: Colors.white,
                 ),
-                 const SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 Row(
                   children: [
-                     Expanded(child: CustomBotton1(ontap: (){}, text: "الغاء", color: ColorApp.secondColor, hieght: 50,)),
-                    Expanded(child: CustomBotton1(ontap: (){
-                      controller.login();
-                    }, text: "تسجل", color: ColorApp.secondColor , hieght: 50,)),
-                    
+                    Expanded(
+                        child: CustomBotton1(
+                      ontap: () {},
+                      text: "الغاء",
+                      color: ColorApp.secondColor,
+                      hieght: 50,
+                    )),
+                    Expanded(
+                        child: CustomBotton1(
+                      ontap: () {
+                        controller.login();
+                      },
+                      text: "تسجل",
+                      color: ColorApp.secondColor,
+                      hieght: 50,
+                    )),
                   ],
                 )
               ],
