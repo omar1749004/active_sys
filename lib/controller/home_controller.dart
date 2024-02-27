@@ -504,7 +504,8 @@ class HomeControllerImp extends HomeController {
     var res = await AttendData().delete({
       "id": attendmodel.attendanceId.toString(),
       "renewid": attendmodel.attendanceRenewalid.toString(),
-      "safeId": attendmodel.safeId == 0 ? "" : attendmodel.safeId.toString()
+      "safeId": attendmodel.safeId == 0 ? "" : attendmodel.safeId.toString(),
+      "adminID": myServices.sharedPreferences.getString("id"),
     });
 
     if (res["status"] == "failure") {
@@ -513,6 +514,7 @@ class HomeControllerImp extends HomeController {
     } else if (res["status"] == "success") {
       attendList.removeWhere(
           (element) => element.attendanceId == attendmodel.attendanceId);
+          assignDataInsideTable() ;
       statusRequs = StatusRequst.sucsess;
     } else if (res["msg"] == "expire") {
       globalAlert("لايمكن حذف هذا اللاعب", title: "!خطأ");
