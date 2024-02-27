@@ -4,10 +4,10 @@ import 'package:active_system/features/home/view/screen/home.dart';
 import 'package:active_system/features/manage_cost/manage_cost_view.dart';
 import 'package:active_system/features/manage_players/manage_palyers.dart';
 import 'package:active_system/features/manage_subscriptions/view/manage_subscriptions_view.dart';
-import 'package:active_system/features/players_profile/players_profile_view.dart';
 import 'package:active_system/features/renew_subscriptions/renew_subscriptions_view.dart';
 import 'package:active_system/features/safe/view/screen/safe_view.dart';
 import 'package:active_system/features/trainers/trainers_view.dart';
+import 'package:active_system/features/treasury_register/treasury_register_view.dart';
 import 'package:active_system/features/users/view/screen/users_view.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -16,14 +16,13 @@ const List<String> serviceName = [
   "سجل الحضور",
   "ادارة الاشتراكات",
   "تجديد الاشتراكات",
-  "ادارة المتدربين",
+  "ادارة المدربين",
   "ادارة المستخدمين",
-  "الخزنة",
+  "ادارة الاعبين",
   "ادارة المصروفات",
-  "الملف الشخصى للاعبين",
-  "تسجيل الدخول",
+  "الخزنة",
   "سجل الخزنة",
-  "ادارة الاعبين"
+  "تسجيل الدخول",
 ];
 
 const List<String> serviceRoutes = [
@@ -33,12 +32,11 @@ const List<String> serviceRoutes = [
   "RenewSybscriptionsView",
   "TrainersView",
   "usersid",
-  "safeciew",
+  "ManagePlayers",
   "ManageCostView",
-  "PlayersProfileView",
-  "authid",
+  "safeciew",
   "TreasuryRegisterView",
-  "ManagePlayers"
+  "authid",
 ];
 const List<Widget> serviceWidget = [
   HomePage(),
@@ -47,12 +45,11 @@ const List<Widget> serviceWidget = [
   RenewSybscriptionsView(),
   TrainersView(),
   UsersView(),
-  SafeView(),
+  ManagePlayers(),
   ManageCostView(),
-  PlayersProfileView(),
+  SafeView(),
+  TreasuryRegisterView(),
   AuthView(),
-  TrainersView(),
-  ManagePlayers()
 ];
 // final List<Widget Function()> serviceWidgetBuilders = [
 //   () => HomePage(),
@@ -68,3 +65,14 @@ const List<Widget> serviceWidget = [
 //   () => TrainersView(),
 //   () => ManagePlayers(),
 // ];
+
+//section specific for powers of admin to create list of pages that will show him
+
+//List of boolean, every index point to page and every value point to if page from his power or not (true -> from his power , false -> not from his power)
+List<bool> booleansPowers = [];
+
+//final result from his power
+List<String> servicePowerName = [];
+
+//final result from his power
+List<String> servicePowerRoutes = [];

@@ -1,5 +1,5 @@
 
-
+import 'package:active_system/core/class/handle_data_in_table.dart';
 import 'package:active_system/core/class/statuscode.dart';
 import 'package:active_system/core/functions/global_alert.dart';
 import 'package:active_system/core/services/services.dart';
@@ -46,7 +46,7 @@ class MangeUsersControllerImp extends MangeUsersController {
   late TextEditingController age;
   late TextEditingController price;
   late TextEditingController searchVal;
-   DateTime? brithDay = DateTime.now();
+  DateTime? brithDay = DateTime.now();
   final List<SubscriptionModel> _subList = [];
   List<String> subNameList = ["عام"];
   List<String> subNameSearchList = ["الكل"];
@@ -155,7 +155,7 @@ class MangeUsersControllerImp extends MangeUsersController {
       if (_subList[i].subscriptionsName == subName) {
         subscriptionModel = _subList[i];
         price.text = subscriptionModel.subscriptionsPrice.toString();
-        break ;
+        break;
       }
     }
   }
@@ -180,7 +180,7 @@ class MangeUsersControllerImp extends MangeUsersController {
     for (int i = 0; i < trainerNameList.length; i++) {
       if (_trainerList[i].usersName == trainerName) {
         userModel = _trainerList[i];
-        break ;
+        break;
       }
     }
   }
@@ -190,6 +190,7 @@ class MangeUsersControllerImp extends MangeUsersController {
     statusRequs = StatusRequst.loading;
     update();
     if (formKey.currentState!.validate()) {
+
         var res = await UsersData().add({
           "name": userName.text,
           "phone": phone.text,
@@ -213,7 +214,6 @@ class MangeUsersControllerImp extends MangeUsersController {
           globalAlert("هذا الكود مستخدم بالفعل");
           statusRequs = StatusRequst.failure;
         }
-
     } else {
       statusRequs = StatusRequst.failure;
     }
@@ -394,9 +394,8 @@ class MangeUsersControllerImp extends MangeUsersController {
       dataInTable.add([
         usersList[i].usersId.toString(),
         usersList[i].usersName.toString(),
-        usersList[i].usersGender.toString(),
+        handleDataInTable().handleGenderData(usersList[i].usersGender),
         usersList[i].usersPhone.toString(),
-        usersList[i].usersType.toString(),
         usersList[i].usersCreate.toString(),
         usersList[i].renewalStart.toString(),
         usersList[i].renewalEnd.toString(),
@@ -413,7 +412,6 @@ class MangeUsersControllerImp extends MangeUsersController {
     phone.text = privetModel.usersPhone!;
     trainerValue = privetModel.captainName!;
     brithDay = privetModel.usersDate ;
-    
     calcAge();
     note.text = privetModel.usersNote!;
     subValue = privetModel.subscriptionsName!;
@@ -427,24 +425,24 @@ class MangeUsersControllerImp extends MangeUsersController {
     userName.clear();
     phone.clear();
     note.clear();
-    age.text = "0";
+    age.clear();
+    file = null;
     brithDay = DateTime.now();
     canAdd = true;
     update();
   }
-  
+
   @override
   void calcAge() {
     int midage = DateTime.now().year - brithDay!.year  ;
-    
     age.text = midage.toString() ;
-    
+
   }
-  
+
   @override
   void calcBrithday() {
     int midBrithday = DateTime.now().year - int.parse(age.text);
     brithDay = DateTime(midBrithday, 1, 1);
     update();
-      }
+  }
 }

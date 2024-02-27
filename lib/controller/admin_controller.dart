@@ -39,7 +39,7 @@ class AdminControllerImp extends AdminController {
   bool isHidepass = true;
   bool canAdd = true;
   IconData icone = CupertinoIcons.eye_slash;
-  List<int> selectpowerList = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14];
+  List<int> selectpowerList = [1, 2, 3, 4, 5, 6, 7, 8, 9,];
   List<Map<int, List<int>>> powersMap = [];
   GlobalKey<FormState> formAdminKey = GlobalKey<FormState>();
   MyServices myServices =Get.find();
@@ -132,7 +132,7 @@ class AdminControllerImp extends AdminController {
 
   @override
   void assignSelectAdminPowers(List<int> selectpower) {
-    List<bool> result = List.filled(14, false);
+    List<bool> result = List.filled(9, false);
 
     for (int i = 0; i < selectpower.length; i++) {
         result[selectpower[i] - 1] = true;
@@ -290,7 +290,6 @@ class AdminControllerImp extends AdminController {
     note.clear();
     checkValueList = List.filled(14, true);
     canAdd = true;
-
     update();
   }
 

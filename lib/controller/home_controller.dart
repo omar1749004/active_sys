@@ -1,3 +1,4 @@
+import 'package:active_system/core/class/handle_data_in_table.dart';
 import 'package:active_system/core/class/statuscode.dart';
 import 'package:active_system/core/functions/global_alert.dart';
 import 'package:active_system/core/services/services.dart';
@@ -16,7 +17,7 @@ abstract class HomeController extends GetxController {
   void viewAll();
   void getSub();
   void assignModel(AttendModel privetModel);
-  void calcAge() ;
+  void calcAge();
   void handlebarcode();
   void handleFunctionsAdd();
   void rightSearch();
@@ -43,8 +44,8 @@ class HomeControllerImp extends HomeController {
   late AttendModel attendmodel;
   int supType = 0;
   int selcetRenew = 0;
-  String ? imageName;
-  DateTime? brithDay ;
+  String? imageName;
+  DateTime? brithDay;
   bool isactive = false;
   List<AttendModel> attendList = [];
   late SubscriptionModel subscriptionModel;
@@ -119,19 +120,19 @@ class HomeControllerImp extends HomeController {
       "barcode": barcode.text,
       "adminID": myServices.sharedPreferences.getString("id"),
     });
-     if (res["msg"] == "barcode not found") {
-        globalAlert("الباركود ليس مستخدم يرجى ادخال الباركود الصحيح",
-            title: "!خطأ");
-        statusRequs = StatusRequst.failure;
+    if (res["msg"] == "barcode not found") {
+      globalAlert("الباركود ليس مستخدم يرجى ادخال الباركود الصحيح",
+          title: "!خطأ");
+      statusRequs = StatusRequst.failure;
     } else if (res["status"] == "success") {
-       attendmodel = AttendModel.fromJson(res["data"]);
-        assignModel(attendmodel);
-        attendList.add(attendmodel);
-        assignDataInsideTable();
-        statusRequs = StatusRequst.sucsess;
-        update();
-        await Future.delayed(const Duration(seconds: 2));
-        clearModel();
+      attendmodel = AttendModel.fromJson(res["data"]);
+      assignModel(attendmodel);
+      attendList.add(attendmodel);
+      assignDataInsideTable();
+      statusRequs = StatusRequst.sucsess;
+      update();
+      await Future.delayed(const Duration(seconds: 2));
+      clearModel();
       statusRequs = StatusRequst.sucsess;
     } else if (res["msg"] == "invitition expired") {
       globalAlert("الاعب تخطى عدد الدعوات");
@@ -256,11 +257,10 @@ class HomeControllerImp extends HomeController {
         statusRequs = StatusRequst.sucsess;
         update();
         selecRenew(res["data"]);
-      } else if(res["msg"] == "barcode not found"){
+      } else if (res["msg"] == "barcode not found") {
         globalAlert("الباركود ليس مستخدم يرجى ادخال الباركود الصحيح",
             title: "!خطأ");
-            statusRequs = StatusRequst.failure;
-      }else{
+      } else {
         statusRequs = StatusRequst.failure;
       }
     } else {
@@ -306,18 +306,16 @@ class HomeControllerImp extends HomeController {
     attendmodel = privetModel;
     username.text = privetModel.usersName!;
     phone.text = privetModel.usersPhone!;
-    
-    imageName = privetModel.usersImage ;
+
+    imageName = privetModel.usersImage;
     barcode.text = privetModel.barcode?.toString() ?? "0";
-    deadline.text =privetModel.renewalEnd?.toString().substring(0,11) ?? ''  ;
-    if(privetModel.brithDay != null)
-    {
-      brithDay = privetModel.brithDay ;
+    deadline.text = privetModel.renewalEnd?.toString().substring(0, 11) ?? '';
+    if (privetModel.brithDay != null) {
+      brithDay = privetModel.brithDay;
       calcAge();
     }
-    
-    note.text = privetModel.usersNote?? "";
 
+    note.text = privetModel.usersNote ?? "";
 
     if(privetModel.subscriptionsName != null && supType != 1)
     {
@@ -326,10 +324,11 @@ class HomeControllerImp extends HomeController {
     subscriptions.text = privetModel.subscriptionsName!;
     update();
   }
+
   @override
   void calcAge() {
-    int midage = DateTime.now().year - brithDay!.year  ;
-    age.text = midage.toString() ;
+    int midage = DateTime.now().year - brithDay!.year;
+    age.text = midage.toString();
   }
 
   @override
@@ -452,7 +451,7 @@ class HomeControllerImp extends HomeController {
       statusRequs = StatusRequst.sucsess;
     } else if (res["status"] == "failure") {
       statusRequs = StatusRequst.failure;
-    }else{
+    } else {
       statusRequs = StatusRequst.failure;
     }
     update();
@@ -489,6 +488,7 @@ class HomeControllerImp extends HomeController {
     for (var i = 0; i < attendList.length; i++) {
       dataInTable.add([
         attendList[i].attendanceId.toString(),
+        handleDataInTable().handelAttendanceTypeData(attendList[i].attendanceType),
         attendList[i].attendanceStart.toString(),
         attendList[i].attendanceEnd.toString(),
         attendList[i].usersName.toString(),
@@ -521,3 +521,5 @@ class HomeControllerImp extends HomeController {
     update();
   }
 }
+
+

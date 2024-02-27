@@ -1,3 +1,4 @@
+import 'package:active_system/core/class/handle_data_in_table.dart';
 import 'package:active_system/core/class/statuscode.dart';
 import 'package:active_system/data/models/attend_model.dart';
 import 'package:active_system/data/service/remote/attend_data.dart';
@@ -19,7 +20,7 @@ class AttendControllerImp extends AttendController {
   bool isdateSearch = true;
   DateTime startSearch = DateTime.now();
   DateTime endSearch = DateTime.now();
-  String? s ;
+  String? s;
   String? e;
   int totalPlayer = 0;
   List<AttendModel> attendList = [];
@@ -40,12 +41,12 @@ class AttendControllerImp extends AttendController {
   @override
   void dateSearch(DateTime startD, DateTime endD) async {
     statusRequs = StatusRequst.loading;
-   s = startD.toString().substring(0,11) ;
-    e = endD.toString().substring(0,11) ;
+    s = startD.toString().substring(0, 11);
+    e = endD.toString().substring(0, 11);
     update();
       var res = await AttendData().dateSearch({
-        "start_date": startD.toString().substring(0,11),
-        "end_date":endD.toString().substring(0,11),
+        "start_date": startD.toString().substring(0, 11),
+        "end_date": endD.toString().substring(0, 11),
       });
       if (res["status"] == "failure") {
         attendList = [];
@@ -69,7 +70,7 @@ class AttendControllerImp extends AttendController {
   void checkSearch(String val) {
     if (val.isEmpty) {
       statusRequs = StatusRequst.non;
-      handlTable(isdateSearch) ;
+      handlTable(isdateSearch);
       isSearch = false;
     } else {
       isSearch = true;
@@ -84,9 +85,9 @@ class AttendControllerImp extends AttendController {
 
     var res = await AttendData().search({
       "search": searchVal.text,
-      "start_date":s,
-      "end_date":e,
-      });
+      "start_date": s,
+      "end_date": e,
+    });
     if (res["status"] == "failure") {
       attendList = [];
       assignDataInsideTable();
@@ -114,6 +115,7 @@ class AttendControllerImp extends AttendController {
         attendList[i].attendanceId.toString(),
         " ${attendList[i].attendanceDay!.year}/${attendList[i].attendanceDay!.month}/${attendList[i].attendanceDay!.day}",
         attendList[i].usersName.toString(),
+        handleDataInTable().handelAttendanceTypeData(attendList[i].attendanceType),
         attendList[i].attendanceStart.toString(),
         attendList[i].attendanceEnd.toString(),
         attendList[i].usersPhone.toString(),
@@ -122,25 +124,25 @@ class AttendControllerImp extends AttendController {
       ]);
     }
   }
-   @override
+
+  @override
   void handlTable(bool isdate) {
-  isdateSearch =  isdate ;
+    isdateSearch = isdate;
 
-  if(isdateSearch){
-
-   dateSearch(startSearch ,endSearch) ;
-  }else{
-    s = "" ;
-    e = "" ;
-    viewAll();
-  }
-
+    if (isdateSearch) {
+      dateSearch(startSearch, endSearch);
+    } else {
+      s = "";
+      e = "";
+      viewAll();
+    }
   }
 
   @override
   void viewAll() async {
-     statusRequs = StatusRequst.loading;
+    statusRequs = StatusRequst.loading;
     update();
+
       var res = await AttendData().viwe();
       if (res["status"] == "failure") {
         statusRequs = StatusRequst.failure;
@@ -151,12 +153,11 @@ class AttendControllerImp extends AttendController {
         attendList.addAll(data.map((e) => AttendModel.fromJson(e)));
          assignDataInsideTable();
         statusRequs = StatusRequst.sucsess;
+         await Future.delayed(const Duration(milliseconds: 200));
       } else {
         statusRequs = StatusRequst.failure;
       }
-   await Future.delayed(const Duration(milliseconds: 200));
-    
+  
     update();
   }
-
 }
