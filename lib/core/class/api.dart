@@ -5,9 +5,9 @@ import 'package:path/path.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
-String _basicAuth = 'Basic  + ${base64Encode(utf8.encode('omar_mohsen:omarMohsen194004#'))}';
+String _basicAuth = 'Basic ' + base64Encode(utf8.encode('omar_mohsen:omarMohsen194004#'));
 
-Map<String, String> myheaders = {'authorization': _basicAuth};
+Map<String, String> myheaders = {'Authorization': _basicAuth};
 
 class Api {
   Future<dynamic> get({required String url, String? token}) async {

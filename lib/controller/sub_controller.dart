@@ -108,6 +108,7 @@ class MangeSubControllerImp extends MangeSubController {
         globalAlert("يرجى إعادة المحاولة في وقت لاحق", title: "!خطأ");
         statusRequs = StatusRequst.failure;
       } else if (res["status"] == "success") {
+        viewAll();
         statusRequs = StatusRequst.sucsess;
       } else {
         statusRequs = StatusRequst.failure;
@@ -324,6 +325,7 @@ class MangeSubControllerImp extends MangeSubController {
       } else if (res["status"] == "success") {
         globalAlert("تم تعديل البانات بنجاح", title: "");
         cleaModel();
+        viewAll();
         statusRequs = StatusRequst.sucsess;
       } else {
         statusRequs = StatusRequst.failure;

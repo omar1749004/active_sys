@@ -24,11 +24,11 @@ Future<dynamic> customHomePageDialog(AttendModel attendModel,HomeControllerImp c
                     child: ClipOval(
                       child: SizedBox.fromSize(
                           size: const Size.fromRadius(100), // Image radius
-                          child: controller.imageName != null
+                          child: attendModel.usersImage != null
                               ? CachedNetworkImage(
                                   fit: BoxFit.fill,
                                   imageUrl:
-                                      "$linkImageUpload/${controller.imageName}",
+                                      "$linkImageUpload/${attendModel.usersImage}",
                                 )
                               : const SizedBox()),
                     )),

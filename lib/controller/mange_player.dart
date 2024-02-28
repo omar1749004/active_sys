@@ -394,7 +394,7 @@ class MangeUsersControllerImp extends MangeUsersController {
         usersList[i].usersName.toString(),
         handleDataInTable().handleGenderData(usersList[i].usersGender),
         usersList[i].usersPhone.toString(),
-        usersList[i].usersCreate.toString(),
+        usersList[i].usersCreate.toString().substring(0,11),
         usersList[i].renewalStart.toString(),
         usersList[i].renewalEnd.toString(),
         usersList[i].usersNote.toString(),

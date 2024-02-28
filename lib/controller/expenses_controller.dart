@@ -264,11 +264,9 @@ class ExpensesControllerImp extends ExpensesController {
     if (res["status"] == "failure") {
       globalAlert("يرجى إعادة المحاولة في وقت لاحق", title: "!خطأ");
       statusRequs = StatusRequst.failure;
-    } else if (res["status"] == "success") {
-      expensesList.removeWhere(
-          (element) => element.expensesId == expensesModel.expensesId);
-          assignDataInsideTable();
+    } else if (res["status"] == "success") { 
           clearModel();
+          handlTable(isdateSearch);
       statusRequs = StatusRequst.sucsess;
     } else {
       statusRequs = StatusRequst.failure;

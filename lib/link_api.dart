@@ -97,19 +97,12 @@ const String linkFreezeDelete = "$linkServerName/freeze/delete.php";
 const String linkImageUpload = "http://localhost/activegym_app/upload";
 
 
-const String linkImageUpload =
-    "https://c4df-197-53-110-151.ngrok-free.app/activegym_app/upload";
-
 // const String linkImageUpload =
-//     "https://b1ab-197-53-103-46.ngrok-free.app/activegym_app/upload";
+//     "https://c4df-197-53-110-151.ngrok-free.app/activegym_app/upload";
 
 // pdfs
 const String linkPDFs = "http://localhost/activegym_app/pdfs";
 
 
-const String linkPDFs =
-    "https://c4df-197-53-110-151.ngrok-free.app/activegym_app/pdfs";
-
 // const String linkPDFs =
-//     "https://b1ab-197-53-103-46.ngrok-free.app/activegym_app/pdfs";
-
+//     "https://c4df-197-53-110-151.ngrok-free.app/activegym_app/pdfs";
