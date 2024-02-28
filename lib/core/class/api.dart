@@ -5,7 +5,7 @@ import 'package:path/path.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
-String _basicAuth = 'Basic  + ${base64Encode(utf8.encode('omar:omar194004'))}';
+String _basicAuth = 'Basic  + ${base64Encode(utf8.encode('omar_mohsen:omarMohsen194004#'))}';
 
 Map<String, String> myheaders = {'authorization': _basicAuth};
 
@@ -37,14 +37,14 @@ class Api {
     //Map<String, String> headers = {};
 
     if (token != null) {
-      headers.addAll(
+      myheaders.addAll(
         {"Authorization": "Bearer $token"},
       );
     }
 
     try {
       http.Response response = await http.post(Uri.parse(uri),
-          body: body, headers: headers); //myheaders
+          body: body, headers: myheaders); //myheaders
 
       if (response.statusCode == 200 || response.statusCode == 201) {
         Map data = jsonDecode(response.body);
