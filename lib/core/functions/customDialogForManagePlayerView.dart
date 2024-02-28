@@ -1,6 +1,8 @@
 import 'package:active_system/core/constant/color.dart';
 import 'package:active_system/data/models/user_model.dart';
 import 'package:active_system/features/safe/view/widget/custom_display_many.dart';
+import 'package:active_system/link_api.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -16,21 +18,19 @@ Future<dynamic> customManagePlayerDialog(UserModel userModel) {
               Container(
                 padding: const EdgeInsets.only(bottom: 30, left: 30),
                 child: CircleAvatar(
-                  backgroundColor: ColorApp.gray,
-                  radius: 100,
-                  child: ClipOval(
+                    backgroundColor: ColorApp.gray,
+                    radius: 100,
+                    child: ClipOval(
                       child: SizedBox.fromSize(
                           size: const Size.fromRadius(100), // Image radius
-                          child: Image.asset(
-                              "assets/image/animals.jpg") //controller.imageName != null
-                          // ? CachedNetworkImage(
-                          //     fit: BoxFit.fill,
-                          //     imageUrl:
-                          //         "$linkImageUpload/${controller.imageName}",
-                          // )
-                          //: const SizedBox()),
-                          )),
-                ),
+                          child: userModel.usersImage != null
+                              ? CachedNetworkImage(
+                                  fit: BoxFit.fill,
+                                  imageUrl:
+                                      "$linkImageUpload/${userModel.usersImage}",
+                                )
+                              : const SizedBox()),
+                    )),
               ),
               const SizedBox(
                 height: 15,

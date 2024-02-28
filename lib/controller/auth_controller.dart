@@ -64,7 +64,23 @@ class AuthControllerImp extends AuthController {
 
         statusRequs = StatusRequst.sucsess;
         Get.offNamed(AppRoute.homeid);
-      } else if (res["msg"] == "no powers") {}
+      } else if (res["msg"] == "no powers") {
+        servicePowerName = [];
+        servicePowerRoutes = [];
+
+        //to add الصفحه الرئيسيه
+        servicePowerName.add(serviceName[0]);
+        servicePowerRoutes.add(serviceRoutes[0]);
+
+        //to add تسجيل الدخول
+        servicePowerName.add(serviceName.last);
+        servicePowerRoutes.add(serviceRoutes.last);
+         services.sharedPreferences
+        .setStringList("servicePowerName", servicePowerName);
+    services.sharedPreferences
+        .setStringList("servicePowerRoutes", servicePowerRoutes);
+        Get.offNamed(AppRoute.homeid);
+      }
     }
 
     update();
@@ -107,6 +123,10 @@ class AuthControllerImp extends AuthController {
   @override
   void setPowersInMenu() async {
     var j = 0;
+
+    servicePowerName = [];
+    servicePowerRoutes = [];
+
     //to add الصفحه الرئيسيه
     servicePowerName.add(serviceName[0]);
     servicePowerRoutes.add(serviceRoutes[0]);
@@ -124,6 +144,10 @@ class AuthControllerImp extends AuthController {
     //to add تسجيل الدخول
     servicePowerName.add(serviceName.last);
     servicePowerRoutes.add(serviceRoutes.last);
+    services.sharedPreferences
+        .setStringList("servicePowerName", servicePowerName);
+    services.sharedPreferences
+        .setStringList("servicePowerRoutes", servicePowerRoutes);
     update();
   }
 }

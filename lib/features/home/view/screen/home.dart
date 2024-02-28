@@ -13,13 +13,13 @@ import 'package:active_system/features/manage_subscriptions/view/widgets/custom_
 import 'package:active_system/features/manage_subscriptions/view/widgets/custom_menu.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'dart:html' as html;
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    
     Get.put(HomeControllerImp());
     return Scaffold(
       body: GetBuilder<HomeControllerImp>(builder: (controller) {
@@ -70,22 +70,35 @@ class HomePage extends StatelessWidget {
                                             data: controller.dataInTable,
                                             widths: const [
                                               150,
-                                              200,
-                                              200,
-                                              200,
+                                              150,
                                               250,
                                               250,
+                                              200,
+                                              200,
+                                              200,
                                             ],
                                             header: const [
+                                              "رقم المتسلسل",
                                               "الكود",
+                                              "ألاسم",
+                                              "أسم الاشتراك",
                                               "نوع الاشتراك",
                                               "وقت الحضور",
                                               "وقت الانصراف",
-                                              "ألاسم",
-                                              "أسم الاشتراك",
                                             ],
                                             nameOfGlobalID: 'home',
-                                            onRowTap: () {},
+                                            onRowTap: () async {
+                                              controller.assignModel(
+                                                  controller.attendList[
+                                                      GlobalVariable.home!]);
+
+                                              //to wait 7 sec then set globalViarable.home=0
+                                              await Future.delayed(
+                                                  const Duration(
+                                                      milliseconds: 7000));
+                                              GlobalVariable.home = null;
+                                              controller.refresh();
+                                            },
                                             //spicial for Homepage only
                                             thisPageIsHomePage: true,
                                             showDialog: () {
@@ -94,7 +107,8 @@ class HomePage extends StatelessWidget {
                                                   controller.attendList[
                                                       GlobalVariable.home!];
                                               customHomePageDialog(
-                                                  controller.attendmodel);
+                                                  controller.attendmodel,
+                                                  controller);
                                             },
                                           ),
                                         ),
@@ -134,11 +148,13 @@ class HomePage extends StatelessWidget {
                                         ],
                                       ),
                                       CustomButton(
-                                        text: "حذف",
-                                        ontap: () {
-                                          controller.deleteTransAction();
-                                        },
-                                      ),
+                                          isActive: GlobalVariable.home == null
+                                              ? false
+                                              : true,
+                                          text: "حذف",
+                                          ontap: () {
+                                            controller.deleteTransAction();
+                                          }),
                                     ],
                                   ),
                                 ),

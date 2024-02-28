@@ -94,6 +94,7 @@ class ManagePlayers extends StatelessWidget {
                                       data: controller.dataInTable,
                                       widths: const [
                                         150,
+                                        150,
                                         250,
                                         150,
                                         200,
@@ -104,6 +105,7 @@ class ManagePlayers extends StatelessWidget {
                                       ],
                                       header: const [
                                         "التسلسل",
+                                        "الكود",
                                         "ألاسم",
                                         "الجنس",
                                         "تليفون",

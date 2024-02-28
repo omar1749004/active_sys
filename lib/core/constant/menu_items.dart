@@ -1,3 +1,6 @@
+import 'dart:developer';
+
+import 'package:active_system/core/services/services.dart';
 import 'package:active_system/features/attendance/attendance_view.dart';
 import 'package:active_system/features/auth/view/screen/auth_view.dart';
 import 'package:active_system/features/home/view/screen/home.dart';
@@ -10,7 +13,11 @@ import 'package:active_system/features/trainers/trainers_view.dart';
 import 'package:active_system/features/treasury_register/treasury_register_view.dart';
 import 'package:active_system/features/users/view/screen/users_view.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
+MyServices services = Get.find();
 const List<String> serviceName = [
   "الصفحة الرئيسية",
   "سجل الحضور",
@@ -26,7 +33,7 @@ const List<String> serviceName = [
 ];
 
 const List<String> serviceRoutes = [
-  '/',
+  'home',
   "AttendanceView",
   'ManageSubscriptionsView',
   "RenewSybscriptionsView",
@@ -36,7 +43,7 @@ const List<String> serviceRoutes = [
   "ManageCostView",
   "safeciew",
   "TreasuryRegisterView",
-  "authid",
+  "/",
 ];
 const List<Widget> serviceWidget = [
   HomePage(),
@@ -69,10 +76,13 @@ const List<Widget> serviceWidget = [
 //section specific for powers of admin to create list of pages that will show him
 
 //List of boolean, every index point to page and every value point to if page from his power or not (true -> from his power , false -> not from his power)
+
 List<bool> booleansPowers = [];
 
 //final result from his power
-List<String> servicePowerName = [];
+List<String> servicePowerName =
+    services.sharedPreferences.getStringList("servicePowerName") ?? [];
 
 //final result from his power
-List<String> servicePowerRoutes = [];
+List<String> servicePowerRoutes =
+    services.sharedPreferences.getStringList("servicePowerRoutes") ?? [];

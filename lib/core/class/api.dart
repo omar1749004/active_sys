@@ -106,7 +106,7 @@ class Api {
 
     // var length = await file.length();
     //var stream = http.ByteStream(file.openRead());
-      // print(basename(file.path + ".png")) ;
+    // print(basename(file.path + ".png")) ;
 
     var multipartfile = http.MultipartFile("files", stream, length,
         filename: '${basename(file.path)}.png');

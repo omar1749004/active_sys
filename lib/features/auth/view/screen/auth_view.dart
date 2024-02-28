@@ -1,8 +1,11 @@
 import 'package:active_system/controller/auth_controller.dart';
+import 'package:active_system/core/constant/app_route.dart';
 import 'package:active_system/core/constant/color.dart';
 import 'package:active_system/core/constant/image_asset.dart';
+import 'package:active_system/core/constant/menu_items.dart';
 import 'package:active_system/core/constant/styles.dart';
 import 'package:active_system/core/functions/validate_input.dart';
+import 'package:active_system/core/services/services.dart';
 import 'package:active_system/core/shared/custom_botton_copy.dart';
 import 'package:active_system/core/shared/custome_textform_auth.dart';
 import 'package:flutter/material.dart';
@@ -13,6 +16,7 @@ class AuthView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    MyServices services = Get.find();
     Get.put(AuthControllerImp());
     return Scaffold(
         body: Center(
@@ -93,7 +97,21 @@ class AuthView extends StatelessWidget {
                   children: [
                     Expanded(
                         child: CustomBotton1(
-                      ontap: () {},
+                      ontap: () async {
+                        servicePowerName = [];
+                        servicePowerRoutes = [];
+                        //to add الصفحه الرئيسيه
+                        servicePowerName.add(serviceName[0]);
+                        servicePowerRoutes.add(serviceRoutes[0]);
+                        //to add تسجيل الدخول
+                        servicePowerName.add(serviceName.last);
+                        servicePowerRoutes.add(serviceRoutes.last);
+                        services.sharedPreferences.setStringList(
+                            "servicePowerName", servicePowerName);
+                        services.sharedPreferences.setStringList(
+                            "servicePowerRoutes", servicePowerRoutes);
+                        Get.offAllNamed(AppRoute.homeid);
+                      },
                       text: "الغاء",
                       color: ColorApp.secondColor,
                       hieght: 50,
@@ -103,7 +121,7 @@ class AuthView extends StatelessWidget {
                       ontap: () {
                         controller.login();
                       },
-                      text: "تسجل",
+                      text: "تسجيل",
                       color: ColorApp.secondColor,
                       hieght: 50,
                     )),
