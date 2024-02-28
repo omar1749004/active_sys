@@ -49,7 +49,6 @@ class _CustomRowTableState extends State<CustomRowTable> {
             ? () {
                 //for store index of row that clicked
                 setValueInGlobalVariable(widget.nameOfVar, widget.ind);
-                //for dialog that have info about player in homepage oooonnnnnllllyyyyyy
 
                 //for any acion want to happen in the row when click
                 widget.onTap();

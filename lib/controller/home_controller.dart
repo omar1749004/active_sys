@@ -2,6 +2,7 @@ import 'package:active_system/core/class/handle_data_in_table.dart';
 import 'package:active_system/core/class/statuscode.dart';
 import 'package:active_system/core/functions/global_alert.dart';
 import 'package:active_system/core/services/services.dart';
+import 'package:active_system/core/shared/global_variable.dart';
 import 'package:active_system/data/models/attend_model.dart';
 import 'package:active_system/data/models/sub_mode.dart';
 import 'package:active_system/data/service/remote/attend_data.dart';
@@ -53,7 +54,7 @@ class HomeControllerImp extends HomeController {
   final List<SubscriptionModel> _subList = [];
   List<String> subNameList = ["عام"];
   String subValue = "عام";
-  MyServices myServices =Get.find();
+  MyServices myServices = Get.find();
   @override
   void onInit() async {
     barcode = TextEditingController();
@@ -77,10 +78,9 @@ class HomeControllerImp extends HomeController {
   void selectSupType(int i) {
     if (i != supType) {
       supType = i;
-        ////////////////////////////////////////////////
-        handleSubType();
-        update();
-
+      ////////////////////////////////////////////////
+      handleSubType();
+      update();
     }
   }
 
@@ -317,9 +317,8 @@ class HomeControllerImp extends HomeController {
 
     note.text = privetModel.usersNote ?? "";
 
-    if(privetModel.subscriptionsName != null && supType != 1)
-    {
-     subValue = privetModel.subscriptionsName!;
+    if (privetModel.subscriptionsName != null && supType != 1) {
+      subValue = privetModel.subscriptionsName!;
     }
     subscriptions.text = privetModel.subscriptionsName!;
     update();
@@ -340,7 +339,7 @@ class HomeControllerImp extends HomeController {
     brithDay = null;
     age.clear();
     subscriptions.clear();
-    imageName = null ;
+    imageName = null;
     note.clear();
     update();
   }
@@ -442,12 +441,12 @@ class HomeControllerImp extends HomeController {
       "search": search,
     });
     if (res["status"] == "success") {
-       attendmodel = AttendModel.fromJson(res["data"]);
-        assignModel(attendmodel);
-        statusRequs = StatusRequst.sucsess;
-        update();
-        await Future.delayed(const Duration(seconds: 3));
-        clearModel();
+      attendmodel = AttendModel.fromJson(res["data"]);
+      assignModel(attendmodel);
+      statusRequs = StatusRequst.sucsess;
+      update();
+      await Future.delayed(const Duration(seconds: 3));
+      clearModel();
       statusRequs = StatusRequst.sucsess;
     } else if (res["status"] == "failure") {
       statusRequs = StatusRequst.failure;
@@ -488,11 +487,13 @@ class HomeControllerImp extends HomeController {
     for (var i = 0; i < attendList.length; i++) {
       dataInTable.add([
         attendList[i].attendanceId.toString(),
-        handleDataInTable().handelAttendanceTypeData(attendList[i].attendanceType),
-        attendList[i].attendanceStart.toString(),
-        attendList[i].attendanceEnd.toString(),
+        attendList[i].barcode.toString(),
         attendList[i].usersName.toString(),
         attendList[i].subscriptionsName.toString(),
+        handleDataInTable()
+            .handelAttendanceTypeData(attendList[i].attendanceType),
+        attendList[i].attendanceStart.toString(),
+        attendList[i].attendanceEnd.toString(),
         attendList[i].isOwed.toString(),
         attendList[i].isClose.toString(),
       ]);
@@ -521,5 +522,3 @@ class HomeControllerImp extends HomeController {
     update();
   }
 }
-
-

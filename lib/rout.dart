@@ -18,16 +18,20 @@ import 'package:get/get.dart';
 
 List<GetPage<dynamic>> route = [
   GetPage(
-      name: AppRoute.homeid,
-      page: () => const HomePage(),
+      name: AppRoute.authid,
+      page: () => const AuthView(),
       middlewares: [MyMiddleWare()]),
   GetPage(
+    name: AppRoute.homeid,
+    page: () => const HomePage(),
+  ),
+  GetPage(
     name: AppRoute.managesubscriptionid,
-    page: () =>const ManageSubscriptionsView(),
+    page: () => const ManageSubscriptionsView(),
   ),
   GetPage(
     name: AppRoute.trainerid,
-    page: () =>const TrainersView(),
+    page: () => const TrainersView(),
   ),
   GetPage(
     name: AppRoute.usersid,
@@ -35,7 +39,7 @@ List<GetPage<dynamic>> route = [
   ),
   GetPage(
     name: AppRoute.renewSybscriptionsView,
-    page: () =>const RenewSybscriptionsView(),
+    page: () => const RenewSybscriptionsView(),
   ),
   GetPage(
     name: AppRoute.safeid,
@@ -46,31 +50,27 @@ List<GetPage<dynamic>> route = [
     page: () => const ManageCostView(),
   ),
   GetPage(
-      name: AppRoute.attendanceid,
-      page: () => const AttendanceView(),
-      ),
-  GetPage(
-      name: AppRoute.playersprofileid,
-      page: () => const PlayersProfileView(),
-      ),
-  GetPage(
-    name: AppRoute.authid,
-    page: () => const AuthView(),
+    name: AppRoute.attendanceid,
+    page: () => const AttendanceView(),
   ),
   GetPage(
-      name: AppRoute.freezescreenid,
-      page: () => const FreezeScreen(),
-      ),
+    name: AppRoute.playersprofileid,
+    page: () => const PlayersProfileView(),
+  ),
   GetPage(
-      name: AppRoute.treasuryregisterid,
-      page: () => const TreasuryRegisterView(),
-      ),
+    name: AppRoute.freezescreenid,
+    page: () => const FreezeScreen(),
+  ),
   GetPage(
-      name: AppRoute.managePlayers,
-      page: () => const ManagePlayers(),
-      ),
+    name: AppRoute.treasuryregisterid,
+    page: () => const TreasuryRegisterView(),
+  ),
   GetPage(
-      name: AppRoute.pdfId,
-      page: () => const CreatePdf(),
-      ),
+    name: AppRoute.managePlayers,
+    page: () => const ManagePlayers(),
+  ),
+  GetPage(
+    name: AppRoute.pdfId,
+    page: () => const CreatePdf(),
+  ),
 ];

@@ -11,21 +11,27 @@ class CustomMenu extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       width: 250,
-      child: ListView.builder(
-        scrollDirection: Axis.vertical,
-        shrinkWrap: true, 
-        itemCount: serviceName.length,
-        itemBuilder: (context, index) {
-          return CustomMenuButton(
-            backgroundColor: serviceName[index] == pageName
-                ? const Color.fromARGB(137, 255, 255, 255)
-                : Colors.white,
-            text: serviceName[index],
-            ontap: () {
-              Get.offAndToNamed(serviceRoutes[index]);
-            },
-          );
-        },
+      child: Align(
+        alignment: Alignment.topCenter,
+        child: ListView.builder(
+          scrollDirection: Axis.vertical,
+          shrinkWrap: true,
+          itemCount: servicePowerName.length,
+          itemBuilder: (context, index) {
+            return SizedBox(
+              height: 60,
+              child: CustomMenuButton(
+                backgroundColor: servicePowerName[index] == pageName
+                    ? const Color.fromARGB(137, 255, 255, 255)
+                    : Colors.white,
+                text: servicePowerName[index],
+                ontap: () {
+                  Get.offAndToNamed(servicePowerRoutes[index]);
+                },
+              ),
+            );
+          },
+        ),
       ),
     );
   }
