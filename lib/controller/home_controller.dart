@@ -508,16 +508,16 @@ class HomeControllerImp extends HomeController {
       "adminID": myServices.sharedPreferences.getString("id"),
     });
 
-    if (res["status"] == "failure") {
-      globalAlert("يرجى إعادة المحاولة في وقت لاحق", title: "!خطأ");
+    if (res["msg"] == "expire") {
+      globalAlert("لايمكن حذف هذا اللاعب", title: "!خطأ");
       statusRequs = StatusRequst.failure;
     } else if (res["status"] == "success") {
       attendList.removeWhere(
           (element) => element.attendanceId == attendmodel.attendanceId);
           assignDataInsideTable() ;
       statusRequs = StatusRequst.sucsess;
-    } else if (res["msg"] == "expire") {
-      globalAlert("لايمكن حذف هذا اللاعب", title: "!خطأ");
+    } else if (res["status"] == "failure") {
+     globalAlert("يرجى إعادة المحاولة في وقت لاحق", title: "!خطأ");
       statusRequs = StatusRequst.failure;
     }
     update();
