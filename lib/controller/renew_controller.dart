@@ -485,7 +485,7 @@ class RenewControllerImp extends RenewController {
     barcodeNum.text = privetModel.barcode.toString();
     userName.text = privetModel.usersName.toString();
     phone.text = privetModel.usersPhone ?? "";
-    trainerValue = privetModel.captainNamme ?? "";
+    trainerValue = privetModel.captainNamme ?? trainerNameList[0];
     start = privetModel.renewalStart ?? DateTime.now();
     if (privetModel.renewalStart == null) {
       setEndDate(start!);
@@ -493,7 +493,7 @@ class RenewControllerImp extends RenewController {
       end =
           privetModel.renewalEnd; /////////////////////////////////////////////
     }
-    subValue = privetModel.subscriptionsName!;
+    subValue = privetModel.subscriptionsName ?? subNameList[0];
     changemodel(subValue);
 
     preNote.text = privetModel.renewalNote ?? "";

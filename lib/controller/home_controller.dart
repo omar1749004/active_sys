@@ -2,7 +2,6 @@ import 'package:active_system/core/class/handle_data_in_table.dart';
 import 'package:active_system/core/class/statuscode.dart';
 import 'package:active_system/core/functions/global_alert.dart';
 import 'package:active_system/core/services/services.dart';
-import 'package:active_system/core/shared/global_variable.dart';
 import 'package:active_system/data/models/attend_model.dart';
 import 'package:active_system/data/models/sub_mode.dart';
 import 'package:active_system/data/service/remote/attend_data.dart';
@@ -306,7 +305,7 @@ class HomeControllerImp extends HomeController {
     attendmodel = privetModel;
     username.text = privetModel.usersName!;
     phone.text = privetModel.usersPhone!;
-
+    print(privetModel.usersImage);
     imageName = privetModel.usersImage;
     barcode.text = privetModel.barcode?.toString() ?? "0";
     deadline.text = privetModel.renewalEnd?.toString().substring(0, 11) ?? '';

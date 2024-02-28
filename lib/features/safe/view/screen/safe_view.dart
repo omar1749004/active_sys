@@ -52,7 +52,7 @@ class SafeView extends StatelessWidget {
                                     controller.isdateSearch =
                                         !controller.isdateSearch;
                                     controller
-                                        .handlTable(controller.isdateSearch);
+                                        .handlTable();
                                   },
                                   color: controller.isdateSearch
                                       ? ColorApp.onfoucosColor

@@ -50,7 +50,7 @@ class TrainersControllerImp extends TrainersController {
     firstState = StatusRequst.loading;
     await Future.delayed(const Duration(milliseconds: 100));
     firstState = StatusRequst.failure;
-    viewAll();
+   viewAll();
     super.onInit();
   }
 
@@ -186,6 +186,7 @@ class TrainersControllerImp extends TrainersController {
     } else if (res["status"] == "success") {
       usersList.removeWhere((element) => element.usersId == userModel.usersId);
       assignDataInsideTable();
+      cleaModel();
       statusRequs = StatusRequst.sucsess;
     } else {
       statusRequs = StatusRequst.failure;

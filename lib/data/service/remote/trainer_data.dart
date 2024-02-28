@@ -5,7 +5,7 @@ class TrainerData{
  TrainerData();
 
    view()async{
-    var res =await Api().get(url: linkTrainerView);
+    var res =await Api().post(uri: linkTrainerView,body: {});
     return res;
   }
 
