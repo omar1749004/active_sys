@@ -110,6 +110,16 @@ class ManagePlayersForm extends GetView<MangeUsersControllerImp> {
                 ),
 
                 CustomDropDownMenu(
+                    label: "الجنس",
+                    items: controller.genderList,
+                    onChanged: (p0) {
+                      controller.changeGendermodel(p0!);
+                    },
+                    intialValue: controller.genderValue),
+                const SizedBox(
+                  height: 20,
+                ),
+                CustomDropDownMenu(
                     label: "المدرب",
                     items: controller.trainerNameList,
                     onChanged: (p0) {
@@ -138,8 +148,7 @@ class ManagePlayersForm extends GetView<MangeUsersControllerImp> {
                         ischeck: controller.isactiveSub,
                         text: "تفعيل الاشتراك",
                         onTap: () {
-                          if(controller.canAdd)
-                          {
+                          if (controller.canAdd) {
                             controller.changeActiveSub(controller.isactiveSub);
                           }
                         },

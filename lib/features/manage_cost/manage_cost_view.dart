@@ -147,13 +147,14 @@ class _ManageCostViewState extends State<ManageCostView> {
                                           255, 218, 218, 218),
                                       child: CustomModernTable(
                                         data: controller.dataInTable,
-                                        widths: const [150, 150, 250, 200, 150],
+                                        widths: const [150, 150, 250, 200, 150,250],
                                         header: const [
                                           "التسلسل",
                                           "قيمة المصروف",
                                           "سبب الصرف",
                                           "تاريخ الصرف",
                                           "الشريك",
+                                          "ملاحظات"
                                         ],
                                         nameOfGlobalID: 'manageCost',
                                         onRowTap: () {

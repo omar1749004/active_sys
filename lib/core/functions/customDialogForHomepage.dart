@@ -1,4 +1,4 @@
-import 'package:active_system/controller/home_controller.dart';
+
 import 'package:active_system/core/constant/color.dart';
 import 'package:active_system/data/models/attend_model.dart';
 import 'package:active_system/features/safe/view/widget/custom_display_many.dart';
@@ -7,7 +7,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-Future<dynamic> customHomePageDialog(AttendModel attendModel,HomeControllerImp controller) {
+Future<dynamic> customHomePageDialog(AttendModel attendModel) {
   return Get.defaultDialog(
       title: "ملف الشخصى للاعب",
       content: Expanded(
@@ -24,11 +24,11 @@ Future<dynamic> customHomePageDialog(AttendModel attendModel,HomeControllerImp c
                     child: ClipOval(
                       child: SizedBox.fromSize(
                           size: const Size.fromRadius(100), // Image radius
-                          child: controller.imageName != null
+                          child: attendModel.usersImage != null
                               ? CachedNetworkImage(
                                   fit: BoxFit.fill,
                                   imageUrl:
-                                      "$linkImageUpload/${controller.imageName}",
+                                      "$linkImageUpload/${attendModel.usersImage}",
                                 )
                               : const SizedBox()),
                     )),

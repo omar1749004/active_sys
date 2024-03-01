@@ -76,6 +76,7 @@ class TrainersView extends StatelessWidget {
                                           data: controller.dataInTable,
                                           widths: const [
                                             150,
+                                            150,
                                             250,
                                             200,
                                             250,
@@ -83,6 +84,7 @@ class TrainersView extends StatelessWidget {
                                           ],
                                           header: const [
                                             "المسلسل",
+                                            "الكود",
                                             "ألاسم",
                                             "نلفون",
                                             "عنوان",

@@ -16,6 +16,7 @@ abstract class MangeUsersController extends GetxController {
   void getTrainer();
   void changemodel(String subName);
   void changeTrainermodel(String trainerName);
+  void changeGendermodel(String genderName);
   void addUsers();
   void view();
   void changeBorrowed(bool x);
@@ -53,6 +54,7 @@ class MangeUsersControllerImp extends MangeUsersController {
   late List<UserModel> usersList = [];
   List<List<String>> dataInTable = [];
   List<String> trainerNameList = ["عام"];
+  List<String> genderList = ["ذكر", "انثى"];
 
   late SubscriptionModel subscriptionModel;
   late UserModel userModel;
@@ -77,6 +79,7 @@ class MangeUsersControllerImp extends MangeUsersController {
 
   String gender = "0";
   String trainerValue = "عام";
+  String genderValue = "ذكر";
   String subValue = "عام";
   String subSearchValue = "الكل";
   String active = "0";
@@ -180,6 +183,15 @@ class MangeUsersControllerImp extends MangeUsersController {
         userModel = _trainerList[i];
         break;
       }
+    }
+  }
+
+  @override
+  void changeGendermodel(String genderName) {
+    if (genderName == "ذكر") {
+      gender = "0";
+    } else {
+      gender = "1";
     }
   }
 
@@ -390,7 +402,7 @@ class MangeUsersControllerImp extends MangeUsersController {
     for (var i = 0; i < usersList.length; i++) {
       dataInTable.add([
         usersList[i].usersId.toString(),
-         usersList[i].barcode.toString(),
+        usersList[i].barcode.toString(),
         usersList[i].usersName.toString(),
         handleDataInTable().handleGenderData(usersList[i].usersGender),
         usersList[i].usersPhone.toString(),
@@ -398,7 +410,6 @@ class MangeUsersControllerImp extends MangeUsersController {
         usersList[i].renewalStart.toString(),
         usersList[i].renewalEnd.toString(),
         usersList[i].usersNote.toString(),
-       
       ]);
     }
   }

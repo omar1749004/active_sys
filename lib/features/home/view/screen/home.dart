@@ -7,6 +7,7 @@ import 'package:active_system/core/shared/custom_app_bar.dart';
 import 'package:active_system/core/shared/custom_table_header.dart';
 import 'package:active_system/core/shared/global_variable.dart';
 import 'package:active_system/core/shared/loading_indecator.dart';
+import 'package:active_system/data/models/attend_model.dart';
 import 'package:active_system/features/home/data/service/static/note_knoladge.dart';
 import 'package:active_system/features/home/view/widget/client_info.dart';
 import 'package:active_system/features/manage_subscriptions/view/widgets/custom_button.dart';
@@ -88,9 +89,9 @@ class HomePage extends StatelessWidget {
                                             ],
                                             nameOfGlobalID: 'home',
                                             onRowTap: () async {
-                                              controller.assignModel(
+                                              controller.attendmodel =
                                                   controller.attendList[
-                                                      GlobalVariable.home!]);
+                                                      GlobalVariable.home!];
 
                                               //to wait 7 sec then set globalViarable.home=0
                                               await Future.delayed(
@@ -107,8 +108,8 @@ class HomePage extends StatelessWidget {
                                                   controller.attendList[
                                                       GlobalVariable.home!];
                                               customHomePageDialog(
-                                                  controller.attendmodel,
-                                                  controller);
+                                                controller.attendmodel,
+                                              );
                                             },
                                           ),
                                         ),

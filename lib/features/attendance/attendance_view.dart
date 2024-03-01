@@ -25,108 +25,110 @@ class AttendanceView extends StatelessWidget {
         // if (controller.firstState == StatusRequst.loading) {
         //   return const CustomLoadingIndecator();
         // } else {
-          return Column(children: [
-            const CustomAppBar(),
-            Expanded(
-              child: Row(
-                children: [
-                  //left menu
-                  const CustomMenu(
-                    pageName: 'سجل الحضور',
-                  ),
-                  //
-                  //the content in the middle
-                  //
-                  Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 10, horizontal: 15),
-                      child: Column(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            //
-                            //search bar
-                            //
-                            CustomTableHeader(
-                              onChanged: (val) {
-                                
-                                controller.checkSearch(val);
-                              },
-                              searchController: controller.searchVal,
-                              header: "سجل الحضور ",
-                            ),
-                            //
-                            //date
-                            //
-                            Padding(
-                              padding: const EdgeInsets.symmetric(vertical: 10),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Row(
-                                    children: [
-                                      CustomDateField(
-                                          width: 150,
-                                          height: 30,
-                                          onChanged: (p0) {
-                                            controller.endSearch = p0!;
-                                            controller.dateSearch(
-                                                controller.startSearch,
-                                                controller.endSearch);
-                                          },
-                                          iconSize: 15,
-                                          fontSize: 15),
-                                      const SizedBox(
-                                        width: 50,
-                                      ),
-                                      const Text(
-                                        " الى ",
-                                        style: TextStyle(fontSize: 18),
-                                      ),
-                                    ],
-                                  ),
-                                  const SizedBox(
-                                    width: 50,
-                                  ),
-                                  Row(
-                                    children: [
-                                      CustomDateField(
-                                          width: 150,
-                                          height: 30,
-                                          onChanged: (p0) {
-                                            controller.startSearch = p0!;
-                                            controller.dateSearch(
-                                                controller.startSearch ,
-                                                controller.endSearch);
-                                          },
-                                          iconSize: 15,
-                                          fontSize: 15),
-                                      const SizedBox(
-                                        width: 50,
-                                      ),
-                                      const Text(
-                                        " من ",
-                                        style: TextStyle(fontSize: 18),
-                                      ),
-                                    ],
-                                  ),
-                                  const SizedBox(
-                                    width: 50,
-                                  ),
-                                  SizedBox(
-                                    child: CustomBotton1(
-                                      text: "بحث",
-                                      ontap: () {
-                                        controller.isdateSearch = !controller.isdateSearch ;
-                                        controller.handlTable(controller.isdateSearch);
-                                      },
-                                      color:controller.isdateSearch? ColorApp.onfoucosColor:ColorApp.kPrimaryColor,
-                                      marginBottom: 0,
-                                      marginLeft: 0,
-                                      marginRight: 0,
-                                      marginTop: 0,
+        return Column(children: [
+          const CustomAppBar(),
+          Expanded(
+            child: Row(
+              children: [
+                //left menu
+                const CustomMenu(
+                  pageName: 'سجل الحضور',
+                ),
+                //
+                //the content in the middle
+                //
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 10, horizontal: 15),
+                    child: Column(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          //
+                          //search bar
+                          //
+                          CustomTableHeader(
+                            onChanged: (val) {
+                              controller.checkSearch(val);
+                            },
+                            searchController: controller.searchVal,
+                            header: "سجل الحضور ",
+                          ),
+                          //
+                          //date
+                          //
+                          Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 10),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Row(
+                                  children: [
+                                    CustomDateField(
+                                        width: 150,
+                                        height: 30,
+                                        onChanged: (p0) {
+                                          controller.endSearch = p0!;
+                                          controller.dateSearch(
+                                              controller.startSearch,
+                                              controller.endSearch);
+                                        },
+                                        iconSize: 15,
+                                        fontSize: 15),
+                                    const SizedBox(
+                                      width: 50,
                                     ),
-                                  
+                                    const Text(
+                                      " الى ",
+                                      style: TextStyle(fontSize: 18),
+                                    ),
+                                  ],
+                                ),
+                                const SizedBox(
+                                  width: 50,
+                                ),
+                                Row(
+                                  children: [
+                                    CustomDateField(
+                                        width: 150,
+                                        height: 30,
+                                        onChanged: (p0) {
+                                          controller.startSearch = p0!;
+                                          controller.dateSearch(
+                                              controller.startSearch,
+                                              controller.endSearch);
+                                        },
+                                        iconSize: 15,
+                                        fontSize: 15),
+                                    const SizedBox(
+                                      width: 50,
+                                    ),
+                                    const Text(
+                                      " من ",
+                                      style: TextStyle(fontSize: 18),
+                                    ),
+                                  ],
+                                ),
+                                const SizedBox(
+                                  width: 50,
+                                ),
+                                SizedBox(
+                                  child: CustomBotton1(
+                                    text: "بحث",
+                                    ontap: () {
+                                      controller.isdateSearch =
+                                          !controller.isdateSearch;
+                                      controller
+                                          .handlTable(controller.isdateSearch);
+                                    },
+                                    color: controller.isdateSearch
+                                        ? ColorApp.onfoucosColor
+                                        : ColorApp.kPrimaryColor,
+                                    marginBottom: 0,
+                                    marginLeft: 0,
+                                    marginRight: 0,
+                                    marginTop: 0,
+                                  ),
                                 ),
                                 const SizedBox(
                                   width: 50,
@@ -150,6 +152,7 @@ class AttendanceView extends StatelessWidget {
                                           data: controller.dataInTable,
                                           widths: const [
                                             150,
+                                            150,
                                             200,
                                             250,
                                             200,
@@ -160,6 +163,7 @@ class AttendanceView extends StatelessWidget {
                                             150
                                           ],
                                           header: const [
+                                            "رقم المسلسل",
                                             "الكود",
                                             "التاريخ",
                                             "ألاسم",

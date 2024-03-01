@@ -72,7 +72,7 @@ class RenewControllerImp extends RenewController {
   String trainerValue = "عام";
   String subValue = "عام";
   String payedType = "0";
-  MyServices myServices =Get.find();
+  MyServices myServices = Get.find();
   late String _amountMid;
   DateTime? start = DateTime.now();
   DateTime? end = DateTime.now();
@@ -197,7 +197,8 @@ class RenewControllerImp extends RenewController {
   @override
   void calPayed(String payed) {
     try {
-      double mid = double.parse(_amountMid) - (double.parse(payed) + double.parse(descound.text));
+      double mid = double.parse(_amountMid) -
+          (double.parse(payed) + double.parse(descound.text));
       remining.text = mid.toString();
     } catch (e) {
       descound.text = "0";
@@ -261,7 +262,7 @@ class RenewControllerImp extends RenewController {
         globalAlert("يرجى إعادة المحاولة في وقت لاحق", title: "!خطأ");
         statusRequs = StatusRequst.failure;
       } else if (res["status"] == "success") {
-        handlTable(isdateSearch) ;
+        handlTable(isdateSearch);
         barcodeNum.clear();
         userName.clear();
         phone.clear();
@@ -277,8 +278,6 @@ class RenewControllerImp extends RenewController {
     }
     update();
   }
-
-
 
   void setTypePaed(String typeofPayed) {
     if ("نقدى" == typeofPayed) {
@@ -302,26 +301,26 @@ class RenewControllerImp extends RenewController {
     statusRequs = StatusRequst.loading;
     update();
 
-      var res = await RenewData().dateSearch({
-        "start_date": startD.toString().substring(0, 11),
-        "end_date": endD.toString().substring(0, 11),
-      });
-      if (res["status"] == "failure") {
-        renewList = [];
-        assignDataInsideTable();
-        statusRequs = StatusRequst.failure;
-      } else if (res["status"] == "success") {
-        List data = res["data"];
-        renewList = [];
-        renewList.addAll(data.map((e) => RenewModel.fromJson(e)));
-        renewUser = renewList[0];
-        update();
-        assignDataInsideTable();
-        statusRequs = StatusRequst.sucsess;
-      } else {
-        statusRequs = StatusRequst.failure;
-      }
-       await Future.delayed(const Duration(milliseconds: 200));
+    var res = await RenewData().dateSearch({
+      "start_date": startD.toString().substring(0, 11),
+      "end_date": endD.toString().substring(0, 11),
+    });
+    if (res["status"] == "failure") {
+      renewList = [];
+      assignDataInsideTable();
+      statusRequs = StatusRequst.failure;
+    } else if (res["status"] == "success") {
+      List data = res["data"];
+      renewList = [];
+      renewList.addAll(data.map((e) => RenewModel.fromJson(e)));
+      renewUser = renewList[0];
+      update();
+      assignDataInsideTable();
+      statusRequs = StatusRequst.sucsess;
+    } else {
+      statusRequs = StatusRequst.failure;
+    }
+    await Future.delayed(const Duration(milliseconds: 200));
     update();
   }
 
@@ -399,9 +398,9 @@ class RenewControllerImp extends RenewController {
   void assignDataInsideTable() {
     dataInTable = [];
     for (var i = 0; i < renewList.length; i++) {
-
-        dataInTable.add([
+      dataInTable.add([
         renewList[i].renewalId.toString(),
+        renewList[i].barcode.toString(),
         "${renewList[i].renewalCreate!.year}/${renewList[i].renewalCreate!.month}/${renewList[i].renewalCreate!.day}",
         renewList[i].usersId.toString(),
         renewList[i].usersName.toString(),
@@ -409,22 +408,14 @@ class RenewControllerImp extends RenewController {
         "${renewList[i].renewalEnd!.year}/${renewList[i].renewalEnd!.month}/${renewList[i].renewalEnd!.day}",
         renewList[i].renewalSessionAttend.toString(),
         renewList[i].renewalNote.toString(),
-        renewList[i].renewalId.toString(),
       ]);
-
-      
     }
   }
 
   @override
-  void gotoFrezze(RenewModel privteModel) async{
-      Get.toNamed(AppRoute.freezescreenid, arguments: {
-        "RenewModel": privteModel,
-        "subModel": subscriptionModel
-      });
-
-      
-
+  void gotoFrezze(RenewModel privteModel) async {
+    Get.toNamed(AppRoute.freezescreenid,
+        arguments: {"RenewModel": privteModel, "subModel": subscriptionModel});
   }
 
   @override
@@ -499,8 +490,8 @@ class RenewControllerImp extends RenewController {
     preNote.text = privetModel.renewalNote ?? "";
     if (renewUser.renewalStart != null) {
       amount.text = privetModel.renewalAmount.toString();
-      descound.text = privetModel.renewOffer.toString() ;    
-      notknow.text = privetModel.renewAmountOwed.toString();   
+      descound.text = privetModel.renewOffer.toString();
+      notknow.text = privetModel.renewAmountOwed.toString();
       remining.text = notknow.text;
     }
 
@@ -509,7 +500,8 @@ class RenewControllerImp extends RenewController {
   }
 
   void caluserPayd() {
-    double disc = subscriptionModel.subscriptionsPrice - (renewUser.renewalAmount! + renewUser.renewAmountOwed!);
+    double disc = subscriptionModel.subscriptionsPrice -
+        (renewUser.renewalAmount! + renewUser.renewAmountOwed!);
     descound.text = disc.toString();
     afterDescound.text = price.text;
   }
@@ -524,7 +516,7 @@ class RenewControllerImp extends RenewController {
     remining.clear();
     setEndDate(start!);
     remining.text = "0";
-        descound.text = "0";
+    descound.text = "0";
     canAdd = true;
 
     update();

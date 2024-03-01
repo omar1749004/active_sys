@@ -112,24 +112,24 @@ class TreasuryRegisterForm extends GetView<TreasuryRegisterControllerImp> {
           const SizedBox(
             height: 10,
           ),
-          CustomDropDownMenu(
-            items: const ["مفصل بالبيانات", "غير مفصل بالبيانات"],
-            intialValue: "مفصل بالبيانات",
-            onChanged: (p0) {},
-            label: "التقرير",
-          ),
-          const SizedBox(
-            height: 10,
-          ),
-          CustomDropDownMenu(
-            items: const ["عام", "خاص"],
-            intialValue: 'عام',
-            onChanged: (p0) {},
-            label: "النوع",
-          ),
-          const SizedBox(
-            height: 10,
-          ),
+          // CustomDropDownMenu(
+          //   items: const ["مفصل بالبيانات", "غير مفصل بالبيانات"],
+          //   intialValue: "مفصل بالبيانات",
+          //   onChanged: (p0) {},
+          //   label: "التقرير",
+          // ),
+          // const SizedBox(
+          //   height: 10,
+          // ),
+          // CustomDropDownMenu(
+          //   items: const ["عام", "خاص"],
+          //   intialValue: 'عام',
+          //   onChanged: (p0) {},
+          //   label: "النوع",
+          // ),
+          // const SizedBox(
+          //   height: 10,
+          // ),
           CustomeTextFormAuth(
             hintText: "",
             myController: controller.reason,
@@ -141,30 +141,30 @@ class TreasuryRegisterForm extends GetView<TreasuryRegisterControllerImp> {
           const SizedBox(
             height: 10,
           ),
-          CustomDropDownMenu(
-            items: const ["الكل", "خاص"],
-            intialValue: 'الكل',
-            onChanged: (p0) {},
-            label: "الدفع",
-          ),
-          const SizedBox(
-            height: 10,
-          ),
-          GetBuilder<TreasuryRegisterControllerImp>(
-            builder: (controller) => CheckboxListTile(
-              title: const Padding(
-                padding: EdgeInsets.only(left: 15),
-                child: Text(
-                  "تجاهل البيانات والحذف",
-                  style: Styles.style18B,
-                ),
-              ),
-              value: controller.checkedValue,
-              onChanged: (value) {
-                controller.cnangeCheack(value!);
-              },
-            ),
-          )
+          // CustomDropDownMenu(
+          //   items: const ["الكل", "خاص"],
+          //   intialValue: 'الكل',
+          //   onChanged: (p0) {},
+          //   label: "الدفع",
+          // ),
+          // const SizedBox(
+          //   height: 10,
+         //),
+          // GetBuilder<TreasuryRegisterControllerImp>(
+          //   builder: (controller) => CheckboxListTile(
+          //     title: const Padding(
+          //       padding: EdgeInsets.only(left: 15),
+          //       child: Text(
+          //         "تجاهل البيانات والحذف",
+          //         style: Styles.style18B,
+          //       ),
+          //     ),
+          //     value: controller.checkedValue,
+          //     onChanged: (value) {
+          //       controller.cnangeCheack(value!);
+          //     },
+          //   ),
+          // )
         ],
       ),
     );
