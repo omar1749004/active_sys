@@ -10,7 +10,7 @@ class CustomModernTable extends StatefulWidget {
     required this.nameOfGlobalID,
     required this.onRowTap,
     this.thisPageIsHomePage = false,
-    required this.showDialog,
+    required this.showDialog,  this.selectedIndex,
   });
 
   final List<List<String>> data;
@@ -20,6 +20,7 @@ class CustomModernTable extends StatefulWidget {
   final void Function() onRowTap;
   final void Function() showDialog;
   final bool thisPageIsHomePage;
+  final int? selectedIndex;
   @override
   State<CustomModernTable> createState() => _CustomModernTableState();
 }
@@ -56,6 +57,7 @@ class _CustomModernTableState extends State<CustomModernTable> {
                     isClickable: false,
                     align: Alignment.center,
                     nameOfVar: "",
+                    color: Colors.black ,
                     ind: -1,
                     onTap: () {},
                     showDialog: () {},
@@ -67,6 +69,24 @@ class _CustomModernTableState extends State<CustomModernTable> {
                         dataCell: widget.data[index],
                         widths: widget.widths,
                         ind: index,
+                        color: widget.selectedIndex == index ? const Color.fromARGB(255, 109, 189, 255) : Colors.black,
+                        // color: !widget.thisPageIsHomePage
+          //     ? const Color.fromARGB(255, 234, 234, 234)
+          //     : widget.dataCell[widget.dataCell.length - 1] == 1.toString() &&
+          //             widget.dataCell[widget.dataCell.length - 2] ==
+          //                 1.toString()
+          //         ? Colors.orange
+          //         : widget.dataCell[widget.dataCell.length - 1] ==
+          //                     0.toString() &&
+          //                 widget.dataCell[widget.dataCell.length - 2] ==
+          //                     1.toString()
+          //             ? const Color.fromARGB(255, 190, 171, 0)
+          //             : widget.dataCell[widget.dataCell.length - 1] ==
+          //                         1.toString() &&
+          //                     widget.dataCell[widget.dataCell.length - 2] ==
+          //                         0.toString()
+          //                 ? Colors.red
+          //                 : const Color.fromARGB(255, 234, 234, 234),
                         nameOfVar: widget.nameOfGlobalID,
                         onTap: widget.onRowTap,
                         thisPageIsHomePage: widget.thisPageIsHomePage,

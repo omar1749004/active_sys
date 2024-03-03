@@ -12,6 +12,7 @@ import 'package:active_system/features/manage_players/widgets/search_tools.dart'
 import 'package:active_system/features/manage_subscriptions/view/widgets/custom_button.dart';
 import 'package:active_system/features/manage_subscriptions/view/widgets/custom_menu.dart';
 import 'package:active_system/features/safe/view/widget/custom_display_many.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -83,7 +84,7 @@ class ManagePlayers extends StatelessWidget {
                           ),
 
                           Expanded(
-                            flex: 8,
+                            flex: 15,
                             child: controller.statusRequs ==
                                     StatusRequst.loading
                                 ? const CustomLoadingIndecator()
@@ -133,23 +134,20 @@ class ManagePlayers extends StatelessWidget {
                           //
                           //search tools and Buttons
                           //
-                          Expanded(
+                        const  Expanded(
                             flex: 3,
-                            child: SingleChildScrollView(
-                              physics: const BouncingScrollPhysics(),
-                              child: Column(
-                                children: [
-                                  //
-                                  //DropDown and checkbox for search
-                                  //
-                                  const SearchTools(),
-                                  const SizedBox(
-                                    height: 20,
-                                  ),
-                                  //
-                                  //Buttons
-                                  //
-                                  Padding(
+                            child: 
+                                //
+                                //DropDown and checkbox for search
+                                //
+                                 SearchTools(),),
+
+                                //
+                                //Buttons
+                                //
+                                Expanded(
+                                  flex: 2,
+                                  child: Padding(
                                     padding:
                                         const EdgeInsets.only(bottom: 20.0),
                                     child: Row(
@@ -249,10 +247,9 @@ class ManagePlayers extends StatelessWidget {
                                       ],
                                     ),
                                   ),
-                                ],
-                              ),
-                            ),
-                          ),
+                                ),
+
+                          
                         ],
                       ),
                     ),

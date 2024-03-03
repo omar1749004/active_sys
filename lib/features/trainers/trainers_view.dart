@@ -88,11 +88,14 @@ class TrainersView extends StatelessWidget {
                                             "عنوان",
                                             "ملاحظات",
                                           ],
+                                          selectedIndex:
+                                              controller.selectedIndex ,
                                           nameOfGlobalID: 'trainers',
                                           onRowTap: () {
                                             controller.assignModel(
                                                 controller.usersList[
                                                     GlobalVariable.trainers!]);
+                                           controller.selectRow(GlobalVariable.trainers!) ;
                                           },
                                           showDialog: () {},
                                         ),
