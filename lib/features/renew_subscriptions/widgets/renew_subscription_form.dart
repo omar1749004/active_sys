@@ -147,7 +147,7 @@ class RenewSubscriptionForm extends StatelessWidget {
                           text: DateFormat('yyyy-MM-dd')
                               .format(controller.start!)),
                       onChanged: (p0) {
-                        controller.start = p0 ;
+                        controller.start = p0;
                         controller.setEndDate(p0!);
                       },
                       width: 145,

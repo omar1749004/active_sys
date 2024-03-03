@@ -200,6 +200,7 @@ class TrainersControllerImp extends TrainersController {
     for (var i = 0; i < usersList.length; i++) {
       dataInTable.add([
         usersList[i].usersId.toString(),
+          usersList[i].barcode.toString(),
         usersList[i].usersName.toString(),
         usersList[i].usersPhone.toString(),
         usersList[i].usersAddress.toString(),

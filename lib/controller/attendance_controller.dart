@@ -113,6 +113,7 @@ class AttendControllerImp extends AttendController {
     for (var i = 0; i < attendList.length; i++) {
       dataInTable.add([
         attendList[i].attendanceId.toString(),
+        attendList[i].barcode.toString(),
         " ${attendList[i].attendanceDay!.year}/${attendList[i].attendanceDay!.month}/${attendList[i].attendanceDay!.day}",
         attendList[i].usersName.toString(),
         handleDataInTable().handelAttendanceTypeData(attendList[i].attendanceType),

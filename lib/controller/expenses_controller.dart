@@ -36,7 +36,7 @@ class ExpensesControllerImp extends ExpensesController {
   late TextEditingController amount;
   late TextEditingController note;
   late TextEditingController search;
-  MyServices myServices =Get.find();
+  MyServices myServices = Get.find();
   @override
   void onInit() async {
     reason = TextEditingController();
@@ -143,7 +143,6 @@ class ExpensesControllerImp extends ExpensesController {
         handlTable(isdateSearch);
         statusRequs = StatusRequst.sucsess;
         clearModel();
-
       } else {
         statusRequs = StatusRequst.failure;
       }
@@ -210,12 +209,13 @@ class ExpensesControllerImp extends ExpensesController {
         expensesList[i].expensesReason.toString(),
         "${expensesList[i].expensesDate!.hour}:${expensesList[i].expensesDate!.minute}      ${expensesList[i].expensesDate!.year}/${expensesList[i].expensesDate!.month}/${expensesList[i].expensesDate!.day}",
         expensesList[i].expensesAdminId.toString(),
+        expensesList[i].note.toString(),
       ]);
     }
   }
 
   @override
- void  editTransAction() async {
+  void editTransAction() async {
     if (formKey.currentState!.validate()) {
       statusRequs = StatusRequst.loading;
       update();
@@ -246,7 +246,7 @@ class ExpensesControllerImp extends ExpensesController {
   }
 
   @override
- void clearModel() {
+  void clearModel() {
     reason.clear();
     note.clear();
     amount.clear();
@@ -258,15 +258,18 @@ class ExpensesControllerImp extends ExpensesController {
   void deleteTransAction() async {
     var res = await ExpensesData().delete({
       "id": expensesModel.expensesId.toString(),
-      "adminId" :myServices.sharedPreferences.getString("id") ,
+      "adminId": myServices.sharedPreferences.getString("id"),
     });
 
     if (res["status"] == "failure") {
       globalAlert("يرجى إعادة المحاولة في وقت لاحق", title: "!خطأ");
       statusRequs = StatusRequst.failure;
-    } else if (res["status"] == "success") { 
-          clearModel();
-          handlTable(isdateSearch);
+    } else if (res["status"] == "success") {
+      expensesList.removeWhere(
+          (element) => element.expensesId == expensesModel.expensesId);
+      assignDataInsideTable();
+      clearModel();
+
       statusRequs = StatusRequst.sucsess;
     } else {
       statusRequs = StatusRequst.failure;

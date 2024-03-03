@@ -131,6 +131,7 @@ class RenewSybscriptionsView extends StatelessWidget {
                                     data: controller.dataInTable,
                                     widths: const [
                                       150,
+                                      150,
                                       250,
                                       150,
                                       250,
@@ -138,10 +139,10 @@ class RenewSybscriptionsView extends StatelessWidget {
                                       200,
                                       150,
                                       250,
-                                      150
                                     ],
                                     header: const [
                                       "رقم الاشتراك",
+                                      "الكود",
                                       "التاريخ",
                                       "كود الاعب",
                                       "الاسم",
@@ -149,7 +150,6 @@ class RenewSybscriptionsView extends StatelessWidget {
                                       "تاريخ النهاية",
                                       "عدد الجلسات",
                                       "ملاحظات",
-                                      "كود التجديد",
                                     ],
                                     nameOfGlobalID: 'renewSubscription',
                                     onRowTap: () {
@@ -204,7 +204,6 @@ class RenewSybscriptionsView extends StatelessWidget {
                                         ]);
                                   }
                                 },
-
                                 isActive: !controller.canAdd ? true : false,
                               ),
                               CustomButton(
@@ -233,8 +232,7 @@ class RenewSybscriptionsView extends StatelessWidget {
                                         ]);
                                   }
                                 },
-
-                               isActive: !controller.canAdd ? true : false,
+                                isActive: !controller.canAdd ? true : false,
                               ),
                               CustomButton(
                                 text: "إلغاء",
@@ -244,7 +242,7 @@ class RenewSybscriptionsView extends StatelessWidget {
                                   }
                                 },
 
-                               // isActive: controller.canAdd ? true : false,
+                                // isActive: controller.canAdd ? true : false,
                               ),
                               CustomButton(
                                 text: "تجميد",
