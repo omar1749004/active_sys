@@ -14,6 +14,7 @@ abstract class TrainersController extends GetxController {
   void deleteTrainer();
   void editTrainer();
   void cleaModel();
+  void selectRow(int assignSelect) ;
 }
 
 class TrainersControllerImp extends TrainersController {
@@ -28,7 +29,7 @@ class TrainersControllerImp extends TrainersController {
 
   late UserModel userModel;
   Map<int, List<String>> phoneMap = {};
-
+  int selectedIndex = -1;
   late TextEditingController name;
   late TextEditingController phone;
   late TextEditingController phone1;
@@ -249,6 +250,18 @@ class TrainersControllerImp extends TrainersController {
     address.clear();
     note.clear();
     canAdd = true;
+    selectedIndex  = -1 ;
+    print(selectedIndex) ;
     update();
+  }
+  
+  @override
+  void selectRow(int assignSelect) {
+      if (selectedIndex ==  assignSelect) {
+                   selectedIndex = -1; // Reset if tapped again
+                   cleaModel() ;
+                  } else {
+                   selectedIndex = assignSelect;
+                  }
   }
 }
