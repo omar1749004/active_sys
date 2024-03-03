@@ -5,7 +5,7 @@ class RenewData{
  RenewData();
 
    view()async{
-    var res =await Api().get(url: linkRenewView);
+    var res =await Api().post(uri: linkRenewView, body: {});
     return res;
   }
 

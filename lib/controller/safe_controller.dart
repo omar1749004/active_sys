@@ -10,7 +10,7 @@ import 'package:get/get.dart';
 abstract class SafeController extends GetxController {
   void dateSearch(DateTime startD, DateTime endD);
   void viewAll();
-  void handlTable(bool isdate);
+  void handlTable();
   void changeSfarType(int type);
   void validatenum(String mid);
   String changeReson();
@@ -44,7 +44,7 @@ class SafeControllerImp extends SafeController {
     reason = TextEditingController();
     amount = TextEditingController();
     adminName = TextEditingController();
-    //adminName.text = myServices.sharedPreferences.getString("name")!;
+    adminName.text = myServices.sharedPreferences.getString("name")!;
     firstState = StatusRequst.loading;
     await Future.delayed(const Duration(milliseconds: 100));
     firstState = StatusRequst.failure;
@@ -113,7 +113,7 @@ class SafeControllerImp extends SafeController {
   }
 
   @override
-  void handlTable(bool isdate) {
+  void handlTable() {
     
      update();
     if (isdateSearch) {
@@ -178,6 +178,7 @@ class SafeControllerImp extends SafeController {
         globalAlert("يرجى إعادة المحاولة في وقت لاحق", title: "!خطأ");
         statusRequs = StatusRequst.failure;
       } else if (res["status"] == "success") {
+        handlTable() ;
         reason.clear();
         amount.clear();
         statusRequs = StatusRequst.sucsess;
