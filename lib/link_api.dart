@@ -1,9 +1,9 @@
 //server name
 
-const String linkServerName =
-    "https://c4df-197-53-110-151.ngrok-free.app/activegym_app/system";
 // const String linkServerName =
-//     "http://localhost/activegym_app/system";
+//     "https://c4df-197-53-110-151.ngrok-free.app/activegym_app/system";
+const String linkServerName =
+    "http://localhost/activegym_app/system";
 
 //admin system
 const String linkAdminAdd = "$linkServerName/adminSys/add.php";
@@ -93,13 +93,13 @@ const String linkFreezeDelete = "$linkServerName/freeze/delete.php";
 
 //image
 
-//const String linkImageUpload = "http://localhost/activegym_app/upload";
+const String linkImageUpload = "http://localhost/activegym_app/upload";
 
 // const String linkImageUpload =
 //     "https://c4df-197-53-110-151.ngrok-free.app/activegym_app/upload";
 
 // pdfs
-//const String linkPDFs = "http://localhost/activegym_app/pdfs";
+const String linkPDFs = "http://localhost/activegym_app/pdfs";
 
 // const String linkPDFs =
 //     "https://c4df-197-53-110-151.ngrok-free.app/activegym_app/pdfs";

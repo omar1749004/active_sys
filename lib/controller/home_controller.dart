@@ -25,6 +25,7 @@ abstract class HomeController extends GetxController {
   void deleteTransAction();
   void clearModel();
   void changemodel(String subName);
+  void selectRow(int assignSelect);
 }
 
 class HomeControllerImp extends HomeController {
@@ -46,7 +47,9 @@ class HomeControllerImp extends HomeController {
   int selcetRenew = 0;
   String? imageName;
   DateTime? brithDay;
+  bool canDelete = false;
   bool isactive = false;
+  int selectedIndex = -1;
   List<AttendModel> attendList = [];
   late SubscriptionModel subscriptionModel;
   List<List<String>> dataInTable = [];
@@ -305,7 +308,6 @@ class HomeControllerImp extends HomeController {
     attendmodel = privetModel;
     username.text = privetModel.usersName!;
     phone.text = privetModel.usersPhone!;
-    print(privetModel.usersImage);
     imageName = privetModel.usersImage;
     barcode.text = privetModel.barcode?.toString() ?? "0";
     deadline.text = privetModel.renewalEnd?.toString().substring(0, 11) ?? '';
@@ -340,6 +342,7 @@ class HomeControllerImp extends HomeController {
     subscriptions.clear();
     imageName = null;
     note.clear();
+    selectedIndex = -1;
     update();
   }
 
@@ -514,11 +517,32 @@ class HomeControllerImp extends HomeController {
     } else if (res["status"] == "success") {
       attendList.removeWhere(
           (element) => element.attendanceId == attendmodel.attendanceId);
-          assignDataInsideTable() ;
+      assignDataInsideTable();
       statusRequs = StatusRequst.sucsess;
     } else if (res["status"] == "failure") {
-     globalAlert("يرجى إعادة المحاولة في وقت لاحق", title: "!خطأ");
+      globalAlert("يرجى إعادة المحاولة في وقت لاحق", title: "!خطأ");
       statusRequs = StatusRequst.failure;
+    }
+    update();
+  }
+
+  void handlSelcetRow() async {
+    canDelete = true;
+    update();
+    //to wait 7 sec then set globalViarable.home=0
+    await Future.delayed(const Duration(milliseconds: 7000));
+    canDelete = false;
+    update() ;
+  }
+
+  @override
+  void selectRow(int assignSelect) {
+    if (selectedIndex == assignSelect) {
+      selectedIndex = -1; // Reset if tapped again
+      canDelete = false;
+    } else {
+      canDelete = true;
+      selectedIndex = assignSelect;
     }
     update();
   }

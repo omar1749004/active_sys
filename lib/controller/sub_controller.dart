@@ -24,6 +24,7 @@ abstract class MangeSubController extends GetxController {
   void checkSearch(String val);
   void editSub();
   void cleaModel();
+  void selectRow(int assignSelect);
 }
 
 class MangeSubControllerImp extends MangeSubController {
@@ -36,7 +37,7 @@ class MangeSubControllerImp extends MangeSubController {
   late SubscriptionModel submodel;
   String type = "اشتراك";
   bool canAdd =true ;
-
+  int selectedIndex = -1;
   late TextEditingController name;
   late TextEditingController specialization;
   late TextEditingController price;
@@ -304,7 +305,7 @@ class MangeSubControllerImp extends MangeSubController {
       var res = await SubData().edit({
         "id": submodel.subscriptionsId.toString(),
         "name": name.text,
-        "type": type,
+        "type": type == "حصة" ? "1":"0",
         "specialization": "0",
         "price": price.text,
         "day": day.text,
@@ -349,6 +350,7 @@ class MangeSubControllerImp extends MangeSubController {
     serviceNumber.text = "0";
     maxService.text = "0";
     allowedNumber.text = "0";
+    selectedIndex  = -1 ;
     canAdd = true ;
     update();
   }
@@ -384,4 +386,14 @@ class MangeSubControllerImp extends MangeSubController {
     update();
   }
 
+
+@override
+  void selectRow(int assignSelect) {
+      if (selectedIndex ==  assignSelect) {
+                   selectedIndex = -1; // Reset if tapped again
+                   cleaModel() ;
+                  } else {
+                   selectedIndex = assignSelect;
+                  }
+  }
 }

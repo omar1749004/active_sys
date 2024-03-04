@@ -8,7 +8,7 @@ import 'package:active_system/core/shared/custom_app_bar.dart';
 import 'package:active_system/core/shared/custom_date_field.dart';
 import 'package:active_system/core/shared/custome_textform_auth.dart';
 import 'package:active_system/core/shared/loading_indecator.dart';
-import 'package:active_system/features/manage_subscriptions/view/widgets/custom_button.dart';
+import 'package:active_system/core/shared/custom_button.dart';
 import 'package:active_system/features/manage_subscriptions/view/widgets/custom_menu.dart';
 import 'package:active_system/features/safe/view/widget/custom_checkbox.dart';
 import 'package:active_system/features/safe/view/widget/custom_display_many.dart';

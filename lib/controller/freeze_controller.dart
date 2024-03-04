@@ -18,6 +18,8 @@ abstract class FreezeController extends GetxController {
   void deleteFreeze();
   void assignModel(FreezeModel privetModel);
   void calcfreezeDate();
+  void selectRow(int assignSelect) ;
+  void cleaModel();
 }
 
 class FreezeControllerImp extends FreezeController {
@@ -31,6 +33,7 @@ class FreezeControllerImp extends FreezeController {
   late TextEditingController day;
   late TextEditingController note;
   bool candelete = false ;
+  int selectedIndex = -1;
   DateTime startSearch = DateTime.now();
   DateTime endSearch = DateTime.now();
   String? barcode;
@@ -43,6 +46,7 @@ class FreezeControllerImp extends FreezeController {
   int? freezeNum;
   int? maxFreeze;
   List<List<String>> dataInTable = [];
+  
   MyServices myServices =Get.find();
   @override
   void onInit() {
@@ -238,5 +242,21 @@ class FreezeControllerImp extends FreezeController {
         freezeList[i].freezeNote.toString(),
       ]);
     }
+  }
+  @override
+  cleaModel() {
+    candelete = true;
+    selectedIndex  = -1 ;
+
+    update();
+  }
+  @override
+  void selectRow(int assignSelect) {
+      if (selectedIndex ==  assignSelect) {
+                   selectedIndex = -1; // Reset if tapped again
+                   cleaModel() ;
+                  } else {
+                   selectedIndex = assignSelect;
+                  }
   }
 }

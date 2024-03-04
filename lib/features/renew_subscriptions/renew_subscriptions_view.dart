@@ -8,7 +8,7 @@ import 'package:active_system/core/shared/custom_date_field.dart';
 import 'package:active_system/core/shared/custom_table_header.dart';
 import 'package:active_system/core/shared/global_variable.dart';
 import 'package:active_system/core/shared/loading_indecator.dart';
-import 'package:active_system/features/manage_subscriptions/view/widgets/custom_button.dart';
+import 'package:active_system/core/shared/custom_button.dart';
 import 'package:active_system/features/manage_subscriptions/view/widgets/custom_menu.dart';
 import 'package:active_system/features/renew_subscriptions/widgets/renew_subscription_form.dart';
 import 'package:flutter/material.dart';
@@ -151,11 +151,14 @@ class RenewSybscriptionsView extends StatelessWidget {
                                       "عدد الجلسات",
                                       "ملاحظات",
                                     ],
+                                    selectedIndex:
+                                              controller.selectedIndex ,
                                     nameOfGlobalID: 'renewSubscription',
                                     onRowTap: () {
                                       controller.assignModel(controller
                                               .renewList[
                                           GlobalVariable.renewSubscription!]);
+                                          controller.selectRow(GlobalVariable.renewSubscription!) ;
                                     },
                                     showDialog: () {},
                                   ),
@@ -173,16 +176,12 @@ class RenewSybscriptionsView extends StatelessWidget {
                             children: [
                               CustomButton(
                                 text: "أضافه",
-                                color: const Color.fromARGB(217, 255, 255, 255),
                                 ontap: () {
                                   controller.addRenew();
                                 },
                               ),
                               CustomButton(
                                 text: "تعديل",
-                                color: !controller.canAdd
-                                    ? const Color.fromARGB(217, 255, 255, 255)
-                                    : const Color.fromARGB(217, 202, 193, 193),
                                 ontap: () {
                                   if (!controller.canAdd) {
                                     Get.defaultDialog(
@@ -208,9 +207,6 @@ class RenewSybscriptionsView extends StatelessWidget {
                               ),
                               CustomButton(
                                 text: "حذف",
-                                color: !controller.canAdd
-                                    ? const Color.fromARGB(217, 255, 255, 255)
-                                    : const Color.fromARGB(217, 202, 193, 193),
                                 ontap: () {
                                   if (!controller.canAdd) {
                                     Get.defaultDialog(
@@ -246,9 +242,6 @@ class RenewSybscriptionsView extends StatelessWidget {
                               ),
                               CustomButton(
                                 text: "تجميد",
-                                color: !controller.canAdd
-                                    ? const Color.fromARGB(217, 255, 255, 255)
-                                    : const Color.fromARGB(217, 202, 193, 193),
                                 ontap: () {
                                   if (!controller.canAdd) {
                                     controller.gotoFrezze(controller.renewUser);

@@ -17,6 +17,7 @@ abstract class ExpensesController extends GetxController {
   void editTransAction();
   void clearModel();
   void deleteTransAction();
+  void selectRow(int assignSelect) ;
 }
 
 class ExpensesControllerImp extends ExpensesController {
@@ -28,6 +29,7 @@ class ExpensesControllerImp extends ExpensesController {
   DateTime endSearch = DateTime.now();
   bool isdateSearch = true;
   double? totalExpenses = 0;
+  int selectedIndex = -1;
   bool canAdd = true;
   List<ExpensesModel> expensesList = [];
   List<List<String>> dataInTable = [];
@@ -250,6 +252,7 @@ class ExpensesControllerImp extends ExpensesController {
     reason.clear();
     note.clear();
     amount.clear();
+    selectedIndex  = -1 ;
     canAdd = true;
     update();
   }
@@ -275,5 +278,15 @@ class ExpensesControllerImp extends ExpensesController {
       statusRequs = StatusRequst.failure;
     }
     update();
+  }
+
+   @override
+  void selectRow(int assignSelect) {
+      if (selectedIndex ==  assignSelect) {
+                   selectedIndex = -1; // Reset if tapped again
+                   clearModel() ;
+                  } else {
+                   selectedIndex = assignSelect;
+                  }
   }
 }

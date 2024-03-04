@@ -120,7 +120,7 @@ class CustomRowTable extends StatefulWidget {
     required this.ind,
     required this.onTap,
     this.thisPageIsHomePage = false,
-    required this.showDialog, required this.color,
+    required this.showDialog,  this.color = Colors.black,
   });
 
   final int ind;

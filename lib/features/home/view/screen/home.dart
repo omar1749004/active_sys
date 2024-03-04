@@ -7,14 +7,12 @@ import 'package:active_system/core/shared/custom_app_bar.dart';
 import 'package:active_system/core/shared/custom_table_header.dart';
 import 'package:active_system/core/shared/global_variable.dart';
 import 'package:active_system/core/shared/loading_indecator.dart';
-import 'package:active_system/data/models/attend_model.dart';
 import 'package:active_system/features/home/data/service/static/note_knoladge.dart';
 import 'package:active_system/features/home/view/widget/client_info.dart';
-import 'package:active_system/features/manage_subscriptions/view/widgets/custom_button.dart';
+import 'package:active_system/core/shared/custom_button.dart';
 import 'package:active_system/features/manage_subscriptions/view/widgets/custom_menu.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'dart:html' as html;
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -88,17 +86,14 @@ class HomePage extends StatelessWidget {
                                               "وقت الانصراف",
                                             ],
                                             nameOfGlobalID: 'home',
+                                            selectedIndex:
+                                              controller.selectedIndex ,
                                             onRowTap: () async {
                                               controller.attendmodel =
                                                   controller.attendList[
                                                       GlobalVariable.home!];
-
-                                              //to wait 7 sec then set globalViarable.home=0
-                                              await Future.delayed(
-                                                  const Duration(
-                                                      milliseconds: 7000));
-                                              GlobalVariable.home = null;
-                                              controller.refresh();
+                                                       controller.selectRow(GlobalVariable.home!) ;
+                                            // controller.handlSelcetRow();
                                             },
                                             //spicial for Homepage only
                                             thisPageIsHomePage: true,
@@ -149,9 +144,7 @@ class HomePage extends StatelessWidget {
                                         ],
                                       ),
                                       CustomButton(
-                                          isActive: GlobalVariable.home == null
-                                              ? false
-                                              : true,
+                                          isActive: controller.canDelete ,
                                           text: "حذف",
                                           ontap: () {
                                             controller.deleteTransAction();
