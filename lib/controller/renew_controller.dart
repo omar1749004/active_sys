@@ -27,6 +27,7 @@ abstract class RenewController extends GetxController {
   void deleteRenew();
   void editPRenew();
   void assignModel(RenewModel privetModel);
+  void selectRow(int assignSelect) ;
 }
 
 class RenewControllerImp extends RenewController {
@@ -68,7 +69,7 @@ class RenewControllerImp extends RenewController {
   bool canAdd = true;
   DateTime startSearch = DateTime.now();
   DateTime endSearch = DateTime.now();
-
+  int selectedIndex = -1;
   String trainerValue = "عام";
   String subValue = "عام";
   String payedType = "0";
@@ -241,7 +242,6 @@ class RenewControllerImp extends RenewController {
   void addRenew() async {
     statusRequs = StatusRequst.loading;
     update();
-
     if (formKey.currentState!.validate()) {
       var res = await RenewData().add({
         "userid": renewUser.usersId.toString(),
@@ -250,8 +250,8 @@ class RenewControllerImp extends RenewController {
         "barcodeId": renewUser.barcodeId.toString(),
         "subscriptionsId": subscriptionModel.subscriptionsId.toString(),
         "note": note.text,
-        "start": start.toString(),
-        "end": start.toString(),
+        "start": start.toString().substring(0,11),
+        "end": end.toString().substring(0,11),
         "offer": descound.text,
         "payed_type": payedType,
         "amount": amount.text,
@@ -316,6 +316,7 @@ class RenewControllerImp extends RenewController {
       renewUser = renewList[0];
       update();
       assignDataInsideTable();
+      cleaModel();
       statusRequs = StatusRequst.sucsess;
     } else {
       statusRequs = StatusRequst.failure;
@@ -422,6 +423,7 @@ class RenewControllerImp extends RenewController {
   void deleteRenew() async {
     var res = await RenewData().delete({
       "id": renewUser.renewalId.toString(),
+      "renewal_adminId": myServices.sharedPreferences.getString("id"),
     });
 
     if (res["status"] == "failure") {
@@ -430,6 +432,7 @@ class RenewControllerImp extends RenewController {
     } else if (res["status"] == "success") {
       renewList
           .removeWhere((element) => element.renewalId == renewUser.renewalId);
+          assignDataInsideTable();
       statusRequs = StatusRequst.sucsess;
     } else {
       statusRequs = StatusRequst.failure;
@@ -477,6 +480,11 @@ class RenewControllerImp extends RenewController {
     userName.text = privetModel.usersName.toString();
     phone.text = privetModel.usersPhone ?? "";
     trainerValue = privetModel.captainNamme ?? trainerNameList[0];
+    if(privetModel.captainNamme== null)
+    {
+      trainerValue = privetModel.captainNamme ?? trainerNameList[0];
+      privetModel.usersCaptiantid = _trainerList[0].usersId!  ;
+    }
     start = privetModel.renewalStart ?? DateTime.now();
     if (privetModel.renewalStart == null) {
       setEndDate(start!);
@@ -518,7 +526,17 @@ class RenewControllerImp extends RenewController {
     remining.text = "0";
     descound.text = "0";
     canAdd = true;
-
+    selectedIndex  = -1 ;
     update();
+  }
+
+ @override
+  void selectRow(int assignSelect) {
+      if (selectedIndex ==  assignSelect) {
+                   selectedIndex = -1; // Reset if tapped again
+                   cleaModel() ;
+                  } else {
+                   selectedIndex = assignSelect;
+                  }
   }
 }

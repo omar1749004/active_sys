@@ -31,6 +31,7 @@ abstract class MangeUsersController extends GetxController {
   void calcBrithday();
   void editPlayers();
   void assignModel(UserModel privetModel);
+  void selectRow(int assignSelect);
 }
 
 class MangeUsersControllerImp extends MangeUsersController {
@@ -74,9 +75,8 @@ class MangeUsersControllerImp extends MangeUsersController {
   bool issubscroptionId = false;
   bool isDateSearch = false;
   bool isSearch = false;
-
   int totalPlayers = 0;
-
+  int selectedIndex = -1;
   String gender = "0";
   String trainerValue = "عام";
   String genderValue = "ذكر";
@@ -406,7 +406,7 @@ class MangeUsersControllerImp extends MangeUsersController {
         usersList[i].usersName.toString(),
         handleDataInTable().handleGenderData(usersList[i].usersGender),
         usersList[i].usersPhone.toString(),
-        usersList[i].usersCreate.toString().substring(0,11),
+        usersList[i].usersCreate.toString().substring(0, 11),
         usersList[i].renewalStart.toString(),
         usersList[i].renewalEnd.toString(),
         usersList[i].usersNote.toString(),
@@ -420,7 +420,7 @@ class MangeUsersControllerImp extends MangeUsersController {
     barcodeNum.text = privetModel.barcode.toString();
     userName.text = privetModel.usersName.toString();
     phone.text = privetModel.usersPhone!;
-    trainerValue = privetModel.captainName!;
+    trainerValue = privetModel.captainName ?? trainerNameList[0];
     brithDay = privetModel.usersDate;
     calcAge();
     note.text = privetModel.usersNote!;
@@ -438,6 +438,7 @@ class MangeUsersControllerImp extends MangeUsersController {
     age.clear();
     file = null;
     brithDay = DateTime.now();
+    selectedIndex = -1;
     canAdd = true;
     update();
   }
@@ -453,5 +454,15 @@ class MangeUsersControllerImp extends MangeUsersController {
     int midBrithday = DateTime.now().year - int.parse(age.text);
     brithDay = DateTime(midBrithday, 1, 1);
     update();
+  }
+
+  @override
+  void selectRow(int assignSelect) {
+    if (selectedIndex == assignSelect) {
+      selectedIndex = -1; // Reset if tapped again
+      cleaModel();
+    } else {
+      selectedIndex = assignSelect;
+    }
   }
 }

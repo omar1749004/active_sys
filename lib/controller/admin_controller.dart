@@ -22,6 +22,7 @@ abstract class AdminController extends GetxController {
   void editAdmin();
   void checkSearch(String val);
   void cleaModel();
+  void selectRow(int assignSelect);
 }
 
 class AdminControllerImp extends AdminController {
@@ -50,6 +51,7 @@ class AdminControllerImp extends AdminController {
     8,
     9,
   ];
+  int selectedIndex = -1;
   List<Map<int, List<int>>> powersMap = [];
   GlobalKey<FormState> formAdminKey = GlobalKey<FormState>();
   MyServices myServices = Get.find();
@@ -259,7 +261,8 @@ class AdminControllerImp extends AdminController {
       dataInTable.add([
         adminmodelList[i].adminSysId.toString(),
         adminmodelList[i].adminSysName.toString(),
-        adminmodelList[i].adminSysType.toString(),
+        // adminmodelList[i].adminSysType.toString() == "0" ?
+        "مدير",
         adminmodelList[i].adminSysNote.toString(),
       ]);
     }
@@ -302,7 +305,18 @@ class AdminControllerImp extends AdminController {
     repass.clear();
     note.clear();
     checkValueList = List.filled(14, true);
+    selectedIndex  = -1 ;
     canAdd = true;
     update();
+  }
+
+  @override
+  void selectRow(int assignSelect) {
+      if (selectedIndex ==  assignSelect) {
+                   selectedIndex = -1; // Reset if tapped again
+                   cleaModel() ;
+                  } else {
+                   selectedIndex = assignSelect;
+                  }
   }
 }

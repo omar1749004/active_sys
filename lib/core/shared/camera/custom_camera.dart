@@ -1,6 +1,6 @@
 import 'dart:html';
 
-import 'package:active_system/controller/mange_player.dart';
+import 'package:active_system/controller/mange_player_controller.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 

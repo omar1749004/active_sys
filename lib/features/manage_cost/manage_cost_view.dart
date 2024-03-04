@@ -9,7 +9,7 @@ import 'package:active_system/core/shared/custom_table_header.dart';
 import 'package:active_system/core/shared/global_variable.dart';
 import 'package:active_system/core/shared/loading_indecator.dart';
 import 'package:active_system/features/manage_cost/widgets/manage_cost_form.dart';
-import 'package:active_system/features/manage_subscriptions/view/widgets/custom_button.dart';
+import 'package:active_system/core/shared/custom_button.dart';
 import 'package:active_system/features/manage_subscriptions/view/widgets/custom_menu.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -156,11 +156,14 @@ class _ManageCostViewState extends State<ManageCostView> {
                                           "الشريك",
                                           "ملاحظات"
                                         ],
+                                        selectedIndex:
+                                              controller.selectedIndex ,
                                         nameOfGlobalID: 'manageCost',
                                         onRowTap: () {
                                           controller.assignModel(
                                               controller.expensesList[
                                                   GlobalVariable.manageCost!]);
+                                              controller.selectRow(GlobalVariable.manageCost!) ;
                                         },
                                         showDialog: () {},
                                       ),
@@ -178,11 +181,6 @@ class _ManageCostViewState extends State<ManageCostView> {
                                 children: [
                                   CustomButton(
                                     text: "أضافه",
-                                    color: controller.canAdd
-                                        ? const Color.fromARGB(
-                                            217, 255, 255, 255)
-                                        : const Color.fromARGB(
-                                            217, 202, 193, 193),
                                     ontap: () {
                                       if (controller.canAdd) {
                                         controller.addTrandsAction();
@@ -192,11 +190,6 @@ class _ManageCostViewState extends State<ManageCostView> {
                                   ),
                                   CustomButton(
                                     text: "تعديل",
-                                    color: !controller.canAdd
-                                        ? const Color.fromARGB(
-                                            217, 255, 255, 255)
-                                        : const Color.fromARGB(
-                                            217, 202, 193, 193),
                                     ontap: () {
                                       if (!controller.canAdd) {
                                         Get.defaultDialog(
@@ -223,11 +216,6 @@ class _ManageCostViewState extends State<ManageCostView> {
                                   ),
                                   CustomButton(
                                     text: "حذف",
-                                    color: !controller.canAdd
-                                        ? const Color.fromARGB(
-                                            217, 255, 255, 255)
-                                        : const Color.fromARGB(
-                                            217, 202, 193, 193),
                                     ontap: () {
                                       if (!controller.canAdd) {
                                         Get.defaultDialog(

@@ -5,7 +5,7 @@ import 'package:active_system/core/shared/custom_app_bar.dart';
 import 'package:active_system/core/shared/custom_table_header.dart';
 import 'package:active_system/core/shared/global_variable.dart';
 import 'package:active_system/core/shared/loading_indecator.dart';
-import 'package:active_system/features/manage_subscriptions/view/widgets/custom_button.dart';
+import 'package:active_system/core/shared/custom_button.dart';
 import 'package:active_system/features/manage_subscriptions/view/widgets/custom_menu.dart';
 import 'package:active_system/features/trainers/widgets/custom_input_form.dart';
 import 'package:flutter/material.dart';
@@ -114,10 +114,6 @@ class TrainersView extends StatelessWidget {
                               children: [
                                 CustomButton(
                                   text: "أضافه",
-                                  color: controller.canAdd
-                                      ? const Color.fromARGB(217, 255, 255, 255)
-                                      : const Color.fromARGB(
-                                          217, 202, 193, 193),
                                   ontap: () {
                                     if (controller.canAdd) {
                                       controller.addTrainer();
@@ -127,10 +123,6 @@ class TrainersView extends StatelessWidget {
                                 ),
                                 CustomButton(
                                   text: "تعديل",
-                                  color: !controller.canAdd
-                                      ? const Color.fromARGB(217, 255, 255, 255)
-                                      : const Color.fromARGB(
-                                          217, 202, 193, 193),
                                   ontap: () {
                                     if (!controller.canAdd) {
                                       Get.defaultDialog(
@@ -156,10 +148,6 @@ class TrainersView extends StatelessWidget {
                                 ),
                                 CustomButton(
                                   text: "حذف",
-                                  color: !controller.canAdd
-                                      ? const Color.fromARGB(217, 255, 255, 255)
-                                      : const Color.fromARGB(
-                                          217, 202, 193, 193),
                                   ontap: () {
                                     if (!controller.canAdd) {
                                       Get.defaultDialog(

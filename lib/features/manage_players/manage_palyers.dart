@@ -1,4 +1,4 @@
-import 'package:active_system/controller/mange_player.dart';
+import 'package:active_system/controller/mange_player_controller.dart';
 import 'package:active_system/core/class/statuscode.dart';
 import 'package:active_system/core/constant/color.dart';
 import 'package:active_system/core/functions/customDialogForManagePlayerView.dart';
@@ -9,10 +9,9 @@ import 'package:active_system/core/shared/global_variable.dart';
 import 'package:active_system/core/shared/loading_indecator.dart';
 import 'package:active_system/features/manage_players/widgets/manage_players_form.dart';
 import 'package:active_system/features/manage_players/widgets/search_tools.dart';
-import 'package:active_system/features/manage_subscriptions/view/widgets/custom_button.dart';
+import 'package:active_system/core/shared/custom_button.dart';
 import 'package:active_system/features/manage_subscriptions/view/widgets/custom_menu.dart';
 import 'package:active_system/features/safe/view/widget/custom_display_many.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -115,11 +114,14 @@ class ManagePlayers extends StatelessWidget {
                                         "نهايه الاشتراك",
                                         "ملاحظات"
                                       ],
+                                      selectedIndex:
+                                              controller.selectedIndex ,
                                       nameOfGlobalID: 'managePlayers',
                                       onRowTap: () {
                                         controller.assignModel(
                                             controller.usersList[
                                                 GlobalVariable.managePlayers!]);
+                                                controller.selectRow(GlobalVariable.managePlayers!) ;
                                       },
                                       showDialog: () {
                                         controller.userModel =
@@ -157,11 +159,6 @@ class ManagePlayers extends StatelessWidget {
                                       children: [
                                         CustomButton(
                                           text: "أضافه",
-                                          color: controller.canAdd
-                                              ? const Color.fromARGB(
-                                                  217, 255, 255, 255)
-                                              : const Color.fromARGB(
-                                                  217, 202, 193, 193),
                                           ontap: () {
                                             if (controller.canAdd) {
                                               controller.addUsers();
@@ -172,11 +169,6 @@ class ManagePlayers extends StatelessWidget {
                                         ),
                                         CustomButton(
                                           text: "تعديل",
-                                          color: !controller.canAdd
-                                              ? const Color.fromARGB(
-                                                  217, 255, 255, 255)
-                                              : const Color.fromARGB(
-                                                  217, 202, 193, 193),
                                           ontap: () {
                                             if (!controller.canAdd) {
                                               Get.defaultDialog(
@@ -206,11 +198,6 @@ class ManagePlayers extends StatelessWidget {
                                         ),
                                         CustomButton(
                                           text: "حذف",
-                                          color: !controller.canAdd
-                                              ? const Color.fromARGB(
-                                                  217, 255, 255, 255)
-                                              : const Color.fromARGB(
-                                                  217, 202, 193, 193),
                                           ontap: () {
                                             if (!controller.canAdd) {
                                               Get.defaultDialog(

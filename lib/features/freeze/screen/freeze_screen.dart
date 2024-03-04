@@ -8,7 +8,7 @@ import 'package:active_system/core/shared/custom_date_field.dart';
 import 'package:active_system/core/shared/custome_textform_auth.dart';
 import 'package:active_system/core/shared/global_variable.dart';
 import 'package:active_system/core/shared/loading_indecator.dart';
-import 'package:active_system/features/manage_subscriptions/view/widgets/custom_button.dart';
+import 'package:active_system/core/shared/custom_button.dart';
 import 'package:active_system/features/manage_subscriptions/view/widgets/custom_menu.dart';
 import 'package:active_system/features/freeze/widget/freeeze_screen_form.dart';
 import 'package:flutter/material.dart';
@@ -76,11 +76,14 @@ class FreezeScreen extends StatelessWidget {
                                       "كود تجديد الاشتراك",
                                       "ملاحظات",
                                     ],
+                                    selectedIndex:
+                                              controller.selectedIndex ,
                                     nameOfGlobalID: 'freeze',
                                     onRowTap: () {
                                       controller.assignModel(
                                           controller.freezeList[
                                               GlobalVariable.freeze!]);
+                                               controller.selectRow(GlobalVariable.freeze!) ;
                                     },
                                     showDialog: () {},
                                   ),

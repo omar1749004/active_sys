@@ -1,4 +1,4 @@
-import 'package:active_system/controller/mange_player.dart';
+import 'package:active_system/controller/mange_player_controller.dart';
 import 'package:active_system/core/constant/styles_copy.dart';
 import 'package:active_system/core/functions/validate_input.dart';
 import 'package:active_system/core/shared/camera/custom_camera.dart';

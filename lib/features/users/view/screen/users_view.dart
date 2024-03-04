@@ -9,7 +9,7 @@ import 'package:active_system/core/shared/custom_table_header.dart';
 import 'package:active_system/core/shared/custome_textform_auth.dart';
 import 'package:active_system/core/shared/global_variable.dart';
 import 'package:active_system/core/shared/loading_indecator.dart';
-import 'package:active_system/features/manage_subscriptions/view/widgets/custom_button.dart';
+import 'package:active_system/core/shared/custom_button.dart';
 import 'package:active_system/features/manage_subscriptions/view/widgets/custom_menu.dart';
 import 'package:active_system/features/users/view/widget/custom_checkbox_list.dart';
 import 'package:flutter/material.dart';
@@ -70,12 +70,15 @@ class UsersView extends StatelessWidget {
                                               "النوع",
                                               "ملاحظات",
                                             ],
+                                            selectedIndex:
+                                              controller.selectedIndex ,
                                             nameOfGlobalID: 'users',
                                             onRowTap: () {
                                               controller.assignModel(
                                                   controller.adminmodelList[
                                                       GlobalVariable.users!],
                                                   GlobalVariable.users!);
+                                                  controller.selectRow(GlobalVariable.users!) ;
                                             },
                                             showDialog: () {},
                                           ),
@@ -93,11 +96,6 @@ class UsersView extends StatelessWidget {
                                 children: [
                                   CustomButton(
                                     text: "أضافه",
-                                    color: controller.canAdd
-                                        ? const Color.fromARGB(
-                                            217, 255, 255, 255)
-                                        : const Color.fromARGB(
-                                            217, 202, 193, 193),
                                     ontap: () {
                                       if (controller.canAdd) {
                                         controller.addAdmin();
@@ -107,11 +105,6 @@ class UsersView extends StatelessWidget {
                                   ),
                                   CustomButton(
                                     text: "تعديل",
-                                    color: !controller.canAdd
-                                        ? const Color.fromARGB(
-                                            217, 255, 255, 255)
-                                        : const Color.fromARGB(
-                                            217, 202, 193, 193),
                                     ontap: () {
                                       if (!controller.canAdd) {
                                         Get.defaultDialog(
@@ -139,11 +132,6 @@ class UsersView extends StatelessWidget {
                                     isActive: !controller.canAdd ? true : false,
                                   ),
                                   CustomButton(
-                                    color: !controller.canAdd
-                                        ? const Color.fromARGB(
-                                            217, 255, 255, 255)
-                                        : const Color.fromARGB(
-                                            217, 202, 193, 193),
                                     text: "حذف",
                                     ontap: () {
                                       if (!controller.canAdd) {

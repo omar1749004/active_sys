@@ -251,7 +251,7 @@ class TrainersControllerImp extends TrainersController {
     note.clear();
     canAdd = true;
     selectedIndex  = -1 ;
-    print(selectedIndex) ;
+
     update();
   }
   

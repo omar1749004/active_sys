@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:active_system/core/services/services.dart';
 import 'package:active_system/features/attendance/attendance_view.dart';
@@ -14,8 +13,6 @@ import 'package:active_system/features/treasury_register/treasury_register_view.
 import 'package:active_system/features/users/view/screen/users_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 MyServices services = Get.find();
 const List<String> serviceName = [
@@ -29,7 +26,7 @@ const List<String> serviceName = [
   "ادارة المصروفات",
   "الخزنة",
   "سجل الخزنة",
-  "تسجيل الدخول",
+  "تسجيل خروج",
 ];
 
 const List<String> serviceRoutes = [
