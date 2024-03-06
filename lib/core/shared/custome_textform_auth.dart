@@ -59,10 +59,12 @@ class CustomeTextFormAuth extends StatelessWidget {
         controller: myController,
         cursorColor: cursorColor,
         readOnly: isreadonly,
-        style: TextStyle(
+        style:  
+         TextStyle(
             fontSize: fontSize,
             color: mainTextColor,
-            fontFamily: "NotoSansArabic"),
+            fontFamily: 
+            "NotoSansArabic" ),
         decoration: InputDecoration(
           hintText: hintText,
           hintStyle: TextStyle(color: hintColor, fontFamily: "NotoSansArabic"),

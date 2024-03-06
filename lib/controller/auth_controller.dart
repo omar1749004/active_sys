@@ -63,7 +63,7 @@ class AuthControllerImp extends AuthController {
         services.sharedPreferences.setString("name", adminModel.adminSysName);
 
         statusRequs = StatusRequst.sucsess;
-        Get.offNamed(AppRoute.homeid);
+       Get.offNamed(AppRoute.homeid);
       } else if (res["msg"] == "no powers") {
         servicePowerName = [];
         servicePowerRoutes = [];

@@ -5,8 +5,7 @@ import 'package:path/path.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
-String _basicAuth =
-    'Basic  + ${base64Encode(utf8.encode('omar_mohsen:omarMohsen194004#'))}';
+String _basicAuth = 'Basic ' + base64Encode(utf8.encode('omar_mohsen:omarMohsen194004#'));
 
 
 Map<String, String> myheaders = {'Authorization': _basicAuth};
@@ -54,7 +53,6 @@ class Api {
             "there id problem with status code${response.statusCode} with body${jsonDecode(response.body)}");
       }
     } catch (e) {
-     // print(e) ;
       return {"status": "false"};
     }
   }

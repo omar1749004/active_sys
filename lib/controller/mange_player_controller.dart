@@ -95,7 +95,7 @@ class MangeUsersControllerImp extends MangeUsersController {
     age = TextEditingController();
     age.text = "0";
     firstState = StatusRequst.loading;
-    await Future.delayed(const Duration(milliseconds: 100));
+    await Future.delayed(const Duration(milliseconds: 300));
     firstState = StatusRequst.failure;
     getSub();
     getTrainer();
@@ -407,6 +407,7 @@ class MangeUsersControllerImp extends MangeUsersController {
         handleDataInTable().handleGenderData(usersList[i].usersGender),
         usersList[i].usersPhone.toString(),
         usersList[i].usersCreate.toString().substring(0, 11),
+        usersList[i].subscriptionsName.toString(),
         usersList[i].renewalStart.toString(),
         usersList[i].renewalEnd.toString(),
         usersList[i].usersNote.toString(),

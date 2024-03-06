@@ -8,7 +8,6 @@ import 'package:active_system/features/home/view/screen/home.dart';
 import 'package:active_system/features/manage_cost/manage_cost_view.dart';
 import 'package:active_system/features/manage_players/manage_palyers.dart';
 import 'package:active_system/features/manage_subscriptions/view/manage_subscriptions_view.dart';
-import 'package:active_system/features/players_profile/players_profile_view.dart';
 import 'package:active_system/features/renew_subscriptions/renew_subscriptions_view.dart';
 import 'package:active_system/features/safe/view/screen/safe_view.dart';
 import 'package:active_system/features/treasury_register/treasury_register_view.dart';
@@ -52,10 +51,6 @@ List<GetPage<dynamic>> route = [
   GetPage(
     name: AppRoute.attendanceid,
     page: () => const AttendanceView(),
-  ),
-  GetPage(
-    name: AppRoute.playersprofileid,
-    page: () => const PlayersProfileView(),
   ),
   GetPage(
     name: AppRoute.freezescreenid,

@@ -29,6 +29,6 @@ ThemeData themeArabic =ThemeData(
          appBarTheme: const  AppBarTheme(backgroundColor: ColorApp.kPrimaryColor),
         floatingActionButtonTheme: const FloatingActionButtonThemeData(backgroundColor: ColorApp.kPrimaryColor),
 
-         fontFamily: "Pacifico-Regular"
+         fontFamily: "NotoSansArabic"
         
       );
