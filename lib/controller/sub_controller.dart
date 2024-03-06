@@ -74,7 +74,7 @@ class MangeSubControllerImp extends MangeSubController {
 
     cleaModel();
     firstState = StatusRequst.loading;
-    await Future.delayed(const Duration(milliseconds: 100));
+    await Future.delayed(const Duration(milliseconds: 300));
     firstState = StatusRequst.failure;
     update();
     viewAll();

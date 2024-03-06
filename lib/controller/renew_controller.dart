@@ -99,7 +99,7 @@ class RenewControllerImp extends RenewController {
     remining.text = "0";
     notknow.text = "0";
     firstState = StatusRequst.loading;
-    await Future.delayed(const Duration(milliseconds: 100));
+    await Future.delayed(const Duration(milliseconds: 300));
     firstState = StatusRequst.failure;
     getSub();
     getTrainer();
@@ -402,8 +402,7 @@ class RenewControllerImp extends RenewController {
       dataInTable.add([
         renewList[i].renewalId.toString(),
         renewList[i].barcode.toString(),
-        "${renewList[i].renewalCreate!.year}/${renewList[i].renewalCreate!.month}/${renewList[i].renewalCreate!.day}",
-        renewList[i].usersId.toString(),
+        renewList[i].subscriptionsName.toString(),
         renewList[i].usersName.toString(),
         "${renewList[i].renewalStart!.year}/${renewList[i].renewalStart!.month}/${renewList[i].renewalStart!.day}",
         "${renewList[i].renewalEnd!.year}/${renewList[i].renewalEnd!.month}/${renewList[i].renewalEnd!.day}",

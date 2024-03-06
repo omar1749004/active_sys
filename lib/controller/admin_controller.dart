@@ -63,7 +63,7 @@ class AdminControllerImp extends AdminController {
     pass = TextEditingController();
     repass = TextEditingController();
     firstState = StatusRequst.loading;
-    await Future.delayed(const Duration(milliseconds: 100));
+    await Future.delayed(const Duration(milliseconds: 300));
     firstState = StatusRequst.failure;
     getPowers();
     super.onInit();

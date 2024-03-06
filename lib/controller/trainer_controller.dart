@@ -49,7 +49,7 @@ class TrainersControllerImp extends TrainersController {
     note = TextEditingController();
     search = TextEditingController();
     firstState = StatusRequst.loading;
-    await Future.delayed(const Duration(milliseconds: 100));
+    await Future.delayed(const Duration(milliseconds: 300));
     firstState = StatusRequst.failure;
    viewAll();
     super.onInit();
@@ -201,7 +201,6 @@ class TrainersControllerImp extends TrainersController {
     for (var i = 0; i < usersList.length; i++) {
       dataInTable.add([
         usersList[i].usersId.toString(),
-          usersList[i].barcode.toString(),
         usersList[i].usersName.toString(),
         usersList[i].usersPhone.toString(),
         usersList[i].usersAddress.toString(),

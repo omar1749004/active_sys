@@ -30,7 +30,7 @@ class AttendControllerImp extends AttendController {
   void onInit() async {
     searchVal = TextEditingController();
     firstState = StatusRequst.loading;
-    await Future.delayed(const Duration(milliseconds: 100));
+    await Future.delayed(const Duration(milliseconds: 300));
     firstState = StatusRequst.failure;
 
     dateSearch(startSearch, endSearch);

@@ -133,7 +133,6 @@ class RenewSybscriptionsView extends StatelessWidget {
                                       150,
                                       150,
                                       250,
-                                      150,
                                       250,
                                       200,
                                       200,
@@ -143,8 +142,7 @@ class RenewSybscriptionsView extends StatelessWidget {
                                     header: const [
                                       "رقم الاشتراك",
                                       "الكود",
-                                      "التاريخ",
-                                      "كود الاعب",
+                                      "الاشتراك",
                                       "الاسم",
                                       "تاريخ البدايه",
                                       "تاريخ النهاية",
