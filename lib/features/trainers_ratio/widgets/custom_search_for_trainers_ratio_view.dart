@@ -5,8 +5,8 @@ import 'package:active_system/core/shared/custom_date_field.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class CustomSearchDate extends GetView<SafeControllerImp> {
-  const CustomSearchDate({
+class CustomSearchDateInTrainersRatioView extends GetView<SafeControllerImp> {
+  const CustomSearchDateInTrainersRatioView({
     super.key,
     required this.color,
     this.ontap,
@@ -58,7 +58,7 @@ class CustomSearchDate extends GetView<SafeControllerImp> {
           ),
         ),
         Text(
-          "سجل الخزنة",
+          "نسبة المدربين",
           style: Styles.style23,
         ),
       ],

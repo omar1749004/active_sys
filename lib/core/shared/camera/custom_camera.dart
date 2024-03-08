@@ -3,6 +3,7 @@ import 'dart:html';
 import 'package:active_system/controller/mange_player_controller.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class CustomCamera extends StatefulWidget {
   CustomCamera({super.key, required this.contrller});
@@ -67,7 +68,7 @@ class CameraView extends StatefulWidget {
       : super(key: key);
 
   @override
-   _CameraViewState createState() => _CameraViewState();
+  _CameraViewState createState() => _CameraViewState();
 }
 
 class _CameraViewState extends State<CameraView> {
@@ -172,6 +173,7 @@ class _CameraViewState extends State<CameraView> {
                   //f.File savedfile = f.File(file.path);
                   widget.contrller.file = file;
                   widget.contrller.refresh();
+                  Get.back();
                   //final bytes = await file.readAsBytes();
 
                   // final link = AnchorElement(

@@ -133,6 +133,17 @@ class ClinetInfo extends StatelessWidget {
                                     controller.handlebarcode();
                                   },
                                   onTapOnTextField: () {
+                                    QrcodeBarcodeScanner(
+                                      onScannedCallback: (String value) {
+                                        if (controller.supType == 0 &&
+                                            int.tryParse(value) != null) {
+                                          controller.barcode.text = value;
+                                          controller.addSub();
+                                        }
+                                      },
+                                    );
+                                    print("aaaaaaaa${controller.barcode.text}");
+
                                     // QrcodeBarcodeScanner(
                                     //   onScannedCallback: (String value) {
                                     //     controller.barcode.text = value;

@@ -114,14 +114,14 @@ class ManagePlayers extends StatelessWidget {
                                         "نهايه الاشتراك",
                                         "ملاحظات"
                                       ],
-                                      selectedIndex:
-                                              controller.selectedIndex ,
+                                      selectedIndex: controller.selectedIndex,
                                       nameOfGlobalID: 'managePlayers',
                                       onRowTap: () {
                                         controller.assignModel(
                                             controller.usersList[
                                                 GlobalVariable.managePlayers!]);
-                                                controller.selectRow(GlobalVariable.managePlayers!) ;
+                                        controller.selectRow(
+                                            GlobalVariable.managePlayers!);
                                       },
                                       showDialog: () {
                                         controller.userModel =
@@ -136,107 +136,96 @@ class ManagePlayers extends StatelessWidget {
                           //
                           //search tools and Buttons
                           //
-                        const  Expanded(
+                          const Expanded(
                             flex: 3,
-                            child: 
+                            child:
                                 //
                                 //DropDown and checkbox for search
                                 //
-                                 SearchTools(),),
+                                SearchTools(),
+                          ),
 
-                                //
-                                //Buttons
-                                //
-                                Expanded(
-                                  flex: 2,
-                                  child: Padding(
-                                    padding:
-                                        const EdgeInsets.only(bottom: 20.0),
-                                    child: Row(
-                                      textDirection: TextDirection.rtl,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceEvenly,
-                                      children: [
-                                        CustomButton(
-                                          text: "أضافه",
-                                          ontap: () {
-                                            if (controller.canAdd) {
-                                              controller.addUsers();
-                                            }
-                                          },
-                                          isActive:
-                                              controller.canAdd ? true : false,
-                                        ),
-                                        CustomButton(
-                                          text: "تعديل",
-                                          ontap: () {
-                                            if (!controller.canAdd) {
-                                              Get.defaultDialog(
-                                                  title: "تحذير ",
-                                                  middleText:
-                                                      "هل أنت متأكد أنك تريد تعديل الاشتراك",
-                                                  actions: [
-                                                    ElevatedButton(
-                                                        onPressed: () {
-                                                          Get.back();
-                                                          controller
-                                                              .editPlayers();
-                                                        },
-                                                        child:
-                                                            const Text("نعم")),
-                                                    ElevatedButton(
-                                                        onPressed: () {
-                                                          Get.back();
-                                                        },
-                                                        child:
-                                                            const Text("لا")),
-                                                  ]);
-                                            }
-                                          },
-                                          isActive:
-                                              !controller.canAdd ? true : false,
-                                        ),
-                                        CustomButton(
-                                          text: "حذف",
-                                          ontap: () {
-                                            if (!controller.canAdd) {
-                                              Get.defaultDialog(
-                                                  title: "تحذير ",
-                                                  middleText:
-                                                      "هل أنت متأكد أنك تريد حذف االلاعب",
-                                                  actions: [
-                                                    ElevatedButton(
-                                                        onPressed: () {
-                                                          Get.back();
-                                                          controller
-                                                              .deletePlayers();
-                                                        },
-                                                        child:
-                                                            const Text("نعم")),
-                                                    ElevatedButton(
-                                                        onPressed: () {
-                                                          Get.back();
-                                                        },
-                                                        child:
-                                                            const Text("لا")),
-                                                  ]);
-                                            }
-                                          },
-                                          isActive:
-                                              !controller.canAdd ? true : false,
-                                        ),
-                                        CustomButton(
-                                          text: "إلغاء",
-                                          ontap: () {
-                                            controller.cleaModel();
-                                          },
-                                        ),
-                                      ],
-                                    ),
+                          //
+                          //Buttons
+                          //
+                          Expanded(
+                            flex: 2,
+                            child: Padding(
+                              padding: const EdgeInsets.only(bottom: 20.0),
+                              child: Row(
+                                textDirection: TextDirection.rtl,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  CustomButton(
+                                    text: "أضافه",
+                                    ontap: () {
+                                      if (controller.canAdd) {
+                                        controller.addUsers();
+                                      }
+                                    },
+                                    isActive: controller.canAdd ? true : false,
                                   ),
-                                ),
-
-                          
+                                  CustomButton(
+                                    text: "تعديل",
+                                    ontap: () {
+                                      if (!controller.canAdd) {
+                                        Get.defaultDialog(
+                                            title: "تحذير ",
+                                            middleText:
+                                                "هل أنت متأكد أنك تريد تعديل الاشتراك",
+                                            actions: [
+                                              ElevatedButton(
+                                                  onPressed: () {
+                                                    Get.back();
+                                                    controller.editPlayers();
+                                                  },
+                                                  child: const Text("نعم")),
+                                              ElevatedButton(
+                                                  onPressed: () {
+                                                    Get.back();
+                                                  },
+                                                  child: const Text("لا")),
+                                            ]);
+                                      }
+                                    },
+                                    isActive: !controller.canAdd ? true : false,
+                                  ),
+                                  CustomButton(
+                                    text: "حذف",
+                                    ontap: () {
+                                      if (!controller.canAdd) {
+                                        Get.defaultDialog(
+                                            title: "تحذير ",
+                                            middleText:
+                                                "هل أنت متأكد أنك تريد حذف االلاعب",
+                                            actions: [
+                                              ElevatedButton(
+                                                  onPressed: () {
+                                                    Get.back();
+                                                    controller.deletePlayers();
+                                                  },
+                                                  child: const Text("نعم")),
+                                              ElevatedButton(
+                                                  onPressed: () {
+                                                    Get.back();
+                                                  },
+                                                  child: const Text("لا")),
+                                            ]);
+                                      }
+                                    },
+                                    isActive: !controller.canAdd ? true : false,
+                                  ),
+                                  CustomButton(
+                                    text: "إلغاء",
+                                    ontap: () {
+                                      controller.cleaModel();
+                                    },
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
                         ],
                       ),
                     ),

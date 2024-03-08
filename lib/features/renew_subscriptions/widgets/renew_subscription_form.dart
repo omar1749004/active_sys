@@ -113,6 +113,14 @@ class RenewSubscriptionForm extends StatelessWidget {
               const SizedBox(
                 height: 20,
               ),
+              CustomeTextFormAuth(
+                myController: controller.note,
+                hintText: "",
+                lableText: "نسبة المدرب",
+              ),
+              const SizedBox(
+                height: 20,
+              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [

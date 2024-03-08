@@ -2,7 +2,6 @@ import 'package:active_system/core/constant/color.dart';
 import 'package:active_system/core/shared/ModernTable/functions.dart';
 import 'package:flutter/material.dart';
 
-
 // class CustomRowTable extends StatefulWidget {
 //   const CustomRowTable({
 //     super.key,
@@ -120,7 +119,8 @@ class CustomRowTable extends StatefulWidget {
     required this.ind,
     required this.onTap,
     this.thisPageIsHomePage = false,
-    required this.showDialog,  this.color = Colors.black,
+    required this.showDialog,
+    this.color = Colors.black,
   });
 
   final int ind;
@@ -132,7 +132,7 @@ class CustomRowTable extends StatefulWidget {
   final void Function() onTap;
   final void Function() showDialog;
   final bool thisPageIsHomePage;
-    final Color color ;
+  final Color color;
 
   @override
   State<CustomRowTable> createState() => _CustomRowTableState();
@@ -165,26 +165,26 @@ class _CustomRowTableState extends State<CustomRowTable> {
             : null,
         child: Container(
           margin: const EdgeInsets.symmetric(vertical: 1),
-          color: 
-          widget.color != Colors.black ?
-          widget.color :
-          !widget.thisPageIsHomePage
-              ? const Color.fromARGB(255, 234, 234, 234)
-              : widget.dataCell[widget.dataCell.length - 1] == 1.toString() &&
-                      widget.dataCell[widget.dataCell.length - 2] ==
-                          1.toString()
-                  ? Colors.orange
+          color: widget.color != Colors.black
+              ? widget.color
+              : !widget.thisPageIsHomePage
+                  ? const Color.fromARGB(255, 234, 234, 234)
                   : widget.dataCell[widget.dataCell.length - 1] ==
-                              0.toString() &&
+                              1.toString() &&
                           widget.dataCell[widget.dataCell.length - 2] ==
                               1.toString()
-                      ? const Color.fromARGB(255, 190, 171, 0)
+                      ? Colors.orange
                       : widget.dataCell[widget.dataCell.length - 1] ==
-                                  1.toString() &&
+                                  0.toString() &&
                               widget.dataCell[widget.dataCell.length - 2] ==
-                                  0.toString()
-                          ? Colors.red
-                          : const Color.fromARGB(255, 234, 234, 234),
+                                  1.toString()
+                          ? const Color.fromARGB(255, 190, 171, 0)
+                          : widget.dataCell[widget.dataCell.length - 1] ==
+                                      1.toString() &&
+                                  widget.dataCell[widget.dataCell.length - 2] ==
+                                      0.toString()
+                              ? Colors.red
+                              : const Color.fromARGB(255, 234, 234, 234),
           //dataCell[dataCell.length - 1] = isclosed on attend model
           //dataCell[dataCell.length - 2] = isowed on attend model
           child: Row(

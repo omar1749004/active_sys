@@ -1,18 +1,20 @@
 import 'package:active_system/controller/trainer_controller.dart';
 import 'package:active_system/core/class/statuscode.dart';
+import 'package:active_system/core/constant/color.dart';
 import 'package:active_system/core/shared/ModernTable/custom_modern_table.dart';
 import 'package:active_system/core/shared/custom_app_bar.dart';
+import 'package:active_system/core/shared/custom_button.dart';
 import 'package:active_system/core/shared/custom_table_header.dart';
 import 'package:active_system/core/shared/global_variable.dart';
 import 'package:active_system/core/shared/loading_indecator.dart';
-import 'package:active_system/core/shared/custom_button.dart';
 import 'package:active_system/features/manage_subscriptions/view/widgets/custom_menu.dart';
-import 'package:active_system/features/trainers/widgets/custom_input_form.dart';
+import 'package:active_system/features/trainers_ratio/widgets/custom_search_for_trainers_ratio_view.dart';
+import 'package:active_system/features/trainers_ratio/widgets/trainers_ratio_form.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class TrainersView extends StatelessWidget {
-  const TrainersView({super.key});
+class TrainersRatioView extends StatelessWidget {
+  const TrainersRatioView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -63,6 +65,8 @@ class TrainersView extends StatelessWidget {
                                 },
                                 header: "",
                               )),
+                          CustomSearchDateInTrainersRatioView(
+                              ontap: () {}, color: ColorApp.kPrimaryColor),
                           //
                           //table that contains data
                           //
@@ -93,13 +97,13 @@ class TrainersView extends StatelessWidget {
                                         "ملاحظات",
                                       ],
                                       selectedIndex: controller.selectedIndex,
-                                      nameOfGlobalID: 'trainers',
+                                      nameOfGlobalID: 'trainersRatio',
                                       onRowTap: () {
                                         controller.assignModel(
                                             controller.usersList[
-                                                GlobalVariable.trainers!]);
+                                                GlobalVariable.trainersRatio!]);
                                         controller.selectRow(
-                                            GlobalVariable.trainers!);
+                                            GlobalVariable.trainersRatio!);
                                       },
                                       showDialog: () {},
                                     ),
@@ -115,41 +119,7 @@ class TrainersView extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
                                 CustomButton(
-                                  text: "أضافه",
-                                  ontap: () {
-                                    if (controller.canAdd) {
-                                      controller.addTrainer();
-                                    }
-                                  },
-                                  isActive: controller.canAdd ? true : false,
-                                ),
-                                CustomButton(
-                                  text: "تعديل",
-                                  ontap: () {
-                                    if (!controller.canAdd) {
-                                      Get.defaultDialog(
-                                          title: "تحذير ",
-                                          middleText:
-                                              "هل أنت متأكد أنك تريد تعديل الاشتراك",
-                                          actions: [
-                                            ElevatedButton(
-                                                onPressed: () {
-                                                  Get.back();
-                                                  controller.editTrainer();
-                                                },
-                                                child: const Text("نعم")),
-                                            ElevatedButton(
-                                                onPressed: () {
-                                                  Get.back();
-                                                },
-                                                child: const Text("لا")),
-                                          ]);
-                                    }
-                                  },
-                                  isActive: !controller.canAdd ? true : false,
-                                ),
-                                CustomButton(
-                                  text: "حذف",
+                                  text: "حذف الاعب",
                                   ontap: () {
                                     if (!controller.canAdd) {
                                       Get.defaultDialog(
@@ -174,13 +144,9 @@ class TrainersView extends StatelessWidget {
                                   isActive: !controller.canAdd ? true : false,
                                 ),
                                 CustomButton(
-                                    text: "نسبة المدرب",
-                                    ontap: () {
-                                      Get.toNamed("trainersRatioView");
-                                    },
-                                    isActive:
-                                        true //!controller.canAdd ? true : false,
-                                    ),
+                                  text: "'طباعه",
+                                  ontap: () {},
+                                ),
                                 CustomButton(
                                   text: "إلغاء",
                                   ontap: () {
@@ -220,7 +186,7 @@ class TrainersView extends StatelessWidget {
                                 ),
                               ),
                             ),
-                            child: const TrainersForm(),
+                            child: const TrainersRatioForm(),
                           ),
                   )
                 ],

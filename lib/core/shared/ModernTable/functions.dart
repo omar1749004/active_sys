@@ -38,6 +38,9 @@ void setValueInGlobalVariable(String nameOfVar, int ind) {
     case "freeze":
       GlobalVariable.freeze = ind;
       break;
+    case "trainersRatio":
+      GlobalVariable.trainersRatio = ind;
+      break;
     default:
   }
 }

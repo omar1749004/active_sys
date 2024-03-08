@@ -11,4 +11,5 @@ class GlobalVariable {
   static int? treasuryRegister;
   static int? users;
   static int? freeze;
+  static int? trainersRatio;
 }

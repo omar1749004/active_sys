@@ -75,10 +75,10 @@ class AuthControllerImp extends AuthController {
         //to add تسجيل الدخول
         servicePowerName.add(serviceName.last);
         servicePowerRoutes.add(serviceRoutes.last);
-         services.sharedPreferences
-        .setStringList("servicePowerName", servicePowerName);
-    services.sharedPreferences
-        .setStringList("servicePowerRoutes", servicePowerRoutes);
+        services.sharedPreferences
+            .setStringList("servicePowerName", servicePowerName);
+        services.sharedPreferences
+            .setStringList("servicePowerRoutes", servicePowerRoutes);
         Get.offNamed(AppRoute.homeid);
       }
     }
