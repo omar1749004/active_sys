@@ -6,8 +6,10 @@ import 'package:active_system/core/shared/custom_date_field.dart';
 import 'package:active_system/core/shared/custom_dropdown_menu.dart';
 import 'package:active_system/core/shared/custome_textform_auth.dart';
 import 'package:active_system/features/safe/view/widget/custom_checkbox.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
@@ -119,23 +121,29 @@ class ManagePlayersForm extends GetView<MangeUsersControllerImp> {
                 const SizedBox(
                   height: 20,
                 ),
-                CustomDropDownMenu(
-                    label: "المدرب",
-                    items: controller.trainerNameList,
-                    onChanged: (p0) {
-                      controller.changeTrainermodel(p0!);
-                    },
-                    intialValue: controller.trainerValue),
+                AbsorbPointer(
+                  absorbing: controller.trainerNameList.isEmpty,
+                  child: CustomDropDownMenu(
+                      label: "المدرب",
+                      items: controller.trainerNameList,
+                      onChanged: (p0) {
+                        controller.changeTrainermodel(p0!);
+                      },
+                      intialValue: controller.trainerValue),
+                ),
                 const SizedBox(
                   height: 20,
                 ),
-                CustomDropDownMenu(
-                    label: "الإشتراك",
-                    items: controller.subNameList,
-                    onChanged: (p0) {
-                      controller.changemodel(p0!);
-                    },
-                    intialValue: controller.subValue),
+                AbsorbPointer(
+                  absorbing: controller.subNameList.isEmpty,
+                  child: CustomDropDownMenu(
+                      label: "الإشتراك",
+                      items: controller.subNameList,
+                      onChanged: (p0) {
+                        controller.changemodel(p0!);
+                      },
+                      intialValue: controller.subValue),
+                ),
                 const SizedBox(
                   height: 20,
                 ),

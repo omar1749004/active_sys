@@ -10,6 +10,7 @@ import 'package:active_system/features/manage_players/manage_palyers.dart';
 import 'package:active_system/features/manage_subscriptions/view/manage_subscriptions_view.dart';
 import 'package:active_system/features/renew_subscriptions/renew_subscriptions_view.dart';
 import 'package:active_system/features/safe/view/screen/safe_view.dart';
+import 'package:active_system/features/trainers_ratio/trainers_ratio.dart';
 import 'package:active_system/features/treasury_register/treasury_register_view.dart';
 import 'package:active_system/features/users/view/screen/users_view.dart';
 import 'package:active_system/features/trainers/trainers_view.dart';
@@ -68,4 +69,8 @@ List<GetPage<dynamic>> route = [
     name: AppRoute.pdfId,
     page: () => const CreatePdf(),
   ),
+  GetPage(
+      name: AppRoute.trainersRatioView,
+      page: () => const TrainersRatioView(),
+      middlewares: [MyMiddleWare()]),
 ];

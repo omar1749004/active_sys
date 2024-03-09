@@ -14,6 +14,7 @@ class CustomButton extends StatelessWidget {
     return ElevatedButton(
       onPressed: isActive ? ontap : null,
       style: ButtonStyle(
+          alignment: Alignment.center,
           shape: MaterialStateProperty.all(
             LinearBorder.bottom(
               side: const BorderSide(
@@ -22,7 +23,16 @@ class CustomButton extends StatelessWidget {
               ),
             ),
           ),
-          fixedSize: MaterialStateProperty.all(Size.copy(const Size(120, 40)))),
+          maximumSize: MaterialStateProperty.all(
+            Size.copy(
+              const Size(150, 40),
+            ),
+          ),
+          minimumSize: MaterialStateProperty.all(
+            Size.copy(
+              const Size(120, 40),
+            ),
+          )),
       child: Text(text),
     );
   }
