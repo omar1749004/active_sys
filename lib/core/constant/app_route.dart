@@ -2,8 +2,8 @@ class AppRoute {
   static const String homeid = "/home";
   static const String managesubscriptionid = "/ManageSubscriptionsView";
   static const String usersid = "/usersid";
-  static const String trainerid = "/trainerid";
-  static const String renewSybscriptionsView = "/renewSybscriptionsView";
+  static const String trainerid = "/TrainersView";
+  static const String renewSybscriptionsView = "/RenewSybscriptionsView";
   static const String safeid = "/safeciew";
   static const String managecostviewid = "/ManageCostView";
   static const String attendanceid = "/AttendanceView";

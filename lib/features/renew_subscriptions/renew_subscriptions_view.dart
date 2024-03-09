@@ -1,5 +1,6 @@
 import 'package:active_system/controller/renew_controller.dart';
 import 'package:active_system/core/class/statuscode.dart';
+import 'package:active_system/core/constant/app_route.dart';
 import 'package:active_system/core/constant/color.dart';
 import 'package:active_system/core/shared/ModernTable/custom_modern_table.dart';
 import 'package:active_system/core/shared/custom_botton_copy.dart';
@@ -149,14 +150,14 @@ class RenewSybscriptionsView extends StatelessWidget {
                                       "عدد الجلسات",
                                       "ملاحظات",
                                     ],
-                                    selectedIndex:
-                                              controller.selectedIndex ,
+                                    selectedIndex: controller.selectedIndex,
                                     nameOfGlobalID: 'renewSubscription',
                                     onRowTap: () {
                                       controller.assignModel(controller
                                               .renewList[
                                           GlobalVariable.renewSubscription!]);
-                                          controller.selectRow(GlobalVariable.renewSubscription!) ;
+                                      controller.selectRow(
+                                          GlobalVariable.renewSubscription!);
                                     },
                                     showDialog: () {},
                                   ),
@@ -235,17 +236,17 @@ class RenewSybscriptionsView extends StatelessWidget {
                                     controller.cleaModel();
                                   }
                                 },
-
                                 // isActive: controller.canAdd ? true : false,
                               ),
                               CustomButton(
                                 text: "تجميد",
                                 ontap: () {
-                                  if (!controller.canAdd) {
-                                    controller.gotoFrezze(controller.renewUser);
-                                  }
+                                  // if (!controller.canAdd) {
+                                  //   controller.gotoFrezze(controller.renewUser);
+                                  // }
+                                  Get.offAllNamed(AppRoute.freezescreenid);
                                 },
-                                isActive: !controller.canAdd ? true : false,
+                                isActive: !controller.canAdd ? true : true,
                               ),
                             ],
                           ),
