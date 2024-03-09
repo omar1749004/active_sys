@@ -38,7 +38,9 @@ class CustomDropDownMenu extends StatelessWidget {
           borderRadius: BorderRadius.all(Radius.circular(redius)),
           items: items
               .map((item) =>
-                  DropdownMenuItem<String>(value: item, child: Text(item)))
+                  DropdownMenuItem<String>(value: item, child: FittedBox(
+                    fit: BoxFit.scaleDown,
+                    child: Text(item))))
               .toList(),
           onChanged: onChanged),
     );

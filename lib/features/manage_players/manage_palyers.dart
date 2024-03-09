@@ -96,8 +96,9 @@ class ManagePlayers extends StatelessWidget {
                                         150,
                                         150,
                                         250,
-                                        150,
+                                        80,
                                         200,
+                                        250,
                                         250,
                                         250,
                                         250,
@@ -110,6 +111,7 @@ class ManagePlayers extends StatelessWidget {
                                         "الجنس",
                                         "تليفون",
                                         "تاريخ الانشاء",
+                                        "الاشتراك",
                                         "بدايه الاشتراك",
                                         "نهايه الاشتراك",
                                         "ملاحظات"

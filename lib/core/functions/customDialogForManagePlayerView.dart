@@ -1,3 +1,4 @@
+import 'package:active_system/core/class/handle_data_in_table.dart';
 import 'package:active_system/core/constant/color.dart';
 import 'package:active_system/data/models/user_model.dart';
 import 'package:active_system/features/safe/view/widget/custom_display_many.dart';
@@ -40,7 +41,7 @@ Future<dynamic> customManagePlayerDialog(UserModel userModel) {
                 child: CustomDisplyMany(
                     textColor: ColorApp.thirdColor,
                     many: userModel.usersName ?? "",
-                    text: "ألاسم",
+                    text: "الاسم",
                     flexOfMany: 2),
               ),
               SizedBox(
@@ -49,7 +50,7 @@ Future<dynamic> customManagePlayerDialog(UserModel userModel) {
                   textColor: ColorApp.thirdColor,
                   many: userModel.usersGender == null
                       ? ""
-                      : userModel.usersGender.toString(),
+                      : handleDataInTable().handleGenderData(userModel.usersGender),
                   text: "الجنس",
                   flexOfMany: 2,
                 ),
@@ -76,20 +77,22 @@ Future<dynamic> customManagePlayerDialog(UserModel userModel) {
                 width: 500,
                 child: CustomDisplyMany(
                   textColor: ColorApp.thirdColor,
-                  many: userModel.usersAddress ?? "",
-                  text: "العنوان",
+                  many: userModel.subscriptionsName ?? "",
+                  text: "الاشتراك",
                   flexOfMany: 2,
                 ),
               ),
-              // SizedBox(
-              //   width: 500,
-              //   child: CustomDisplyMany(
-              //     textColor: ColorApp.thirdColor,
-              //     many: userModel.usersBranch.toString(),
-              //     text: "الفرع",
-              //     flexOfMany: 2,
-              //   ),
-              // ),
+              SizedBox(
+                width: 500,
+                child: CustomDisplyMany(
+                  textColor: ColorApp.thirdColor,
+                  many: userModel.renewalEnd == null
+                      ? ""
+                      : userModel.renewalEnd.toString(),
+                  text: "تاريخ الانتهاء",
+                  flexOfMany: 2,
+                ),
+              ),
               SizedBox(
                 width: 500,
                 child: CustomDisplyMany(

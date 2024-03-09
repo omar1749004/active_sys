@@ -41,6 +41,7 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   intl: any
+
   lottie: ^3.0.0
   loading_indicator: ^3.1.1
   syncfusion_flutter_pdfviewer: ^24.2.4
@@ -110,6 +111,9 @@ flutter:
       fonts:
         - asset: assets/font/NotoSansArabic-Regular.ttf
         - asset: assets/font/NotoSansArabic-Bold.ttf
+    - family: NotoSansSymbols
+      fonts:
+        - asset: assets/font/NotoSansSymbols-Regular.ttf
   #       - asset: fonts/TrajanPro_Bold.ttf
   #         weight: 700
   #

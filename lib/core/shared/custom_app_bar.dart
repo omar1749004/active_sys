@@ -22,7 +22,15 @@ class CustomAppBar extends StatelessWidget {
             style: Styles.style20.copyWith(color: Colors.white),
           ),
           //here will add another element in the future
-        const  Text("data")
+         Padding(
+           padding: const EdgeInsets.only(right: 10),
+           child: ClipOval(
+                                child: SizedBox.fromSize(
+                                    size:const Size.fromRadius(
+                                        30), // Image radius
+                                    child: Image.asset(ImageAsset.myLogo,
+             ),),),
+         )
         ],
       ),
     );

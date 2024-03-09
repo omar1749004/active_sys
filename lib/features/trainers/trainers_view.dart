@@ -68,42 +68,40 @@ class TrainersView extends StatelessWidget {
                           //
                           Expanded(
                             flex: 6,
-                            child: controller.statusRequs ==
-                                    StatusRequst.loading
-                                ? const CustomLoadingIndecator()
-                                : Container(
-                                    color: const Color.fromARGB(
-                                        255, 218, 218, 218),
-                                    child: CustomModernTable(
-                                      data: controller.dataInTable,
-                                      widths: const [
-                                        150,
-                                        150,
-                                        250,
-                                        200,
-                                        250,
-                                        250,
-                                      ],
-                                      header: const [
-                                        "المسلسل",
-                                        "الكود",
-                                        "ألاسم",
-                                        "نلفون",
-                                        "عنوان",
-                                        "ملاحظات",
-                                      ],
-                                      selectedIndex: controller.selectedIndex,
-                                      nameOfGlobalID: 'trainers',
-                                      onRowTap: () {
-                                        controller.assignModel(
-                                            controller.usersList[
-                                                GlobalVariable.trainers!]);
-                                        controller.selectRow(
-                                            GlobalVariable.trainers!);
-                                      },
-                                      showDialog: () {},
-                                    ),
-                                  ),
+                            child:
+                                controller.statusRequs == StatusRequst.loading
+                                    ? const CustomLoadingIndecator()
+                                    : Container(
+                                        color: const Color.fromARGB(
+                                            255, 218, 218, 218),
+                                        child: CustomModernTable(
+                                          data: controller.dataInTable,
+                                          widths: const [
+                                            150,
+                                            250,
+                                            200,
+                                            250,
+                                            250,
+                                          ],
+                                          header: const [
+                                            "المسلسل",
+                                            "ألاسم",
+                                            "نلفون",
+                                            "عنوان",
+                                            "ملاحظات",
+                                          ],
+                                          selectedIndex:
+                                              controller.selectedIndex ,
+                                          nameOfGlobalID: 'trainers',
+                                          onRowTap: () {
+                                            controller.assignModel(
+                                                controller.usersList[
+                                                    GlobalVariable.trainers!]);
+                                           controller.selectRow(GlobalVariable.trainers!) ;
+                                          },
+                                          showDialog: () {},
+                                        ),
+                                      ),
                           ),
                           //
                           //buttons

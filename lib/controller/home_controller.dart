@@ -69,11 +69,11 @@ class HomeControllerImp extends HomeController {
     search = TextEditingController();
     barcode.text = "0";
     firstState = StatusRequst.loading;
-    await Future.delayed(const Duration(milliseconds: 100));
+    await Future.delayed(const Duration(milliseconds: 300));
     firstState = StatusRequst.failure;
-    viewAll();
-    getSub();
-
+   viewAll();
+   getSub();
+   
     super.onInit();
   }
 
@@ -262,6 +262,7 @@ class HomeControllerImp extends HomeController {
       } else if (res["msg"] == "barcode not found") {
         globalAlert("الباركود ليس مستخدم يرجى ادخال الباركود الصحيح",
             title: "!خطأ");
+            statusRequs = StatusRequst.failure;
       } else {
         statusRequs = StatusRequst.failure;
       }

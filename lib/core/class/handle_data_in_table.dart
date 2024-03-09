@@ -16,9 +16,9 @@ class handleDataInTable {
 
   String handleGenderData(ind) {
     if (ind == 0) {
-      return "Man";
+      return "ذكر";
     } else if (ind == 1) {
-      return "Woman";
+      return "أنثى";
     } else {
       return "";
     }
