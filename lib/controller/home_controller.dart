@@ -487,6 +487,7 @@ class HomeControllerImp extends HomeController {
   //function to assign data inside List
   void assignDataInsideTable() {
     dataInTable = [];
+    selectedIndex = -1;
     for (var i = 0; i < attendList.length; i++) {
       dataInTable.add([
         attendList[i].attendanceId.toString(),

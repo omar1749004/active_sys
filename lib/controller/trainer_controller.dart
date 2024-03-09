@@ -198,6 +198,7 @@ class TrainersControllerImp extends TrainersController {
   //function to assign data inside List
   void assignDataInsideTable() {
     dataInTable = [];
+    selectedIndex = -1;
     for (var i = 0; i < usersList.length; i++) {
       dataInTable.add([
         usersList[i].usersId.toString(),

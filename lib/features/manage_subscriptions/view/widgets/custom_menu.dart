@@ -27,7 +27,7 @@ class CustomMenu extends StatelessWidget {
                 text: servicePowerName[index],
                 ontap: () {
                   if(servicePowerName[index] !=pageName)
-                  {
+                  { 
                      Get.offAllNamed(servicePowerRoutes[index]);
                   }
                   

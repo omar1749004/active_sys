@@ -109,12 +109,12 @@ class ExpensesControllerImp extends ExpensesController {
 
   @override
   void handlTable(bool isdate) {
-    if (isdateSearch) {
+   
+    if (isdate) {
       dateSearch(startSearch, endSearch);
     } else {
       viewAll();
     }
-    update();
   }
 
   @override
@@ -204,6 +204,7 @@ class ExpensesControllerImp extends ExpensesController {
 //function to assign data inside List
   void assignDataInsideTable() {
     dataInTable = [];
+    selectedIndex  = -1 ;
     for (var i = 0; i < expensesList.length; i++) {
       dataInTable.add([
         expensesList[i].expensesId.toString(),

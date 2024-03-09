@@ -88,9 +88,8 @@ class _ManageCostViewState extends State<ManageCostView> {
                                       height: 30,
                                       onChanged: (p0) {
                                         controller.endSearch = p0!;
-                                        controller.dateSearch(
-                                            controller.startSearch,
-                                            controller.endSearch);
+                                        controller.handlTable(controller.isdateSearch) ;
+                                        
                                       },
                                       iconSize: 15,
                                       fontSize: 15),
@@ -103,9 +102,7 @@ class _ManageCostViewState extends State<ManageCostView> {
                                       height: 30,
                                       onChanged: (p0) {
                                         controller.startSearch = p0!;
-                                        controller.dateSearch(
-                                            controller.startSearch,
-                                            controller.endSearch);
+                                       controller.handlTable(controller.isdateSearch) ;
                                       },
                                       iconSize: 15,
                                       fontSize: 15),
@@ -117,6 +114,7 @@ class _ManageCostViewState extends State<ManageCostView> {
                                     child: CustomBotton1(
                                       text: "بحث",
                                       ontap: () {
+                                        
                                         controller.isdateSearch =
                                             !controller.isdateSearch;
                                         controller.handlTable(
