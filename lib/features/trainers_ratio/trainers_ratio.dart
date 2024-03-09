@@ -1,5 +1,6 @@
 import 'package:active_system/controller/trainer_controller.dart';
 import 'package:active_system/core/class/statuscode.dart';
+import 'package:active_system/core/constant/app_route.dart';
 import 'package:active_system/core/constant/color.dart';
 import 'package:active_system/core/shared/ModernTable/custom_modern_table.dart';
 import 'package:active_system/core/shared/custom_app_bar.dart';
@@ -144,13 +145,19 @@ class TrainersRatioView extends StatelessWidget {
                                   isActive: !controller.canAdd ? true : false,
                                 ),
                                 CustomButton(
-                                  text: "'طباعه",
+                                  text: "طباعه",
                                   ontap: () {},
                                 ),
                                 CustomButton(
                                   text: "إلغاء",
                                   ontap: () {
                                     controller.cleaModel();
+                                  },
+                                ),
+                                CustomButton(
+                                  text: "رجوع",
+                                  ontap: () {
+                                    Get.offNamed(AppRoute.trainerid);
                                   },
                                 ),
                               ],

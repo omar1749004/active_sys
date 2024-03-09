@@ -1,5 +1,6 @@
 import 'package:active_system/controller/freeze_controller.dart';
 import 'package:active_system/core/class/statuscode.dart';
+import 'package:active_system/core/constant/app_route.dart';
 import 'package:active_system/core/constant/color.dart';
 import 'package:active_system/core/functions/validate_input.dart';
 import 'package:active_system/core/shared/ModernTable/custom_modern_table.dart';
@@ -76,14 +77,13 @@ class FreezeScreen extends StatelessWidget {
                                       "كود تجديد الاشتراك",
                                       "ملاحظات",
                                     ],
-                                    selectedIndex:
-                                              controller.selectedIndex ,
+                                    selectedIndex: controller.selectedIndex,
                                     nameOfGlobalID: 'freeze',
                                     onRowTap: () {
-                                      controller.assignModel(
-                                          controller.freezeList[
-                                              GlobalVariable.freeze!]);
-                                               controller.selectRow(GlobalVariable.freeze!) ;
+                                      controller.assignModel(controller
+                                          .freezeList[GlobalVariable.freeze!]);
+                                      controller
+                                          .selectRow(GlobalVariable.freeze!);
                                     },
                                     showDialog: () {},
                                   ),
@@ -98,12 +98,14 @@ class FreezeScreen extends StatelessWidget {
                             padding: const EdgeInsets.only(top: 10.0),
                             child: SingleChildScrollView(
                               child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   Expanded(
                                     flex: 1,
                                     child: Column(
-                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
                                       children: [
                                         CustomButton(
                                           text: "تجميد",
@@ -115,32 +117,45 @@ class FreezeScreen extends StatelessWidget {
                                           height: 10,
                                         ),
                                         CustomButton(
-                                      text: "حذف",
-                              
-                                      ontap: () {
-                                        if (controller.candelete) {
-                                          Get.defaultDialog(
-                                              title: "تحذير ",
-                                              middleText:
-                                                  "هل أنت متأكد أنك تريد حذف التجميد",
-                                              actions: [
-                                                ElevatedButton(
-                                                    onPressed: () {
-                                                      Get.back();
-                                                      controller
-                                                          .deleteFreeze();
-                                                    },
-                                                    child: const Text("نعم")),
-                                                ElevatedButton(
-                                                    onPressed: () {
-                                                      Get.back();
-                                                    },
-                                                    child: const Text("لا")),
-                                              ]);
-                                        }
-                                      },
-                                      isActive: controller.candelete ? true : false,
-                                    ),
+                                          text: "حذف",
+                                          ontap: () {
+                                            if (controller.candelete) {
+                                              Get.defaultDialog(
+                                                  title: "تحذير ",
+                                                  middleText:
+                                                      "هل أنت متأكد أنك تريد حذف التجميد",
+                                                  actions: [
+                                                    ElevatedButton(
+                                                        onPressed: () {
+                                                          Get.back();
+                                                          controller
+                                                              .deleteFreeze();
+                                                        },
+                                                        child:
+                                                            const Text("نعم")),
+                                                    ElevatedButton(
+                                                        onPressed: () {
+                                                          Get.back();
+                                                        },
+                                                        child:
+                                                            const Text("لا")),
+                                                  ]);
+                                            }
+                                          },
+                                          isActive: controller.candelete
+                                              ? true
+                                              : false,
+                                        ),
+                                        const SizedBox(
+                                          height: 10,
+                                        ),
+                                        CustomButton(
+                                          text: "رجوع",
+                                          ontap: () {
+                                            Get.offNamed(AppRoute
+                                                .renewSybscriptionsView);
+                                          },
+                                        ),
                                       ],
                                     ),
                                   ),
@@ -150,7 +165,8 @@ class FreezeScreen extends StatelessWidget {
                                   Expanded(
                                     flex: 5,
                                     child: Column(
-                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
                                       children: [
                                         Form(
                                           key: controller.formKey,
@@ -160,9 +176,11 @@ class FreezeScreen extends StatelessWidget {
                                                 child: CustomeTextFormAuth(
                                                     hintText: "",
                                                     lableText: "عدد الايام",
-                                                    myController: controller.day,
+                                                    myController:
+                                                        controller.day,
                                                     onChanged: (p0) {
-                                                      controller.calcfreezeDate();
+                                                      controller
+                                                          .calcfreezeDate();
                                                     },
                                                     validator: (val) {
                                                       return validInput(
@@ -194,7 +212,8 @@ class FreezeScreen extends StatelessWidget {
                                                             controller
                                                                     .startSearch =
                                                                 p0!;
-                                                            controller.calcDays();
+                                                            controller
+                                                                .calcDays();
                                                           },
                                                           fontSize: 15),
                                                     ),
@@ -204,10 +223,11 @@ class FreezeScreen extends StatelessWidget {
                                                     Expanded(
                                                       flex: 3,
                                                       child: Container(
-                                                        padding: const EdgeInsets
-                                                            .symmetric(
-                                                            horizontal: 25,
-                                                            vertical: 5),
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .symmetric(
+                                                                horizontal: 25,
+                                                                vertical: 5),
                                                         decoration: BoxDecoration(
                                                             border: Border.all(
                                                                 color: const Color
@@ -301,11 +321,12 @@ class FreezeScreen extends StatelessWidget {
                                                             color: ColorApp
                                                                 .thirdColor,
                                                             fontWeight:
-                                                                FontWeight.w600),
+                                                                FontWeight
+                                                                    .w600),
                                                         textAlign:
                                                             TextAlign.center,
-                                                        overflow:
-                                                            TextOverflow.visible,
+                                                        overflow: TextOverflow
+                                                            .visible,
                                                         softWrap: false,
                                                       ),
                                                     ),
