@@ -192,6 +192,7 @@ class SafeControllerImp extends SafeController {
   //function to assign data inside List
   void assignDataInsideTable() {
     dataInTable = [];
+    
     for (var i = 0; i < safeList.length; i++) {
       dataInTable.add([
         safeList[i].safeId.toString(),

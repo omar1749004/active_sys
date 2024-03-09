@@ -231,6 +231,7 @@ class FreezeControllerImp extends FreezeController {
   //function to assign data inside List
   void assignDataInsideTable() {
     dataInTable = [];
+    selectedIndex  = -1 ;
     for (var i = 0; i < freezeList.length; i++) {
       dataInTable.add([
         freezeList[i].freezeId.toString(),

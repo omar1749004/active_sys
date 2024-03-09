@@ -398,6 +398,7 @@ class RenewControllerImp extends RenewController {
   //function to assign data inside List
   void assignDataInsideTable() {
     dataInTable = [];
+    selectedIndex = -1;
     for (var i = 0; i < renewList.length; i++) {
       dataInTable.add([
         renewList[i].renewalId.toString(),

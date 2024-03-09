@@ -284,6 +284,7 @@ class MangeSubControllerImp extends MangeSubController {
 //function to assign data inside List
   void assignDataInsideTable() {
     dataInTable = [];
+    selectedIndex = -1;
     for (var i = 0; i < subList.length; i++) {
       dataInTable.add([
         subList[i].subscriptionsId.toString(),
