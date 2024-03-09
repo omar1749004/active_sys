@@ -92,6 +92,13 @@ class SearchTools extends StatelessWidget {
                           currentValue: DateTime.now(),
                           width: 210,
                           height: 35,
+                          myController: TextEditingController(
+                          text: DateFormat('yyyy-MM')
+                              .format(controller.startSearch)),
+                      onChanged: (p0) {
+                        controller.startSearch = p0!;
+                        controller.changeDate(controller.isDateSearch);
+                      },
                           iconSize: 20,
                           format: DateFormat('yyyy-MM'),
                         ),

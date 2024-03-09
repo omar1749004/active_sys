@@ -147,7 +147,24 @@ class HomePage extends StatelessWidget {
                                           isActive: controller.canDelete ,
                                           text: "حذف",
                                           ontap: () {
-                                            controller.deleteTransAction();
+                                              Get.defaultDialog(
+                                            title: "تحذير ",
+                                            middleText:
+                                                "هل أنت متأكد أنك تريد حذف حضور اللاعب",
+                                            actions: [
+                                              ElevatedButton(
+                                                  onPressed: () {
+                                                    Get.back();
+                                                    controller.deleteTransAction();
+                                                  },
+                                                  child: const Text("نعم")),
+                                              ElevatedButton(
+                                                  onPressed: () {
+                                                    Get.back();
+                                                  },
+                                                  child: const Text("لا")),
+                                            ]);
+                                            
                                           }),
                                     ],
                                   ),
