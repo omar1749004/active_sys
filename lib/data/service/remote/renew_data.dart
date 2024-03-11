@@ -8,7 +8,10 @@ class RenewData{
     var res =await Api().post(uri: linkRenewView, body: {});
     return res;
   }
-
+    getSub()async{
+    var res =await Api().post(uri: linkRenewGetSub, body: {});
+    return res;
+  }
    add(Map data)async{
     var res =await Api().post(uri: linkRenewAdd, body: data,
     );

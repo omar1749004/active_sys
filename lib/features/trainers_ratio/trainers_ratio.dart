@@ -1,4 +1,4 @@
-import 'package:active_system/controller/trainer_controller.dart';
+import 'package:active_system/controller/persent_controller.dart';
 import 'package:active_system/core/class/statuscode.dart';
 import 'package:active_system/core/constant/app_route.dart';
 import 'package:active_system/core/constant/color.dart';
@@ -6,8 +6,6 @@ import 'package:active_system/core/services/services.dart';
 import 'package:active_system/core/shared/ModernTable/custom_modern_table.dart';
 import 'package:active_system/core/shared/custom_app_bar.dart';
 import 'package:active_system/core/shared/custom_button.dart';
-import 'package:active_system/core/shared/custom_table_header.dart';
-import 'package:active_system/core/shared/global_variable.dart';
 import 'package:active_system/core/shared/loading_indecator.dart';
 import 'package:active_system/features/auth/view/screen/auth_view.dart';
 import 'package:active_system/features/manage_subscriptions/view/widgets/custom_menu.dart';
@@ -152,24 +150,60 @@ class TrainersRatioView extends StatelessWidget {
                                     },
                                     isActive: !controller.canAdd ? true : false,
                                   ),
-                                  CustomButton(
-                                    text: "طباعه",
-                                    ontap: () {},
-                                  ),
-                                  CustomButton(
-                                    text: "إلغاء",
-                                    ontap: () {
-                                      controller.cleaModel();
-                                    },
-                                  ),
-                                  CustomButton(
-                                    text: "رجوع",
-                                    ontap: () {
-                                      Get.offNamed(AppRoute.trainerid);
-                                    },
-                                  ),
-                                ],
-                              ),
+                          ),
+                          //
+                          //buttons
+                          //
+                          Expanded(
+                            flex: 1,
+                            child: Row(
+                              textDirection: TextDirection.rtl,
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                // CustomButton(
+                                //   text: "حذف الاعب",
+                                //   ontap: () {
+                                //     if (!controller.canAdd) {
+                                //       Get.defaultDialog(
+                                //           title: "تحذير ",
+                                //           middleText:
+                                //               "هل أنت متأكد أنك تريد حذف الاشتراك",
+                                //           actions: [
+                                //             ElevatedButton(
+                                //                 onPressed: () {
+                                //                   Get.back();
+                                //                   controller.deleteTrainer();
+                                //                 },
+                                //                 child: const Text("نعم")),
+                                //             ElevatedButton(
+                                //                 onPressed: () {
+                                //                   Get.back();
+                                //                 },
+                                //                 child: const Text("لا")),
+                                //           ]);
+                                //     }
+                                //   },
+                                //   isActive: !controller.canAdd ? true : false,
+                                // ),
+                                CustomButton(
+                                  text: "طباعه",
+                                  ontap: () {
+                                    controller.getpdf() ;
+                                  },
+                                ),
+                                // CustomButton(
+                                //   text: "إلغاء",
+                                //   ontap: () {
+                                //     controller.cleaModel();
+                                //   },
+                                // ),
+                                CustomButton(
+                                  text: "رجوع",
+                                  ontap: () {
+                                    Get.offNamed(AppRoute.trainerid);
+                                  },
+                                ),
+                              ],
                             ),
                           ],
                         ),

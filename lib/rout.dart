@@ -71,6 +71,5 @@ List<GetPage<dynamic>> route = [
   ),
   GetPage(
       name: AppRoute.trainersRatioView,
-      page: () => const TrainersRatioView(),
-      middlewares: [MyMiddleWare()]),
+      page: () => const TrainersRatioView(),),
 ];

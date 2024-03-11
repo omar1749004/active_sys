@@ -27,4 +27,13 @@ class TrainerData{
     var res =await Api().post(uri: linkTrainerSearch, body: data);
     return res;
   }
+    dateSearch(Map data)async{
+    var res =await Api().post(uri: linkPersentDateSearch, body: data);
+    return res;
+  }
+
+  getpdf(Map data)async{
+    var res =await Api().post(uri: linkpdfPersent, body: data);
+    return res;
+  }
 }

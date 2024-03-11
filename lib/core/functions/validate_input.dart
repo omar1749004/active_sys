@@ -33,5 +33,10 @@ validInput(String val, int min, int max, String type) {
         return "رقم الهاتف غير صالح";
       }
     }
+    if (type == "ratio") {
+      if (int.parse(val)  > 100) {
+        return "النسبة يجب أن تكون أقل من أو تساوي 100";
+      }
+    }
   }
 }
