@@ -60,7 +60,7 @@ class ExpensesControllerImp extends ExpensesController {
   void dateSearch(DateTime startD, DateTime endD) async {
     statusRequs = StatusRequst.loading;
     update();
-    if (isdateSearch) {
+
       var res = await ExpensesData().dateSearch({
         "start_date": startD.toString().substring(0, 11),
         "end_date": endD.toString().substring(0, 11),
@@ -80,7 +80,6 @@ class ExpensesControllerImp extends ExpensesController {
       } else {
         statusRequs = StatusRequst.failure;
       }
-    }
     update();
   }
 

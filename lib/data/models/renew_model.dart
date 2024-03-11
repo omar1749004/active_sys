@@ -18,7 +18,7 @@ class RenewModel {
   double? renewalAmount;
   double? renewOffer ;
   String? subscriptionsName ;
-int? totalPlayer;
+   int? ratio;
 
 
   RenewModel({
@@ -41,7 +41,7 @@ int? totalPlayer;
     required this.renewAmountOwed,
     this.renewOffer ,
     required this.renewalAmount,
-    required this.totalPlayer,
+    required this.ratio,
   });
 
   factory RenewModel.fromJson(Map<String, dynamic> json) {
@@ -65,7 +65,7 @@ int? totalPlayer;
       renewAmountOwed: double.parse(json['renew_amount_owed']), 
       renewOffer: double.parse(json['renew_offer_applied']),
       renewalAmount: double.parse(json['renewal_amount']),
-      totalPlayer: json['totalPlayer'],
+      ratio: json['ratio'],
 
     );
   }
