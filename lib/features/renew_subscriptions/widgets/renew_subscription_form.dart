@@ -346,6 +346,7 @@ class RenewSubscriptionForm extends StatelessWidget {
                 height: 10,
               ),
               CustomeTextFormAuth(
+                  maxlines: 2,
                   myController: controller.preNote,
                   hintText: "",
                   lableText: "ملاحظات الللاعب",
@@ -357,6 +358,7 @@ class RenewSubscriptionForm extends StatelessWidget {
                 height: 10,
               ),
               CustomeTextFormAuth(
+                maxlines: 3,
                 myController: controller.note,
                 hintText: "",
                 lableText: "الملاحظات",

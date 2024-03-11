@@ -11,6 +11,7 @@ class CustomeTextFormAuth extends StatelessWidget {
       required this.lableText,
       this.myController,
       this.validator,
+      this.maxlines = 1,
       this.onChanged,
       this.isShowIcone = false,
       this.icone = Icons.power_off_rounded,
@@ -33,6 +34,7 @@ class CustomeTextFormAuth extends StatelessWidget {
   final String? Function(String?)? validator;
   final bool isPhoneNumber;
   final bool obscureText;
+  final int maxlines;
   final bool isShowIcone;
   final TextStyle? lableStyle;
   final double fontSize;
@@ -51,6 +53,7 @@ class CustomeTextFormAuth extends StatelessWidget {
     return Directionality(
       textDirection: TextDirection.rtl,
       child: TextFormField(
+        maxLines: maxlines,
         onTap: onTapOnTextField,
         onChanged: onChanged,
         obscureText: obscureText,
@@ -59,12 +62,10 @@ class CustomeTextFormAuth extends StatelessWidget {
         controller: myController,
         cursorColor: cursorColor,
         readOnly: isreadonly,
-        style:  
-         TextStyle(
+        style: TextStyle(
             fontSize: fontSize,
             color: mainTextColor,
-            fontFamily: 
-            "NotoSansArabic" ),
+            fontFamily: "NotoSansArabic"),
         decoration: InputDecoration(
           hintText: hintText,
           hintStyle: TextStyle(color: hintColor, fontFamily: "NotoSansArabic"),

@@ -218,6 +218,7 @@ class SubscriptionForm extends GetView<MangeSubControllerImp> {
                         height: 20,
                       ),
                       CustomeTextFormAuth(
+                        maxlines: 3,
                         hintText: "",
                         lableText: "ملاحظات",
                         myController: controller.notes,

@@ -1,3 +1,4 @@
+import 'package:active_system/core/class/handle_data_in_table.dart';
 import 'package:active_system/core/class/statuscode.dart';
 import 'package:active_system/core/constant/app_route.dart';
 import 'package:active_system/data/models/safe_model.dart';
@@ -88,7 +89,6 @@ class TreasuryRegisterControllerImp extends TreasuryRegisterController {
       safeList = [];
       assignDataInsideTable();
     } else if (res["status"] == "success") {
-      
       List data = res["data"];
       toralIncoming = double.parse(res["moreInfo"][0]["totalincoming"]);
       toralOutcoming = double.parse(res["moreInfo"][0]["totalOutgioing"]);
@@ -120,7 +120,7 @@ class TreasuryRegisterControllerImp extends TreasuryRegisterController {
   //function to assign data inside List
   void assignDataInsideTable() {
     dataInTable = [];
-    
+
     for (var i = 0; i < safeList.length; i++) {
       dataInTable.add([
         safeList[i].safeId.toString(),
@@ -129,7 +129,7 @@ class TreasuryRegisterControllerImp extends TreasuryRegisterController {
         safeList[i].safeIncoming.toString(),
         safeList[i].safeOutgoing.toString(),
         safeList[i].remaining.toString(),
-        safeList[i].safeType.toString(),
+        handleDataInTable().handleSafeType(safeList[i].safeType),
         safeList[i].adminSysName.toString(),
         safeList[i].safeAdminId.toString(),
         safeList[i].totalIncoming.toString(),
@@ -138,7 +138,7 @@ class TreasuryRegisterControllerImp extends TreasuryRegisterController {
     }
   }
 
-    @override
+  @override
   void getpdf() async {
     statusRequs = StatusRequst.loading;
     update();
@@ -148,7 +148,7 @@ class TreasuryRegisterControllerImp extends TreasuryRegisterController {
     });
 
     Get.toNamed(AppRoute.pdfId, arguments: {"pdf": res["data"]});
-   statusRequs = StatusRequst.failure;
+    statusRequs = StatusRequst.failure;
     update();
   }
 }

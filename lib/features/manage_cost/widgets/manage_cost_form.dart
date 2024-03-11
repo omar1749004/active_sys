@@ -86,6 +86,7 @@ class MangeCostForm extends GetView<ExpensesControllerImp> {
                 height: 15,
               ),
               CustomeTextFormAuth(
+                  maxlines: 2,
                   hintText: "",
                   myController: controller.reason,
                   lableText: "سبب الصرف",
@@ -96,6 +97,7 @@ class MangeCostForm extends GetView<ExpensesControllerImp> {
                 height: 15,
               ),
               CustomeTextFormAuth(
+                maxlines: 3,
                 hintText: "",
                 lableText: "ملاحظات",
                 myController: controller.note,

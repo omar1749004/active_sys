@@ -17,6 +17,8 @@ class AuthView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     MyServices services = Get.find();
+    services.sharedPreferences.setString("id", "");
+    services.sharedPreferences.setString("name", "");
     Get.put(AuthControllerImp());
     return Scaffold(
         body: Center(
@@ -70,7 +72,6 @@ class AuthView extends StatelessWidget {
                 const SizedBox(
                   height: 20,
                 ),
-               
                 CustomeTextFormAuth(
                   hintText: "",
                   icone: controller.icone,
@@ -87,7 +88,7 @@ class AuthView extends StatelessWidget {
                   onfocuseColor: Colors.white,
                   lableStyle: Styles.style18,
                   hintColor: Colors.white,
-                  obscureText:  controller.isHidepass,
+                  obscureText: controller.isHidepass,
                   mainTextColor: Colors.white,
                   cursorColor: Colors.white,
                 ),
@@ -120,7 +121,7 @@ class AuthView extends StatelessWidget {
                     Expanded(
                         child: CustomBotton1(
                       ontap: () {
-                       controller.login();
+                        controller.login();
                       },
                       text: "تسجيل",
                       color: ColorApp.secondColor,

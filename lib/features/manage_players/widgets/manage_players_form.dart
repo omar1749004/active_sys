@@ -191,6 +191,7 @@ class ManagePlayersForm extends GetView<MangeUsersControllerImp> {
                   height: 10,
                 ),
                 CustomeTextFormAuth(
+                  maxlines: 3,
                   hintText: "",
                   myController: controller.note,
                   lableText: "ملاحظات",
