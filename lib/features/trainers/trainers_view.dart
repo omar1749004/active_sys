@@ -174,10 +174,10 @@ class TrainersView extends StatelessWidget {
                                 CustomButton(
                                     text: "نسبة المدرب",
                                     ontap: () {
-                                      Get.toNamed("trainersRatioView");
+                                      controller.gotoPersent(controller.userModel);
                                     },
                                     isActive:
-                                        true //!controller.canAdd ? true : false,
+                                      !controller.canAdd ? true : false,
                                     ),
                                 CustomButton(
                                   text: "إلغاء",

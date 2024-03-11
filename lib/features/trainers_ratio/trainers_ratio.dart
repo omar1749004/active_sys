@@ -1,12 +1,10 @@
-import 'package:active_system/controller/trainer_controller.dart';
+import 'package:active_system/controller/persent_controller.dart';
 import 'package:active_system/core/class/statuscode.dart';
 import 'package:active_system/core/constant/app_route.dart';
 import 'package:active_system/core/constant/color.dart';
 import 'package:active_system/core/shared/ModernTable/custom_modern_table.dart';
 import 'package:active_system/core/shared/custom_app_bar.dart';
 import 'package:active_system/core/shared/custom_button.dart';
-import 'package:active_system/core/shared/custom_table_header.dart';
-import 'package:active_system/core/shared/global_variable.dart';
 import 'package:active_system/core/shared/loading_indecator.dart';
 import 'package:active_system/features/manage_subscriptions/view/widgets/custom_menu.dart';
 import 'package:active_system/features/trainers_ratio/widgets/custom_search_for_trainers_ratio_view.dart';
@@ -19,9 +17,9 @@ class TrainersRatioView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Get.put(TrainersControllerImp());
+    Get.put(PersentControllerImp());
     return Scaffold(
-        body: GetBuilder<TrainersControllerImp>(builder: (controller) {
+        body: GetBuilder<PersentControllerImp>(builder: (controller) {
       // if (controller.firstState == StatusRequst.loading) {
       //   return const CustomLoadingIndecator();
       // } else {
@@ -54,20 +52,10 @@ class TrainersRatioView extends StatelessWidget {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
-                          //
-                          //search bar
-                          //
-                          SizedBox(
-                              width: MediaQuery.of(context).size.width * 0.5,
-                              child: CustomTableHeader(
-                                searchController: controller.search,
-                                onChanged: (p0) {
-                                  controller.checkSearch(p0);
-                                },
-                                header: "",
-                              )),
                           CustomSearchDateInTrainersRatioView(
-                              ontap: () {}, color: ColorApp.kPrimaryColor),
+                              ontap: () {
+                                
+                              }, color: ColorApp.onfoucosColor),
                           //
                           //table that contains data
                           //
@@ -85,27 +73,21 @@ class TrainersRatioView extends StatelessWidget {
                                         150,
                                         150,
                                         250,
-                                        200,
                                         250,
-                                        250,
+                                        150,
+                                        150,
                                       ],
                                       header: const [
-                                        "المسلسل",
-                                        "الكود",
-                                        "ألاسم",
-                                        "نلفون",
-                                        "عنوان",
-                                        "ملاحظات",
+                                        'النسبة',
+                                        "المبلغ",
+                                        'اسم الاعب',
+                                        'اسم الاشتراك',
+                                        'البداية',
+                                        'النهاية',
                                       ],
                                       selectedIndex: controller.selectedIndex,
                                       nameOfGlobalID: 'trainersRatio',
-                                      onRowTap: () {
-                                        controller.assignModel(
-                                            controller.usersList[
-                                                GlobalVariable.trainersRatio!]);
-                                        controller.selectRow(
-                                            GlobalVariable.trainersRatio!);
-                                      },
+                                      onRowTap: () {},
                                       showDialog: () {},
                                     ),
                                   ),
@@ -119,41 +101,43 @@ class TrainersRatioView extends StatelessWidget {
                               textDirection: TextDirection.rtl,
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
-                                CustomButton(
-                                  text: "حذف الاعب",
-                                  ontap: () {
-                                    if (!controller.canAdd) {
-                                      Get.defaultDialog(
-                                          title: "تحذير ",
-                                          middleText:
-                                              "هل أنت متأكد أنك تريد حذف الاشتراك",
-                                          actions: [
-                                            ElevatedButton(
-                                                onPressed: () {
-                                                  Get.back();
-                                                  controller.deleteTrainer();
-                                                },
-                                                child: const Text("نعم")),
-                                            ElevatedButton(
-                                                onPressed: () {
-                                                  Get.back();
-                                                },
-                                                child: const Text("لا")),
-                                          ]);
-                                    }
-                                  },
-                                  isActive: !controller.canAdd ? true : false,
-                                ),
+                                // CustomButton(
+                                //   text: "حذف الاعب",
+                                //   ontap: () {
+                                //     if (!controller.canAdd) {
+                                //       Get.defaultDialog(
+                                //           title: "تحذير ",
+                                //           middleText:
+                                //               "هل أنت متأكد أنك تريد حذف الاشتراك",
+                                //           actions: [
+                                //             ElevatedButton(
+                                //                 onPressed: () {
+                                //                   Get.back();
+                                //                   controller.deleteTrainer();
+                                //                 },
+                                //                 child: const Text("نعم")),
+                                //             ElevatedButton(
+                                //                 onPressed: () {
+                                //                   Get.back();
+                                //                 },
+                                //                 child: const Text("لا")),
+                                //           ]);
+                                //     }
+                                //   },
+                                //   isActive: !controller.canAdd ? true : false,
+                                // ),
                                 CustomButton(
                                   text: "طباعه",
-                                  ontap: () {},
-                                ),
-                                CustomButton(
-                                  text: "إلغاء",
                                   ontap: () {
-                                    controller.cleaModel();
+                                    controller.getpdf() ;
                                   },
                                 ),
+                                // CustomButton(
+                                //   text: "إلغاء",
+                                //   ontap: () {
+                                //     controller.cleaModel();
+                                //   },
+                                // ),
                                 CustomButton(
                                   text: "رجوع",
                                   ontap: () {

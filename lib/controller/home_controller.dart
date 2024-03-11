@@ -263,6 +263,9 @@ class HomeControllerImp extends HomeController {
         globalAlert("الباركود ليس مستخدم يرجى ادخال الباركود الصحيح",
             title: "!خطأ");
             statusRequs = StatusRequst.failure;
+      }else if (res["msg"] == "waite") {
+        globalAlert("يرجي الاتنظار لدقيقة");
+            statusRequs = StatusRequst.failure;
       } else {
         statusRequs = StatusRequst.failure;
       }

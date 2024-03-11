@@ -1,4 +1,5 @@
 import 'package:active_system/core/class/statuscode.dart';
+import 'package:active_system/core/constant/app_route.dart';
 import 'package:active_system/core/functions/global_alert.dart';
 import 'package:active_system/data/models/user_model.dart';
 import 'package:active_system/data/service/remote/trainer_data.dart';
@@ -15,6 +16,7 @@ abstract class TrainersController extends GetxController {
   void editTrainer();
   void cleaModel();
   void selectRow(int assignSelect) ;
+   void gotoPersent(UserModel privteModel) ;
 }
 
 class TrainersControllerImp extends TrainersController {
@@ -263,5 +265,11 @@ class TrainersControllerImp extends TrainersController {
                   } else {
                    selectedIndex = assignSelect;
                   }
+  }
+
+  @override
+  void gotoPersent(UserModel privteModel) async {
+    Get.toNamed(AppRoute.trainersRatioView,
+        arguments: {"usermodel": privteModel});
   }
 }

@@ -4,7 +4,7 @@ import 'package:active_system/core/functions/global_alert.dart';
 import 'package:active_system/core/services/services.dart';
 import 'package:active_system/data/models/sub_mode.dart';
 import 'package:active_system/data/models/user_model.dart';
-import 'package:active_system/data/service/remote/sub_data.dart';
+import 'package:active_system/data/service/remote/renew_data.dart';
 import 'package:active_system/data/service/remote/trainer_data.dart';
 import 'package:active_system/data/service/remote/users_data.dart';
 import 'package:camera/camera.dart';
@@ -108,7 +108,7 @@ class MangeUsersControllerImp extends MangeUsersController {
   void getSub() async {
     statusRequs = StatusRequst.loading;
     update();
-    var res = await SubData().view();
+    var res = await RenewData().getSub();
     if (res["status"] == "failure") {
       statusRequs = StatusRequst.failure;
     } else if (res["status"] == "success") {
@@ -263,7 +263,7 @@ class MangeUsersControllerImp extends MangeUsersController {
       totalPlayers = res["totalPlayer"];
       usersList = [];
       usersList.addAll(data.map((e) => UserModel.fromJson(e)));
-      assignDataInsideTable();
+    assignDataInsideTable();
       statusRequs = StatusRequst.sucsess;
     } else {
       statusRequs = StatusRequst.failure;
