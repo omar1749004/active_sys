@@ -1,12 +1,15 @@
 import 'package:active_system/controller/home_controller.dart';
 import 'package:active_system/core/class/statuscode.dart';
+import 'package:active_system/core/constant/app_route.dart';
 import 'package:active_system/core/constant/styles.dart';
 import 'package:active_system/core/functions/customDialogForHomepage.dart';
+import 'package:active_system/core/services/services.dart';
 import 'package:active_system/core/shared/ModernTable/custom_modern_table.dart';
 import 'package:active_system/core/shared/custom_app_bar.dart';
 import 'package:active_system/core/shared/custom_table_header.dart';
 import 'package:active_system/core/shared/global_variable.dart';
 import 'package:active_system/core/shared/loading_indecator.dart';
+import 'package:active_system/features/auth/view/screen/auth_view.dart';
 import 'package:active_system/features/home/data/service/static/note_knoladge.dart';
 import 'package:active_system/features/home/view/widget/client_info.dart';
 import 'package:active_system/core/shared/custom_button.dart';
@@ -20,6 +23,9 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Get.put(HomeControllerImp());
+    MyServices services = Get.find();
+
+    print(services.sharedPreferences.get("id"));
     return Scaffold(
       body: GetBuilder<HomeControllerImp>(builder: (controller) {
         // if (controller.firstState == StatusRequst.loading) {
@@ -87,13 +93,14 @@ class HomePage extends StatelessWidget {
                                             ],
                                             nameOfGlobalID: 'home',
                                             selectedIndex:
-                                              controller.selectedIndex ,
+                                                controller.selectedIndex,
                                             onRowTap: () async {
                                               controller.attendmodel =
                                                   controller.attendList[
                                                       GlobalVariable.home!];
-                                                       controller.selectRow(GlobalVariable.home!) ;
-                                            // controller.handlSelcetRow();
+                                              controller.selectRow(
+                                                  GlobalVariable.home!);
+                                              // controller.handlSelcetRow();
                                             },
                                             //spicial for Homepage only
                                             thisPageIsHomePage: true,
@@ -144,27 +151,27 @@ class HomePage extends StatelessWidget {
                                         ],
                                       ),
                                       CustomButton(
-                                          isActive: controller.canDelete ,
+                                          isActive: controller.canDelete,
                                           text: "حذف",
                                           ontap: () {
-                                              Get.defaultDialog(
-                                            title: "تحذير ",
-                                            middleText:
-                                                "هل أنت متأكد أنك تريد حذف حضور اللاعب",
-                                            actions: [
-                                              ElevatedButton(
-                                                  onPressed: () {
-                                                    Get.back();
-                                                    controller.deleteTransAction();
-                                                  },
-                                                  child: const Text("نعم")),
-                                              ElevatedButton(
-                                                  onPressed: () {
-                                                    Get.back();
-                                                  },
-                                                  child: const Text("لا")),
-                                            ]);
-                                            
+                                            Get.defaultDialog(
+                                                title: "تحذير ",
+                                                middleText:
+                                                    "هل أنت متأكد أنك تريد حذف حضور اللاعب",
+                                                actions: [
+                                                  ElevatedButton(
+                                                      onPressed: () {
+                                                        Get.back();
+                                                        controller
+                                                            .deleteTransAction();
+                                                      },
+                                                      child: const Text("نعم")),
+                                                  ElevatedButton(
+                                                      onPressed: () {
+                                                        Get.back();
+                                                      },
+                                                      child: const Text("لا")),
+                                                ]);
                                           }),
                                     ],
                                   ),

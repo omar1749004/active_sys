@@ -1,8 +1,10 @@
+import 'package:active_system/core/class/handle_data_in_table.dart';
 import 'package:active_system/core/class/statuscode.dart';
 import 'package:active_system/core/functions/global_alert.dart';
 import 'package:active_system/data/models/sub_mode.dart';
 import 'package:active_system/data/service/remote/sub_data.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/gestures.dart';
 import 'package:get/get.dart';
 
 abstract class MangeSubController extends GetxController {
@@ -36,7 +38,7 @@ class MangeSubControllerImp extends MangeSubController {
   List<List<String>> dataInTable = [];
   late SubscriptionModel submodel;
   String type = "اشتراك";
-  bool canAdd =true ;
+  bool canAdd = true;
   int selectedIndex = -1;
   late TextEditingController name;
   late TextEditingController specialization;
@@ -81,6 +83,7 @@ class MangeSubControllerImp extends MangeSubController {
 
     super.onInit();
   }
+
   @override
   void addSub() async {
     if (formKey.currentState!.validate()) {
@@ -89,7 +92,7 @@ class MangeSubControllerImp extends MangeSubController {
       var res = await SubData().add(
         {
           "name": name.text,
-          "type": type == "حصة" ? "1":"0",
+          "type": type == "حصة" ? "1" : "0",
           "specialization": "0",
           "price": price.text,
           "day": day.text,
@@ -117,15 +120,14 @@ class MangeSubControllerImp extends MangeSubController {
     }
     update();
   }
-   
-   changesubAndSession(){
-     if(type == "حصة")
-     {
-       day.text = "1";
-       day.text = "1";
-     }
-     update();
-   }
+
+  changesubAndSession() {
+    if (type == "حصة") {
+      day.text = "1";
+      day.text = "1";
+    }
+    update();
+  }
 
   @override
   void assignModel(SubscriptionModel privetModel) {
@@ -139,15 +141,15 @@ class MangeSubControllerImp extends MangeSubController {
     frezzNumber.text = privetModel.subscriptionsFrezzNumber.toString();
     maxFrezzDay.text = privetModel.subscriptionsMaxFrezzDay.toString();
     invitationsNumber.text =
-    privetModel.subscriptionsInvitationsNumber.toString();
+        privetModel.subscriptionsInvitationsNumber.toString();
     maxInvitation.text = privetModel.subscriptionsMaxInvitation.toString();
     serviceNumber.text = privetModel.subscriptionsServiceNumber.toString();
     maxService.text = privetModel.subscriptionsMaxService.toString();
     allowedNumber.text = privetModel.subscriptionsAllowedNumber.toString();
     notes.text = privetModel.subscriptionsNotes.toString();
     submodel = privetModel;
-    type = privetModel.subscriptionsType.toString() == "0" ? "اشتراك" :"حصة";
-    canAdd =false ;
+    type = privetModel.subscriptionsType.toString() == "0" ? "اشتراك" : "حصة";
+    canAdd = false;
     update();
   }
 
@@ -273,7 +275,7 @@ class MangeSubControllerImp extends MangeSubController {
     } else if (res["status"] == "success") {
       subList.removeWhere(
           (element) => element.subscriptionsId == submodel.subscriptionsId);
-          assignDataInsideTable();
+      assignDataInsideTable();
       statusRequs = StatusRequst.sucsess;
     } else {
       statusRequs = StatusRequst.failure;
@@ -290,7 +292,8 @@ class MangeSubControllerImp extends MangeSubController {
         subList[i].subscriptionsId.toString(),
         subList[i].subscriptionsName.toString(),
         subList[i].subscriptionsPrice.toString(),
-        subList[i].subscriptionsType.toString(),
+        handleDataInTable()
+            .handleSubscriptionsType(subList[i].subscriptionsType),
         subList[i].subscriptionsDay.toString(),
         subList[i].subscriptionsSessionsNumber.toString(),
         subList[i].subscriptionsNotes.toString(),
@@ -306,7 +309,7 @@ class MangeSubControllerImp extends MangeSubController {
       var res = await SubData().edit({
         "id": submodel.subscriptionsId.toString(),
         "name": name.text,
-        "type": type == "حصة" ? "1":"0",
+        "type": type == "حصة" ? "1" : "0",
         "specialization": "0",
         "price": price.text,
         "day": day.text,
@@ -336,6 +339,7 @@ class MangeSubControllerImp extends MangeSubController {
       update();
     }
   }
+
   @override
   void cleaModel() {
     name.clear();
@@ -351,8 +355,8 @@ class MangeSubControllerImp extends MangeSubController {
     serviceNumber.text = "0";
     maxService.text = "0";
     allowedNumber.text = "0";
-    selectedIndex  = -1 ;
-    canAdd = true ;
+    selectedIndex = -1;
+    canAdd = true;
     update();
   }
 
@@ -387,14 +391,13 @@ class MangeSubControllerImp extends MangeSubController {
     update();
   }
 
-
-@override
+  @override
   void selectRow(int assignSelect) {
-      if (selectedIndex ==  assignSelect) {
-                   selectedIndex = -1; // Reset if tapped again
-                   cleaModel() ;
-                  } else {
-                   selectedIndex = assignSelect;
-                  }
+    if (selectedIndex == assignSelect) {
+      selectedIndex = -1; // Reset if tapped again
+      cleaModel();
+    } else {
+      selectedIndex = assignSelect;
+    }
   }
 }

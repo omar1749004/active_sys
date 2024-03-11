@@ -24,6 +24,16 @@ class handleDataInTable {
     }
   }
 
+  String handleSubscriptionsType(ind) {
+    if (ind == 0) {
+      return "اشتراك";
+    } else if (ind == 1) {
+      return "حصه";
+    } else {
+      return "";
+    }
+  }
+
   String handleSafeType(ind) {
     switch (ind) {
       case 0:

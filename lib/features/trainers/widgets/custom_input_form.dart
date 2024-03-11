@@ -23,7 +23,6 @@ class TrainersForm extends GetView<TrainersControllerImp> {
               const SizedBox(
                 height: 10,
               ),
-              
               const SizedBox(
                 height: 15,
               ),
@@ -48,19 +47,18 @@ class TrainersForm extends GetView<TrainersControllerImp> {
                 height: 15,
               ),
               CustomeTextFormAuth(
-                  hintText: "",
-                  lableText: "موبايل 1",
-                  myController: controller.phone1,
-          
-                  ),
+                hintText: "",
+                lableText: "موبايل 1",
+                myController: controller.phone1,
+              ),
               const SizedBox(
                 height: 15,
               ),
               CustomeTextFormAuth(
-                  hintText: "",
-                  lableText: "موبايل 2",
-                  myController: controller.phone2,
-                  ),
+                hintText: "",
+                lableText: "موبايل 2",
+                myController: controller.phone2,
+              ),
               const SizedBox(
                 height: 15,
               ),
@@ -70,16 +68,16 @@ class TrainersForm extends GetView<TrainersControllerImp> {
                   myController: controller.address,
                   validator: (val) {
                     return validInput(val!, 5, 50, "");
-                  }
-                  ),
+                  }),
               const SizedBox(
                 height: 15,
               ),
               CustomeTextFormAuth(
-                  hintText: "",
-                  lableText: "الملاحظات",
-                  myController: controller.note,
-                  ),
+                maxlines: 3,
+                hintText: "",
+                lableText: "الملاحظات",
+                myController: controller.note,
+              ),
             ],
           ),
         ),

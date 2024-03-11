@@ -26,11 +26,9 @@ class CustomMenu extends StatelessWidget {
                     : Colors.white,
                 text: servicePowerName[index],
                 ontap: () {
-                  if(servicePowerName[index] !=pageName)
-                  { 
-                     Get.offAllNamed(servicePowerRoutes[index]);
+                  if (servicePowerName[index] != pageName) {
+                    Get.offAllNamed(servicePowerRoutes[index]);
                   }
-                  
                 },
               ),
             );

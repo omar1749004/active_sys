@@ -135,14 +135,14 @@ class ClinetInfo extends StatelessWidget {
                                   onTapOnTextField: () {
                                     QrcodeBarcodeScanner(
                                       onScannedCallback: (String value) {
-                                        if(controller.supType != 1 && int.tryParse(value) != null)
-                                        {
+                                        if (controller.supType != 1 &&
+                                            int.tryParse(value) != null) {
                                           controller.barcode.text = value;
                                           controller.handleFunctionsAdd();
                                         }
                                       },
                                     );
-                                   print("aaaaaaaa${controller.barcode.text}");
+                                    print("aaaaaaaa${controller.barcode.text}");
                                   },
                                 ),
                               ),
@@ -197,6 +197,7 @@ class ClinetInfo extends StatelessWidget {
                     height: 15,
                   ),
                   CustomeTextFormAuth(
+                    maxlines: 3,
                     hintText: "",
                     lableText: "ملاحظات",
                     myController: controller.note,
