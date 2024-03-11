@@ -272,4 +272,6 @@ class TrainersControllerImp extends TrainersController {
     Get.toNamed(AppRoute.trainersRatioView,
         arguments: {"usermodel": privteModel});
   }
+
+  void getpdf() {}
 }
