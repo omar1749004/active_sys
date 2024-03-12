@@ -104,7 +104,9 @@ class RenewSubscriptionForm extends StatelessWidget {
                     child: CustomDropDownMenu(
                       items: controller.trainerNameList,
                       intialValue: controller.trainerValue,
-                      onChanged: null,
+                      onChanged: (p0){
+                        controller.changeTrainermodel(p0!) ;
+                      },
                       label: "المدرب",
                     ),
                   ),

@@ -28,6 +28,7 @@ abstract class RenewController extends GetxController {
   void assignModel(RenewModel privetModel);
   void selectRow(int assignSelect) ;
   void handleRatio() ;
+  void changeTrainermodel(String trainerName) ;
 }
 
 class RenewControllerImp extends RenewController {
@@ -77,6 +78,7 @@ class RenewControllerImp extends RenewController {
   late String _amountMid;
   DateTime? start = DateTime.now();
   DateTime? end = DateTime.now();
+  late UserModel trainerModel;
   @override
   void onInit() async {
     barcodeNum = TextEditingController();
@@ -158,6 +160,7 @@ class RenewControllerImp extends RenewController {
       _trainerList.addAll(data.map((e) => UserModel.fromJson(e)));
       trainerNameList.addAll(_trainerList.map((e) => e.usersName!));
       trainerValue = trainerNameList[0];
+      trainerModel = _trainerList[0];
       statusRequs = StatusRequst.sucsess;
     } else {
       statusRequs = StatusRequst.failure;
@@ -248,7 +251,7 @@ class RenewControllerImp extends RenewController {
       var res = await RenewData().add({
         "userid": renewUser.usersId.toString(),
         "name": renewUser.usersName,
-        "captinId": renewUser.usersCaptiantid.toString(),
+        "captinId": trainerModel.usersId.toString(),
         "barcodeId": renewUser.barcodeId.toString(),
         "subscriptionsId": subscriptionModel.subscriptionsId.toString(),
         "note": note.text,
@@ -452,7 +455,7 @@ class RenewControllerImp extends RenewController {
       var res = await RenewData().edit({
         "id": renewUser.renewalId.toString(),
         "name": renewUser.usersName,
-        "captineId": renewUser.usersCaptiantid.toString(),
+        "captineId": trainerModel.usersId.toString(),
         "subscriptionsId": subscriptionModel.subscriptionsId.toString(),
         "note": note.text,
         "start": start.toString(),
@@ -490,7 +493,11 @@ class RenewControllerImp extends RenewController {
     {
       trainerValue = privetModel.captainNamme ?? trainerNameList[0];
       privetModel.usersCaptiantid = _trainerList[0].usersId!  ;
+      changeTrainermodel(trainerValue) ;
+    }else{
+      changeTrainermodel(privetModel.captainNamme!) ;
     }
+    
     start = privetModel.renewalStart ?? DateTime.now();
     if (privetModel.renewalStart == null) {
       setEndDate(start!);
@@ -552,6 +559,17 @@ class RenewControllerImp extends RenewController {
     int? mid = int.tryParse(ratio.text);
     if (mid == null) {
       ratio.text = "0";
+    }
+  }
+
+
+@override
+  void changeTrainermodel(String trainerName) {
+    for (int i = 0; i < trainerNameList.length; i++) {
+      if (_trainerList[i].usersName == trainerName) {
+        trainerModel = _trainerList[i];
+        break;
+      }
     }
   }
 
