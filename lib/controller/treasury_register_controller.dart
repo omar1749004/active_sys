@@ -1,6 +1,7 @@
 import 'package:active_system/core/class/handle_data_in_table.dart';
 import 'package:active_system/core/class/statuscode.dart';
 import 'package:active_system/core/constant/app_route.dart';
+import 'package:active_system/core/services/services.dart';
 import 'package:active_system/data/models/safe_model.dart';
 import 'package:active_system/data/service/remote/safe_data.dart';
 import 'package:flutter/cupertino.dart';
@@ -11,6 +12,7 @@ abstract class TreasuryRegisterController extends GetxController {
   void search();
   void makeSearch();
   void getpdf();
+  void sharedPrefSecurity();
 }
 
 class TreasuryRegisterControllerImp extends TreasuryRegisterController {
@@ -29,7 +31,7 @@ class TreasuryRegisterControllerImp extends TreasuryRegisterController {
   double toralSafe = 0;
   double toralIncoming = 0;
   double toralOutcoming = 0;
-
+  MyServices myServices = Get.find();
   @override
   void onInit() async {
     reason = TextEditingController();
@@ -37,6 +39,7 @@ class TreasuryRegisterControllerImp extends TreasuryRegisterController {
     await Future.delayed(const Duration(milliseconds: 100));
     firstState = StatusRequst.failure;
     dateSearch(startSearch, endSearch);
+    sharedPrefSecurity();
     super.onInit();
   }
 
@@ -150,5 +153,13 @@ class TreasuryRegisterControllerImp extends TreasuryRegisterController {
     Get.toNamed(AppRoute.pdfId, arguments: {"pdf": res["data"]});
     statusRequs = StatusRequst.failure;
     update();
+  }
+
+  @override
+  void sharedPrefSecurity() {
+    if (myServices.sharedPreferences.get("id") == "" &&
+        myServices.sharedPreferences.get("name") == "") {
+      Get.offAllNamed(AppRoute.authid);
+    }
   }
 }

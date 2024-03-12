@@ -1,5 +1,7 @@
 import 'package:active_system/core/class/statuscode.dart';
+import 'package:active_system/core/constant/app_route.dart';
 import 'package:active_system/core/functions/global_alert.dart';
+import 'package:active_system/core/services/services.dart';
 import 'package:active_system/data/models/user_model.dart';
 import 'package:active_system/data/service/remote/trainer_data.dart';
 import 'package:flutter/cupertino.dart';
@@ -14,7 +16,8 @@ abstract class TrainersController extends GetxController {
   void deleteTrainer();
   void editTrainer();
   void cleaModel();
-  void selectRow(int assignSelect) ;
+  void selectRow(int assignSelect);
+  void sharedPrefSecurity();
 }
 
 class TrainersControllerImp extends TrainersController {
@@ -39,6 +42,7 @@ class TrainersControllerImp extends TrainersController {
 
   late TextEditingController search;
   bool canAdd = true;
+  MyServices myServices = Get.find();
   @override
   void onInit() async {
     name = TextEditingController();
@@ -51,7 +55,8 @@ class TrainersControllerImp extends TrainersController {
     firstState = StatusRequst.loading;
     await Future.delayed(const Duration(milliseconds: 300));
     firstState = StatusRequst.failure;
-   viewAll();
+    viewAll();
+    sharedPrefSecurity();
     super.onInit();
   }
 
@@ -153,7 +158,7 @@ class TrainersControllerImp extends TrainersController {
   @override
   void assignModel(UserModel privetModel) {
     address.text = privetModel.usersAddress ?? "";
-    
+
     name.text = privetModel.usersName ?? "";
     note.text = privetModel.usersNote ?? "";
     userModel = privetModel;
@@ -250,18 +255,26 @@ class TrainersControllerImp extends TrainersController {
     address.clear();
     note.clear();
     canAdd = true;
-    selectedIndex  = -1 ;
+    selectedIndex = -1;
 
     update();
   }
-  
+
   @override
   void selectRow(int assignSelect) {
-      if (selectedIndex ==  assignSelect) {
-                   selectedIndex = -1; // Reset if tapped again
-                   cleaModel() ;
-                  } else {
-                   selectedIndex = assignSelect;
-                  }
+    if (selectedIndex == assignSelect) {
+      selectedIndex = -1; // Reset if tapped again
+      cleaModel();
+    } else {
+      selectedIndex = assignSelect;
+    }
+  }
+
+  @override
+  void sharedPrefSecurity() {
+    if (myServices.sharedPreferences.get("id") == "" &&
+        myServices.sharedPreferences.get("name") == "") {
+      Get.offAllNamed(AppRoute.authid);
+    }
   }
 }

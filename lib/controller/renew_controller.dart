@@ -27,7 +27,8 @@ abstract class RenewController extends GetxController {
   void deleteRenew();
   void editPRenew();
   void assignModel(RenewModel privetModel);
-  void selectRow(int assignSelect) ;
+  void selectRow(int assignSelect);
+  void sharedPrefSecurity();
 }
 
 class RenewControllerImp extends RenewController {
@@ -103,6 +104,7 @@ class RenewControllerImp extends RenewController {
     firstState = StatusRequst.failure;
     getSub();
     getTrainer();
+    sharedPrefSecurity();
     handlTable(isdateSearch);
     statusRequs = StatusRequst.loading;
     await Future.delayed(const Duration(milliseconds: 300));
@@ -250,8 +252,8 @@ class RenewControllerImp extends RenewController {
         "barcodeId": renewUser.barcodeId.toString(),
         "subscriptionsId": subscriptionModel.subscriptionsId.toString(),
         "note": note.text,
-        "start": start.toString().substring(0,11),
-        "end": end.toString().substring(0,11),
+        "start": start.toString().substring(0, 11),
+        "end": end.toString().substring(0, 11),
         "offer": descound.text,
         "payed_type": payedType,
         "amount": amount.text,
@@ -432,7 +434,7 @@ class RenewControllerImp extends RenewController {
     } else if (res["status"] == "success") {
       renewList
           .removeWhere((element) => element.renewalId == renewUser.renewalId);
-          assignDataInsideTable();
+      assignDataInsideTable();
       statusRequs = StatusRequst.sucsess;
     } else {
       statusRequs = StatusRequst.failure;
@@ -480,10 +482,9 @@ class RenewControllerImp extends RenewController {
     userName.text = privetModel.usersName.toString();
     phone.text = privetModel.usersPhone ?? "";
     trainerValue = privetModel.captainNamme ?? trainerNameList[0];
-    if(privetModel.captainNamme== null)
-    {
+    if (privetModel.captainNamme == null) {
       trainerValue = privetModel.captainNamme ?? trainerNameList[0];
-      privetModel.usersCaptiantid = _trainerList[0].usersId!  ;
+      privetModel.usersCaptiantid = _trainerList[0].usersId!;
     }
     start = privetModel.renewalStart ?? DateTime.now();
     if (privetModel.renewalStart == null) {
@@ -526,17 +527,25 @@ class RenewControllerImp extends RenewController {
     remining.text = "0";
     descound.text = "0";
     canAdd = true;
-    selectedIndex  = -1 ;
+    selectedIndex = -1;
     update();
   }
 
- @override
+  @override
   void selectRow(int assignSelect) {
-      if (selectedIndex ==  assignSelect) {
-                   selectedIndex = -1; // Reset if tapped again
-                   cleaModel() ;
-                  } else {
-                   selectedIndex = assignSelect;
-                  }
+    if (selectedIndex == assignSelect) {
+      selectedIndex = -1; // Reset if tapped again
+      cleaModel();
+    } else {
+      selectedIndex = assignSelect;
+    }
+  }
+
+  @override
+  void sharedPrefSecurity() {
+    if (myServices.sharedPreferences.get("id") == "" &&
+        myServices.sharedPreferences.get("name") == "") {
+      Get.offAllNamed(AppRoute.authid);
+    }
   }
 }

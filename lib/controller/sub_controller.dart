@@ -1,10 +1,11 @@
 import 'package:active_system/core/class/handle_data_in_table.dart';
 import 'package:active_system/core/class/statuscode.dart';
+import 'package:active_system/core/constant/app_route.dart';
 import 'package:active_system/core/functions/global_alert.dart';
+import 'package:active_system/core/services/services.dart';
 import 'package:active_system/data/models/sub_mode.dart';
 import 'package:active_system/data/service/remote/sub_data.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/gestures.dart';
 import 'package:get/get.dart';
 
 abstract class MangeSubController extends GetxController {
@@ -27,6 +28,7 @@ abstract class MangeSubController extends GetxController {
   void editSub();
   void cleaModel();
   void selectRow(int assignSelect);
+  void sharedPrefSecurity();
 }
 
 class MangeSubControllerImp extends MangeSubController {
@@ -55,7 +57,7 @@ class MangeSubControllerImp extends MangeSubController {
   late TextEditingController allowedNumber;
   late TextEditingController notes;
   late TextEditingController search;
-
+  MyServices myServices = Get.find();
   @override
   void onInit() async {
     name = TextEditingController();
@@ -80,7 +82,7 @@ class MangeSubControllerImp extends MangeSubController {
     firstState = StatusRequst.failure;
     update();
     viewAll();
-
+    sharedPrefSecurity();
     super.onInit();
   }
 
@@ -398,6 +400,14 @@ class MangeSubControllerImp extends MangeSubController {
       cleaModel();
     } else {
       selectedIndex = assignSelect;
+    }
+  }
+
+  @override
+  void sharedPrefSecurity() {
+    if (myServices.sharedPreferences.get("id") == "" &&
+        myServices.sharedPreferences.get("name") == "") {
+      Get.offAllNamed(AppRoute.authid);
     }
   }
 }
