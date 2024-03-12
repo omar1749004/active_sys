@@ -183,6 +183,7 @@ class MangeUsersControllerImp extends MangeUsersController {
         userModel = _trainerList[i];
         break;
       }
+      
     }
   }
 
