@@ -1,9 +1,9 @@
 //server name
 
-const String linkServerName =
-    "https://a4a2-156-210-178-84.ngrok-free.app/activegym_app/system";
 // const String linkServerName =
-//     "http://localhost/activegym_app/system";
+//     "https://f99e-156-210-178-84.ngrok-free.app/activegym_app/system";
+const String linkServerName =
+    "http://localhost/activegym_app/system";
 
 //admin system
 const String linkAdminAdd = "$linkServerName/adminSys/add.php";
@@ -35,6 +35,7 @@ const String linkTrainerView = "$linkServerName/trainer/view.php";
 //renew
 const String linkRenewAdd = "$linkServerName/renewal_subscriptions/add.php";
 const String linkRenewEdit = "$linkServerName/renewal_subscriptions/edit.php";
+const String linkRenewGetSub = "$linkServerName/renewal_subscriptions/get_sub.php";
 const String linkRenewDelete =
     "$linkServerName/renewal_subscriptions/delete.php";
 const String linkRenewView = "$linkServerName/renewal_subscriptions/view.php";
@@ -49,6 +50,7 @@ const String linkRenewDateSearch =
     "$linkServerName/renewal_subscriptions/date_search.php";
 
 //attendance
+
 // add
 const String linkAttendanceAddSub = "$linkServerName/attendance/add_sub.php";
 const String linkAttendanceAddInvitation =
@@ -91,12 +93,16 @@ const String linkFreezeAdd = "$linkServerName/freeze/add.php";
 const String linkFreezeView = "$linkServerName/freeze/view.php";
 const String linkFreezeDelete = "$linkServerName/freeze/delete.php";
 
+// persent
+const String linkPersentDateSearch = "$linkServerName/persent/date_search.php";
+const String linkpdfPersent = "$linkServerName/persent/create_pdf.php";
 //image
 
-//const String linkImageUpload = "http://localhost/activegym_app/upload";
+const String linkImageUpload = "http://localhost/activegym_app/upload";
 
-const String linkImageUpload =
-    "https://a4a2-156-210-178-84.ngrok-free.app/activegym_app/upload";
+
+// const String linkImageUpload =
+//     "https://f99e-156-210-178-84.ngrok-free.app/activegym_app/upload";
 
 // pdfs
 const String linkPDFs = "http://localhost/activegym_app/pdfs";

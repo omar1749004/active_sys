@@ -6,7 +6,6 @@ import 'package:active_system/data/models/renew_model.dart';
 import 'package:active_system/data/models/sub_mode.dart';
 import 'package:active_system/data/models/user_model.dart';
 import 'package:active_system/data/service/remote/renew_data.dart';
-import 'package:active_system/data/service/remote/sub_data.dart';
 import 'package:active_system/data/service/remote/trainer_data.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -27,8 +26,10 @@ abstract class RenewController extends GetxController {
   void deleteRenew();
   void editPRenew();
   void assignModel(RenewModel privetModel);
-  void selectRow(int assignSelect);
   void sharedPrefSecurity();
+  void selectRow(int assignSelect) ;
+  void handleRatio() ;
+  void changeTrainermodel(String trainerName) ;
 }
 
 class RenewControllerImp extends RenewController {
@@ -53,7 +54,7 @@ class RenewControllerImp extends RenewController {
   late TextEditingController amount;
   late TextEditingController notknow;
   late TextEditingController remining;
-
+  late TextEditingController ratio;
   final List<SubscriptionModel> _subList = [];
   List<String> subNameList = ["عام"];
   final List<UserModel> _trainerList = [];
@@ -78,6 +79,7 @@ class RenewControllerImp extends RenewController {
   late String _amountMid;
   DateTime? start = DateTime.now();
   DateTime? end = DateTime.now();
+  late UserModel trainerModel;
   @override
   void onInit() async {
     barcodeNum = TextEditingController();
@@ -93,9 +95,11 @@ class RenewControllerImp extends RenewController {
     notknow = TextEditingController();
     remining = TextEditingController();
     note = TextEditingController();
+    ratio = TextEditingController();
     searchVal = TextEditingController();
     preNote.text = "";
     descound.text = "0";
+    ratio.text = "0" ;
     amount.text = "0";
     remining.text = "0";
     notknow.text = "0";
@@ -118,17 +122,17 @@ class RenewControllerImp extends RenewController {
   void getSub() async {
     statusRequs = StatusRequst.loading;
     update();
-    var res = await SubData().view();
+    var res = await RenewData().getSub();
     if (res["status"] == "failure") {
       statusRequs = StatusRequst.failure;
     } else if (res["status"] == "success") {
       List data = res["data"];
       subNameList = [];
+    
       _subList.addAll(data.map((e) => SubscriptionModel.fromJson(e)));
       subNameList.addAll(_subList.map((e) => e.subscriptionsName));
       subValue = subNameList[0];
       subscriptionModel = _subList[0];
-
       sessionNum.text =
           subscriptionModel.subscriptionsSessionsNumber.toString();
       dayNum.text = subscriptionModel.subscriptionsDay.toString();
@@ -158,6 +162,7 @@ class RenewControllerImp extends RenewController {
       _trainerList.addAll(data.map((e) => UserModel.fromJson(e)));
       trainerNameList.addAll(_trainerList.map((e) => e.usersName!));
       trainerValue = trainerNameList[0];
+      trainerModel = _trainerList[0];
       statusRequs = StatusRequst.sucsess;
     } else {
       statusRequs = StatusRequst.failure;
@@ -248,7 +253,7 @@ class RenewControllerImp extends RenewController {
       var res = await RenewData().add({
         "userid": renewUser.usersId.toString(),
         "name": renewUser.usersName,
-        "captinId": renewUser.usersCaptiantid.toString(),
+        "captinId": trainerModel.usersId.toString(),
         "barcodeId": renewUser.barcodeId.toString(),
         "subscriptionsId": subscriptionModel.subscriptionsId.toString(),
         "note": note.text,
@@ -258,6 +263,7 @@ class RenewControllerImp extends RenewController {
         "payed_type": payedType,
         "amount": amount.text,
         "amount_owed": remining.text,
+        "persent" : ratio.text ,
         "renewal_adminId": myServices.sharedPreferences.getString("id"),
       });
       if (res["status"] == "failure") {
@@ -434,7 +440,8 @@ class RenewControllerImp extends RenewController {
     } else if (res["status"] == "success") {
       renewList
           .removeWhere((element) => element.renewalId == renewUser.renewalId);
-      assignDataInsideTable();
+          assignDataInsideTable();
+          cleaModel();
       statusRequs = StatusRequst.sucsess;
     } else {
       statusRequs = StatusRequst.failure;
@@ -450,7 +457,7 @@ class RenewControllerImp extends RenewController {
       var res = await RenewData().edit({
         "id": renewUser.renewalId.toString(),
         "name": renewUser.usersName,
-        "captineId": renewUser.usersCaptiantid.toString(),
+        "captineId": trainerModel.usersId.toString(),
         "subscriptionsId": subscriptionModel.subscriptionsId.toString(),
         "note": note.text,
         "start": start.toString(),
@@ -458,6 +465,7 @@ class RenewControllerImp extends RenewController {
         "offer": descound.text,
         "amount": amount.text,
         "amount_owed": remining.text,
+        "persent" : ratio.text ,
         "renewal_adminId": myServices.sharedPreferences.getString("id"),
       });
       if (res["status"] == "failure") {
@@ -481,11 +489,16 @@ class RenewControllerImp extends RenewController {
     barcodeNum.text = privetModel.barcode.toString();
     userName.text = privetModel.usersName.toString();
     phone.text = privetModel.usersPhone ?? "";
+    ratio.text = privetModel.ratio.toString() ;
     trainerValue = privetModel.captainNamme ?? trainerNameList[0];
     if (privetModel.captainNamme == null) {
       trainerValue = privetModel.captainNamme ?? trainerNameList[0];
-      privetModel.usersCaptiantid = _trainerList[0].usersId!;
+      privetModel.usersCaptiantid = _trainerList[0].usersId!  ;
+      changeTrainermodel(trainerValue) ;
+    }else{
+      changeTrainermodel(privetModel.captainNamme!) ;
     }
+    
     start = privetModel.renewalStart ?? DateTime.now();
     if (privetModel.renewalStart == null) {
       setEndDate(start!);
@@ -521,6 +534,7 @@ class RenewControllerImp extends RenewController {
     userName.clear();
     phone.clear();
     preNote.clear();
+    ratio.text = "0";
     start = DateTime.now();
     remining.clear();
     setEndDate(start!);
@@ -548,4 +562,24 @@ class RenewControllerImp extends RenewController {
       Get.offAllNamed(AppRoute.authid);
     }
   }
+
+@override
+  void handleRatio() {
+    int? mid = int.tryParse(ratio.text);
+    if (mid == null) {
+      ratio.text = "0";
+    }
+  }
+
+
+@override
+  void changeTrainermodel(String trainerName) {
+    for (int i = 0; i < trainerNameList.length; i++) {
+      if (_trainerList[i].usersName == trainerName) {
+        trainerModel = _trainerList[i];
+        break;
+      }
+    }
+  }
+
 }

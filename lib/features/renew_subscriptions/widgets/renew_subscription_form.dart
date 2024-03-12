@@ -104,7 +104,9 @@ class RenewSubscriptionForm extends StatelessWidget {
                     child: CustomDropDownMenu(
                       items: controller.trainerNameList,
                       intialValue: controller.trainerValue,
-                      onChanged: (p0) {},
+                      onChanged: (p0){
+                        controller.changeTrainermodel(p0!) ;
+                      },
                       label: "المدرب",
                     ),
                   ),
@@ -113,14 +115,10 @@ class RenewSubscriptionForm extends StatelessWidget {
               const SizedBox(
                 height: 20,
               ),
-              CustomeTextFormAuth(
-                myController: controller.note,
-                hintText: "",
-                lableText: "نسبة المدرب",
-              ),
-              const SizedBox(
-                height: 20,
-              ),
+              
+              // const SizedBox(
+              //   height: 20,
+              // ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -315,12 +313,21 @@ class RenewSubscriptionForm extends StatelessWidget {
                     width: 20,
                   ),
                   Expanded(
-                    child: CustomeTextFormAuth(
-                      myController: controller.phone,
-                      hintText: "",
-                      lableText: "التلفون",
-                      isreadonly: true,
-                    ),
+                    child:
+                    CustomeTextFormAuth(
+                myController: controller.ratio,
+                onChanged: (p0) {
+                  controller.handleRatio();
+                },
+                mainTextColor: ColorApp.secondColor,
+                
+                hintText: "",
+                lableText: "نسبة المدرب",
+                validator: (val) {
+                    return validInput(val!, 0, 50, "username");
+                  }
+              ),
+                    
                   ),
                 ],
               ),
@@ -330,12 +337,13 @@ class RenewSubscriptionForm extends StatelessWidget {
               //
               //maybe will change because it is image
               //
-              // CustomeTextFormAuth(
-              //     hintText: "",
-              //     lableText: "الصوره",
-              //     validator: (val) {
-              //       return validInput(val!, 5, 50, "username");
-              //     }),
+               CustomeTextFormAuth(
+                      myController: controller.phone,
+                      hintText: "",
+                      lableText: "التلفون",
+                      
+                      isreadonly: true,
+                    ),
               const SizedBox(
                 height: 10,
               ),

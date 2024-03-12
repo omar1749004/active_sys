@@ -108,8 +108,9 @@ class TrainersRatioView extends StatelessWidget {
                                       },
                                       showDialog: () {},
                                     ),
-                                  ),
-                          ),
+                            ),
+
+                          
                           //
                           //buttons
                           //
@@ -119,41 +120,43 @@ class TrainersRatioView extends StatelessWidget {
                               textDirection: TextDirection.rtl,
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
-                                CustomButton(
-                                  text: "حذف الاعب",
-                                  ontap: () {
-                                    if (!controller.canAdd) {
-                                      Get.defaultDialog(
-                                          title: "تحذير ",
-                                          middleText:
-                                              "هل أنت متأكد أنك تريد حذف الاشتراك",
-                                          actions: [
-                                            ElevatedButton(
-                                                onPressed: () {
-                                                  Get.back();
-                                                  controller.deleteTrainer();
-                                                },
-                                                child: const Text("نعم")),
-                                            ElevatedButton(
-                                                onPressed: () {
-                                                  Get.back();
-                                                },
-                                                child: const Text("لا")),
-                                          ]);
-                                    }
-                                  },
-                                  isActive: !controller.canAdd ? true : false,
-                                ),
+                                // CustomButton(
+                                //   text: "حذف الاعب",
+                                //   ontap: () {
+                                //     if (!controller.canAdd) {
+                                //       Get.defaultDialog(
+                                //           title: "تحذير ",
+                                //           middleText:
+                                //               "هل أنت متأكد أنك تريد حذف الاشتراك",
+                                //           actions: [
+                                //             ElevatedButton(
+                                //                 onPressed: () {
+                                //                   Get.back();
+                                //                   controller.deleteTrainer();
+                                //                 },
+                                //                 child: const Text("نعم")),
+                                //             ElevatedButton(
+                                //                 onPressed: () {
+                                //                   Get.back();
+                                //                 },
+                                //                 child: const Text("لا")),
+                                //           ]);
+                                //     }
+                                //   },
+                                //   isActive: !controller.canAdd ? true : false,
+                                // ),
                                 CustomButton(
                                   text: "طباعه",
-                                  ontap: () {},
-                                ),
-                                CustomButton(
-                                  text: "إلغاء",
                                   ontap: () {
-                                    controller.cleaModel();
+                                    controller.getpdf() ;
                                   },
                                 ),
+                                // CustomButton(
+                                //   text: "إلغاء",
+                                //   ontap: () {
+                                //     controller.cleaModel();
+                                //   },
+                                // ),
                                 CustomButton(
                                   text: "رجوع",
                                   ontap: () {
@@ -163,7 +166,8 @@ class TrainersRatioView extends StatelessWidget {
                               ],
                             ),
                           ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
                   ),

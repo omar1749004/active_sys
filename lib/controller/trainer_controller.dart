@@ -16,8 +16,9 @@ abstract class TrainersController extends GetxController {
   void deleteTrainer();
   void editTrainer();
   void cleaModel();
-  void selectRow(int assignSelect);
   void sharedPrefSecurity();
+  void selectRow(int assignSelect) ;
+   void gotoPersent(UserModel privteModel) ;
 }
 
 class TrainersControllerImp extends TrainersController {
@@ -277,4 +278,12 @@ class TrainersControllerImp extends TrainersController {
       Get.offAllNamed(AppRoute.authid);
     }
   }
+
+  @override
+  void gotoPersent(UserModel privteModel) async {
+    Get.toNamed(AppRoute.trainersRatioView,
+        arguments: {"usermodel": privteModel});
+  }
+
+  void getpdf() {}
 }

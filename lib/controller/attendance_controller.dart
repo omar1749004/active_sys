@@ -44,8 +44,6 @@ class AttendControllerImp extends AttendController {
   @override
   void dateSearch(DateTime startD, DateTime endD) async {
     statusRequs = StatusRequst.loading;
-    s = startD.toString().substring(0, 11);
-    e = endD.toString().substring(0, 11);
     update();
     var res = await AttendData().dateSearch({
       "start_date": startD.toString().substring(0, 11),
