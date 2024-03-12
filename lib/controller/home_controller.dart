@@ -1,5 +1,6 @@
 import 'package:active_system/core/class/handle_data_in_table.dart';
 import 'package:active_system/core/class/statuscode.dart';
+import 'package:active_system/core/constant/app_route.dart';
 import 'package:active_system/core/functions/global_alert.dart';
 import 'package:active_system/core/services/services.dart';
 import 'package:active_system/data/models/attend_model.dart';
@@ -71,9 +72,8 @@ class HomeControllerImp extends HomeController {
     firstState = StatusRequst.loading;
     await Future.delayed(const Duration(milliseconds: 300));
     firstState = StatusRequst.failure;
-   viewAll();
-   getSub();
-   
+    viewAll();
+    getSub();
     super.onInit();
   }
 
@@ -537,7 +537,7 @@ class HomeControllerImp extends HomeController {
     //to wait 7 sec then set globalViarable.home=0
     await Future.delayed(const Duration(milliseconds: 7000));
     canDelete = false;
-    update() ;
+    update();
   }
 
   @override

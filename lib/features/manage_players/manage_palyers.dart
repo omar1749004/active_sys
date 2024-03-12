@@ -2,13 +2,11 @@ import 'package:active_system/controller/mange_player_controller.dart';
 import 'package:active_system/core/class/statuscode.dart';
 import 'package:active_system/core/constant/color.dart';
 import 'package:active_system/core/functions/customDialogForManagePlayerView.dart';
-import 'package:active_system/core/services/services.dart';
 import 'package:active_system/core/shared/ModernTable/custom_modern_table.dart';
 import 'package:active_system/core/shared/custom_app_bar.dart';
 import 'package:active_system/core/shared/custom_table_header.dart';
 import 'package:active_system/core/shared/global_variable.dart';
 import 'package:active_system/core/shared/loading_indecator.dart';
-import 'package:active_system/features/auth/view/screen/auth_view.dart';
 import 'package:active_system/features/manage_players/widgets/manage_players_form.dart';
 import 'package:active_system/features/manage_players/widgets/search_tools.dart';
 import 'package:active_system/core/shared/custom_button.dart';
@@ -22,11 +20,6 @@ class ManagePlayers extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    MyServices services = Get.find();
-    if (services.sharedPreferences.get("id") == "" &&
-        services.sharedPreferences.get("name") == "") {
-      return const AuthView();
-    } else {
       Get.put(MangeUsersControllerImp());
       return Scaffold(
           body: GetBuilder<MangeUsersControllerImp>(builder: (controller) {
@@ -281,5 +274,5 @@ class ManagePlayers extends StatelessWidget {
         // }
       }));
     }
-  }
+  
 }

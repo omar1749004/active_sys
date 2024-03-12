@@ -36,7 +36,8 @@ class AuthControllerImp extends AuthController {
   void onInit() {
     name = TextEditingController();
     password = TextEditingController();
-
+    services.sharedPreferences.setString("id", "");
+    services.sharedPreferences.setString("name", "");
     super.onInit();
   }
 
@@ -63,7 +64,7 @@ class AuthControllerImp extends AuthController {
         services.sharedPreferences.setString("name", adminModel.adminSysName);
 
         statusRequs = StatusRequst.sucsess;
-       Get.offNamed(AppRoute.homeid);
+        Get.offNamed(AppRoute.homeid);
       } else if (res["msg"] == "no powers") {
         servicePowerName = [];
         servicePowerRoutes = [];

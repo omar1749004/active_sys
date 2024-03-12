@@ -1,14 +1,17 @@
 import 'package:active_system/core/class/handle_data_in_table.dart';
 import 'package:active_system/core/class/statuscode.dart';
+import 'package:active_system/core/constant/app_route.dart';
+import 'package:active_system/core/services/services.dart';
 import 'package:active_system/data/models/attend_model.dart';
 import 'package:active_system/data/service/remote/attend_data.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get_state_manager/src/simple/get_controllers.dart';
+import 'package:get/get.dart';
 
 abstract class AttendController extends GetxController {
   void viewAll();
   void dateSearch(DateTime startD, DateTime endD);
   void handlTable(bool isdate);
+  void sharedPrefSecurity();
 }
 
 class AttendControllerImp extends AttendController {
@@ -25,15 +28,15 @@ class AttendControllerImp extends AttendController {
   int totalPlayer = 0;
   List<AttendModel> attendList = [];
   List<List<String>> dataInTable = [];
-  
+  MyServices myServices = Get.find();
   @override
   void onInit() async {
     searchVal = TextEditingController();
     firstState = StatusRequst.loading;
     await Future.delayed(const Duration(milliseconds: 300));
     firstState = StatusRequst.failure;
-
     dateSearch(startSearch, endSearch);
+    sharedPrefSecurity();
 
     super.onInit();
   }
@@ -42,26 +45,26 @@ class AttendControllerImp extends AttendController {
   void dateSearch(DateTime startD, DateTime endD) async {
     statusRequs = StatusRequst.loading;
     update();
-      var res = await AttendData().dateSearch({
-        "start_date": startD.toString().substring(0, 11),
-        "end_date": endD.toString().substring(0, 11),
-      });
-      if (res["status"] == "failure") {
-        attendList = [];
-        assignDataInsideTable();
-        statusRequs = StatusRequst.failure;
-      } else if (res["status"] == "success") {
-        List data = res["data"];
-        totalPlayer = res["moreInfo"][0]["totalPlayers"] ?? 0;
-        attendList = [];
-        attendList.addAll(data.map((e) => AttendModel.fromJson(e)));
-        assignDataInsideTable();
-        statusRequs = StatusRequst.sucsess;
-      } else {
-        statusRequs = StatusRequst.failure;
-      }
+    var res = await AttendData().dateSearch({
+      "start_date": startD.toString().substring(0, 11),
+      "end_date": endD.toString().substring(0, 11),
+    });
+    if (res["status"] == "failure") {
+      attendList = [];
+      assignDataInsideTable();
+      statusRequs = StatusRequst.failure;
+    } else if (res["status"] == "success") {
+      List data = res["data"];
+      totalPlayer = res["moreInfo"][0]["totalPlayers"] ?? 0;
+      attendList = [];
+      attendList.addAll(data.map((e) => AttendModel.fromJson(e)));
+      assignDataInsideTable();
+      statusRequs = StatusRequst.sucsess;
+    } else {
+      statusRequs = StatusRequst.failure;
+    }
     await Future.delayed(const Duration(milliseconds: 200));
-    
+
     update();
   }
 
@@ -114,7 +117,8 @@ class AttendControllerImp extends AttendController {
         attendList[i].barcode.toString(),
         " ${attendList[i].attendanceDay!.year}/${attendList[i].attendanceDay!.month}/${attendList[i].attendanceDay!.day}",
         attendList[i].usersName.toString(),
-        handleDataInTable().handelAttendanceTypeData(attendList[i].attendanceType),
+        handleDataInTable()
+            .handelAttendanceTypeData(attendList[i].attendanceType),
         attendList[i].attendanceStart.toString(),
         attendList[i].attendanceEnd.toString(),
         attendList[i].usersPhone.toString(),
@@ -142,21 +146,29 @@ class AttendControllerImp extends AttendController {
     statusRequs = StatusRequst.loading;
     update();
 
-      var res = await AttendData().viwe();
-      if (res["status"] == "failure") {
-        statusRequs = StatusRequst.failure;
-      } else if (res["status"] == "success") {
-        List data = res["data"];
-        totalPlayer = res["moreInfo"][0]["totalPlayers"] ?? 0;
-        attendList = [];
-        attendList.addAll(data.map((e) => AttendModel.fromJson(e)));
-         assignDataInsideTable();
-        statusRequs = StatusRequst.sucsess;
-         await Future.delayed(const Duration(milliseconds: 200));
-      } else {
-        statusRequs = StatusRequst.failure;
-      }
-  
+    var res = await AttendData().viwe();
+    if (res["status"] == "failure") {
+      statusRequs = StatusRequst.failure;
+    } else if (res["status"] == "success") {
+      List data = res["data"];
+      totalPlayer = res["moreInfo"][0]["totalPlayers"] ?? 0;
+      attendList = [];
+      attendList.addAll(data.map((e) => AttendModel.fromJson(e)));
+      assignDataInsideTable();
+      statusRequs = StatusRequst.sucsess;
+      await Future.delayed(const Duration(milliseconds: 200));
+    } else {
+      statusRequs = StatusRequst.failure;
+    }
+
     update();
+  }
+
+  @override
+  void sharedPrefSecurity() {
+    if (myServices.sharedPreferences.get("id") == "" &&
+        myServices.sharedPreferences.get("name") == "") {
+      Get.offAllNamed(AppRoute.authid);
+    }
   }
 }

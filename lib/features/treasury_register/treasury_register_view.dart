@@ -1,12 +1,10 @@
 import 'package:active_system/controller/treasury_register_controller.dart';
 import 'package:active_system/core/class/statuscode.dart';
 import 'package:active_system/core/constant/color.dart';
-import 'package:active_system/core/services/services.dart';
 import 'package:active_system/core/shared/ModernTable/custom_modern_table.dart';
 import 'package:active_system/core/shared/custom_app_bar.dart';
 import 'package:active_system/core/shared/loading_indecator.dart';
 import 'package:active_system/core/shared/custom_button.dart';
-import 'package:active_system/features/auth/view/screen/auth_view.dart';
 import 'package:active_system/features/manage_subscriptions/view/widgets/custom_menu.dart';
 import 'package:active_system/features/safe/view/widget/custom_display_many.dart';
 import 'package:active_system/features/treasury_register/widgets/treasury_register_form.dart';
@@ -18,11 +16,6 @@ class TreasuryRegisterView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    MyServices services = Get.find();
-    if (services.sharedPreferences.get("id") == "" &&
-        services.sharedPreferences.get("name") == "") {
-      return const AuthView();
-    } else {
       Get.put(TreasuryRegisterControllerImp());
       return Scaffold(body:
           GetBuilder<TreasuryRegisterControllerImp>(builder: (controller) {
@@ -213,5 +206,5 @@ class TreasuryRegisterView extends StatelessWidget {
         // }
       }));
     }
-  }
+  
 }

@@ -1,4 +1,5 @@
 import 'package:active_system/core/class/statuscode.dart';
+import 'package:active_system/core/constant/app_route.dart';
 import 'package:active_system/core/functions/global_alert.dart';
 import 'package:active_system/core/services/services.dart';
 import 'package:active_system/data/models/expenses_model.dart';
@@ -17,7 +18,8 @@ abstract class ExpensesController extends GetxController {
   void editTransAction();
   void clearModel();
   void deleteTransAction();
-  void selectRow(int assignSelect) ;
+  void selectRow(int assignSelect);
+  void sharedPrefSecurity();
 }
 
 class ExpensesControllerImp extends ExpensesController {
@@ -53,6 +55,7 @@ class ExpensesControllerImp extends ExpensesController {
     statusRequs = StatusRequst.loading;
     await Future.delayed(const Duration(milliseconds: 300));
     statusRequs = StatusRequst.failure;
+    sharedPrefSecurity();
     super.onInit();
   }
 
@@ -108,7 +111,6 @@ class ExpensesControllerImp extends ExpensesController {
 
   @override
   void handlTable(bool isdate) {
-   
     if (isdate) {
       dateSearch(startSearch, endSearch);
     } else {
@@ -203,7 +205,7 @@ class ExpensesControllerImp extends ExpensesController {
 //function to assign data inside List
   void assignDataInsideTable() {
     dataInTable = [];
-    selectedIndex  = -1 ;
+    selectedIndex = -1;
     for (var i = 0; i < expensesList.length; i++) {
       dataInTable.add([
         expensesList[i].expensesId.toString(),
@@ -252,7 +254,7 @@ class ExpensesControllerImp extends ExpensesController {
     reason.clear();
     note.clear();
     amount.clear();
-    selectedIndex  = -1 ;
+    selectedIndex = -1;
     canAdd = true;
     update();
   }
@@ -280,13 +282,21 @@ class ExpensesControllerImp extends ExpensesController {
     update();
   }
 
-   @override
+  @override
   void selectRow(int assignSelect) {
-      if (selectedIndex ==  assignSelect) {
-                   selectedIndex = -1; // Reset if tapped again
-                   clearModel() ;
-                  } else {
-                   selectedIndex = assignSelect;
-                  }
+    if (selectedIndex == assignSelect) {
+      selectedIndex = -1; // Reset if tapped again
+      clearModel();
+    } else {
+      selectedIndex = assignSelect;
+    }
+  }
+
+  @override
+  void sharedPrefSecurity() {
+    if (myServices.sharedPreferences.get("id") == "" &&
+        myServices.sharedPreferences.get("name") == "") {
+      Get.offAllNamed(AppRoute.authid);
+    }
   }
 }

@@ -5,7 +5,6 @@ import 'package:active_system/core/constant/image_asset.dart';
 import 'package:active_system/core/constant/menu_items.dart';
 import 'package:active_system/core/constant/styles.dart';
 import 'package:active_system/core/functions/validate_input.dart';
-import 'package:active_system/core/services/services.dart';
 import 'package:active_system/core/shared/custom_botton_copy.dart';
 import 'package:active_system/core/shared/custome_textform_auth.dart';
 import 'package:flutter/material.dart';
@@ -16,9 +15,6 @@ class AuthView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    MyServices services = Get.find();
-    services.sharedPreferences.setString("id", "");
-    services.sharedPreferences.setString("name", "");
     Get.put(AuthControllerImp());
     return Scaffold(
         body: Center(

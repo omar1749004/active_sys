@@ -1,5 +1,6 @@
 import 'package:active_system/core/class/handle_data_in_table.dart';
 import 'package:active_system/core/class/statuscode.dart';
+import 'package:active_system/core/constant/app_route.dart';
 import 'package:active_system/core/functions/global_alert.dart';
 import 'package:active_system/core/services/services.dart';
 import 'package:active_system/data/models/sub_mode.dart';
@@ -32,6 +33,7 @@ abstract class MangeUsersController extends GetxController {
   void editPlayers();
   void assignModel(UserModel privetModel);
   void selectRow(int assignSelect);
+  void sharedPrefSecurity();
 }
 
 class MangeUsersControllerImp extends MangeUsersController {
@@ -101,6 +103,7 @@ class MangeUsersControllerImp extends MangeUsersController {
     getTrainer();
     view();
     update();
+    sharedPrefSecurity();
     super.onInit();
   }
 
@@ -466,6 +469,14 @@ class MangeUsersControllerImp extends MangeUsersController {
       cleaModel();
     } else {
       selectedIndex = assignSelect;
+    }
+  }
+
+  @override
+  void sharedPrefSecurity() {
+    if (myServices.sharedPreferences.get("id") == "" &&
+        myServices.sharedPreferences.get("name") == "") {
+      Get.offAllNamed(AppRoute.authid);
     }
   }
 }

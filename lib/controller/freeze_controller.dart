@@ -18,8 +18,9 @@ abstract class FreezeController extends GetxController {
   void deleteFreeze();
   void assignModel(FreezeModel privetModel);
   void calcfreezeDate();
-  void selectRow(int assignSelect) ;
+  void selectRow(int assignSelect);
   void cleaModel();
+  void sharedPrefSecurity();
 }
 
 class FreezeControllerImp extends FreezeController {
@@ -32,7 +33,7 @@ class FreezeControllerImp extends FreezeController {
   late SubscriptionModel subModel;
   late TextEditingController day;
   late TextEditingController note;
-  bool candelete = false ;
+  bool candelete = false;
   int selectedIndex = -1;
   DateTime startSearch = DateTime.now();
   DateTime endSearch = DateTime.now();
@@ -46,40 +47,37 @@ class FreezeControllerImp extends FreezeController {
   int? freezeNum;
   int? maxFreeze;
   List<List<String>> dataInTable = [];
-  
-  MyServices myServices =Get.find();
+
+  MyServices myServices = Get.find();
   @override
   void onInit() {
     day = TextEditingController();
     note = TextEditingController();
     day.text = "0";
-     initialData();
-    
-    
+    initialData();
+
+    sharedPrefSecurity();
 
     super.onInit();
   }
 
   @override
   void initialData() {
-    try{
-     renewUser = Get.arguments["RenewModel"];
-    subModel = Get.arguments["subModel"];
-     getFreeze();
-    name = renewUser.usersName;
-    barcode = renewUser.barcode.toString();
-    startrenew = renewUser.renewalStart.toString();
-    endrenew = renewUser.renewalEnd.toString();
-    subName = renewUser.subscriptionsName;
-    days = subModel.subscriptionsDay.toString();
-    }catch(e)
-    {
+    try {
+      renewUser = Get.arguments["RenewModel"];
+      subModel = Get.arguments["subModel"];
+      getFreeze();
+      name = renewUser.usersName;
+      barcode = renewUser.barcode.toString();
+      startrenew = renewUser.renewalStart.toString();
+      endrenew = renewUser.renewalEnd.toString();
+      subName = renewUser.subscriptionsName;
+      days = subModel.subscriptionsDay.toString();
+    } catch (e) {
       Future.delayed(Duration.zero, () {
         Get.offAndToNamed(AppRoute.renewSybscriptionsView);
       });
     }
-    
-   
   }
 
   @override
@@ -149,14 +147,13 @@ class FreezeControllerImp extends FreezeController {
           globalAlert("الاعب تخطى عدد مرات التجميد");
           statusRequs = StatusRequst.failure;
         } else if (res["status"] == "success") {
-          day.text = "0" ;
-          endrenew = 
-          renewUser.renewalEnd!
-          .add(Duration(days: int.parse(day.text)))
-          .toString();
+          day.text = "0";
+          endrenew = renewUser.renewalEnd!
+              .add(Duration(days: int.parse(day.text)))
+              .toString();
           getFreeze();
           note.clear();
-          day.text = "0" ;
+          day.text = "0";
           statusRequs = StatusRequst.sucsess;
         }
       } else {
@@ -164,7 +161,7 @@ class FreezeControllerImp extends FreezeController {
         update();
         globalAlert(msg);
       }
-    }else{
+    } else {
       statusRequs = StatusRequst.failure;
     }
     update();
@@ -190,37 +187,35 @@ class FreezeControllerImp extends FreezeController {
   }
 
   @override
-  void assignModel(FreezeModel privetModel)async {
+  void assignModel(FreezeModel privetModel) async {
     freezeModel = privetModel;
-    candelete = true ;
-    
+    candelete = true;
+
     update();
   }
 
   @override
   void deleteFreeze() async {
-
     var res = await FrezzeData().delete({
       "id": freezeModel.freezeId.toString(),
       "freeze_day": freezeModel.freezeDay.toString(),
-      "renewal_end": renewUser.renewalEnd.toString().substring(0,11),
+      "renewal_end": renewUser.renewalEnd.toString().substring(0, 11),
       "renewal_id": freezeModel.freezeRenewalId.toString(),
     });
     if (res["status"] == "failure") {
       globalAlert("يرجى إعادة المحاولة في وقت لاحق", title: "!خطأ");
       statusRequs = StatusRequst.failure;
     } else if (res["status"] == "success") {
-      
       freezeList
           .removeWhere((element) => element.freezeId == freezeModel.freezeId);
       endrenew = renewUser.renewalEnd!
           .subtract(Duration(days: freezeModel.freezeDay))
           .toString();
-          getFreeze() ;
-          assignDataInsideTable();
-          note.clear();
-          day.text = "0" ;
-          candelete = false ;
+      getFreeze();
+      assignDataInsideTable();
+      note.clear();
+      day.text = "0";
+      candelete = false;
       statusRequs = StatusRequst.sucsess;
     } else {
       statusRequs = StatusRequst.failure;
@@ -231,33 +226,43 @@ class FreezeControllerImp extends FreezeController {
   //function to assign data inside List
   void assignDataInsideTable() {
     dataInTable = [];
-    selectedIndex  = -1 ;
+    selectedIndex = -1;
     for (var i = 0; i < freezeList.length; i++) {
       dataInTable.add([
         freezeList[i].freezeId.toString(),
         freezeList[i].freezeDay.toString(),
-        freezeList[i].freezeStart.toString().substring(0,11),
-        freezeList[i].freezeEnd.toString().substring(0,11),
+        freezeList[i].freezeStart.toString().substring(0, 11),
+        freezeList[i].freezeEnd.toString().substring(0, 11),
         freezeList[i].freezeUserId.toString(),
         freezeList[i].freezeRenewalId.toString(),
         freezeList[i].freezeNote.toString(),
       ]);
     }
   }
+
   @override
   cleaModel() {
     candelete = true;
-    selectedIndex  = -1 ;
+    selectedIndex = -1;
 
     update();
   }
+
   @override
   void selectRow(int assignSelect) {
-      if (selectedIndex ==  assignSelect) {
-                   selectedIndex = -1; // Reset if tapped again
-                   cleaModel() ;
-                  } else {
-                   selectedIndex = assignSelect;
-                  }
+    if (selectedIndex == assignSelect) {
+      selectedIndex = -1; // Reset if tapped again
+      cleaModel();
+    } else {
+      selectedIndex = assignSelect;
+    }
+  }
+
+  @override
+  void sharedPrefSecurity() {
+    if (myServices.sharedPreferences.get("id") == "" &&
+        myServices.sharedPreferences.get("name") == "") {
+      Get.offAllNamed(AppRoute.authid);
+    }
   }
 }

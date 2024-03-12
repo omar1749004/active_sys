@@ -1,4 +1,5 @@
 import 'package:active_system/core/class/statuscode.dart';
+import 'package:active_system/core/constant/app_route.dart';
 import 'package:active_system/core/functions/global_alert.dart';
 import 'package:active_system/core/services/services.dart';
 import 'package:active_system/data/models/admin_mode.dart';
@@ -23,6 +24,7 @@ abstract class AdminController extends GetxController {
   void checkSearch(String val);
   void cleaModel();
   void selectRow(int assignSelect);
+  void sharedPrefSecurity();
 }
 
 class AdminControllerImp extends AdminController {
@@ -66,6 +68,7 @@ class AdminControllerImp extends AdminController {
     await Future.delayed(const Duration(milliseconds: 300));
     firstState = StatusRequst.failure;
     getPowers();
+    sharedPrefSecurity();
     super.onInit();
   }
 
@@ -305,18 +308,26 @@ class AdminControllerImp extends AdminController {
     repass.clear();
     note.clear();
     checkValueList = List.filled(14, true);
-    selectedIndex  = -1 ;
+    selectedIndex = -1;
     canAdd = true;
     update();
   }
 
   @override
   void selectRow(int assignSelect) {
-      if (selectedIndex ==  assignSelect) {
-                   selectedIndex = -1; // Reset if tapped again
-                   cleaModel() ;
-                  } else {
-                   selectedIndex = assignSelect;
-                  }
+    if (selectedIndex == assignSelect) {
+      selectedIndex = -1; // Reset if tapped again
+      cleaModel();
+    } else {
+      selectedIndex = assignSelect;
+    }
+  }
+
+  @override
+  void sharedPrefSecurity() {
+    if (myServices.sharedPreferences.get("id") == "" &&
+        myServices.sharedPreferences.get("name") == "") {
+      Get.offAllNamed(AppRoute.authid);
+    }
   }
 }
